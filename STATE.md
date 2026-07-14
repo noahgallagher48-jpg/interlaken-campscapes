@@ -20,6 +20,7 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - A question to Drea is outstanding in the hub email's P.S.; her answer goes to the owner, not the page.
 
 ## Log
+- 2026-07-14: Living-agenda added at the top of the page (section id=agenda). During the residency THIS is the living daily element: keep it current each day (what today holds, what is next). Residency is Thu-Sun; no Wednesday night, Wednesday is travel only. Weather chips refresh twice daily via the interlaken-weather-pull routine.
 - 2026-07-14: Camp purchased a 50mm f/1.8 prime on the owner's recommendation (Drea: "Lens purchased"), same day he suggested it. Added to the gear-rehab card and the page footer as the low-light lens. The kit is now residency-ready.
 - 2026-07-13: Camp camera kit from Drea (Canon T5, T6, T7 and their kit zooms) folded into the gear rehab and field guide cards; exact bodies and reported lens ranges recorded above.
 - 2026-07-12: Drea's four program areas (Jul 10 email) folded into shot list one: Lake Finley, K'far Noar yurt village, Chadar at Shabbat song session, Tushball.
