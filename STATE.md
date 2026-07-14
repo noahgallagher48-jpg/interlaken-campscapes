@@ -16,7 +16,7 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 
 ## Pending
 - Campaign language RECEIVED from Drea (Jul 10): the bridge is the campaign's icon; the Shabbat crossing (whole camp, candles) is its central ritual (both now on the page at her direction). One internal note from her draft is recorded for the owner in the private repo, not here. Still awaited: remaining donor communications and the photo library as a Google Drive folder.
-- Awaiting team-meeting output: shot list one, shot list two (the exercise), key schedule moments, day-one details.
+- Camp DAILY SCHEDULE received Jul 14 ("Camp Interlaken Schedules 2026.docx" in Drive), folded into the owner's private schedule grid (dashboard docs/INTERLAKEN_SCHEDULE.md). Key: Fri 5:45pm Shabbat Walk is likely the bridge crossing (confirm); camp marks its own "Meaningful Check-in Opportunity" blocks. Still awaiting: shot list two (the exercise) if separate.
 - A question to Drea is outstanding in the hub email's P.S.; her answer goes to the owner, not the page.
 
 ## Log
