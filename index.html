@@ -149,13 +149,6 @@
   </ul>
 </section>
 
-<section id="sky">
-  <p class="kicker">Jul 15-19</p>
-  <h2>The sky over Eagle River</h2>
-  <p class="sub">Live from the National Weather Service, fresh on every visit. If rain shows up here, here is what it means for the photography: it shifts the locations and the focus. It does not prevent the work, and it may enhance it. Stormy skies bring what clear ones cannot: dramatic light, mist on the lake, sometimes a rainbow. The gear is weather-sealed and covered. The plan bends; the delivery does not.</p>
-  <div id="skychips" class="cards"><div class="card"><p>Loading the forecast…</p></div></div>
-</section>
-
 <section id="meeting">
   <p class="kicker">First things first</p>
   <h2>For your meeting</h2>
@@ -341,28 +334,5 @@
 </footer>
 
 </div>
-<script>
-(function(){
-  var box = document.getElementById("skychips");
-  function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
-  fetch("https://api.weather.gov/gridpoints/GRB/36,96/forecast")
-    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-    .then(function(d){
-      var periods = d.properties.periods.filter(function(p){
-        var day = p.startTime.slice(0,10);
-        return day >= "2026-07-15" && day <= "2026-07-19";
-      });
-      if(!periods.length) throw 0;
-      box.innerHTML = periods.map(function(p){
-        var pop = (p.probabilityOfPrecipitation||{}).value || 0;
-        return "<div class='card'><h3>"+esc(p.name)+"</h3><p>"+esc(p.shortForecast)
-          +(pop ? " · "+pop+"% chance of rain" : "")+"</p></div>";
-      }).join("");
-    })
-    .catch(function(){
-      box.innerHTML = "<div class='card'><p>The forecast feed is unreachable right now. The plan above holds in any weather.</p></div>";
-    });
-})();
-</script>
 </body>
 </html>
