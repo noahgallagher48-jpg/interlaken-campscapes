@@ -22,6 +22,34 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-29 (Monday line corrected, PUSHED): the overdue promise is fixed as a one-word
+  change to Noah's own sentence, "lands Monday" to "lands this week", in all three places
+  (plan page `#firstlook`, first-look title card, first-look og:description). Nothing else in
+  that copy touched. If a date is promised again it should name a day that has not passed.
+- 2026-07-29 (favorites, BUILT, NOT PUSHED, copy needs Noah's eyes): `delivery.html` now has
+  a working favorites round. A heart on each frame, stored in the visitor's own browser, and
+  a "Send my picks" button that opens a prefilled mail to noah@abba-photo.com listing the
+  frame IDs. No backend, no account, works on Pages. Per-device by design so Drea, Toni and
+  anyone else each send their own ballot rather than one merged set. This is what backs the
+  promise already on the page, "Heart the ones you love"; before today that promise had
+  nothing behind it. The one new piece of client-facing copy is the line in the picks bar.
+- 2026-07-29 (COLOUR, live surfaces): every image currently on the first look (34) and the
+  plan page (6) is ProPhoto RGB. The files are tagged, so a colour-managed browser renders
+  them correctly; the exposure is on surfaces that ignore or strip the profile, which
+  includes a lot of what a camp actually does with a photo (drop it into a slide deck, a
+  CMS, a social upload). 8-bit ProPhoto also bands more readily, and this set has night
+  skies. Convert to sRGB before the next batch lands.
+- 2026-07-29: DELIVERY PIPELINE BUILT, not yet pushed. `build_delivery.py` in this repo now
+  generates the `#samples` frame blocks from a FRAMES table between markers in
+  `delivery.html`, so adding a delivered frame is one table entry rather than hand-written
+  markup. `ingest` subcommand takes a Lightroom export folder and writes two tiers into
+  `img/` (present 2560px, thumb 900px), converting to sRGB with the profile embedded. With an
+  empty table the page keeps its waiting state, so this changed nothing visible. Also added
+  CSS so a frame block can carry a real image.
+  OPEN, CLIENT-FACING: three surfaces still read "more of the set lands Monday" (the plan
+  page `#firstlook` line, the first-look title card, and the first-look og:description).
+  Monday was Jul 27 and nothing has shipped since Jul 25. Either frames land or the language
+  changes; it should not sit as-is with the Drea meeting on Aug 3.
 - 2026-07-25 (night, SUPERSEDES the Jul 24 "Monday takedown" line below): the first look STAYS UP and GROWS Monday Jul 27. It is NOT taken down. Noah's call; his email to Drea said "it times out on Monday so I can build out the full set," and Monday is now when more lands. Page copy changed on both surfaces: the slideshow title card reads "This page stays up, and it grows. More of the set lands Monday," and the plan page's `#firstlook` section reads "more of the set lands Monday." Any future session that deletes `first-look/` or restores takedown language is breaking a live client promise. Also settled: Drea already knows `cil-35` is a blend (Noah, Jul 25), so no disclosure task exists; a disclosure draft staged that night is MOOT and marked for deletion unsent.
 - 2026-07-25 (night): `#sky` NWS section REMOVED from the plan page, section markup plus the whole weather-fetch script block. It was scoped Jul 15-19 and had been showing a dead feed since the residency ended Jul 19; the Jul 10 log line said it retires at the post-trip refresh and that never happened. Closes the defect flagged Jul 24. CAPTION DECISION on `cil-35` (the night bridge): it ships UNCAPTIONED. The three captions in the show are Noah's or Drea's own words; a fourth written for him would breach the voice rule, so the frame carries none unless he supplies one.
 - 2026-07-24 (evening): First look LINKED from the plan page: new `#firstlook` section at the top, above the agenda, with the Monday takedown stated. One frame added to the slideshow, the bridge at night under the stars (source `RepSet1-26new-2.jpg`, derivative `cil-35.jpg` at 2560px), placed at the close of the evening group after the song session. CONFIRMED BY NOAH 7/24: this frame is a BLEND, both elements his own captures (his sky, his bridge), not a single exposure. Supersedes the Jul 18 "the blend may not be needed after all" note. Placement follows the delivery doctrine: sky-blend frames sit inside the campaign, never the headline. Disclosure to camp was settled Jul 16 as the standing approach. Set is now 33 frames; counts updated in the title card and the og:description. Frame is uncaptioned; a caption needs Noah's own words. Opening quad and the rainbow closer unchanged, which keeps night sky off the headline per the Jul 24 delivery doctrine. OPEN DEFECT: the `#sky` NWS section was due to retire at the post-trip refresh and is still on the page.
