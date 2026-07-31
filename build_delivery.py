@@ -96,11 +96,14 @@ p{margin-top:12px;color:#a69b8a;font-size:14px}
 button{margin-top:32px;background:none;border:1px solid rgba(226,167,62,.5);color:#e2a73e;
 padding:11px 22px;border-radius:3px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
 #n{position:fixed;bottom:14px;right:18px;font-size:12px;color:#a69b8a}
+#h{position:fixed;top:10px;right:14px;z-index:6;font-size:28px;color:#a69b8a;text-decoration:none;
+padding:6px 10px;text-shadow:0 1px 6px #000}#h:hover{color:#ede7dd}
 .z{position:fixed;top:0;bottom:0;width:34%;z-index:3;cursor:pointer}#p{left:0}#x{right:0}
 </style></head><body>
 <div id=c><h1>Camp Interlaken</h1><p>__SUB__</p><button id=b>Begin</button><p style="margin-top:18px;font-size:12px"><a href="#" id=cl style="color:#a69b8a;text-decoration:underline">Copy this page's link to share</a></p></div>
 <div id=s><img id=a><img id=d style=position:absolute></div>
 <div class=z id=p></div><div class=z id=x></div><div id=n></div>
+<a id=h href="library.html" aria-label="Back to the gallery">&times;</a>
 <script>var U=__IMGS__,MS=__MS__,i=0,t=null,sh=null;
 var A=document.getElementById("a"),B=document.getElementById("d"),N=document.getElementById("n");
 function go(k){i=(k+U.length)%U.length;var I=sh===A?B:A,O=sh===A?A:B;
@@ -113,7 +116,8 @@ document.getElementById("cl").onclick=function(e){e.preventDefault();var a=this;
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(location.href).then(function(){a.textContent="Link copied";});}
 else{window.prompt("Copy this link:",location.href);}};
 document.addEventListener("keydown",function(e){if(e.key==="ArrowRight"){st(1);ar();}
-if(e.key==="ArrowLeft"){st(-1);ar();}if(e.key===" "){e.preventDefault();if(t){clearInterval(t);t=null;}else ar();}});
+if(e.key==="ArrowLeft"){st(-1);ar();}if(e.key==="Escape"){location.href="library.html";}
+if(e.key===" "){e.preventDefault();if(t){clearInterval(t);t=null;}else ar();}});
 </scr"""  """ipt></body></html>"""
 
 
