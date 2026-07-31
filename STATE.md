@@ -26,7 +26,8 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
   INCLUDE_FACES flipped True, all 166 frames on the wall and ballot, held-back notice gone.
   Plan page now links the library from "A first look". Pushed live. Superseded havcil img
   tiers left untracked on purpose (never added to git); local prune still awaits the
-  owner's go.
+  owner's go. Ballot collection wired into the twice-daily intake sweep same day: "Interlaken
+  picks" mail accumulates verbatim in the private dashboard repo; tally runs on request.
 - 2026-07-31 (full set): Noah's full web-ready export (`/Volumes/Extreme SSD/CIL_WEB1`,
   166 frames, sRGB 2560 from Lightroom this time, no conversion needed) is now the page's
   canonical set. 134 frames matched the July label pass by capture identity and carried
