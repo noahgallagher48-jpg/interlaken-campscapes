@@ -70,25 +70,14 @@ def slug(name):
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
-def card(f, r42=False, in42=False):
-    """One card. r42: a forty-two card, carries Replace. in42: a library card whose
-    frame already sits in the forty-two, carries a badge instead of +."""
-    out = ('    <div class="card">'
-           f'<button class="ph" type="button" data-file="{f["file"]}" '
-           f'data-id="{f["id"]}" data-group="{f["label"]}" '
-           f'aria-label="View {f["id"]}">'
-           f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></button>'
-           f'<span class="num">{f["id"].rsplit("-", 1)[-1] if "-" in f["id"] else "1"}</span>')
-    if r42:
-        out += (f'<button class="rep" type="button" data-id="{f["id"]}" '
-                f'aria-label="Mark {f["id"]} to come out of the forty-two">Replace</button>')
-    elif in42:
-        out += '<span class="in42">in the 42</span>'
-    else:
-        out += (f'<button class="pick" type="button" data-id="{f["id"]}" '
-                f'data-group="{f["label"]}" data-file="{f["file"]}" '
-                f'aria-pressed="false" aria-label="Swap {f["id"]} into the forty-two">+</button>')
-    return out + '</div>' 
+def card(f):
+    """One card: the image and its number. Viewing only."""
+    return ('    <div class="card">'
+            f'<button class="ph" type="button" data-file="{f["file"]}" '
+            f'data-id="{f["id"]}" aria-label="View {f["id"]}">'
+            f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></button>'
+            f'<span class="num">{f["id"].rsplit("-", 1)[-1] if "-" in f["id"] else "1"}</span>'
+            '</div>')
 
 
 
@@ -145,13 +134,11 @@ def build():
     lookup = {f["id"]: f for f in FRAMES}
     shown = sorted((nums[n] for n in placed), key=lambda f: times.get(f["id"], "9999"))
 
-    r42 = [{"id": fid, "file": lookup[fid]["file"]} for fid in FORTY_TWO]
-    gal = ['  <div class="grid">']
-    gal.extend(card(f, in42=f["id"] in set(FORTY_TWO)) for f in shown)
+    gal = ['  <div class="wall">']
+    gal.extend(card(f) for f in shown)
     gal.append('  </div>')
     rall = [{"id": f["id"], "file": f["file"]} for f in shown]
-    gal.append('  <script>window.R42 = ' + json.dumps(r42) + ';'
-               + 'window.RALL = ' + json.dumps(rall) + ';</script>')
+    gal.append('  <script>window.RALL = ' + json.dumps(rall) + ';</script>')
 
     html = open(PAGE).read()
 
