@@ -22,6 +22,19 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-31 (Ramah architecture): Page rebuilt on the Ramah guide's structure after
+  Noah's first real use ("can't scroll through or back out, no vehicle for selection,
+  unclear what's expected"). Now: deliverables grid up top (First look slideshow, Fine
+  art, The book, The library, Printing) with one instruction line; LIGHTBOX viewer
+  (arrows, keyboard, swipe, pick-inside, Open file, counter); pick buttons ON every
+  card, everywhere; sticky pickbar (Scapes/Story/42 counters, Send, offline-slideshow
+  builder ported from Ramah, Clear); the 166 organized into four movements and fifteen
+  named sections with counts (The camp / The days / Shabbat / Land and sky; map in
+  sections.json, verified frame-by-frame against contact sheets in _work/sec2/); nav
+  filter buttons per section, Ramah's filter JS; the book section scaffolds 42 empty
+  page slots that fill from the picks. Ballot format v2 unchanged; tally unchanged.
+  Verified in-browser: lightbox walk, picks from card and lightbox, counters, mailto,
+  filters, clear, 390px phone geometry, no horizontal scroll.
 - 2026-07-31 (the six + the forty-two): Page brought to parity with the Ramah guide's
   feature set, adapted: sticky jump bar; Fine art prints section (the twelve, image and
   number only: "If we call it fine art it is," Noah, no why-lines on the surface, the

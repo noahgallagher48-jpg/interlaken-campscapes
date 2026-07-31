@@ -1,28 +1,25 @@
 #!/usr/bin/env python3
-"""Fills the sample-set section of delivery.html from a table of frames.
+"""Builds the Camp Interlaken library page (library.html) from frames.json and
+_work/section_map.json.
 
 Two commands.
 
     python3 build_delivery.py ingest /path/to/lightroom/export
         Reads every JPEG in that folder, converts to sRGB with the profile
         embedded, and writes two tiers into img/: present at 2560px for the
-        lightbox, thumb at 900px for the page. Prints a FRAMES skeleton to paste
-        below, one entry per file, so the table starts from what actually landed.
+        lightbox, thumb at 900px for the cards.
 
     python3 build_delivery.py build
-        Regenerates everything between the FRAMES markers in delivery.html from
-        the FRAMES table. With an empty table the page keeps its waiting state,
-        so running this before any frames exist changes nothing visible.
+        Regenerates the NAVFILT, FINEART and LIBRARY marker regions.
 
-Export out of Lightroom as sRGB, not ProPhoto. ProPhoto renders flat and
-desaturated on most surfaces, and stripping the profile during a resize makes it
-worse. The ingest step converts and embeds correctly either way, but the file the
-client receives should be sRGB from the start.
+Export out of Lightroom as sRGB, not ProPhoto. The ingest converts either way,
+but the file the client receives should be sRGB from the start.
 
 Label keys: fa Fine Art, sig Signature Campscape, dev Development / Campaign,
-pub Publication-Ready, day Daily / Social, arc Archive.
+pub Publication-Ready, day Daily / Social. sig + fa count as scapes in the
+ballot; dev + pub + day count as story.
 """
-import io
+import json
 import os
 import re
 import sys
@@ -37,79 +34,101 @@ LABELS = {
     "dev": "Development / Campaign",
     "pub": "Publication-Ready",
     "day": "Daily / Social",
-    "arc": "Archive",
 }
 
-# One entry per delivered frame. Order here is the order on the page.
-#   id            what the camp calls it, shown on the thumbnail
-#   file          filename inside img/present and img/thumb
-#   label         a key from LABELS
-#   use           where this image should live, named plainly
-#   why           the off-frame meaning. What the picture is really about
-#   justification why it earns the label, verifiable in the image itself
-#   production    paper, process, size window, lab routing. Print-grade only
-#   availability  how it may be published and the notation that rides with it
-#   faces         True where a minor is clearly identifiable. Held off the page while
-#                 INCLUDE_FACES is False, per the client-page rule in CLAUDE.md and
-#                 Drea's Jul 17 scenes-not-faces direction.
-#
-# The table lives in frames.json so it can be regenerated and hand-edited without
-# touching this file. FRAMES below is the fallback when that file is absent.
-FRAMES = []
+FRAMES = json.load(open(os.path.join(HERE, "frames.json")))
+SECTIONS = json.load(open(os.path.join(HERE, "sections.json")))
 
 # True since 2026-07-31: STATE.md records the owner's confirmation that the camp's
-# releases cover the population-facing set. The faces field stays on every such frame
-# so later public reuse outside this page remains a deliberate decision.
+# releases cover the population-facing set.
 INCLUDE_FACES = True
 
-_TABLE = os.path.join(HERE, "frames.json")
-if os.path.exists(_TABLE):
-    import json as _json
-    FRAMES = _json.load(open(_TABLE))
-
-EMPTY = """  <div class="empty">
-    <b>The frames land here</b>
-    The sample set arrives on this page first, then the full library within 30 days of the last on-site day. The counts in the agreement (12 Mastered Campscapes, 30 Storytelling Candids) are floors, not targets; the archive carries everything beyond them.
-  </div>"""
-
 # The fine-art twelve. No why-lines on the page: "If we call it fine art it is"
-# (Noah, 2026-07-31). The label carries the claim; justification and specs stay in
-# frames.json and ride with the use-guide layer, never under the frame.
-# Selected 2026-07-31 by a full visual pass over the sig+fa pool (81 frames,
-# _work/fa_sheets/), NOT by which frames had written justifications. Sequence:
-# night sky, night structures, dawn, sunset, black and white, the working camp,
-# closing on the crossing.
+# (Noah, 2026-07-31). Selected by a full visual pass over the sig+fa pool
+# (_work/fa_sheets/), not by the written justification fields.
 FINE_TWELVE = [
-    "CILWEB1-17",   # Milky Way over the sailboats on the grass
-    "CILWEB1-102",  # the bridge at night, lit, under stars
-    "CILWEB1-19",   # the yurts at night, black and white
-    "CILWEB1-142",  # hydro-bikes on the beach at pink dawn, lake mirror-flat
-    "CILWEB1-143",  # one Adirondack chair on the dock, towel, flat water
-    "CILWEB1-91",   # sunburst over the lake, driftwood beach foreground
-    "CILWEB1-89",   # the waterslide in silhouette against the sunset
-    "CILWEB1-16",   # the bridge boards, black and white, to nothing
-    "CILWEB1-22",   # amphitheater light through the trees, black and white
-    "CILWEB1-116",  # canoe hulls over the working waterfront
-    "CILWEB1-66",   # the Magen David over the camp in whites
-    "CILWEB1-63",   # the whole camp on the bridge at once
+    "CILWEB1-17", "CILWEB1-102", "CILWEB1-19", "CILWEB1-142", "CILWEB1-143",
+    "CILWEB1-91", "CILWEB1-89", "CILWEB1-16", "CILWEB1-22", "CILWEB1-116",
+    "CILWEB1-66", "CILWEB1-63",
 ]
 
 
-def fineart(frames):
-    """The twelve. Image and its number, nothing else."""
-    by_id = {f["id"]: f for f in frames}
-    out = ['  <div class="fagrid">']
-    for fid in FINE_TWELVE:
-        f = by_id[fid]
-        out.append('    <div class="facard">'
-                   f'<a href="img/present/{f["file"]}" target="_blank" rel="noopener">'
-                   f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{fid}"></a>'
-                   f'<p class="why"><span class="fid">{fid}</span></p></div>')
-    out.append('  </div>')
-    return "\n".join(out)
+def by_num():
+    """frame number -> frame dict (CILWEB1.jpg is frame 1)."""
+    out = {}
+    for f in FRAMES:
+        m = re.match(r"CILWEB1-(\d+)$", f["id"])
+        out[int(m.group(1)) if m else 1] = f
+    return out
+
+
+def slug(name):
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+
+
+def card(f):
+    return ('    <div class="card">'
+            f'<button class="ph" type="button" data-file="{f["file"]}" '
+            f'data-id="{f["id"]}" data-group="{f["label"]}" '
+            f'aria-label="View {f["id"]}">'
+            f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></button>'
+            f'<span class="num">{f["id"]}</span>'
+            f'<button class="pick" type="button" data-id="{f["id"]}" '
+            f'data-group="{f["label"]}" data-file="{f["file"]}" '
+            f'aria-pressed="false" aria-label="Pick {f["id"]} for the book">+</button>'
+            '</div>')
+
+
+def build():
+    nums = by_num()
+    html = open(PAGE).read()
+
+    lib, navf = [], []
+    total = 0
+    for mv, secs in SECTIONS:
+        mvslug = slug(mv)
+        lib.append(f'<h3 class="mv" id="{mvslug}">{mv}</h3>')
+        navf.append(f'<span class="navmv">{mv}</span>')
+        for name, ns in secs:
+            s = slug(name)
+            frames = [nums[n] for n in ns]
+            total += len(frames)
+            lib.append(f'<section id="{s}" data-sec="{s}" data-n="{len(frames)}">')
+            lib.append(f'  <h2>{name} <span class="cnt">{len(frames)}</span></h2>')
+            lib.append('  <div class="grid">')
+            lib.extend(card(f) for f in frames)
+            lib.append('  </div>')
+            lib.append('</section>')
+            navf.append(f'<button class="filt" type="button" data-sec="{s}">'
+                        f'{name} <i>{len(frames)}</i></button>')
+
+    fa = ['  <div class="grid">']
+    lookup = {f["id"]: f for f in FRAMES}
+    fa.extend(card(lookup[fid]) for fid in FINE_TWELVE)
+    fa.append('  </div>')
+
+    def fill(html, start, end, body):
+        i, j = html.find(start), html.find(end)
+        if i < 0 or j < 0:
+            sys.exit(f"marker {start} missing")
+        head = html.find("-->", i) + 3
+        return html[:head] + "\n" + body + "\n  " + html[j:]
+
+    html = fill(html, "<!-- LIBRARY:START", "<!-- LIBRARY:END -->", "\n".join(lib))
+    html = fill(html, "<!-- NAVFILT:START", "<!-- NAVFILT:END -->", "  ".join(navf))
+    html = fill(html, "<!-- FINEART:START", "<!-- FINEART:END -->", "\n".join(fa))
+    open(PAGE, "w").write(html)
+
+    missing = [f["file"] for f in FRAMES
+               if not os.path.exists(os.path.join(IMG, "thumb", f["file"]))]
+    print(f"wrote {PAGE}")
+    print(f"frames placed: {total} of {len(FRAMES)}")
+    if missing:
+        print("MISSING thumbs:", missing)
 
 
 def ingest(folder):
+    import io
     from PIL import Image, ImageCms
     os.makedirs(os.path.join(IMG, "present"), exist_ok=True)
     os.makedirs(os.path.join(IMG, "thumb"), exist_ok=True)
@@ -136,114 +155,7 @@ def ingest(folder):
                icc_profile=srgb_icc, subsampling=0)
         b = im.copy(); b.thumbnail((900, 900), Image.LANCZOS)
         b.save(os.path.join(IMG, "thumb", out), quality=82, icc_profile=srgb_icc)
-    print(f"\ningested {len(names)} frames into img/present and img/thumb\n")
-    print("FRAMES skeleton, paste into build_delivery.py and fill it in:\n")
-    for n in names:
-        out = os.path.splitext(n)[0] + ".jpg"
-        stem = os.path.splitext(n)[0]
-        print(f'    {{"id": "{stem}", "file": "{out}", "label": "", "use": "",')
-        print(f'     "why": "", "justification": "", "production": "", "availability": ""}},')
-
-
-def field(key, value, placeholder):
-    if value:
-        return f'      <div class="field"><span class="k">{key}</span><span class="v">{value}</span></div>'
-    return (f'      <div class="field"><span class="k">{key}</span>'
-            f'<span class="v mut">{placeholder}</span></div>')
-
-
-def block(f):
-    """One card on the gallery wall. Viewing only; choosing happens in the ballot."""
-    out = ['    <figure class="pick">']
-    out.append('      <div class="ph">'
-               f'<a href="img/present/{f["file"]}" target="_blank" rel="noopener">'
-               f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></a></div>')
-    out.append('    </figure>')
-    return "\n".join(out)
-
-
-def ballot(shown):
-    """The voting section. Two picks per set; clicking is choosing, not viewing."""
-    out = []
-    current = None
-    for f in shown:
-        if f.get("label") != current:
-            if current is not None:
-                out.append("  </div>")
-            current = f.get("label")
-            out.append(f'  <h3 class="group"><span class="tag {current}">'
-                       f'{LABELS.get(current, "Unlabelled")}</span>'
-                       f'<span class="quota" data-group="{current}">0 picked</span></h3>')
-            out.append('  <div class="bgrid">')
-        out.append(f'    <button class="bpick" type="button" data-id="{f["id"]}" '
-                   f'data-group="{f["label"]}" aria-pressed="false" '
-                   f'aria-label="Pick {f["id"]}">'
-                   f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></button>')
-    out.append("  </div>")
-    return "\n".join(out)
-
-
-def build():
-    html = open(PAGE).read()
-    start = "<!-- FRAMES:START"
-    end = "<!-- FRAMES:END -->"
-    i = html.find(start)
-    j = html.find(end)
-    if i < 0 or j < 0:
-        sys.exit("FRAMES markers missing from delivery.html")
-    head_end = html.find("-->", i) + 3
-    shown = [f for f in FRAMES if INCLUDE_FACES or not f.get("faces")]
-    held = len(FRAMES) - len(shown)
-    if not shown:
-        body = EMPTY
-    else:
-        out, current = [], None
-        for f in shown:
-            if f.get("label") != current:
-                if current is not None:
-                    out.append("  </div>")
-                current = f.get("label")
-                out.append(f'  <h3 class="group"><span class="tag {current}">'
-                           f'{LABELS.get(current, "Unlabelled")}</span></h3>')
-                out.append('  <div class="wall">')
-            out.append(block(f))
-        out.append("  </div>")
-        body = "\n".join(out)
-    if held:
-        body += (f'\n  <div class="empty" style="text-align:left">'
-                 f'<b>{held} more frames are finished and held back</b>'
-                 f'They show campers close enough to recognise. They are yours, at full '
-                 f'resolution, in your full-resolution folder. They go on this page the moment the '
-                 f'camp confirms the releases cover them, and not before.</div>')
-    html = html[:head_end] + "\n" + body + "\n  " + html[j:]
-
-    bs = html.find("<!-- BALLOT:START")
-    be = html.find("<!-- BALLOT:END -->")
-    if bs >= 0 and be >= 0:
-        bhead = html.find("-->", bs) + 3
-        html = html[:bhead] + "\n" + ballot(shown) + "\n  " + html[be:]
-
-    fs = html.find("<!-- FINEART:START")
-    fe = html.find("<!-- FINEART:END -->")
-    if fs >= 0 and fe >= 0:
-        fhead = html.find("-->", fs) + 3
-        html = html[:fhead] + "\n" + fineart(FRAMES) + "\n  " + html[fe:]
-    open(PAGE, "w").write(html)
-
-    missing = [f["file"] for f in FRAMES
-               if not os.path.exists(os.path.join(IMG, "thumb", f["file"]))]
-    blank = [f["id"] for f in FRAMES if not f.get("label")]
-    print(f"wrote {PAGE}")
-    print(f"frames on the page: {len(FRAMES)}")
-    if missing:
-        print("MISSING from img/thumb:", missing)
-    if blank:
-        print("no label yet:", blank)
-    by = {}
-    for f in FRAMES:
-        by[LABELS.get(f.get("label"), "unlabelled")] = by.get(LABELS.get(f.get("label"), "unlabelled"), 0) + 1
-    if by:
-        print("by label:", by)
+    print(f"ingested {len(names)} frames")
 
 
 if __name__ == "__main__":
