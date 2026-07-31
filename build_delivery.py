@@ -92,38 +92,27 @@ def card(f, r42=False, in42=False):
 
 
 def build():
+    """Two blocks: the forty-two (Noah's order) and the full gallery (chronological,
+    everything, the forty-two included). Emits R42 and RALL for the slideshows."""
+    times = json.load(open(os.path.join(HERE, "_work", "times.json")))
+    placed = {n for _, secs in SECTIONS for _, ns in secs for n in ns}
     nums = by_num()
-    html = open(PAGE).read()
-
-    lib, navf = [], []
-    total = 0
-    for mv, secs in SECTIONS:
-        mvslug = slug(mv)
-        lib.append(f'<h3 class="mv" id="{mvslug}">{mv}</h3>')
-        navf.append(f'<span class="navmv">{mv}</span>')
-        for name, ns in secs:
-            s = slug(name)
-            frames = [nums[n] for n in ns]
-            total += len(frames)
-            lib.append(f'<section id="{s}" data-sec="{s}" data-n="{len(frames)}">')
-            lib.append(f'  <h2>{name} <span class="cnt">{len(frames)}</span></h2>')
-            lib.append('  <div class="grid">')
-            lib.extend(card(f, in42=f["id"] in set(FORTY_TWO)) for f in frames)
-            lib.append('  </div>')
-            lib.append('</section>')
-            navf.append(f'<button class="filt" type="button" data-sec="{s}">'
-                        f'{name} <i>{len(frames)}</i></button>')
-
     lookup = {f["id"]: f for f in FRAMES}
-    fa = ['  <div class="grid">']
-    fa.extend(card(lookup[fid], in42=fid in set(FORTY_TWO)) for fid in FINE_TWELVE)
-    fa.append('  </div>')
+    shown = sorted((nums[n] for n in placed), key=lambda f: times.get(f["id"], "9999"))
 
     ft = ['  <div class="grid">']
     ft.extend(card(lookup[fid], r42=True) for fid in FORTY_TWO)
     ft.append('  </div>')
-    r42data = [{"id": fid, "file": lookup[fid]["file"]} for fid in FORTY_TWO]
-    ft.append('  <script>window.R42 = ' + json.dumps(r42data) + ';</script>')
+    r42 = [{"id": fid, "file": lookup[fid]["file"]} for fid in FORTY_TWO]
+    ft.append('  <script>window.R42 = ' + json.dumps(r42) + ';</script>')
+
+    gal = ['  <div class="grid">']
+    gal.extend(card(f, in42=f["id"] in set(FORTY_TWO)) for f in shown)
+    gal.append('  </div>')
+    rall = [{"id": f["id"], "file": f["file"]} for f in shown]
+    gal.append('  <script>window.RALL = ' + json.dumps(rall) + ';</script>')
+
+    html = open(PAGE).read()
 
     def fill(html, start, end, body):
         i, j = html.find(start), html.find(end)
@@ -132,18 +121,11 @@ def build():
         head = html.find("-->", i) + 3
         return html[:head] + "\n" + body + "\n  " + html[j:]
 
-    html = fill(html, "<!-- LIBRARY:START", "<!-- LIBRARY:END -->", "\n".join(lib))
-    html = fill(html, "<!-- NAVFILT:START", "<!-- NAVFILT:END -->", "  ".join(navf))
-    html = fill(html, "<!-- FINEART:START", "<!-- FINEART:END -->", "\n".join(fa))
     html = fill(html, "<!-- FORTYTWO:START", "<!-- FORTYTWO:END -->", "\n".join(ft))
+    html = fill(html, "<!-- GALLERY:START", "<!-- GALLERY:END -->", "\n".join(gal))
     open(PAGE, "w").write(html)
-
-    missing = [f["file"] for f in FRAMES
-               if not os.path.exists(os.path.join(IMG, "thumb", f["file"]))]
     print(f"wrote {PAGE}")
-    print(f"frames placed: {total} of {len(FRAMES)}")
-    if missing:
-        print("MISSING thumbs:", missing)
+    print(f"forty-two: {len(FORTY_TWO)} · gallery: {len(shown)}")
 
 
 def ingest(folder):

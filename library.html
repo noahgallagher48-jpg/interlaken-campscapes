@@ -7,12 +7,12 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314110D'/%3E%3Crect x='7' y='7' width='18' height='18' fill='none' stroke='%23E2A73E' stroke-width='2.5'/%3E%3C/svg%3E">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Camp Interlaken · July 2026">
-<meta property="og:description" content="The residency library: four days, in order, with the book picks open.">
+<meta property="og:description" content="The forty-two, and the full gallery.">
 <style>
   :root{
     --ground:#14110D; --panel:#1C1813; --line:rgba(237,231,221,.12);
     --ink:#EDE7DD; --muted:#A69B8A; --faint:#7A7060;
-    --accent:#E2A73E; --ok:#8FB573; --art:#C9A227;
+    --accent:#E2A73E; --ok:#8FB573;
     --serif:"Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif;
     --sans:"Avenir Next",Avenir,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
     --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -25,16 +25,12 @@
   a{color:var(--accent);text-decoration:none}
   a:hover,a:focus-visible{text-decoration:underline}
   :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  section{scroll-margin-top:64px}
-  h2{font-family:var(--serif);font-weight:500;font-size:24px;margin:34px 0 10px}
+  section{scroll-margin-top:58px}
+  h2{font-family:var(--serif);font-weight:500;font-size:26px;margin:44px 0 4px}
   h2 .cnt{font-family:var(--mono);font-size:12px;color:var(--faint);margin-left:10px;letter-spacing:.06em}
-  h3.mv{font-family:var(--serif);font-weight:500;font-size:17px;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--accent);margin:58px 0 0;padding-top:26px;
-    border-top:1px solid var(--line)}
-  p{max-width:66ch}
-  .sub{color:var(--muted);font-size:14.5px;margin:0 0 16px;max-width:66ch}
-  .kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
-    margin:0 0 8px;font-weight:600}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 14px;max-width:70ch}
+  .sub button{background:none;border:0;color:var(--accent);cursor:pointer;
+    font-size:inherit;font-family:inherit;padding:0;text-decoration:underline}
 
   /* hero */
   .hero{position:relative;height:66vh;min-height:400px;overflow:hidden;background:#000;margin:0 -18px}
@@ -48,43 +44,16 @@
     margin:0;letter-spacing:.005em;line-height:1.15;color:#fff}
   .herotitle p{font-family:var(--mono);font-size:13px;color:#c9c2b4;margin:8px 0 0}
 
-  /* nav */
+  /* nav: two places */
   nav{position:sticky;top:0;z-index:30;background:rgba(20,17,13,.94);
     -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
     border-bottom:1px solid var(--line);margin:0 -18px;padding:0 18px}
-  nav .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:4px;
-    overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;padding:7px 0}
-  nav a{display:inline-block;font-size:12.5px;color:var(--muted);padding:6px 8px}
+  nav .in{max-width:1180px;margin:0 auto;display:flex;gap:20px;padding:10px 0}
+  nav a{font-size:13.5px;color:var(--muted)}
   nav a:hover{color:var(--ink);text-decoration:none}
-  nav .navmv{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--faint);padding:6px 4px 6px 14px}
-  nav button.filt{background:none;border:1px solid var(--line);border-radius:20px;color:var(--muted);
-    font-size:12px;padding:4.5px 11px;cursor:pointer;font-family:var(--sans)}
-  nav button.filt i{font-style:normal;color:var(--faint);font-family:var(--mono);font-size:10.5px;margin-left:4px}
-  nav button.filt.on{border-color:var(--accent);color:var(--accent)}
-  nav button.filt.on i{color:var(--accent)}
-  nav #clearfilt{background:none;border:0;color:var(--accent);font-size:12px;cursor:pointer;
-    text-decoration:underline;padding:6px 8px}
-  .filthint{font-size:13px;color:var(--muted);margin:14px 0 0}
-  .filthint b{color:var(--ink)}
-
-  /* deliverables grid */
-  #deliverables{margin-top:26px}
-  .dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
-  .dcard{position:relative;display:block;border-radius:6px;overflow:hidden;background:#000;
-    border:1px solid var(--line);aspect-ratio:16/10}
-  .dcard img{width:100%;height:100%;object-fit:cover;display:block;opacity:.72;transition:opacity .15s}
-  .dcard:hover img{opacity:.95}
-  .dcard .txt{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 9px;
-    background:linear-gradient(transparent,rgba(20,17,13,.9))}
-  .dcard .dlab{display:block;font-family:var(--serif);font-weight:600;font-size:16.5px;
-    color:#fff;text-shadow:0 1px 6px #000;line-height:1.25}
-  .dcard .dsub{display:block;margin-top:3px;font-family:var(--mono);font-size:10.5px;
-    color:#d8d0c0;text-shadow:0 1px 4px #000;letter-spacing:.04em;line-height:1.45}
-  .dcard:hover{text-decoration:none}
 
   /* cards */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:10px;margin-top:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:10px;margin-top:12px}
   .card{position:relative;border-radius:5px;overflow:hidden;background:#000}
   .card .ph{display:block;width:100%;padding:0;border:0;background:#000;cursor:zoom-in}
   .card .ph img{width:100%;height:auto;display:block;opacity:.92;transition:opacity .15s}
@@ -97,7 +66,16 @@
     font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
   .pick:hover{background:rgba(20,17,13,.75)}
   .pick.on{background:var(--accent);border-color:var(--accent);color:#14110D;font-weight:700}
-  .fineart .grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+  .rep{position:absolute;bottom:6px;right:6px;z-index:3;background:rgba(20,17,13,.6);
+    border:1px solid rgba(255,255,255,.5);border-radius:20px;color:#fff;font-size:11.5px;
+    padding:4px 11px;cursor:pointer;font-family:var(--sans)}
+  .rep:hover{background:rgba(20,17,13,.85)}
+  .rep.on{background:#B4483C;border-color:#B4483C;font-weight:600}
+  .card.marked .ph img{opacity:.45}
+  .card.marked{outline:2px solid #B4483C}
+  .in42{position:absolute;top:6px;right:8px;z-index:2;font-family:var(--mono);font-size:9.5px;
+    letter-spacing:.08em;color:var(--accent);border:1px solid rgba(226,167,62,.55);
+    border-radius:20px;padding:2.5px 8px;background:rgba(20,17,13,.55);pointer-events:none}
 
   /* pickbar */
   #pickbar[hidden]{display:none}
@@ -106,11 +84,10 @@
     display:flex;align-items:center;gap:12px;flex-wrap:wrap;
     -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
   #pickbar .n{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted)}
-  #pickbar .n.hit{color:var(--ok)}
-  #pickbar .n.over{color:#E4685D}
   #pickbar .send{font-size:13px;font-weight:600;border:1px solid var(--accent);color:var(--accent);
     border-radius:5px;padding:7px 14px}
   #pickbar .send[aria-disabled="true"]{opacity:.4;pointer-events:none}
+  #pickbar a{font-size:12.5px}
   #pickbar button{background:none;border:0;color:var(--muted);font-size:12.5px;cursor:pointer;
     text-decoration:underline;font-family:var(--sans);padding:4px}
   #pickbar .x{margin-left:auto;text-decoration:none;font-size:16px;color:var(--faint)}
@@ -138,29 +115,6 @@
   #lb .lbpick{background:none;border:1.5px solid rgba(255,255,255,.7);border-radius:20px;color:#fff;
     font-size:13px;padding:6px 14px;cursor:pointer}
   #lb .lbpick.on{background:var(--accent);border-color:var(--accent);color:#14110D;font-weight:600}
-
-  /* copy sections */
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:20px}
-  .copycard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 19px}
-  .copycard h3{font-family:var(--serif);font-weight:600;font-size:16.5px;margin:0 0 6px}
-  .copycard p{margin:0;font-size:13.8px;color:var(--muted)}
-  table.specs{border-collapse:collapse;margin-top:20px;font-size:13.8px;width:100%;max-width:70ch}
-  table.specs td{border-top:1px solid var(--line);padding:10px 14px 10px 0;color:var(--muted);vertical-align:top}
-  table.specs td:first-child{color:var(--ink);white-space:nowrap}
-  table.specs td.num{font-family:var(--mono);font-size:12px;color:var(--accent);white-space:nowrap}
-  .channel{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--accent);
-    border-radius:6px;padding:16px 20px;margin:40px 0 0;font-size:14.5px;color:var(--muted);max-width:70ch}
-  .channel b{color:var(--ink)}
-  .rep{position:absolute;bottom:6px;right:6px;z-index:3;background:rgba(20,17,13,.6);
-    border:1px solid rgba(255,255,255,.5);border-radius:20px;color:#fff;font-size:11.5px;
-    padding:4px 11px;cursor:pointer;font-family:var(--sans)}
-  .rep:hover{background:rgba(20,17,13,.85)}
-  .rep.on{background:#B4483C;border-color:#B4483C;font-weight:600}
-  .card.marked .ph img{opacity:.45}
-  .card.marked{outline:2px solid #B4483C}
-  .in42{position:absolute;top:6px;right:8px;z-index:2;font-family:var(--mono);font-size:9.5px;
-    letter-spacing:.08em;color:var(--accent);border:1px solid rgba(226,167,62,.55);
-    border-radius:20px;padding:2.5px 8px;background:rgba(20,17,13,.55);pointer-events:none}
 
   footer{margin-top:80px;padding-top:26px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
   footer .thesis{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px;margin:0 0 10px}
@@ -191,50 +145,14 @@
 
 <nav aria-label="Sections"><div class="in">
   <a href="#fortytwo">The forty-two</a>
-  <a href="first-look/">First look</a>
-  <a href="#fineart">Fine art</a>
-  <a href="#files">Files</a>
-  <a href="#printing">Printing</a>
-  <!-- NAVFILT:START -->
-<span class="navmv">The camp</span>  <button class="filt" type="button" data-sec="k-far-noar">K'far Noar <i>10</i></button>  <button class="filt" type="button" data-sec="cabins-and-bunks">Cabins and bunks <i>8</i></button>  <button class="filt" type="button" data-sec="around-camp">Around camp <i>14</i></button>  <span class="navmv">The days</span>  <button class="filt" type="button" data-sec="the-waterfront">The waterfront <i>9</i></button>  <button class="filt" type="button" data-sec="on-the-water">On the water <i>11</i></button>  <button class="filt" type="button" data-sec="games-and-the-wall">Games and the wall <i>8</i></button>  <button class="filt" type="button" data-sec="the-first-night">The first night <i>11</i></button>  <span class="navmv">Shabbat</span>  <button class="filt" type="button" data-sec="the-whites">The whites <i>15</i></button>  <button class="filt" type="button" data-sec="the-crossing">The crossing <i>7</i></button>  <button class="filt" type="button" data-sec="the-gathering">The gathering <i>18</i></button>  <button class="filt" type="button" data-sec="havdalah">Havdalah <i>5</i></button>  <span class="navmv">Land and sky</span>  <button class="filt" type="button" data-sec="dusk-and-last-light">Dusk and last light <i>28</i></button>  <button class="filt" type="button" data-sec="the-rainbow">The rainbow <i>4</i></button>  <button class="filt" type="button" data-sec="the-camp-at-night">The camp at night <i>11</i></button>  <button class="filt" type="button" data-sec="night-sky-studies">Night sky studies <i>4</i></button>
-  <!-- NAVFILT:END -->
-  <button id="clearfilt" type="button" hidden>Clear</button>
+  <a href="#gallery">Full gallery</a>
 </div></nav>
 
 <div class="wrap">
 
-<p class="filthint" id="filthint" hidden></p>
-
-<section id="deliverables">
-  <p class="sub" style="margin:22px 0 14px">Tap any frame to view it full screen. To change the forty-two: <b style="color:var(--ink)">Replace</b> takes a frame out, <b style="color:var(--ink)">+</b> puts a library frame in, the bottom bar sends it.</p>
-  <div class="dgrid">
-    <a class="dcard" href="#fortytwo">
-      <img loading="lazy" src="img/thumb/CILWEB1-63.jpg" alt="">
-      <span class="txt"><span class="dlab">The forty-two</span><span class="dsub">The proposed set &middot; challenge any frame</span></span>
-    </a>
-    <a class="dcard" href="first-look/">
-      <img loading="lazy" src="img/thumb/CILWEB1-14.jpg" alt="">
-      <span class="txt"><span class="dlab">First look</span><span class="dsub">33 frames &middot; 90 seconds &middot; slideshow</span></span>
-    </a>
-    <a class="dcard" href="#fineart">
-      <img loading="lazy" src="img/thumb/CILWEB1-17.jpg" alt="">
-      <span class="txt"><span class="dlab">Fine art prints</span><span class="dsub">12 frames</span></span>
-    </a>
-    <a class="dcard" href="#library">
-      <img loading="lazy" src="img/thumb/CILWEB1-58.jpg" alt="">
-      <span class="txt"><span class="dlab">The library</span><span class="dsub">Every frame &middot; four days, in order</span></span>
-    </a>
-    <a class="dcard" href="#printing">
-      <img loading="lazy" src="img/thumb/CILWEB1-116.jpg" alt="">
-      <span class="txt"><span class="dlab">Printing</span><span class="dsub">What each frame can become</span></span>
-    </a>
-  </div>
-</section>
-
 <section id="fortytwo">
-  <p class="kicker">The signature layout</p>
-  <h2>The forty-two <span class="cnt">the proposed set &middot; 12 by 8 inches &middot; hardcover</span></h2>
-  <p class="sub">My read of the residency. <b style="color:var(--ink)">Replace</b> what comes out, <b style="color:var(--ink)">+</b> what goes in from the library below. <a id="standsLink" href="#">It stands as it is</a> <a id="standsGmail" href="#" target="_blank" rel="noopener" style="font-size:12px">(by Gmail)</a> &middot; Watch the forty-two: <button id="watch90" type="button" style="background:none;border:0;color:var(--accent);cursor:pointer;font-size:inherit;font-family:inherit;padding:0;text-decoration:underline">90 seconds</button> &middot; <button id="watch42s" type="button" style="background:none;border:0;color:var(--accent);cursor:pointer;font-size:inherit;font-family:inherit;padding:0;text-decoration:underline">42 seconds</button> &middot; <button id="show42" type="button" style="background:none;border:0;color:var(--accent);cursor:pointer;font-size:12px;font-family:inherit;padding:0;text-decoration:underline">offline copy</button></p>
+  <h2>The forty-two <span class="cnt">curated by Noah</span></h2>
+  <p class="sub">Watch: <button id="watch90" type="button">90 seconds</button> &middot; <button id="watch42s" type="button">42 seconds</button>. Tap any frame to view it full screen. <b style="color:var(--ink)">Replace</b> marks a frame out; <b style="color:var(--ink)">+</b> in the gallery marks one in; the bar sends it. <a id="standsLink" href="#">It stands as it is</a> <a id="standsGmail" href="#" target="_blank" rel="noopener" style="font-size:12px">(by Gmail)</a></p>
   <!-- FORTYTWO:START  generated by build_delivery.py, do not hand-edit between these markers -->
   <div class="grid">
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-18.jpg" data-id="CILWEB1-18" data-group="sig" aria-label="View CILWEB1-18"><img loading="lazy" src="img/thumb/CILWEB1-18.jpg" alt="CILWEB1-18"></button><span class="num">18</span><button class="rep" type="button" data-id="CILWEB1-18" aria-label="Mark CILWEB1-18 to come out of the forty-two">Replace</button></div>
@@ -282,151 +200,15 @@
   </div>
   <script>window.R42 = [{"id": "CILWEB1-18", "file": "CILWEB1-18.jpg"}, {"id": "CILWEB1-83", "file": "CILWEB1-83.jpg"}, {"id": "CILWEB1-145", "file": "CILWEB1-145.jpg"}, {"id": "CILWEB1-93", "file": "CILWEB1-93.jpg"}, {"id": "CILWEB1-94", "file": "CILWEB1-94.jpg"}, {"id": "CILWEB1-65", "file": "CILWEB1-65.jpg"}, {"id": "CILWEB1-54", "file": "CILWEB1-54.jpg"}, {"id": "CILWEB1-63", "file": "CILWEB1-63.jpg"}, {"id": "CILWEB1-60", "file": "CILWEB1-60.jpg"}, {"id": "CILWEB1-3", "file": "CILWEB1-3.jpg"}, {"id": "CILWEB1-160", "file": "CILWEB1-160.jpg"}, {"id": "CILWEB1-29", "file": "CILWEB1-29.jpg"}, {"id": "CILWEB1-38", "file": "CILWEB1-38.jpg"}, {"id": "CILWEB1-20", "file": "CILWEB1-20.jpg"}, {"id": "CILWEB1-16", "file": "CILWEB1-16.jpg"}, {"id": "CILWEB1-143", "file": "CILWEB1-143.jpg"}, {"id": "CILWEB1-144", "file": "CILWEB1-144.jpg"}, {"id": "CILWEB1-141", "file": "CILWEB1-141.jpg"}, {"id": "CILWEB1-96", "file": "CILWEB1-96.jpg"}, {"id": "CILWEB1-90", "file": "CILWEB1-90.jpg"}, {"id": "CILWEB1-87", "file": "CILWEB1-87.jpg"}, {"id": "CILWEB1-88", "file": "CILWEB1-88.jpg"}, {"id": "CILWEB1-2", "file": "CILWEB1-2.jpg"}, {"id": "CILWEB1-73", "file": "CILWEB1-73.jpg"}, {"id": "CILWEB1-8", "file": "CILWEB1-8.jpg"}, {"id": "CILWEB1-36", "file": "CILWEB1-36.jpg"}, {"id": "CILWEB1-116", "file": "CILWEB1-116.jpg"}, {"id": "CILWEB1-34", "file": "CILWEB1-34.jpg"}, {"id": "CILWEB1-123", "file": "CILWEB1-123.jpg"}, {"id": "CILWEB1-97", "file": "CILWEB1-97.jpg"}, {"id": "CILWEB1-148", "file": "CILWEB1-148.jpg"}, {"id": "CILWEB1-99", "file": "CILWEB1-99.jpg"}, {"id": "CILWEB1-98", "file": "CILWEB1-98.jpg"}, {"id": "CILWEB1-57", "file": "CILWEB1-57.jpg"}, {"id": "CILWEB1-56", "file": "CILWEB1-56.jpg"}, {"id": "CILWEB1-52", "file": "CILWEB1-52.jpg"}, {"id": "CILWEB1-46", "file": "CILWEB1-46.jpg"}, {"id": "CILWEB1-12", "file": "CILWEB1-12.jpg"}, {"id": "CILWEB1-7", "file": "CILWEB1-7.jpg"}, {"id": "CILWEB1-76", "file": "CILWEB1-76.jpg"}, {"id": "CILWEB1-161", "file": "CILWEB1-161.jpg"}, {"id": "CILWEB1-47", "file": "CILWEB1-47.jpg"}];</script>
   <!-- FORTYTWO:END -->
-  <p class="sub" style="margin-top:14px">The laid-out preview lands here for approval before anything prints. Printed through Miller's; the images are yours to print anywhere.</p>
 </section>
 
-<section id="fineart" class="fineart">
-  <h2>Fine art prints <span class="cnt">12</span></h2>
-  <!-- FINEART:START  generated by build_delivery.py, do not hand-edit between these markers -->
+<section id="gallery">
+  <h2>Full gallery <span class="cnt">every frame, four days in order</span></h2>
+  <p class="sub">Watch: <button id="watchAll" type="button">the full gallery as a slideshow</button></p>
+  <!-- GALLERY:START  generated by build_delivery.py, do not hand-edit between these markers -->
   <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-17.jpg" data-id="CILWEB1-17" data-group="fa" aria-label="View CILWEB1-17"><img loading="lazy" src="img/thumb/CILWEB1-17.jpg" alt="CILWEB1-17"></button><span class="num">17</span><button class="pick" type="button" data-id="CILWEB1-17" data-group="fa" data-file="CILWEB1-17.jpg" aria-pressed="false" aria-label="Swap CILWEB1-17 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-102.jpg" data-id="CILWEB1-102" data-group="sig" aria-label="View CILWEB1-102"><img loading="lazy" src="img/thumb/CILWEB1-102.jpg" alt="CILWEB1-102"></button><span class="num">102</span><button class="pick" type="button" data-id="CILWEB1-102" data-group="sig" data-file="CILWEB1-102.jpg" aria-pressed="false" aria-label="Swap CILWEB1-102 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-19.jpg" data-id="CILWEB1-19" data-group="sig" aria-label="View CILWEB1-19"><img loading="lazy" src="img/thumb/CILWEB1-19.jpg" alt="CILWEB1-19"></button><span class="num">19</span><button class="pick" type="button" data-id="CILWEB1-19" data-group="sig" data-file="CILWEB1-19.jpg" aria-pressed="false" aria-label="Swap CILWEB1-19 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-142.jpg" data-id="CILWEB1-142" data-group="sig" aria-label="View CILWEB1-142"><img loading="lazy" src="img/thumb/CILWEB1-142.jpg" alt="CILWEB1-142"></button><span class="num">142</span><button class="pick" type="button" data-id="CILWEB1-142" data-group="sig" data-file="CILWEB1-142.jpg" aria-pressed="false" aria-label="Swap CILWEB1-142 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-143.jpg" data-id="CILWEB1-143" data-group="fa" aria-label="View CILWEB1-143"><img loading="lazy" src="img/thumb/CILWEB1-143.jpg" alt="CILWEB1-143"></button><span class="num">143</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-91.jpg" data-id="CILWEB1-91" data-group="fa" aria-label="View CILWEB1-91"><img loading="lazy" src="img/thumb/CILWEB1-91.jpg" alt="CILWEB1-91"></button><span class="num">91</span><button class="pick" type="button" data-id="CILWEB1-91" data-group="fa" data-file="CILWEB1-91.jpg" aria-pressed="false" aria-label="Swap CILWEB1-91 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-89.jpg" data-id="CILWEB1-89" data-group="sig" aria-label="View CILWEB1-89"><img loading="lazy" src="img/thumb/CILWEB1-89.jpg" alt="CILWEB1-89"></button><span class="num">89</span><button class="pick" type="button" data-id="CILWEB1-89" data-group="sig" data-file="CILWEB1-89.jpg" aria-pressed="false" aria-label="Swap CILWEB1-89 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-16.jpg" data-id="CILWEB1-16" data-group="fa" aria-label="View CILWEB1-16"><img loading="lazy" src="img/thumb/CILWEB1-16.jpg" alt="CILWEB1-16"></button><span class="num">16</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-22.jpg" data-id="CILWEB1-22" data-group="fa" aria-label="View CILWEB1-22"><img loading="lazy" src="img/thumb/CILWEB1-22.jpg" alt="CILWEB1-22"></button><span class="num">22</span><button class="pick" type="button" data-id="CILWEB1-22" data-group="fa" data-file="CILWEB1-22.jpg" aria-pressed="false" aria-label="Swap CILWEB1-22 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-116.jpg" data-id="CILWEB1-116" data-group="fa" aria-label="View CILWEB1-116"><img loading="lazy" src="img/thumb/CILWEB1-116.jpg" alt="CILWEB1-116"></button><span class="num">116</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-66.jpg" data-id="CILWEB1-66" data-group="sig" aria-label="View CILWEB1-66"><img loading="lazy" src="img/thumb/CILWEB1-66.jpg" alt="CILWEB1-66"></button><span class="num">66</span><button class="pick" type="button" data-id="CILWEB1-66" data-group="sig" data-file="CILWEB1-66.jpg" aria-pressed="false" aria-label="Swap CILWEB1-66 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-63.jpg" data-id="CILWEB1-63" data-group="sig" aria-label="View CILWEB1-63"><img loading="lazy" src="img/thumb/CILWEB1-63.jpg" alt="CILWEB1-63"></button><span class="num">63</span><span class="in42">in the 42</span></div>
-  </div>
-  <!-- FINEART:END -->
-</section>
-
-<section id="files">
-  <h2>The files</h2>
-  <p>Every frame opens full screen here, and the <b style="color:var(--ink)">Open file</b> link under it is the web file: 2560 pixels on the long edge, right for the website, email, social and slide decks. The full-resolution set, from the 45-megapixel masters, arrives with the full library within 30 days of the last on-site day.</p>
-</section>
-
-<section id="printing">
-  <p class="kicker">The print-grade frames</p>
-  <h2>Printing</h2>
-  <p class="sub">The Fine Art and Signature frames carry production notes.</p>
-  <div class="cards">
-    <div class="copycard"><h3>Produced through Abba Photo at Miller's</h3>
-      <p>The print-grade frames are produced through me at Miller's Imaging Labs. The specs on each frame are written for that lab's papers and inks. Printed somewhere else, the spec no longer describes what ends up on the wall.</p></div>
-    <div class="copycard"><h3>Each carries its own specs</h3>
-      <p>Paper class, the size window at which the frame reads as intended, finish and mounting where it matters. Delivered alongside the full-resolution file so the frame arrives at full strength.</p></div>
-    <div class="copycard"><h3>The notation rides with the frame</h3>
-      <p>Fine-art frames publish with the line "from the fine-art series, available as a print." The line stays with the image wherever it runs, so a frame the camp has already posted is still a print someone can ask for.</p></div>
-  </div>
-  <table class="specs">
-    <tr><td>Metal and acrylic</td><td class="num">300 DPI</td><td>Hard, reflective surfaces show detail, so these get the most resolution. Lobby and donor-wall pieces.</td></tr>
-    <tr><td>Photographic paper</td><td class="num">250 DPI</td><td>Framed prints, gifts, anything behind glass.</td></tr>
-    <tr><td>Canvas</td><td class="num">150 DPI</td><td>The weave absorbs detail, so canvas goes largest from the same file. Big wall pieces.</td></tr>
-  </table>
-  <p class="sub" style="margin-top:14px">Every frame here prints; what changes between frames is how large each one goes. Per-frame size windows ride with the specs when the full library lands.</p>
-</section>
-
-<div id="library">
-<!-- LIBRARY:START  generated by build_delivery.py, do not hand-edit between these markers -->
-<h3 class="mv" id="the-camp">The camp</h3>
-<section id="k-far-noar" data-sec="k-far-noar" data-n="10">
-  <h2>K'far Noar <span class="cnt">10</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-24.jpg" data-id="CILWEB1-24" data-group="day" aria-label="View CILWEB1-24"><img loading="lazy" src="img/thumb/CILWEB1-24.jpg" alt="CILWEB1-24"></button><span class="num">24</span><button class="pick" type="button" data-id="CILWEB1-24" data-group="day" data-file="CILWEB1-24.jpg" aria-pressed="false" aria-label="Swap CILWEB1-24 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-25.jpg" data-id="CILWEB1-25" data-group="day" aria-label="View CILWEB1-25"><img loading="lazy" src="img/thumb/CILWEB1-25.jpg" alt="CILWEB1-25"></button><span class="num">25</span><button class="pick" type="button" data-id="CILWEB1-25" data-group="day" data-file="CILWEB1-25.jpg" aria-pressed="false" aria-label="Swap CILWEB1-25 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-28.jpg" data-id="CILWEB1-28" data-group="sig" aria-label="View CILWEB1-28"><img loading="lazy" src="img/thumb/CILWEB1-28.jpg" alt="CILWEB1-28"></button><span class="num">28</span><button class="pick" type="button" data-id="CILWEB1-28" data-group="sig" data-file="CILWEB1-28.jpg" aria-pressed="false" aria-label="Swap CILWEB1-28 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-29.jpg" data-id="CILWEB1-29" data-group="sig" aria-label="View CILWEB1-29"><img loading="lazy" src="img/thumb/CILWEB1-29.jpg" alt="CILWEB1-29"></button><span class="num">29</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-31.jpg" data-id="CILWEB1-31" data-group="day" aria-label="View CILWEB1-31"><img loading="lazy" src="img/thumb/CILWEB1-31.jpg" alt="CILWEB1-31"></button><span class="num">31</span><button class="pick" type="button" data-id="CILWEB1-31" data-group="day" data-file="CILWEB1-31.jpg" aria-pressed="false" aria-label="Swap CILWEB1-31 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-32.jpg" data-id="CILWEB1-32" data-group="sig" aria-label="View CILWEB1-32"><img loading="lazy" src="img/thumb/CILWEB1-32.jpg" alt="CILWEB1-32"></button><span class="num">32</span><button class="pick" type="button" data-id="CILWEB1-32" data-group="sig" data-file="CILWEB1-32.jpg" aria-pressed="false" aria-label="Swap CILWEB1-32 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-33.jpg" data-id="CILWEB1-33" data-group="day" aria-label="View CILWEB1-33"><img loading="lazy" src="img/thumb/CILWEB1-33.jpg" alt="CILWEB1-33"></button><span class="num">33</span><button class="pick" type="button" data-id="CILWEB1-33" data-group="day" data-file="CILWEB1-33.jpg" aria-pressed="false" aria-label="Swap CILWEB1-33 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-162.jpg" data-id="CILWEB1-162" data-group="sig" aria-label="View CILWEB1-162"><img loading="lazy" src="img/thumb/CILWEB1-162.jpg" alt="CILWEB1-162"></button><span class="num">162</span><button class="pick" type="button" data-id="CILWEB1-162" data-group="sig" data-file="CILWEB1-162.jpg" aria-pressed="false" aria-label="Swap CILWEB1-162 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-163.jpg" data-id="CILWEB1-163" data-group="dev" aria-label="View CILWEB1-163"><img loading="lazy" src="img/thumb/CILWEB1-163.jpg" alt="CILWEB1-163"></button><span class="num">163</span><button class="pick" type="button" data-id="CILWEB1-163" data-group="dev" data-file="CILWEB1-163.jpg" aria-pressed="false" aria-label="Swap CILWEB1-163 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-164.jpg" data-id="CILWEB1-164" data-group="sig" aria-label="View CILWEB1-164"><img loading="lazy" src="img/thumb/CILWEB1-164.jpg" alt="CILWEB1-164"></button><span class="num">164</span><button class="pick" type="button" data-id="CILWEB1-164" data-group="sig" data-file="CILWEB1-164.jpg" aria-pressed="false" aria-label="Swap CILWEB1-164 into the forty-two">+</button></div>
-  </div>
-</section>
-<section id="cabins-and-bunks" data-sec="cabins-and-bunks" data-n="8">
-  <h2>Cabins and bunks <span class="cnt">8</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-30.jpg" data-id="CILWEB1-30" data-group="day" aria-label="View CILWEB1-30"><img loading="lazy" src="img/thumb/CILWEB1-30.jpg" alt="CILWEB1-30"></button><span class="num">30</span><button class="pick" type="button" data-id="CILWEB1-30" data-group="day" data-file="CILWEB1-30.jpg" aria-pressed="false" aria-label="Swap CILWEB1-30 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-34.jpg" data-id="CILWEB1-34" data-group="fa" aria-label="View CILWEB1-34"><img loading="lazy" src="img/thumb/CILWEB1-34.jpg" alt="CILWEB1-34"></button><span class="num">34</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-35.jpg" data-id="CILWEB1-35" data-group="fa" aria-label="View CILWEB1-35"><img loading="lazy" src="img/thumb/CILWEB1-35.jpg" alt="CILWEB1-35"></button><span class="num">35</span><button class="pick" type="button" data-id="CILWEB1-35" data-group="fa" data-file="CILWEB1-35.jpg" aria-pressed="false" aria-label="Swap CILWEB1-35 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-38.jpg" data-id="CILWEB1-38" data-group="sig" aria-label="View CILWEB1-38"><img loading="lazy" src="img/thumb/CILWEB1-38.jpg" alt="CILWEB1-38"></button><span class="num">38</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-40.jpg" data-id="CILWEB1-40" data-group="day" aria-label="View CILWEB1-40"><img loading="lazy" src="img/thumb/CILWEB1-40.jpg" alt="CILWEB1-40"></button><span class="num">40</span><button class="pick" type="button" data-id="CILWEB1-40" data-group="day" data-file="CILWEB1-40.jpg" aria-pressed="false" aria-label="Swap CILWEB1-40 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-107.jpg" data-id="CILWEB1-107" data-group="sig" aria-label="View CILWEB1-107"><img loading="lazy" src="img/thumb/CILWEB1-107.jpg" alt="CILWEB1-107"></button><span class="num">107</span><button class="pick" type="button" data-id="CILWEB1-107" data-group="sig" data-file="CILWEB1-107.jpg" aria-pressed="false" aria-label="Swap CILWEB1-107 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-126.jpg" data-id="CILWEB1-126" data-group="fa" aria-label="View CILWEB1-126"><img loading="lazy" src="img/thumb/CILWEB1-126.jpg" alt="CILWEB1-126"></button><span class="num">126</span><button class="pick" type="button" data-id="CILWEB1-126" data-group="fa" data-file="CILWEB1-126.jpg" aria-pressed="false" aria-label="Swap CILWEB1-126 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-127.jpg" data-id="CILWEB1-127" data-group="fa" aria-label="View CILWEB1-127"><img loading="lazy" src="img/thumb/CILWEB1-127.jpg" alt="CILWEB1-127"></button><span class="num">127</span><button class="pick" type="button" data-id="CILWEB1-127" data-group="fa" data-file="CILWEB1-127.jpg" aria-pressed="false" aria-label="Swap CILWEB1-127 into the forty-two">+</button></div>
-  </div>
-</section>
-<section id="around-camp" data-sec="around-camp" data-n="14">
-  <h2>Around camp <span class="cnt">14</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-26.jpg" data-id="CILWEB1-26" data-group="dev" aria-label="View CILWEB1-26"><img loading="lazy" src="img/thumb/CILWEB1-26.jpg" alt="CILWEB1-26"></button><span class="num">26</span><button class="pick" type="button" data-id="CILWEB1-26" data-group="dev" data-file="CILWEB1-26.jpg" aria-pressed="false" aria-label="Swap CILWEB1-26 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-27.jpg" data-id="CILWEB1-27" data-group="day" aria-label="View CILWEB1-27"><img loading="lazy" src="img/thumb/CILWEB1-27.jpg" alt="CILWEB1-27"></button><span class="num">27</span><button class="pick" type="button" data-id="CILWEB1-27" data-group="day" data-file="CILWEB1-27.jpg" aria-pressed="false" aria-label="Swap CILWEB1-27 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-41.jpg" data-id="CILWEB1-41" data-group="dev" aria-label="View CILWEB1-41"><img loading="lazy" src="img/thumb/CILWEB1-41.jpg" alt="CILWEB1-41"></button><span class="num">41</span><button class="pick" type="button" data-id="CILWEB1-41" data-group="dev" data-file="CILWEB1-41.jpg" aria-pressed="false" aria-label="Swap CILWEB1-41 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-108.jpg" data-id="CILWEB1-108" data-group="fa" aria-label="View CILWEB1-108"><img loading="lazy" src="img/thumb/CILWEB1-108.jpg" alt="CILWEB1-108"></button><span class="num">108</span><button class="pick" type="button" data-id="CILWEB1-108" data-group="fa" data-file="CILWEB1-108.jpg" aria-pressed="false" aria-label="Swap CILWEB1-108 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-109.jpg" data-id="CILWEB1-109" data-group="fa" aria-label="View CILWEB1-109"><img loading="lazy" src="img/thumb/CILWEB1-109.jpg" alt="CILWEB1-109"></button><span class="num">109</span><button class="pick" type="button" data-id="CILWEB1-109" data-group="fa" data-file="CILWEB1-109.jpg" aria-pressed="false" aria-label="Swap CILWEB1-109 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-114.jpg" data-id="CILWEB1-114" data-group="sig" aria-label="View CILWEB1-114"><img loading="lazy" src="img/thumb/CILWEB1-114.jpg" alt="CILWEB1-114"></button><span class="num">114</span><button class="pick" type="button" data-id="CILWEB1-114" data-group="sig" data-file="CILWEB1-114.jpg" aria-pressed="false" aria-label="Swap CILWEB1-114 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-123.jpg" data-id="CILWEB1-123" data-group="fa" aria-label="View CILWEB1-123"><img loading="lazy" src="img/thumb/CILWEB1-123.jpg" alt="CILWEB1-123"></button><span class="num">123</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-124.jpg" data-id="CILWEB1-124" data-group="day" aria-label="View CILWEB1-124"><img loading="lazy" src="img/thumb/CILWEB1-124.jpg" alt="CILWEB1-124"></button><span class="num">124</span><button class="pick" type="button" data-id="CILWEB1-124" data-group="day" data-file="CILWEB1-124.jpg" aria-pressed="false" aria-label="Swap CILWEB1-124 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-125.jpg" data-id="CILWEB1-125" data-group="day" aria-label="View CILWEB1-125"><img loading="lazy" src="img/thumb/CILWEB1-125.jpg" alt="CILWEB1-125"></button><span class="num">125</span><button class="pick" type="button" data-id="CILWEB1-125" data-group="day" data-file="CILWEB1-125.jpg" aria-pressed="false" aria-label="Swap CILWEB1-125 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-128.jpg" data-id="CILWEB1-128" data-group="sig" aria-label="View CILWEB1-128"><img loading="lazy" src="img/thumb/CILWEB1-128.jpg" alt="CILWEB1-128"></button><span class="num">128</span><button class="pick" type="button" data-id="CILWEB1-128" data-group="sig" data-file="CILWEB1-128.jpg" aria-pressed="false" aria-label="Swap CILWEB1-128 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-129.jpg" data-id="CILWEB1-129" data-group="sig" aria-label="View CILWEB1-129"><img loading="lazy" src="img/thumb/CILWEB1-129.jpg" alt="CILWEB1-129"></button><span class="num">129</span><button class="pick" type="button" data-id="CILWEB1-129" data-group="sig" data-file="CILWEB1-129.jpg" aria-pressed="false" aria-label="Swap CILWEB1-129 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-131.jpg" data-id="CILWEB1-131" data-group="sig" aria-label="View CILWEB1-131"><img loading="lazy" src="img/thumb/CILWEB1-131.jpg" alt="CILWEB1-131"></button><span class="num">131</span><button class="pick" type="button" data-id="CILWEB1-131" data-group="sig" data-file="CILWEB1-131.jpg" aria-pressed="false" aria-label="Swap CILWEB1-131 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-165.jpg" data-id="CILWEB1-165" data-group="day" aria-label="View CILWEB1-165"><img loading="lazy" src="img/thumb/CILWEB1-165.jpg" alt="CILWEB1-165"></button><span class="num">165</span><button class="pick" type="button" data-id="CILWEB1-165" data-group="day" data-file="CILWEB1-165.jpg" aria-pressed="false" aria-label="Swap CILWEB1-165 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-166.jpg" data-id="CILWEB1-166" data-group="dev" aria-label="View CILWEB1-166"><img loading="lazy" src="img/thumb/CILWEB1-166.jpg" alt="CILWEB1-166"></button><span class="num">166</span><button class="pick" type="button" data-id="CILWEB1-166" data-group="dev" data-file="CILWEB1-166.jpg" aria-pressed="false" aria-label="Swap CILWEB1-166 into the forty-two">+</button></div>
-  </div>
-</section>
-<h3 class="mv" id="the-days">The days</h3>
-<section id="the-waterfront" data-sec="the-waterfront" data-n="9">
-  <h2>The waterfront <span class="cnt">9</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-23.jpg" data-id="CILWEB1-23" data-group="sig" aria-label="View CILWEB1-23"><img loading="lazy" src="img/thumb/CILWEB1-23.jpg" alt="CILWEB1-23"></button><span class="num">23</span><button class="pick" type="button" data-id="CILWEB1-23" data-group="sig" data-file="CILWEB1-23.jpg" aria-pressed="false" aria-label="Swap CILWEB1-23 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-36.jpg" data-id="CILWEB1-36" data-group="fa" aria-label="View CILWEB1-36"><img loading="lazy" src="img/thumb/CILWEB1-36.jpg" alt="CILWEB1-36"></button><span class="num">36</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-37.jpg" data-id="CILWEB1-37" data-group="fa" aria-label="View CILWEB1-37"><img loading="lazy" src="img/thumb/CILWEB1-37.jpg" alt="CILWEB1-37"></button><span class="num">37</span><button class="pick" type="button" data-id="CILWEB1-37" data-group="fa" data-file="CILWEB1-37.jpg" aria-pressed="false" aria-label="Swap CILWEB1-37 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-115.jpg" data-id="CILWEB1-115" data-group="sig" aria-label="View CILWEB1-115"><img loading="lazy" src="img/thumb/CILWEB1-115.jpg" alt="CILWEB1-115"></button><span class="num">115</span><button class="pick" type="button" data-id="CILWEB1-115" data-group="sig" data-file="CILWEB1-115.jpg" aria-pressed="false" aria-label="Swap CILWEB1-115 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-116.jpg" data-id="CILWEB1-116" data-group="fa" aria-label="View CILWEB1-116"><img loading="lazy" src="img/thumb/CILWEB1-116.jpg" alt="CILWEB1-116"></button><span class="num">116</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-117.jpg" data-id="CILWEB1-117" data-group="day" aria-label="View CILWEB1-117"><img loading="lazy" src="img/thumb/CILWEB1-117.jpg" alt="CILWEB1-117"></button><span class="num">117</span><button class="pick" type="button" data-id="CILWEB1-117" data-group="day" data-file="CILWEB1-117.jpg" aria-pressed="false" aria-label="Swap CILWEB1-117 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-118.jpg" data-id="CILWEB1-118" data-group="day" aria-label="View CILWEB1-118"><img loading="lazy" src="img/thumb/CILWEB1-118.jpg" alt="CILWEB1-118"></button><span class="num">118</span><button class="pick" type="button" data-id="CILWEB1-118" data-group="day" data-file="CILWEB1-118.jpg" aria-pressed="false" aria-label="Swap CILWEB1-118 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-119.jpg" data-id="CILWEB1-119" data-group="sig" aria-label="View CILWEB1-119"><img loading="lazy" src="img/thumb/CILWEB1-119.jpg" alt="CILWEB1-119"></button><span class="num">119</span><button class="pick" type="button" data-id="CILWEB1-119" data-group="sig" data-file="CILWEB1-119.jpg" aria-pressed="false" aria-label="Swap CILWEB1-119 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-120.jpg" data-id="CILWEB1-120" data-group="day" aria-label="View CILWEB1-120"><img loading="lazy" src="img/thumb/CILWEB1-120.jpg" alt="CILWEB1-120"></button><span class="num">120</span><button class="pick" type="button" data-id="CILWEB1-120" data-group="day" data-file="CILWEB1-120.jpg" aria-pressed="false" aria-label="Swap CILWEB1-120 into the forty-two">+</button></div>
-  </div>
-</section>
-<section id="on-the-water" data-sec="on-the-water" data-n="11">
-  <h2>On the water <span class="cnt">11</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-150.jpg" data-id="CILWEB1-150" data-group="pub" aria-label="View CILWEB1-150"><img loading="lazy" src="img/thumb/CILWEB1-150.jpg" alt="CILWEB1-150"></button><span class="num">150</span><button class="pick" type="button" data-id="CILWEB1-150" data-group="pub" data-file="CILWEB1-150.jpg" aria-pressed="false" aria-label="Swap CILWEB1-150 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-151.jpg" data-id="CILWEB1-151" data-group="pub" aria-label="View CILWEB1-151"><img loading="lazy" src="img/thumb/CILWEB1-151.jpg" alt="CILWEB1-151"></button><span class="num">151</span><button class="pick" type="button" data-id="CILWEB1-151" data-group="pub" data-file="CILWEB1-151.jpg" aria-pressed="false" aria-label="Swap CILWEB1-151 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-152.jpg" data-id="CILWEB1-152" data-group="pub" aria-label="View CILWEB1-152"><img loading="lazy" src="img/thumb/CILWEB1-152.jpg" alt="CILWEB1-152"></button><span class="num">152</span><button class="pick" type="button" data-id="CILWEB1-152" data-group="pub" data-file="CILWEB1-152.jpg" aria-pressed="false" aria-label="Swap CILWEB1-152 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-153.jpg" data-id="CILWEB1-153" data-group="pub" aria-label="View CILWEB1-153"><img loading="lazy" src="img/thumb/CILWEB1-153.jpg" alt="CILWEB1-153"></button><span class="num">153</span><button class="pick" type="button" data-id="CILWEB1-153" data-group="pub" data-file="CILWEB1-153.jpg" aria-pressed="false" aria-label="Swap CILWEB1-153 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-154.jpg" data-id="CILWEB1-154" data-group="pub" aria-label="View CILWEB1-154"><img loading="lazy" src="img/thumb/CILWEB1-154.jpg" alt="CILWEB1-154"></button><span class="num">154</span><button class="pick" type="button" data-id="CILWEB1-154" data-group="pub" data-file="CILWEB1-154.jpg" aria-pressed="false" aria-label="Swap CILWEB1-154 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-155.jpg" data-id="CILWEB1-155" data-group="pub" aria-label="View CILWEB1-155"><img loading="lazy" src="img/thumb/CILWEB1-155.jpg" alt="CILWEB1-155"></button><span class="num">155</span><button class="pick" type="button" data-id="CILWEB1-155" data-group="pub" data-file="CILWEB1-155.jpg" aria-pressed="false" aria-label="Swap CILWEB1-155 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-156.jpg" data-id="CILWEB1-156" data-group="pub" aria-label="View CILWEB1-156"><img loading="lazy" src="img/thumb/CILWEB1-156.jpg" alt="CILWEB1-156"></button><span class="num">156</span><button class="pick" type="button" data-id="CILWEB1-156" data-group="pub" data-file="CILWEB1-156.jpg" aria-pressed="false" aria-label="Swap CILWEB1-156 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-157.jpg" data-id="CILWEB1-157" data-group="day" aria-label="View CILWEB1-157"><img loading="lazy" src="img/thumb/CILWEB1-157.jpg" alt="CILWEB1-157"></button><span class="num">157</span><button class="pick" type="button" data-id="CILWEB1-157" data-group="day" data-file="CILWEB1-157.jpg" aria-pressed="false" aria-label="Swap CILWEB1-157 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-158.jpg" data-id="CILWEB1-158" data-group="dev" aria-label="View CILWEB1-158"><img loading="lazy" src="img/thumb/CILWEB1-158.jpg" alt="CILWEB1-158"></button><span class="num">158</span><button class="pick" type="button" data-id="CILWEB1-158" data-group="dev" data-file="CILWEB1-158.jpg" aria-pressed="false" aria-label="Swap CILWEB1-158 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-159.jpg" data-id="CILWEB1-159" data-group="day" aria-label="View CILWEB1-159"><img loading="lazy" src="img/thumb/CILWEB1-159.jpg" alt="CILWEB1-159"></button><span class="num">159</span><button class="pick" type="button" data-id="CILWEB1-159" data-group="day" data-file="CILWEB1-159.jpg" aria-pressed="false" aria-label="Swap CILWEB1-159 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-161.jpg" data-id="CILWEB1-161" data-group="pub" aria-label="View CILWEB1-161"><img loading="lazy" src="img/thumb/CILWEB1-161.jpg" alt="CILWEB1-161"></button><span class="num">161</span><span class="in42">in the 42</span></div>
-  </div>
-</section>
-<section id="games-and-the-wall" data-sec="games-and-the-wall" data-n="8">
-  <h2>Games and the wall <span class="cnt">8</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-110.jpg" data-id="CILWEB1-110" data-group="day" aria-label="View CILWEB1-110"><img loading="lazy" src="img/thumb/CILWEB1-110.jpg" alt="CILWEB1-110"></button><span class="num">110</span><button class="pick" type="button" data-id="CILWEB1-110" data-group="day" data-file="CILWEB1-110.jpg" aria-pressed="false" aria-label="Swap CILWEB1-110 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-111.jpg" data-id="CILWEB1-111" data-group="day" aria-label="View CILWEB1-111"><img loading="lazy" src="img/thumb/CILWEB1-111.jpg" alt="CILWEB1-111"></button><span class="num">111</span><button class="pick" type="button" data-id="CILWEB1-111" data-group="day" data-file="CILWEB1-111.jpg" aria-pressed="false" aria-label="Swap CILWEB1-111 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-112.jpg" data-id="CILWEB1-112" data-group="pub" aria-label="View CILWEB1-112"><img loading="lazy" src="img/thumb/CILWEB1-112.jpg" alt="CILWEB1-112"></button><span class="num">112</span><button class="pick" type="button" data-id="CILWEB1-112" data-group="pub" data-file="CILWEB1-112.jpg" aria-pressed="false" aria-label="Swap CILWEB1-112 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-113.jpg" data-id="CILWEB1-113" data-group="pub" aria-label="View CILWEB1-113"><img loading="lazy" src="img/thumb/CILWEB1-113.jpg" alt="CILWEB1-113"></button><span class="num">113</span><button class="pick" type="button" data-id="CILWEB1-113" data-group="pub" data-file="CILWEB1-113.jpg" aria-pressed="false" aria-label="Swap CILWEB1-113 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-121.jpg" data-id="CILWEB1-121" data-group="day" aria-label="View CILWEB1-121"><img loading="lazy" src="img/thumb/CILWEB1-121.jpg" alt="CILWEB1-121"></button><span class="num">121</span><button class="pick" type="button" data-id="CILWEB1-121" data-group="day" data-file="CILWEB1-121.jpg" aria-pressed="false" aria-label="Swap CILWEB1-121 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-122.jpg" data-id="CILWEB1-122" data-group="pub" aria-label="View CILWEB1-122"><img loading="lazy" src="img/thumb/CILWEB1-122.jpg" alt="CILWEB1-122"></button><span class="num">122</span><button class="pick" type="button" data-id="CILWEB1-122" data-group="pub" data-file="CILWEB1-122.jpg" aria-pressed="false" aria-label="Swap CILWEB1-122 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-130.jpg" data-id="CILWEB1-130" data-group="day" aria-label="View CILWEB1-130"><img loading="lazy" src="img/thumb/CILWEB1-130.jpg" alt="CILWEB1-130"></button><span class="num">130</span><button class="pick" type="button" data-id="CILWEB1-130" data-group="day" data-file="CILWEB1-130.jpg" aria-pressed="false" aria-label="Swap CILWEB1-130 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-160.jpg" data-id="CILWEB1-160" data-group="sig" aria-label="View CILWEB1-160"><img loading="lazy" src="img/thumb/CILWEB1-160.jpg" alt="CILWEB1-160"></button><span class="num">160</span><span class="in42">in the 42</span></div>
-  </div>
-</section>
-<section id="the-first-night" data-sec="the-first-night" data-n="11">
-  <h2>The first night <span class="cnt">11</span></h2>
-  <div class="grid">
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1.jpg" data-id="CILWEB1" data-group="fa" aria-label="View CILWEB1"><img loading="lazy" src="img/thumb/CILWEB1.jpg" alt="CILWEB1"></button><span class="num">1</span><button class="pick" type="button" data-id="CILWEB1" data-group="fa" data-file="CILWEB1.jpg" aria-pressed="false" aria-label="Swap CILWEB1 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-2.jpg" data-id="CILWEB1-2" data-group="fa" aria-label="View CILWEB1-2"><img loading="lazy" src="img/thumb/CILWEB1-2.jpg" alt="CILWEB1-2"></button><span class="num">2</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-3.jpg" data-id="CILWEB1-3" data-group="sig" aria-label="View CILWEB1-3"><img loading="lazy" src="img/thumb/CILWEB1-3.jpg" alt="CILWEB1-3"></button><span class="num">3</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-4.jpg" data-id="CILWEB1-4" data-group="day" aria-label="View CILWEB1-4"><img loading="lazy" src="img/thumb/CILWEB1-4.jpg" alt="CILWEB1-4"></button><span class="num">4</span><button class="pick" type="button" data-id="CILWEB1-4" data-group="day" data-file="CILWEB1-4.jpg" aria-pressed="false" aria-label="Swap CILWEB1-4 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-5.jpg" data-id="CILWEB1-5" data-group="dev" aria-label="View CILWEB1-5"><img loading="lazy" src="img/thumb/CILWEB1-5.jpg" alt="CILWEB1-5"></button><span class="num">5</span><button class="pick" type="button" data-id="CILWEB1-5" data-group="dev" data-file="CILWEB1-5.jpg" aria-pressed="false" aria-label="Swap CILWEB1-5 into the forty-two">+</button></div>
@@ -438,12 +220,33 @@
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-11.jpg" data-id="CILWEB1-11" data-group="day" aria-label="View CILWEB1-11"><img loading="lazy" src="img/thumb/CILWEB1-11.jpg" alt="CILWEB1-11"></button><span class="num">11</span><button class="pick" type="button" data-id="CILWEB1-11" data-group="day" data-file="CILWEB1-11.jpg" aria-pressed="false" aria-label="Swap CILWEB1-11 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-12.jpg" data-id="CILWEB1-12" data-group="dev" aria-label="View CILWEB1-12"><img loading="lazy" src="img/thumb/CILWEB1-12.jpg" alt="CILWEB1-12"></button><span class="num">12</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-13.jpg" data-id="CILWEB1-13" data-group="dev" aria-label="View CILWEB1-13"><img loading="lazy" src="img/thumb/CILWEB1-13.jpg" alt="CILWEB1-13"></button><span class="num">13</span><button class="pick" type="button" data-id="CILWEB1-13" data-group="dev" data-file="CILWEB1-13.jpg" aria-pressed="false" aria-label="Swap CILWEB1-13 into the forty-two">+</button></div>
-  </div>
-</section>
-<h3 class="mv" id="shabbat">Shabbat</h3>
-<section id="the-whites" data-sec="the-whites" data-n="15">
-  <h2>The whites <span class="cnt">15</span></h2>
-  <div class="grid">
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-14.jpg" data-id="CILWEB1-14" data-group="sig" aria-label="View CILWEB1-14"><img loading="lazy" src="img/thumb/CILWEB1-14.jpg" alt="CILWEB1-14"></button><span class="num">14</span><button class="pick" type="button" data-id="CILWEB1-14" data-group="sig" data-file="CILWEB1-14.jpg" aria-pressed="false" aria-label="Swap CILWEB1-14 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-15.jpg" data-id="CILWEB1-15" data-group="sig" aria-label="View CILWEB1-15"><img loading="lazy" src="img/thumb/CILWEB1-15.jpg" alt="CILWEB1-15"></button><span class="num">15</span><button class="pick" type="button" data-id="CILWEB1-15" data-group="sig" data-file="CILWEB1-15.jpg" aria-pressed="false" aria-label="Swap CILWEB1-15 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-16.jpg" data-id="CILWEB1-16" data-group="fa" aria-label="View CILWEB1-16"><img loading="lazy" src="img/thumb/CILWEB1-16.jpg" alt="CILWEB1-16"></button><span class="num">16</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-17.jpg" data-id="CILWEB1-17" data-group="fa" aria-label="View CILWEB1-17"><img loading="lazy" src="img/thumb/CILWEB1-17.jpg" alt="CILWEB1-17"></button><span class="num">17</span><button class="pick" type="button" data-id="CILWEB1-17" data-group="fa" data-file="CILWEB1-17.jpg" aria-pressed="false" aria-label="Swap CILWEB1-17 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-18.jpg" data-id="CILWEB1-18" data-group="sig" aria-label="View CILWEB1-18"><img loading="lazy" src="img/thumb/CILWEB1-18.jpg" alt="CILWEB1-18"></button><span class="num">18</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-19.jpg" data-id="CILWEB1-19" data-group="sig" aria-label="View CILWEB1-19"><img loading="lazy" src="img/thumb/CILWEB1-19.jpg" alt="CILWEB1-19"></button><span class="num">19</span><button class="pick" type="button" data-id="CILWEB1-19" data-group="sig" data-file="CILWEB1-19.jpg" aria-pressed="false" aria-label="Swap CILWEB1-19 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-20.jpg" data-id="CILWEB1-20" data-group="fa" aria-label="View CILWEB1-20"><img loading="lazy" src="img/thumb/CILWEB1-20.jpg" alt="CILWEB1-20"></button><span class="num">20</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-21.jpg" data-id="CILWEB1-21" data-group="fa" aria-label="View CILWEB1-21"><img loading="lazy" src="img/thumb/CILWEB1-21.jpg" alt="CILWEB1-21"></button><span class="num">21</span><button class="pick" type="button" data-id="CILWEB1-21" data-group="fa" data-file="CILWEB1-21.jpg" aria-pressed="false" aria-label="Swap CILWEB1-21 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-22.jpg" data-id="CILWEB1-22" data-group="fa" aria-label="View CILWEB1-22"><img loading="lazy" src="img/thumb/CILWEB1-22.jpg" alt="CILWEB1-22"></button><span class="num">22</span><button class="pick" type="button" data-id="CILWEB1-22" data-group="fa" data-file="CILWEB1-22.jpg" aria-pressed="false" aria-label="Swap CILWEB1-22 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-23.jpg" data-id="CILWEB1-23" data-group="sig" aria-label="View CILWEB1-23"><img loading="lazy" src="img/thumb/CILWEB1-23.jpg" alt="CILWEB1-23"></button><span class="num">23</span><button class="pick" type="button" data-id="CILWEB1-23" data-group="sig" data-file="CILWEB1-23.jpg" aria-pressed="false" aria-label="Swap CILWEB1-23 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-24.jpg" data-id="CILWEB1-24" data-group="day" aria-label="View CILWEB1-24"><img loading="lazy" src="img/thumb/CILWEB1-24.jpg" alt="CILWEB1-24"></button><span class="num">24</span><button class="pick" type="button" data-id="CILWEB1-24" data-group="day" data-file="CILWEB1-24.jpg" aria-pressed="false" aria-label="Swap CILWEB1-24 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-25.jpg" data-id="CILWEB1-25" data-group="day" aria-label="View CILWEB1-25"><img loading="lazy" src="img/thumb/CILWEB1-25.jpg" alt="CILWEB1-25"></button><span class="num">25</span><button class="pick" type="button" data-id="CILWEB1-25" data-group="day" data-file="CILWEB1-25.jpg" aria-pressed="false" aria-label="Swap CILWEB1-25 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-26.jpg" data-id="CILWEB1-26" data-group="dev" aria-label="View CILWEB1-26"><img loading="lazy" src="img/thumb/CILWEB1-26.jpg" alt="CILWEB1-26"></button><span class="num">26</span><button class="pick" type="button" data-id="CILWEB1-26" data-group="dev" data-file="CILWEB1-26.jpg" aria-pressed="false" aria-label="Swap CILWEB1-26 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-27.jpg" data-id="CILWEB1-27" data-group="day" aria-label="View CILWEB1-27"><img loading="lazy" src="img/thumb/CILWEB1-27.jpg" alt="CILWEB1-27"></button><span class="num">27</span><button class="pick" type="button" data-id="CILWEB1-27" data-group="day" data-file="CILWEB1-27.jpg" aria-pressed="false" aria-label="Swap CILWEB1-27 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-28.jpg" data-id="CILWEB1-28" data-group="sig" aria-label="View CILWEB1-28"><img loading="lazy" src="img/thumb/CILWEB1-28.jpg" alt="CILWEB1-28"></button><span class="num">28</span><button class="pick" type="button" data-id="CILWEB1-28" data-group="sig" data-file="CILWEB1-28.jpg" aria-pressed="false" aria-label="Swap CILWEB1-28 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-29.jpg" data-id="CILWEB1-29" data-group="sig" aria-label="View CILWEB1-29"><img loading="lazy" src="img/thumb/CILWEB1-29.jpg" alt="CILWEB1-29"></button><span class="num">29</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-30.jpg" data-id="CILWEB1-30" data-group="day" aria-label="View CILWEB1-30"><img loading="lazy" src="img/thumb/CILWEB1-30.jpg" alt="CILWEB1-30"></button><span class="num">30</span><button class="pick" type="button" data-id="CILWEB1-30" data-group="day" data-file="CILWEB1-30.jpg" aria-pressed="false" aria-label="Swap CILWEB1-30 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-31.jpg" data-id="CILWEB1-31" data-group="day" aria-label="View CILWEB1-31"><img loading="lazy" src="img/thumb/CILWEB1-31.jpg" alt="CILWEB1-31"></button><span class="num">31</span><button class="pick" type="button" data-id="CILWEB1-31" data-group="day" data-file="CILWEB1-31.jpg" aria-pressed="false" aria-label="Swap CILWEB1-31 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-32.jpg" data-id="CILWEB1-32" data-group="sig" aria-label="View CILWEB1-32"><img loading="lazy" src="img/thumb/CILWEB1-32.jpg" alt="CILWEB1-32"></button><span class="num">32</span><button class="pick" type="button" data-id="CILWEB1-32" data-group="sig" data-file="CILWEB1-32.jpg" aria-pressed="false" aria-label="Swap CILWEB1-32 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-33.jpg" data-id="CILWEB1-33" data-group="day" aria-label="View CILWEB1-33"><img loading="lazy" src="img/thumb/CILWEB1-33.jpg" alt="CILWEB1-33"></button><span class="num">33</span><button class="pick" type="button" data-id="CILWEB1-33" data-group="day" data-file="CILWEB1-33.jpg" aria-pressed="false" aria-label="Swap CILWEB1-33 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-34.jpg" data-id="CILWEB1-34" data-group="fa" aria-label="View CILWEB1-34"><img loading="lazy" src="img/thumb/CILWEB1-34.jpg" alt="CILWEB1-34"></button><span class="num">34</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-35.jpg" data-id="CILWEB1-35" data-group="fa" aria-label="View CILWEB1-35"><img loading="lazy" src="img/thumb/CILWEB1-35.jpg" alt="CILWEB1-35"></button><span class="num">35</span><button class="pick" type="button" data-id="CILWEB1-35" data-group="fa" data-file="CILWEB1-35.jpg" aria-pressed="false" aria-label="Swap CILWEB1-35 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-36.jpg" data-id="CILWEB1-36" data-group="fa" aria-label="View CILWEB1-36"><img loading="lazy" src="img/thumb/CILWEB1-36.jpg" alt="CILWEB1-36"></button><span class="num">36</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-37.jpg" data-id="CILWEB1-37" data-group="fa" aria-label="View CILWEB1-37"><img loading="lazy" src="img/thumb/CILWEB1-37.jpg" alt="CILWEB1-37"></button><span class="num">37</span><button class="pick" type="button" data-id="CILWEB1-37" data-group="fa" data-file="CILWEB1-37.jpg" aria-pressed="false" aria-label="Swap CILWEB1-37 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-38.jpg" data-id="CILWEB1-38" data-group="sig" aria-label="View CILWEB1-38"><img loading="lazy" src="img/thumb/CILWEB1-38.jpg" alt="CILWEB1-38"></button><span class="num">38</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-40.jpg" data-id="CILWEB1-40" data-group="day" aria-label="View CILWEB1-40"><img loading="lazy" src="img/thumb/CILWEB1-40.jpg" alt="CILWEB1-40"></button><span class="num">40</span><button class="pick" type="button" data-id="CILWEB1-40" data-group="day" data-file="CILWEB1-40.jpg" aria-pressed="false" aria-label="Swap CILWEB1-40 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-41.jpg" data-id="CILWEB1-41" data-group="dev" aria-label="View CILWEB1-41"><img loading="lazy" src="img/thumb/CILWEB1-41.jpg" alt="CILWEB1-41"></button><span class="num">41</span><button class="pick" type="button" data-id="CILWEB1-41" data-group="dev" data-file="CILWEB1-41.jpg" aria-pressed="false" aria-label="Swap CILWEB1-41 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-42.jpg" data-id="CILWEB1-42" data-group="pub" aria-label="View CILWEB1-42"><img loading="lazy" src="img/thumb/CILWEB1-42.jpg" alt="CILWEB1-42"></button><span class="num">42</span><button class="pick" type="button" data-id="CILWEB1-42" data-group="pub" data-file="CILWEB1-42.jpg" aria-pressed="false" aria-label="Swap CILWEB1-42 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-43.jpg" data-id="CILWEB1-43" data-group="pub" aria-label="View CILWEB1-43"><img loading="lazy" src="img/thumb/CILWEB1-43.jpg" alt="CILWEB1-43"></button><span class="num">43</span><button class="pick" type="button" data-id="CILWEB1-43" data-group="pub" data-file="CILWEB1-43.jpg" aria-pressed="false" aria-label="Swap CILWEB1-43 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-44.jpg" data-id="CILWEB1-44" data-group="pub" aria-label="View CILWEB1-44"><img loading="lazy" src="img/thumb/CILWEB1-44.jpg" alt="CILWEB1-44"></button><span class="num">44</span><button class="pick" type="button" data-id="CILWEB1-44" data-group="pub" data-file="CILWEB1-44.jpg" aria-pressed="false" aria-label="Swap CILWEB1-44 into the forty-two">+</button></div>
@@ -456,14 +259,9 @@
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-51.jpg" data-id="CILWEB1-51" data-group="fa" aria-label="View CILWEB1-51"><img loading="lazy" src="img/thumb/CILWEB1-51.jpg" alt="CILWEB1-51"></button><span class="num">51</span><button class="pick" type="button" data-id="CILWEB1-51" data-group="fa" data-file="CILWEB1-51.jpg" aria-pressed="false" aria-label="Swap CILWEB1-51 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-52.jpg" data-id="CILWEB1-52" data-group="dev" aria-label="View CILWEB1-52"><img loading="lazy" src="img/thumb/CILWEB1-52.jpg" alt="CILWEB1-52"></button><span class="num">52</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-53.jpg" data-id="CILWEB1-53" data-group="pub" aria-label="View CILWEB1-53"><img loading="lazy" src="img/thumb/CILWEB1-53.jpg" alt="CILWEB1-53"></button><span class="num">53</span><button class="pick" type="button" data-id="CILWEB1-53" data-group="pub" data-file="CILWEB1-53.jpg" aria-pressed="false" aria-label="Swap CILWEB1-53 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-54.jpg" data-id="CILWEB1-54" data-group="sig" aria-label="View CILWEB1-54"><img loading="lazy" src="img/thumb/CILWEB1-54.jpg" alt="CILWEB1-54"></button><span class="num">54</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-55.jpg" data-id="CILWEB1-55" data-group="pub" aria-label="View CILWEB1-55"><img loading="lazy" src="img/thumb/CILWEB1-55.jpg" alt="CILWEB1-55"></button><span class="num">55</span><button class="pick" type="button" data-id="CILWEB1-55" data-group="pub" data-file="CILWEB1-55.jpg" aria-pressed="false" aria-label="Swap CILWEB1-55 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-56.jpg" data-id="CILWEB1-56" data-group="dev" aria-label="View CILWEB1-56"><img loading="lazy" src="img/thumb/CILWEB1-56.jpg" alt="CILWEB1-56"></button><span class="num">56</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-64.jpg" data-id="CILWEB1-64" data-group="dev" aria-label="View CILWEB1-64"><img loading="lazy" src="img/thumb/CILWEB1-64.jpg" alt="CILWEB1-64"></button><span class="num">64</span><button class="pick" type="button" data-id="CILWEB1-64" data-group="dev" data-file="CILWEB1-64.jpg" aria-pressed="false" aria-label="Swap CILWEB1-64 into the forty-two">+</button></div>
-  </div>
-</section>
-<section id="the-crossing" data-sec="the-crossing" data-n="7">
-  <h2>The crossing <span class="cnt">7</span></h2>
-  <div class="grid">
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-57.jpg" data-id="CILWEB1-57" data-group="dev" aria-label="View CILWEB1-57"><img loading="lazy" src="img/thumb/CILWEB1-57.jpg" alt="CILWEB1-57"></button><span class="num">57</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-58.jpg" data-id="CILWEB1-58" data-group="sig" aria-label="View CILWEB1-58"><img loading="lazy" src="img/thumb/CILWEB1-58.jpg" alt="CILWEB1-58"></button><span class="num">58</span><button class="pick" type="button" data-id="CILWEB1-58" data-group="sig" data-file="CILWEB1-58.jpg" aria-pressed="false" aria-label="Swap CILWEB1-58 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-59.jpg" data-id="CILWEB1-59" data-group="sig" aria-label="View CILWEB1-59"><img loading="lazy" src="img/thumb/CILWEB1-59.jpg" alt="CILWEB1-59"></button><span class="num">59</span><button class="pick" type="button" data-id="CILWEB1-59" data-group="sig" data-file="CILWEB1-59.jpg" aria-pressed="false" aria-label="Swap CILWEB1-59 into the forty-two">+</button></div>
@@ -471,12 +269,7 @@
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-61.jpg" data-id="CILWEB1-61" data-group="sig" aria-label="View CILWEB1-61"><img loading="lazy" src="img/thumb/CILWEB1-61.jpg" alt="CILWEB1-61"></button><span class="num">61</span><button class="pick" type="button" data-id="CILWEB1-61" data-group="sig" data-file="CILWEB1-61.jpg" aria-pressed="false" aria-label="Swap CILWEB1-61 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-62.jpg" data-id="CILWEB1-62" data-group="sig" aria-label="View CILWEB1-62"><img loading="lazy" src="img/thumb/CILWEB1-62.jpg" alt="CILWEB1-62"></button><span class="num">62</span><button class="pick" type="button" data-id="CILWEB1-62" data-group="sig" data-file="CILWEB1-62.jpg" aria-pressed="false" aria-label="Swap CILWEB1-62 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-63.jpg" data-id="CILWEB1-63" data-group="sig" aria-label="View CILWEB1-63"><img loading="lazy" src="img/thumb/CILWEB1-63.jpg" alt="CILWEB1-63"></button><span class="num">63</span><span class="in42">in the 42</span></div>
-  </div>
-</section>
-<section id="the-gathering" data-sec="the-gathering" data-n="18">
-  <h2>The gathering <span class="cnt">18</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-54.jpg" data-id="CILWEB1-54" data-group="sig" aria-label="View CILWEB1-54"><img loading="lazy" src="img/thumb/CILWEB1-54.jpg" alt="CILWEB1-54"></button><span class="num">54</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-64.jpg" data-id="CILWEB1-64" data-group="dev" aria-label="View CILWEB1-64"><img loading="lazy" src="img/thumb/CILWEB1-64.jpg" alt="CILWEB1-64"></button><span class="num">64</span><button class="pick" type="button" data-id="CILWEB1-64" data-group="dev" data-file="CILWEB1-64.jpg" aria-pressed="false" aria-label="Swap CILWEB1-64 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-65.jpg" data-id="CILWEB1-65" data-group="sig" aria-label="View CILWEB1-65"><img loading="lazy" src="img/thumb/CILWEB1-65.jpg" alt="CILWEB1-65"></button><span class="num">65</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-66.jpg" data-id="CILWEB1-66" data-group="sig" aria-label="View CILWEB1-66"><img loading="lazy" src="img/thumb/CILWEB1-66.jpg" alt="CILWEB1-66"></button><span class="num">66</span><button class="pick" type="button" data-id="CILWEB1-66" data-group="sig" data-file="CILWEB1-66.jpg" aria-pressed="false" aria-label="Swap CILWEB1-66 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-68.jpg" data-id="CILWEB1-68" data-group="day" aria-label="View CILWEB1-68"><img loading="lazy" src="img/thumb/CILWEB1-68.jpg" alt="CILWEB1-68"></button><span class="num">68</span><button class="pick" type="button" data-id="CILWEB1-68" data-group="day" data-file="CILWEB1-68.jpg" aria-pressed="false" aria-label="Swap CILWEB1-68 into the forty-two">+</button></div>
@@ -491,29 +284,12 @@
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-77.jpg" data-id="CILWEB1-77" data-group="day" aria-label="View CILWEB1-77"><img loading="lazy" src="img/thumb/CILWEB1-77.jpg" alt="CILWEB1-77"></button><span class="num">77</span><button class="pick" type="button" data-id="CILWEB1-77" data-group="day" data-file="CILWEB1-77.jpg" aria-pressed="false" aria-label="Swap CILWEB1-77 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-78.jpg" data-id="CILWEB1-78" data-group="day" aria-label="View CILWEB1-78"><img loading="lazy" src="img/thumb/CILWEB1-78.jpg" alt="CILWEB1-78"></button><span class="num">78</span><button class="pick" type="button" data-id="CILWEB1-78" data-group="day" data-file="CILWEB1-78.jpg" aria-pressed="false" aria-label="Swap CILWEB1-78 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-79.jpg" data-id="CILWEB1-79" data-group="pub" aria-label="View CILWEB1-79"><img loading="lazy" src="img/thumb/CILWEB1-79.jpg" alt="CILWEB1-79"></button><span class="num">79</span><button class="pick" type="button" data-id="CILWEB1-79" data-group="pub" data-file="CILWEB1-79.jpg" aria-pressed="false" aria-label="Swap CILWEB1-79 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-98.jpg" data-id="CILWEB1-98" data-group="dev" aria-label="View CILWEB1-98"><img loading="lazy" src="img/thumb/CILWEB1-98.jpg" alt="CILWEB1-98"></button><span class="num">98</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-99.jpg" data-id="CILWEB1-99" data-group="dev" aria-label="View CILWEB1-99"><img loading="lazy" src="img/thumb/CILWEB1-99.jpg" alt="CILWEB1-99"></button><span class="num">99</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-100.jpg" data-id="CILWEB1-100" data-group="day" aria-label="View CILWEB1-100"><img loading="lazy" src="img/thumb/CILWEB1-100.jpg" alt="CILWEB1-100"></button><span class="num">100</span><button class="pick" type="button" data-id="CILWEB1-100" data-group="day" data-file="CILWEB1-100.jpg" aria-pressed="false" aria-label="Swap CILWEB1-100 into the forty-two">+</button></div>
-  </div>
-</section>
-<section id="havdalah" data-sec="havdalah" data-n="5">
-  <h2>Havdalah <span class="cnt">5</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-139.jpg" data-id="CILWEB1-139" data-group="dev" aria-label="View CILWEB1-139"><img loading="lazy" src="img/thumb/CILWEB1-139.jpg" alt="CILWEB1-139"></button><span class="num">139</span><button class="pick" type="button" data-id="CILWEB1-139" data-group="dev" data-file="CILWEB1-139.jpg" aria-pressed="false" aria-label="Swap CILWEB1-139 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-146.jpg" data-id="CILWEB1-146" data-group="pub" aria-label="View CILWEB1-146"><img loading="lazy" src="img/thumb/CILWEB1-146.jpg" alt="CILWEB1-146"></button><span class="num">146</span><button class="pick" type="button" data-id="CILWEB1-146" data-group="pub" data-file="CILWEB1-146.jpg" aria-pressed="false" aria-label="Swap CILWEB1-146 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-147.jpg" data-id="CILWEB1-147" data-group="dev" aria-label="View CILWEB1-147"><img loading="lazy" src="img/thumb/CILWEB1-147.jpg" alt="CILWEB1-147"></button><span class="num">147</span><button class="pick" type="button" data-id="CILWEB1-147" data-group="dev" data-file="CILWEB1-147.jpg" aria-pressed="false" aria-label="Swap CILWEB1-147 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-148.jpg" data-id="CILWEB1-148" data-group="dev" aria-label="View CILWEB1-148"><img loading="lazy" src="img/thumb/CILWEB1-148.jpg" alt="CILWEB1-148"></button><span class="num">148</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-149.jpg" data-id="CILWEB1-149" data-group="dev" aria-label="View CILWEB1-149"><img loading="lazy" src="img/thumb/CILWEB1-149.jpg" alt="CILWEB1-149"></button><span class="num">149</span><button class="pick" type="button" data-id="CILWEB1-149" data-group="dev" data-file="CILWEB1-149.jpg" aria-pressed="false" aria-label="Swap CILWEB1-149 into the forty-two">+</button></div>
-  </div>
-</section>
-<h3 class="mv" id="land-and-sky">Land and sky</h3>
-<section id="dusk-and-last-light" data-sec="dusk-and-last-light" data-n="28">
-  <h2>Dusk and last light <span class="cnt">28</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1.jpg" data-id="CILWEB1" data-group="fa" aria-label="View CILWEB1"><img loading="lazy" src="img/thumb/CILWEB1.jpg" alt="CILWEB1"></button><span class="num">1</span><button class="pick" type="button" data-id="CILWEB1" data-group="fa" data-file="CILWEB1.jpg" aria-pressed="false" aria-label="Swap CILWEB1 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-2.jpg" data-id="CILWEB1-2" data-group="fa" aria-label="View CILWEB1-2"><img loading="lazy" src="img/thumb/CILWEB1-2.jpg" alt="CILWEB1-2"></button><span class="num">2</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-80.jpg" data-id="CILWEB1-80" data-group="sig" aria-label="View CILWEB1-80"><img loading="lazy" src="img/thumb/CILWEB1-80.jpg" alt="CILWEB1-80"></button><span class="num">80</span><button class="pick" type="button" data-id="CILWEB1-80" data-group="sig" data-file="CILWEB1-80.jpg" aria-pressed="false" aria-label="Swap CILWEB1-80 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-81.jpg" data-id="CILWEB1-81" data-group="fa" aria-label="View CILWEB1-81"><img loading="lazy" src="img/thumb/CILWEB1-81.jpg" alt="CILWEB1-81"></button><span class="num">81</span><button class="pick" type="button" data-id="CILWEB1-81" data-group="fa" data-file="CILWEB1-81.jpg" aria-pressed="false" aria-label="Swap CILWEB1-81 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-82.jpg" data-id="CILWEB1-82" data-group="sig" aria-label="View CILWEB1-82"><img loading="lazy" src="img/thumb/CILWEB1-82.jpg" alt="CILWEB1-82"></button><span class="num">82</span><button class="pick" type="button" data-id="CILWEB1-82" data-group="sig" data-file="CILWEB1-82.jpg" aria-pressed="false" aria-label="Swap CILWEB1-82 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-83.jpg" data-id="CILWEB1-83" data-group="sig" aria-label="View CILWEB1-83"><img loading="lazy" src="img/thumb/CILWEB1-83.jpg" alt="CILWEB1-83"></button><span class="num">83</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-84.jpg" data-id="CILWEB1-84" data-group="sig" aria-label="View CILWEB1-84"><img loading="lazy" src="img/thumb/CILWEB1-84.jpg" alt="CILWEB1-84"></button><span class="num">84</span><button class="pick" type="button" data-id="CILWEB1-84" data-group="sig" data-file="CILWEB1-84.jpg" aria-pressed="false" aria-label="Swap CILWEB1-84 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-85.jpg" data-id="CILWEB1-85" data-group="sig" aria-label="View CILWEB1-85"><img loading="lazy" src="img/thumb/CILWEB1-85.jpg" alt="CILWEB1-85"></button><span class="num">85</span><button class="pick" type="button" data-id="CILWEB1-85" data-group="sig" data-file="CILWEB1-85.jpg" aria-pressed="false" aria-label="Swap CILWEB1-85 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-87.jpg" data-id="CILWEB1-87" data-group="fa" aria-label="View CILWEB1-87"><img loading="lazy" src="img/thumb/CILWEB1-87.jpg" alt="CILWEB1-87"></button><span class="num">87</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-88.jpg" data-id="CILWEB1-88" data-group="fa" aria-label="View CILWEB1-88"><img loading="lazy" src="img/thumb/CILWEB1-88.jpg" alt="CILWEB1-88"></button><span class="num">88</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-89.jpg" data-id="CILWEB1-89" data-group="sig" aria-label="View CILWEB1-89"><img loading="lazy" src="img/thumb/CILWEB1-89.jpg" alt="CILWEB1-89"></button><span class="num">89</span><button class="pick" type="button" data-id="CILWEB1-89" data-group="sig" data-file="CILWEB1-89.jpg" aria-pressed="false" aria-label="Swap CILWEB1-89 into the forty-two">+</button></div>
@@ -525,6 +301,40 @@
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-95.jpg" data-id="CILWEB1-95" data-group="sig" aria-label="View CILWEB1-95"><img loading="lazy" src="img/thumb/CILWEB1-95.jpg" alt="CILWEB1-95"></button><span class="num">95</span><button class="pick" type="button" data-id="CILWEB1-95" data-group="sig" data-file="CILWEB1-95.jpg" aria-pressed="false" aria-label="Swap CILWEB1-95 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-96.jpg" data-id="CILWEB1-96" data-group="fa" aria-label="View CILWEB1-96"><img loading="lazy" src="img/thumb/CILWEB1-96.jpg" alt="CILWEB1-96"></button><span class="num">96</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-97.jpg" data-id="CILWEB1-97" data-group="dev" aria-label="View CILWEB1-97"><img loading="lazy" src="img/thumb/CILWEB1-97.jpg" alt="CILWEB1-97"></button><span class="num">97</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-98.jpg" data-id="CILWEB1-98" data-group="dev" aria-label="View CILWEB1-98"><img loading="lazy" src="img/thumb/CILWEB1-98.jpg" alt="CILWEB1-98"></button><span class="num">98</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-99.jpg" data-id="CILWEB1-99" data-group="dev" aria-label="View CILWEB1-99"><img loading="lazy" src="img/thumb/CILWEB1-99.jpg" alt="CILWEB1-99"></button><span class="num">99</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-100.jpg" data-id="CILWEB1-100" data-group="day" aria-label="View CILWEB1-100"><img loading="lazy" src="img/thumb/CILWEB1-100.jpg" alt="CILWEB1-100"></button><span class="num">100</span><button class="pick" type="button" data-id="CILWEB1-100" data-group="day" data-file="CILWEB1-100.jpg" aria-pressed="false" aria-label="Swap CILWEB1-100 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-101.jpg" data-id="CILWEB1-101" data-group="fa" aria-label="View CILWEB1-101"><img loading="lazy" src="img/thumb/CILWEB1-101.jpg" alt="CILWEB1-101"></button><span class="num">101</span><button class="pick" type="button" data-id="CILWEB1-101" data-group="fa" data-file="CILWEB1-101.jpg" aria-pressed="false" aria-label="Swap CILWEB1-101 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-102.jpg" data-id="CILWEB1-102" data-group="sig" aria-label="View CILWEB1-102"><img loading="lazy" src="img/thumb/CILWEB1-102.jpg" alt="CILWEB1-102"></button><span class="num">102</span><button class="pick" type="button" data-id="CILWEB1-102" data-group="sig" data-file="CILWEB1-102.jpg" aria-pressed="false" aria-label="Swap CILWEB1-102 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-103.jpg" data-id="CILWEB1-103" data-group="fa" aria-label="View CILWEB1-103"><img loading="lazy" src="img/thumb/CILWEB1-103.jpg" alt="CILWEB1-103"></button><span class="num">103</span><button class="pick" type="button" data-id="CILWEB1-103" data-group="fa" data-file="CILWEB1-103.jpg" aria-pressed="false" aria-label="Swap CILWEB1-103 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-104.jpg" data-id="CILWEB1-104" data-group="fa" aria-label="View CILWEB1-104"><img loading="lazy" src="img/thumb/CILWEB1-104.jpg" alt="CILWEB1-104"></button><span class="num">104</span><button class="pick" type="button" data-id="CILWEB1-104" data-group="fa" data-file="CILWEB1-104.jpg" aria-pressed="false" aria-label="Swap CILWEB1-104 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-105.jpg" data-id="CILWEB1-105" data-group="dev" aria-label="View CILWEB1-105"><img loading="lazy" src="img/thumb/CILWEB1-105.jpg" alt="CILWEB1-105"></button><span class="num">105</span><button class="pick" type="button" data-id="CILWEB1-105" data-group="dev" data-file="CILWEB1-105.jpg" aria-pressed="false" aria-label="Swap CILWEB1-105 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-106.jpg" data-id="CILWEB1-106" data-group="fa" aria-label="View CILWEB1-106"><img loading="lazy" src="img/thumb/CILWEB1-106.jpg" alt="CILWEB1-106"></button><span class="num">106</span><button class="pick" type="button" data-id="CILWEB1-106" data-group="fa" data-file="CILWEB1-106.jpg" aria-pressed="false" aria-label="Swap CILWEB1-106 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-107.jpg" data-id="CILWEB1-107" data-group="sig" aria-label="View CILWEB1-107"><img loading="lazy" src="img/thumb/CILWEB1-107.jpg" alt="CILWEB1-107"></button><span class="num">107</span><button class="pick" type="button" data-id="CILWEB1-107" data-group="sig" data-file="CILWEB1-107.jpg" aria-pressed="false" aria-label="Swap CILWEB1-107 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-108.jpg" data-id="CILWEB1-108" data-group="fa" aria-label="View CILWEB1-108"><img loading="lazy" src="img/thumb/CILWEB1-108.jpg" alt="CILWEB1-108"></button><span class="num">108</span><button class="pick" type="button" data-id="CILWEB1-108" data-group="fa" data-file="CILWEB1-108.jpg" aria-pressed="false" aria-label="Swap CILWEB1-108 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-109.jpg" data-id="CILWEB1-109" data-group="fa" aria-label="View CILWEB1-109"><img loading="lazy" src="img/thumb/CILWEB1-109.jpg" alt="CILWEB1-109"></button><span class="num">109</span><button class="pick" type="button" data-id="CILWEB1-109" data-group="fa" data-file="CILWEB1-109.jpg" aria-pressed="false" aria-label="Swap CILWEB1-109 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-110.jpg" data-id="CILWEB1-110" data-group="day" aria-label="View CILWEB1-110"><img loading="lazy" src="img/thumb/CILWEB1-110.jpg" alt="CILWEB1-110"></button><span class="num">110</span><button class="pick" type="button" data-id="CILWEB1-110" data-group="day" data-file="CILWEB1-110.jpg" aria-pressed="false" aria-label="Swap CILWEB1-110 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-111.jpg" data-id="CILWEB1-111" data-group="day" aria-label="View CILWEB1-111"><img loading="lazy" src="img/thumb/CILWEB1-111.jpg" alt="CILWEB1-111"></button><span class="num">111</span><button class="pick" type="button" data-id="CILWEB1-111" data-group="day" data-file="CILWEB1-111.jpg" aria-pressed="false" aria-label="Swap CILWEB1-111 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-112.jpg" data-id="CILWEB1-112" data-group="pub" aria-label="View CILWEB1-112"><img loading="lazy" src="img/thumb/CILWEB1-112.jpg" alt="CILWEB1-112"></button><span class="num">112</span><button class="pick" type="button" data-id="CILWEB1-112" data-group="pub" data-file="CILWEB1-112.jpg" aria-pressed="false" aria-label="Swap CILWEB1-112 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-113.jpg" data-id="CILWEB1-113" data-group="pub" aria-label="View CILWEB1-113"><img loading="lazy" src="img/thumb/CILWEB1-113.jpg" alt="CILWEB1-113"></button><span class="num">113</span><button class="pick" type="button" data-id="CILWEB1-113" data-group="pub" data-file="CILWEB1-113.jpg" aria-pressed="false" aria-label="Swap CILWEB1-113 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-114.jpg" data-id="CILWEB1-114" data-group="sig" aria-label="View CILWEB1-114"><img loading="lazy" src="img/thumb/CILWEB1-114.jpg" alt="CILWEB1-114"></button><span class="num">114</span><button class="pick" type="button" data-id="CILWEB1-114" data-group="sig" data-file="CILWEB1-114.jpg" aria-pressed="false" aria-label="Swap CILWEB1-114 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-115.jpg" data-id="CILWEB1-115" data-group="sig" aria-label="View CILWEB1-115"><img loading="lazy" src="img/thumb/CILWEB1-115.jpg" alt="CILWEB1-115"></button><span class="num">115</span><button class="pick" type="button" data-id="CILWEB1-115" data-group="sig" data-file="CILWEB1-115.jpg" aria-pressed="false" aria-label="Swap CILWEB1-115 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-116.jpg" data-id="CILWEB1-116" data-group="fa" aria-label="View CILWEB1-116"><img loading="lazy" src="img/thumb/CILWEB1-116.jpg" alt="CILWEB1-116"></button><span class="num">116</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-117.jpg" data-id="CILWEB1-117" data-group="day" aria-label="View CILWEB1-117"><img loading="lazy" src="img/thumb/CILWEB1-117.jpg" alt="CILWEB1-117"></button><span class="num">117</span><button class="pick" type="button" data-id="CILWEB1-117" data-group="day" data-file="CILWEB1-117.jpg" aria-pressed="false" aria-label="Swap CILWEB1-117 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-118.jpg" data-id="CILWEB1-118" data-group="day" aria-label="View CILWEB1-118"><img loading="lazy" src="img/thumb/CILWEB1-118.jpg" alt="CILWEB1-118"></button><span class="num">118</span><button class="pick" type="button" data-id="CILWEB1-118" data-group="day" data-file="CILWEB1-118.jpg" aria-pressed="false" aria-label="Swap CILWEB1-118 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-119.jpg" data-id="CILWEB1-119" data-group="sig" aria-label="View CILWEB1-119"><img loading="lazy" src="img/thumb/CILWEB1-119.jpg" alt="CILWEB1-119"></button><span class="num">119</span><button class="pick" type="button" data-id="CILWEB1-119" data-group="sig" data-file="CILWEB1-119.jpg" aria-pressed="false" aria-label="Swap CILWEB1-119 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-120.jpg" data-id="CILWEB1-120" data-group="day" aria-label="View CILWEB1-120"><img loading="lazy" src="img/thumb/CILWEB1-120.jpg" alt="CILWEB1-120"></button><span class="num">120</span><button class="pick" type="button" data-id="CILWEB1-120" data-group="day" data-file="CILWEB1-120.jpg" aria-pressed="false" aria-label="Swap CILWEB1-120 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-121.jpg" data-id="CILWEB1-121" data-group="day" aria-label="View CILWEB1-121"><img loading="lazy" src="img/thumb/CILWEB1-121.jpg" alt="CILWEB1-121"></button><span class="num">121</span><button class="pick" type="button" data-id="CILWEB1-121" data-group="day" data-file="CILWEB1-121.jpg" aria-pressed="false" aria-label="Swap CILWEB1-121 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-122.jpg" data-id="CILWEB1-122" data-group="pub" aria-label="View CILWEB1-122"><img loading="lazy" src="img/thumb/CILWEB1-122.jpg" alt="CILWEB1-122"></button><span class="num">122</span><button class="pick" type="button" data-id="CILWEB1-122" data-group="pub" data-file="CILWEB1-122.jpg" aria-pressed="false" aria-label="Swap CILWEB1-122 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-123.jpg" data-id="CILWEB1-123" data-group="fa" aria-label="View CILWEB1-123"><img loading="lazy" src="img/thumb/CILWEB1-123.jpg" alt="CILWEB1-123"></button><span class="num">123</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-124.jpg" data-id="CILWEB1-124" data-group="day" aria-label="View CILWEB1-124"><img loading="lazy" src="img/thumb/CILWEB1-124.jpg" alt="CILWEB1-124"></button><span class="num">124</span><button class="pick" type="button" data-id="CILWEB1-124" data-group="day" data-file="CILWEB1-124.jpg" aria-pressed="false" aria-label="Swap CILWEB1-124 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-125.jpg" data-id="CILWEB1-125" data-group="day" aria-label="View CILWEB1-125"><img loading="lazy" src="img/thumb/CILWEB1-125.jpg" alt="CILWEB1-125"></button><span class="num">125</span><button class="pick" type="button" data-id="CILWEB1-125" data-group="day" data-file="CILWEB1-125.jpg" aria-pressed="false" aria-label="Swap CILWEB1-125 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-126.jpg" data-id="CILWEB1-126" data-group="fa" aria-label="View CILWEB1-126"><img loading="lazy" src="img/thumb/CILWEB1-126.jpg" alt="CILWEB1-126"></button><span class="num">126</span><button class="pick" type="button" data-id="CILWEB1-126" data-group="fa" data-file="CILWEB1-126.jpg" aria-pressed="false" aria-label="Swap CILWEB1-126 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-127.jpg" data-id="CILWEB1-127" data-group="fa" aria-label="View CILWEB1-127"><img loading="lazy" src="img/thumb/CILWEB1-127.jpg" alt="CILWEB1-127"></button><span class="num">127</span><button class="pick" type="button" data-id="CILWEB1-127" data-group="fa" data-file="CILWEB1-127.jpg" aria-pressed="false" aria-label="Swap CILWEB1-127 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-128.jpg" data-id="CILWEB1-128" data-group="sig" aria-label="View CILWEB1-128"><img loading="lazy" src="img/thumb/CILWEB1-128.jpg" alt="CILWEB1-128"></button><span class="num">128</span><button class="pick" type="button" data-id="CILWEB1-128" data-group="sig" data-file="CILWEB1-128.jpg" aria-pressed="false" aria-label="Swap CILWEB1-128 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-129.jpg" data-id="CILWEB1-129" data-group="sig" aria-label="View CILWEB1-129"><img loading="lazy" src="img/thumb/CILWEB1-129.jpg" alt="CILWEB1-129"></button><span class="num">129</span><button class="pick" type="button" data-id="CILWEB1-129" data-group="sig" data-file="CILWEB1-129.jpg" aria-pressed="false" aria-label="Swap CILWEB1-129 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-130.jpg" data-id="CILWEB1-130" data-group="day" aria-label="View CILWEB1-130"><img loading="lazy" src="img/thumb/CILWEB1-130.jpg" alt="CILWEB1-130"></button><span class="num">130</span><button class="pick" type="button" data-id="CILWEB1-130" data-group="day" data-file="CILWEB1-130.jpg" aria-pressed="false" aria-label="Swap CILWEB1-130 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-131.jpg" data-id="CILWEB1-131" data-group="sig" aria-label="View CILWEB1-131"><img loading="lazy" src="img/thumb/CILWEB1-131.jpg" alt="CILWEB1-131"></button><span class="num">131</span><button class="pick" type="button" data-id="CILWEB1-131" data-group="sig" data-file="CILWEB1-131.jpg" aria-pressed="false" aria-label="Swap CILWEB1-131 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-132.jpg" data-id="CILWEB1-132" data-group="fa" aria-label="View CILWEB1-132"><img loading="lazy" src="img/thumb/CILWEB1-132.jpg" alt="CILWEB1-132"></button><span class="num">132</span><button class="pick" type="button" data-id="CILWEB1-132" data-group="fa" data-file="CILWEB1-132.jpg" aria-pressed="false" aria-label="Swap CILWEB1-132 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-133.jpg" data-id="CILWEB1-133" data-group="fa" aria-label="View CILWEB1-133"><img loading="lazy" src="img/thumb/CILWEB1-133.jpg" alt="CILWEB1-133"></button><span class="num">133</span><button class="pick" type="button" data-id="CILWEB1-133" data-group="fa" data-file="CILWEB1-133.jpg" aria-pressed="false" aria-label="Swap CILWEB1-133 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-134.jpg" data-id="CILWEB1-134" data-group="fa" aria-label="View CILWEB1-134"><img loading="lazy" src="img/thumb/CILWEB1-134.jpg" alt="CILWEB1-134"></button><span class="num">134</span><button class="pick" type="button" data-id="CILWEB1-134" data-group="fa" data-file="CILWEB1-134.jpg" aria-pressed="false" aria-label="Swap CILWEB1-134 into the forty-two">+</button></div>
@@ -532,53 +342,37 @@
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-136.jpg" data-id="CILWEB1-136" data-group="dev" aria-label="View CILWEB1-136"><img loading="lazy" src="img/thumb/CILWEB1-136.jpg" alt="CILWEB1-136"></button><span class="num">136</span><button class="pick" type="button" data-id="CILWEB1-136" data-group="dev" data-file="CILWEB1-136.jpg" aria-pressed="false" aria-label="Swap CILWEB1-136 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-137.jpg" data-id="CILWEB1-137" data-group="day" aria-label="View CILWEB1-137"><img loading="lazy" src="img/thumb/CILWEB1-137.jpg" alt="CILWEB1-137"></button><span class="num">137</span><button class="pick" type="button" data-id="CILWEB1-137" data-group="day" data-file="CILWEB1-137.jpg" aria-pressed="false" aria-label="Swap CILWEB1-137 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-138.jpg" data-id="CILWEB1-138" data-group="day" aria-label="View CILWEB1-138"><img loading="lazy" src="img/thumb/CILWEB1-138.jpg" alt="CILWEB1-138"></button><span class="num">138</span><button class="pick" type="button" data-id="CILWEB1-138" data-group="day" data-file="CILWEB1-138.jpg" aria-pressed="false" aria-label="Swap CILWEB1-138 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-139.jpg" data-id="CILWEB1-139" data-group="dev" aria-label="View CILWEB1-139"><img loading="lazy" src="img/thumb/CILWEB1-139.jpg" alt="CILWEB1-139"></button><span class="num">139</span><button class="pick" type="button" data-id="CILWEB1-139" data-group="dev" data-file="CILWEB1-139.jpg" aria-pressed="false" aria-label="Swap CILWEB1-139 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-140.jpg" data-id="CILWEB1-140" data-group="fa" aria-label="View CILWEB1-140"><img loading="lazy" src="img/thumb/CILWEB1-140.jpg" alt="CILWEB1-140"></button><span class="num">140</span><button class="pick" type="button" data-id="CILWEB1-140" data-group="fa" data-file="CILWEB1-140.jpg" aria-pressed="false" aria-label="Swap CILWEB1-140 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-141.jpg" data-id="CILWEB1-141" data-group="fa" aria-label="View CILWEB1-141"><img loading="lazy" src="img/thumb/CILWEB1-141.jpg" alt="CILWEB1-141"></button><span class="num">141</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-142.jpg" data-id="CILWEB1-142" data-group="sig" aria-label="View CILWEB1-142"><img loading="lazy" src="img/thumb/CILWEB1-142.jpg" alt="CILWEB1-142"></button><span class="num">142</span><button class="pick" type="button" data-id="CILWEB1-142" data-group="sig" data-file="CILWEB1-142.jpg" aria-pressed="false" aria-label="Swap CILWEB1-142 into the forty-two">+</button></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-143.jpg" data-id="CILWEB1-143" data-group="fa" aria-label="View CILWEB1-143"><img loading="lazy" src="img/thumb/CILWEB1-143.jpg" alt="CILWEB1-143"></button><span class="num">143</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-144.jpg" data-id="CILWEB1-144" data-group="fa" aria-label="View CILWEB1-144"><img loading="lazy" src="img/thumb/CILWEB1-144.jpg" alt="CILWEB1-144"></button><span class="num">144</span><span class="in42">in the 42</span></div>
     <div class="card"><button class="ph" type="button" data-file="CILWEB1-145.jpg" data-id="CILWEB1-145" data-group="sig" aria-label="View CILWEB1-145"><img loading="lazy" src="img/thumb/CILWEB1-145.jpg" alt="CILWEB1-145"></button><span class="num">145</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-146.jpg" data-id="CILWEB1-146" data-group="pub" aria-label="View CILWEB1-146"><img loading="lazy" src="img/thumb/CILWEB1-146.jpg" alt="CILWEB1-146"></button><span class="num">146</span><button class="pick" type="button" data-id="CILWEB1-146" data-group="pub" data-file="CILWEB1-146.jpg" aria-pressed="false" aria-label="Swap CILWEB1-146 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-147.jpg" data-id="CILWEB1-147" data-group="dev" aria-label="View CILWEB1-147"><img loading="lazy" src="img/thumb/CILWEB1-147.jpg" alt="CILWEB1-147"></button><span class="num">147</span><button class="pick" type="button" data-id="CILWEB1-147" data-group="dev" data-file="CILWEB1-147.jpg" aria-pressed="false" aria-label="Swap CILWEB1-147 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-148.jpg" data-id="CILWEB1-148" data-group="dev" aria-label="View CILWEB1-148"><img loading="lazy" src="img/thumb/CILWEB1-148.jpg" alt="CILWEB1-148"></button><span class="num">148</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-149.jpg" data-id="CILWEB1-149" data-group="dev" aria-label="View CILWEB1-149"><img loading="lazy" src="img/thumb/CILWEB1-149.jpg" alt="CILWEB1-149"></button><span class="num">149</span><button class="pick" type="button" data-id="CILWEB1-149" data-group="dev" data-file="CILWEB1-149.jpg" aria-pressed="false" aria-label="Swap CILWEB1-149 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-150.jpg" data-id="CILWEB1-150" data-group="pub" aria-label="View CILWEB1-150"><img loading="lazy" src="img/thumb/CILWEB1-150.jpg" alt="CILWEB1-150"></button><span class="num">150</span><button class="pick" type="button" data-id="CILWEB1-150" data-group="pub" data-file="CILWEB1-150.jpg" aria-pressed="false" aria-label="Swap CILWEB1-150 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-151.jpg" data-id="CILWEB1-151" data-group="pub" aria-label="View CILWEB1-151"><img loading="lazy" src="img/thumb/CILWEB1-151.jpg" alt="CILWEB1-151"></button><span class="num">151</span><button class="pick" type="button" data-id="CILWEB1-151" data-group="pub" data-file="CILWEB1-151.jpg" aria-pressed="false" aria-label="Swap CILWEB1-151 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-152.jpg" data-id="CILWEB1-152" data-group="pub" aria-label="View CILWEB1-152"><img loading="lazy" src="img/thumb/CILWEB1-152.jpg" alt="CILWEB1-152"></button><span class="num">152</span><button class="pick" type="button" data-id="CILWEB1-152" data-group="pub" data-file="CILWEB1-152.jpg" aria-pressed="false" aria-label="Swap CILWEB1-152 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-153.jpg" data-id="CILWEB1-153" data-group="pub" aria-label="View CILWEB1-153"><img loading="lazy" src="img/thumb/CILWEB1-153.jpg" alt="CILWEB1-153"></button><span class="num">153</span><button class="pick" type="button" data-id="CILWEB1-153" data-group="pub" data-file="CILWEB1-153.jpg" aria-pressed="false" aria-label="Swap CILWEB1-153 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-154.jpg" data-id="CILWEB1-154" data-group="pub" aria-label="View CILWEB1-154"><img loading="lazy" src="img/thumb/CILWEB1-154.jpg" alt="CILWEB1-154"></button><span class="num">154</span><button class="pick" type="button" data-id="CILWEB1-154" data-group="pub" data-file="CILWEB1-154.jpg" aria-pressed="false" aria-label="Swap CILWEB1-154 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-155.jpg" data-id="CILWEB1-155" data-group="pub" aria-label="View CILWEB1-155"><img loading="lazy" src="img/thumb/CILWEB1-155.jpg" alt="CILWEB1-155"></button><span class="num">155</span><button class="pick" type="button" data-id="CILWEB1-155" data-group="pub" data-file="CILWEB1-155.jpg" aria-pressed="false" aria-label="Swap CILWEB1-155 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-156.jpg" data-id="CILWEB1-156" data-group="pub" aria-label="View CILWEB1-156"><img loading="lazy" src="img/thumb/CILWEB1-156.jpg" alt="CILWEB1-156"></button><span class="num">156</span><button class="pick" type="button" data-id="CILWEB1-156" data-group="pub" data-file="CILWEB1-156.jpg" aria-pressed="false" aria-label="Swap CILWEB1-156 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-157.jpg" data-id="CILWEB1-157" data-group="day" aria-label="View CILWEB1-157"><img loading="lazy" src="img/thumb/CILWEB1-157.jpg" alt="CILWEB1-157"></button><span class="num">157</span><button class="pick" type="button" data-id="CILWEB1-157" data-group="day" data-file="CILWEB1-157.jpg" aria-pressed="false" aria-label="Swap CILWEB1-157 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-158.jpg" data-id="CILWEB1-158" data-group="dev" aria-label="View CILWEB1-158"><img loading="lazy" src="img/thumb/CILWEB1-158.jpg" alt="CILWEB1-158"></button><span class="num">158</span><button class="pick" type="button" data-id="CILWEB1-158" data-group="dev" data-file="CILWEB1-158.jpg" aria-pressed="false" aria-label="Swap CILWEB1-158 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-159.jpg" data-id="CILWEB1-159" data-group="day" aria-label="View CILWEB1-159"><img loading="lazy" src="img/thumb/CILWEB1-159.jpg" alt="CILWEB1-159"></button><span class="num">159</span><button class="pick" type="button" data-id="CILWEB1-159" data-group="day" data-file="CILWEB1-159.jpg" aria-pressed="false" aria-label="Swap CILWEB1-159 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-160.jpg" data-id="CILWEB1-160" data-group="sig" aria-label="View CILWEB1-160"><img loading="lazy" src="img/thumb/CILWEB1-160.jpg" alt="CILWEB1-160"></button><span class="num">160</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-161.jpg" data-id="CILWEB1-161" data-group="pub" aria-label="View CILWEB1-161"><img loading="lazy" src="img/thumb/CILWEB1-161.jpg" alt="CILWEB1-161"></button><span class="num">161</span><span class="in42">in the 42</span></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-162.jpg" data-id="CILWEB1-162" data-group="sig" aria-label="View CILWEB1-162"><img loading="lazy" src="img/thumb/CILWEB1-162.jpg" alt="CILWEB1-162"></button><span class="num">162</span><button class="pick" type="button" data-id="CILWEB1-162" data-group="sig" data-file="CILWEB1-162.jpg" aria-pressed="false" aria-label="Swap CILWEB1-162 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-163.jpg" data-id="CILWEB1-163" data-group="dev" aria-label="View CILWEB1-163"><img loading="lazy" src="img/thumb/CILWEB1-163.jpg" alt="CILWEB1-163"></button><span class="num">163</span><button class="pick" type="button" data-id="CILWEB1-163" data-group="dev" data-file="CILWEB1-163.jpg" aria-pressed="false" aria-label="Swap CILWEB1-163 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-164.jpg" data-id="CILWEB1-164" data-group="sig" aria-label="View CILWEB1-164"><img loading="lazy" src="img/thumb/CILWEB1-164.jpg" alt="CILWEB1-164"></button><span class="num">164</span><button class="pick" type="button" data-id="CILWEB1-164" data-group="sig" data-file="CILWEB1-164.jpg" aria-pressed="false" aria-label="Swap CILWEB1-164 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-165.jpg" data-id="CILWEB1-165" data-group="day" aria-label="View CILWEB1-165"><img loading="lazy" src="img/thumb/CILWEB1-165.jpg" alt="CILWEB1-165"></button><span class="num">165</span><button class="pick" type="button" data-id="CILWEB1-165" data-group="day" data-file="CILWEB1-165.jpg" aria-pressed="false" aria-label="Swap CILWEB1-165 into the forty-two">+</button></div>
+    <div class="card"><button class="ph" type="button" data-file="CILWEB1-166.jpg" data-id="CILWEB1-166" data-group="dev" aria-label="View CILWEB1-166"><img loading="lazy" src="img/thumb/CILWEB1-166.jpg" alt="CILWEB1-166"></button><span class="num">166</span><button class="pick" type="button" data-id="CILWEB1-166" data-group="dev" data-file="CILWEB1-166.jpg" aria-pressed="false" aria-label="Swap CILWEB1-166 into the forty-two">+</button></div>
   </div>
-</section>
-<section id="the-rainbow" data-sec="the-rainbow" data-n="4">
-  <h2>The rainbow <span class="cnt">4</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-82.jpg" data-id="CILWEB1-82" data-group="sig" aria-label="View CILWEB1-82"><img loading="lazy" src="img/thumb/CILWEB1-82.jpg" alt="CILWEB1-82"></button><span class="num">82</span><button class="pick" type="button" data-id="CILWEB1-82" data-group="sig" data-file="CILWEB1-82.jpg" aria-pressed="false" aria-label="Swap CILWEB1-82 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-83.jpg" data-id="CILWEB1-83" data-group="sig" aria-label="View CILWEB1-83"><img loading="lazy" src="img/thumb/CILWEB1-83.jpg" alt="CILWEB1-83"></button><span class="num">83</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-84.jpg" data-id="CILWEB1-84" data-group="sig" aria-label="View CILWEB1-84"><img loading="lazy" src="img/thumb/CILWEB1-84.jpg" alt="CILWEB1-84"></button><span class="num">84</span><button class="pick" type="button" data-id="CILWEB1-84" data-group="sig" data-file="CILWEB1-84.jpg" aria-pressed="false" aria-label="Swap CILWEB1-84 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-85.jpg" data-id="CILWEB1-85" data-group="sig" aria-label="View CILWEB1-85"><img loading="lazy" src="img/thumb/CILWEB1-85.jpg" alt="CILWEB1-85"></button><span class="num">85</span><button class="pick" type="button" data-id="CILWEB1-85" data-group="sig" data-file="CILWEB1-85.jpg" aria-pressed="false" aria-label="Swap CILWEB1-85 into the forty-two">+</button></div>
-  </div>
-</section>
-<section id="the-camp-at-night" data-sec="the-camp-at-night" data-n="11">
-  <h2>The camp at night <span class="cnt">11</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-14.jpg" data-id="CILWEB1-14" data-group="sig" aria-label="View CILWEB1-14"><img loading="lazy" src="img/thumb/CILWEB1-14.jpg" alt="CILWEB1-14"></button><span class="num">14</span><button class="pick" type="button" data-id="CILWEB1-14" data-group="sig" data-file="CILWEB1-14.jpg" aria-pressed="false" aria-label="Swap CILWEB1-14 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-15.jpg" data-id="CILWEB1-15" data-group="sig" aria-label="View CILWEB1-15"><img loading="lazy" src="img/thumb/CILWEB1-15.jpg" alt="CILWEB1-15"></button><span class="num">15</span><button class="pick" type="button" data-id="CILWEB1-15" data-group="sig" data-file="CILWEB1-15.jpg" aria-pressed="false" aria-label="Swap CILWEB1-15 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-16.jpg" data-id="CILWEB1-16" data-group="fa" aria-label="View CILWEB1-16"><img loading="lazy" src="img/thumb/CILWEB1-16.jpg" alt="CILWEB1-16"></button><span class="num">16</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-18.jpg" data-id="CILWEB1-18" data-group="sig" aria-label="View CILWEB1-18"><img loading="lazy" src="img/thumb/CILWEB1-18.jpg" alt="CILWEB1-18"></button><span class="num">18</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-19.jpg" data-id="CILWEB1-19" data-group="sig" aria-label="View CILWEB1-19"><img loading="lazy" src="img/thumb/CILWEB1-19.jpg" alt="CILWEB1-19"></button><span class="num">19</span><button class="pick" type="button" data-id="CILWEB1-19" data-group="sig" data-file="CILWEB1-19.jpg" aria-pressed="false" aria-label="Swap CILWEB1-19 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-20.jpg" data-id="CILWEB1-20" data-group="fa" aria-label="View CILWEB1-20"><img loading="lazy" src="img/thumb/CILWEB1-20.jpg" alt="CILWEB1-20"></button><span class="num">20</span><span class="in42">in the 42</span></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-21.jpg" data-id="CILWEB1-21" data-group="fa" aria-label="View CILWEB1-21"><img loading="lazy" src="img/thumb/CILWEB1-21.jpg" alt="CILWEB1-21"></button><span class="num">21</span><button class="pick" type="button" data-id="CILWEB1-21" data-group="fa" data-file="CILWEB1-21.jpg" aria-pressed="false" aria-label="Swap CILWEB1-21 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-22.jpg" data-id="CILWEB1-22" data-group="fa" aria-label="View CILWEB1-22"><img loading="lazy" src="img/thumb/CILWEB1-22.jpg" alt="CILWEB1-22"></button><span class="num">22</span><button class="pick" type="button" data-id="CILWEB1-22" data-group="fa" data-file="CILWEB1-22.jpg" aria-pressed="false" aria-label="Swap CILWEB1-22 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-102.jpg" data-id="CILWEB1-102" data-group="sig" aria-label="View CILWEB1-102"><img loading="lazy" src="img/thumb/CILWEB1-102.jpg" alt="CILWEB1-102"></button><span class="num">102</span><button class="pick" type="button" data-id="CILWEB1-102" data-group="sig" data-file="CILWEB1-102.jpg" aria-pressed="false" aria-label="Swap CILWEB1-102 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-105.jpg" data-id="CILWEB1-105" data-group="dev" aria-label="View CILWEB1-105"><img loading="lazy" src="img/thumb/CILWEB1-105.jpg" alt="CILWEB1-105"></button><span class="num">105</span><button class="pick" type="button" data-id="CILWEB1-105" data-group="dev" data-file="CILWEB1-105.jpg" aria-pressed="false" aria-label="Swap CILWEB1-105 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-106.jpg" data-id="CILWEB1-106" data-group="fa" aria-label="View CILWEB1-106"><img loading="lazy" src="img/thumb/CILWEB1-106.jpg" alt="CILWEB1-106"></button><span class="num">106</span><button class="pick" type="button" data-id="CILWEB1-106" data-group="fa" data-file="CILWEB1-106.jpg" aria-pressed="false" aria-label="Swap CILWEB1-106 into the forty-two">+</button></div>
-  </div>
-</section>
-<section id="night-sky-studies" data-sec="night-sky-studies" data-n="4">
-  <h2>Night sky studies <span class="cnt">4</span></h2>
-  <div class="grid">
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-17.jpg" data-id="CILWEB1-17" data-group="fa" aria-label="View CILWEB1-17"><img loading="lazy" src="img/thumb/CILWEB1-17.jpg" alt="CILWEB1-17"></button><span class="num">17</span><button class="pick" type="button" data-id="CILWEB1-17" data-group="fa" data-file="CILWEB1-17.jpg" aria-pressed="false" aria-label="Swap CILWEB1-17 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-101.jpg" data-id="CILWEB1-101" data-group="fa" aria-label="View CILWEB1-101"><img loading="lazy" src="img/thumb/CILWEB1-101.jpg" alt="CILWEB1-101"></button><span class="num">101</span><button class="pick" type="button" data-id="CILWEB1-101" data-group="fa" data-file="CILWEB1-101.jpg" aria-pressed="false" aria-label="Swap CILWEB1-101 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-103.jpg" data-id="CILWEB1-103" data-group="fa" aria-label="View CILWEB1-103"><img loading="lazy" src="img/thumb/CILWEB1-103.jpg" alt="CILWEB1-103"></button><span class="num">103</span><button class="pick" type="button" data-id="CILWEB1-103" data-group="fa" data-file="CILWEB1-103.jpg" aria-pressed="false" aria-label="Swap CILWEB1-103 into the forty-two">+</button></div>
-    <div class="card"><button class="ph" type="button" data-file="CILWEB1-104.jpg" data-id="CILWEB1-104" data-group="fa" aria-label="View CILWEB1-104"><img loading="lazy" src="img/thumb/CILWEB1-104.jpg" alt="CILWEB1-104"></button><span class="num">104</span><button class="pick" type="button" data-id="CILWEB1-104" data-group="fa" data-file="CILWEB1-104.jpg" aria-pressed="false" aria-label="Swap CILWEB1-104 into the forty-two">+</button></div>
-  </div>
-</section>
-  <!-- LIBRARY:END -->
-</div>
-
-<section id="living">
-  <p class="channel"><b>Tell me where they run.</b> When a frame lands somewhere, on the appeal, the gala screen, a donor's wall, a family's feed, send me a note at <a href="mailto:noah@abba-photo.com">noah@abba-photo.com</a>. It helps me steward the library.</p>
+  <script>window.RALL = [{"id": "CILWEB1", "file": "CILWEB1.jpg"}, {"id": "CILWEB1-2", "file": "CILWEB1-2.jpg"}, {"id": "CILWEB1-3", "file": "CILWEB1-3.jpg"}, {"id": "CILWEB1-4", "file": "CILWEB1-4.jpg"}, {"id": "CILWEB1-5", "file": "CILWEB1-5.jpg"}, {"id": "CILWEB1-6", "file": "CILWEB1-6.jpg"}, {"id": "CILWEB1-7", "file": "CILWEB1-7.jpg"}, {"id": "CILWEB1-8", "file": "CILWEB1-8.jpg"}, {"id": "CILWEB1-9", "file": "CILWEB1-9.jpg"}, {"id": "CILWEB1-10", "file": "CILWEB1-10.jpg"}, {"id": "CILWEB1-11", "file": "CILWEB1-11.jpg"}, {"id": "CILWEB1-12", "file": "CILWEB1-12.jpg"}, {"id": "CILWEB1-13", "file": "CILWEB1-13.jpg"}, {"id": "CILWEB1-14", "file": "CILWEB1-14.jpg"}, {"id": "CILWEB1-15", "file": "CILWEB1-15.jpg"}, {"id": "CILWEB1-16", "file": "CILWEB1-16.jpg"}, {"id": "CILWEB1-17", "file": "CILWEB1-17.jpg"}, {"id": "CILWEB1-18", "file": "CILWEB1-18.jpg"}, {"id": "CILWEB1-19", "file": "CILWEB1-19.jpg"}, {"id": "CILWEB1-20", "file": "CILWEB1-20.jpg"}, {"id": "CILWEB1-21", "file": "CILWEB1-21.jpg"}, {"id": "CILWEB1-22", "file": "CILWEB1-22.jpg"}, {"id": "CILWEB1-23", "file": "CILWEB1-23.jpg"}, {"id": "CILWEB1-24", "file": "CILWEB1-24.jpg"}, {"id": "CILWEB1-25", "file": "CILWEB1-25.jpg"}, {"id": "CILWEB1-26", "file": "CILWEB1-26.jpg"}, {"id": "CILWEB1-27", "file": "CILWEB1-27.jpg"}, {"id": "CILWEB1-28", "file": "CILWEB1-28.jpg"}, {"id": "CILWEB1-29", "file": "CILWEB1-29.jpg"}, {"id": "CILWEB1-30", "file": "CILWEB1-30.jpg"}, {"id": "CILWEB1-31", "file": "CILWEB1-31.jpg"}, {"id": "CILWEB1-32", "file": "CILWEB1-32.jpg"}, {"id": "CILWEB1-33", "file": "CILWEB1-33.jpg"}, {"id": "CILWEB1-34", "file": "CILWEB1-34.jpg"}, {"id": "CILWEB1-35", "file": "CILWEB1-35.jpg"}, {"id": "CILWEB1-36", "file": "CILWEB1-36.jpg"}, {"id": "CILWEB1-37", "file": "CILWEB1-37.jpg"}, {"id": "CILWEB1-38", "file": "CILWEB1-38.jpg"}, {"id": "CILWEB1-40", "file": "CILWEB1-40.jpg"}, {"id": "CILWEB1-41", "file": "CILWEB1-41.jpg"}, {"id": "CILWEB1-42", "file": "CILWEB1-42.jpg"}, {"id": "CILWEB1-43", "file": "CILWEB1-43.jpg"}, {"id": "CILWEB1-44", "file": "CILWEB1-44.jpg"}, {"id": "CILWEB1-45", "file": "CILWEB1-45.jpg"}, {"id": "CILWEB1-46", "file": "CILWEB1-46.jpg"}, {"id": "CILWEB1-47", "file": "CILWEB1-47.jpg"}, {"id": "CILWEB1-48", "file": "CILWEB1-48.jpg"}, {"id": "CILWEB1-49", "file": "CILWEB1-49.jpg"}, {"id": "CILWEB1-50", "file": "CILWEB1-50.jpg"}, {"id": "CILWEB1-51", "file": "CILWEB1-51.jpg"}, {"id": "CILWEB1-52", "file": "CILWEB1-52.jpg"}, {"id": "CILWEB1-53", "file": "CILWEB1-53.jpg"}, {"id": "CILWEB1-54", "file": "CILWEB1-54.jpg"}, {"id": "CILWEB1-55", "file": "CILWEB1-55.jpg"}, {"id": "CILWEB1-56", "file": "CILWEB1-56.jpg"}, {"id": "CILWEB1-57", "file": "CILWEB1-57.jpg"}, {"id": "CILWEB1-58", "file": "CILWEB1-58.jpg"}, {"id": "CILWEB1-59", "file": "CILWEB1-59.jpg"}, {"id": "CILWEB1-60", "file": "CILWEB1-60.jpg"}, {"id": "CILWEB1-61", "file": "CILWEB1-61.jpg"}, {"id": "CILWEB1-62", "file": "CILWEB1-62.jpg"}, {"id": "CILWEB1-63", "file": "CILWEB1-63.jpg"}, {"id": "CILWEB1-64", "file": "CILWEB1-64.jpg"}, {"id": "CILWEB1-65", "file": "CILWEB1-65.jpg"}, {"id": "CILWEB1-66", "file": "CILWEB1-66.jpg"}, {"id": "CILWEB1-68", "file": "CILWEB1-68.jpg"}, {"id": "CILWEB1-69", "file": "CILWEB1-69.jpg"}, {"id": "CILWEB1-70", "file": "CILWEB1-70.jpg"}, {"id": "CILWEB1-71", "file": "CILWEB1-71.jpg"}, {"id": "CILWEB1-72", "file": "CILWEB1-72.jpg"}, {"id": "CILWEB1-73", "file": "CILWEB1-73.jpg"}, {"id": "CILWEB1-74", "file": "CILWEB1-74.jpg"}, {"id": "CILWEB1-75", "file": "CILWEB1-75.jpg"}, {"id": "CILWEB1-76", "file": "CILWEB1-76.jpg"}, {"id": "CILWEB1-77", "file": "CILWEB1-77.jpg"}, {"id": "CILWEB1-78", "file": "CILWEB1-78.jpg"}, {"id": "CILWEB1-79", "file": "CILWEB1-79.jpg"}, {"id": "CILWEB1-80", "file": "CILWEB1-80.jpg"}, {"id": "CILWEB1-81", "file": "CILWEB1-81.jpg"}, {"id": "CILWEB1-82", "file": "CILWEB1-82.jpg"}, {"id": "CILWEB1-83", "file": "CILWEB1-83.jpg"}, {"id": "CILWEB1-84", "file": "CILWEB1-84.jpg"}, {"id": "CILWEB1-85", "file": "CILWEB1-85.jpg"}, {"id": "CILWEB1-87", "file": "CILWEB1-87.jpg"}, {"id": "CILWEB1-88", "file": "CILWEB1-88.jpg"}, {"id": "CILWEB1-89", "file": "CILWEB1-89.jpg"}, {"id": "CILWEB1-90", "file": "CILWEB1-90.jpg"}, {"id": "CILWEB1-91", "file": "CILWEB1-91.jpg"}, {"id": "CILWEB1-92", "file": "CILWEB1-92.jpg"}, {"id": "CILWEB1-93", "file": "CILWEB1-93.jpg"}, {"id": "CILWEB1-94", "file": "CILWEB1-94.jpg"}, {"id": "CILWEB1-95", "file": "CILWEB1-95.jpg"}, {"id": "CILWEB1-96", "file": "CILWEB1-96.jpg"}, {"id": "CILWEB1-97", "file": "CILWEB1-97.jpg"}, {"id": "CILWEB1-98", "file": "CILWEB1-98.jpg"}, {"id": "CILWEB1-99", "file": "CILWEB1-99.jpg"}, {"id": "CILWEB1-100", "file": "CILWEB1-100.jpg"}, {"id": "CILWEB1-101", "file": "CILWEB1-101.jpg"}, {"id": "CILWEB1-102", "file": "CILWEB1-102.jpg"}, {"id": "CILWEB1-103", "file": "CILWEB1-103.jpg"}, {"id": "CILWEB1-104", "file": "CILWEB1-104.jpg"}, {"id": "CILWEB1-105", "file": "CILWEB1-105.jpg"}, {"id": "CILWEB1-106", "file": "CILWEB1-106.jpg"}, {"id": "CILWEB1-107", "file": "CILWEB1-107.jpg"}, {"id": "CILWEB1-108", "file": "CILWEB1-108.jpg"}, {"id": "CILWEB1-109", "file": "CILWEB1-109.jpg"}, {"id": "CILWEB1-110", "file": "CILWEB1-110.jpg"}, {"id": "CILWEB1-111", "file": "CILWEB1-111.jpg"}, {"id": "CILWEB1-112", "file": "CILWEB1-112.jpg"}, {"id": "CILWEB1-113", "file": "CILWEB1-113.jpg"}, {"id": "CILWEB1-114", "file": "CILWEB1-114.jpg"}, {"id": "CILWEB1-115", "file": "CILWEB1-115.jpg"}, {"id": "CILWEB1-116", "file": "CILWEB1-116.jpg"}, {"id": "CILWEB1-117", "file": "CILWEB1-117.jpg"}, {"id": "CILWEB1-118", "file": "CILWEB1-118.jpg"}, {"id": "CILWEB1-119", "file": "CILWEB1-119.jpg"}, {"id": "CILWEB1-120", "file": "CILWEB1-120.jpg"}, {"id": "CILWEB1-121", "file": "CILWEB1-121.jpg"}, {"id": "CILWEB1-122", "file": "CILWEB1-122.jpg"}, {"id": "CILWEB1-123", "file": "CILWEB1-123.jpg"}, {"id": "CILWEB1-124", "file": "CILWEB1-124.jpg"}, {"id": "CILWEB1-125", "file": "CILWEB1-125.jpg"}, {"id": "CILWEB1-126", "file": "CILWEB1-126.jpg"}, {"id": "CILWEB1-127", "file": "CILWEB1-127.jpg"}, {"id": "CILWEB1-128", "file": "CILWEB1-128.jpg"}, {"id": "CILWEB1-129", "file": "CILWEB1-129.jpg"}, {"id": "CILWEB1-130", "file": "CILWEB1-130.jpg"}, {"id": "CILWEB1-131", "file": "CILWEB1-131.jpg"}, {"id": "CILWEB1-132", "file": "CILWEB1-132.jpg"}, {"id": "CILWEB1-133", "file": "CILWEB1-133.jpg"}, {"id": "CILWEB1-134", "file": "CILWEB1-134.jpg"}, {"id": "CILWEB1-135", "file": "CILWEB1-135.jpg"}, {"id": "CILWEB1-136", "file": "CILWEB1-136.jpg"}, {"id": "CILWEB1-137", "file": "CILWEB1-137.jpg"}, {"id": "CILWEB1-138", "file": "CILWEB1-138.jpg"}, {"id": "CILWEB1-139", "file": "CILWEB1-139.jpg"}, {"id": "CILWEB1-140", "file": "CILWEB1-140.jpg"}, {"id": "CILWEB1-141", "file": "CILWEB1-141.jpg"}, {"id": "CILWEB1-142", "file": "CILWEB1-142.jpg"}, {"id": "CILWEB1-143", "file": "CILWEB1-143.jpg"}, {"id": "CILWEB1-144", "file": "CILWEB1-144.jpg"}, {"id": "CILWEB1-145", "file": "CILWEB1-145.jpg"}, {"id": "CILWEB1-146", "file": "CILWEB1-146.jpg"}, {"id": "CILWEB1-147", "file": "CILWEB1-147.jpg"}, {"id": "CILWEB1-148", "file": "CILWEB1-148.jpg"}, {"id": "CILWEB1-149", "file": "CILWEB1-149.jpg"}, {"id": "CILWEB1-150", "file": "CILWEB1-150.jpg"}, {"id": "CILWEB1-151", "file": "CILWEB1-151.jpg"}, {"id": "CILWEB1-152", "file": "CILWEB1-152.jpg"}, {"id": "CILWEB1-153", "file": "CILWEB1-153.jpg"}, {"id": "CILWEB1-154", "file": "CILWEB1-154.jpg"}, {"id": "CILWEB1-155", "file": "CILWEB1-155.jpg"}, {"id": "CILWEB1-156", "file": "CILWEB1-156.jpg"}, {"id": "CILWEB1-157", "file": "CILWEB1-157.jpg"}, {"id": "CILWEB1-158", "file": "CILWEB1-158.jpg"}, {"id": "CILWEB1-159", "file": "CILWEB1-159.jpg"}, {"id": "CILWEB1-160", "file": "CILWEB1-160.jpg"}, {"id": "CILWEB1-161", "file": "CILWEB1-161.jpg"}, {"id": "CILWEB1-162", "file": "CILWEB1-162.jpg"}, {"id": "CILWEB1-163", "file": "CILWEB1-163.jpg"}, {"id": "CILWEB1-164", "file": "CILWEB1-164.jpg"}, {"id": "CILWEB1-165", "file": "CILWEB1-165.jpg"}, {"id": "CILWEB1-166", "file": "CILWEB1-166.jpg"}];</script>
+  <!-- GALLERY:END -->
 </section>
 
 <footer>
@@ -593,7 +387,7 @@
   <span class="n" id="outCount">0 out</span>
   <span class="n" id="inCount">0 in</span>
   <a class="send" id="sendPicks" href="#" aria-disabled="true">Send my swaps</a>
-  <a id="sendGmail" href="#" target="_blank" rel="noopener" style="font-size:12.5px">by Gmail</a>
+  <a id="sendGmail" href="#" target="_blank" rel="noopener">by Gmail</a>
   <button id="copyPicks" type="button">Copy instead</button>
   <button id="clearPicks" type="button">Clear</button>
   <button class="x" id="hideBar" type="button" aria-label="Hide the bar">&times;</button>
@@ -626,9 +420,8 @@
   }, 7000);
 })();
 
-// Swaps: the forty-two is proposed; the camp challenges it. "Replace" on a frame in the
-// forty-two marks it out; + on a library frame nominates it in. The bar sends both
-// lists as a machine-readable ballot; Copy is the fallback when mailto has no client.
+// Swaps: the forty-two is proposed; Replace marks a frame out, + nominates one in.
+// The bar sends both lists; Gmail and Copy cover machines without a mail app.
 (function () {
   var KEY = 'interlaken-swaps-v3';
   var bar = document.getElementById('pickbar');
@@ -730,8 +523,12 @@
   });
   window.swapToggle = toggle;
   window.swapState = read;
+  paint();
+})();
 
-  // offline slideshow from the picks
+// Slideshows in a new tab: images straight from the site, nothing downloaded.
+// The forty-two at 90 seconds or 42 seconds; the full gallery at 2 seconds a frame.
+(function () {
   var SLIDE = [
     '<!DOCTYPE html><html lang=en><head><meta charset=utf-8>',
     '<meta name=viewport content="width=device-width,initial-scale=1">',
@@ -749,7 +546,7 @@
     '#n{position:fixed;bottom:14px;right:18px;font-size:12px;color:#a69b8a}',
     '.z{position:fixed;top:0;bottom:0;width:34%;z-index:3;cursor:pointer}#p{left:0}#x{right:0}',
     '</style></head><body>',
-    '<div id=c><h1>Camp Interlaken</h1><p>__N__ frames &middot; works offline</p><button id=b>Begin</button></div>',
+    '<div id=c><h1>Camp Interlaken</h1><p>__N__ frames</p><button id=b>Begin</button></div>',
     '<div id=s><img id=a><img id=d style=position:absolute></div>',
     '<div class=z id=p></div><div class=z id=x></div><div id=n></div>',
     '<scr' + 'ipt>var U=__IMGS__,MS=__MS__,i=0,t=null,sh=null;',
@@ -763,20 +560,9 @@
     'document.addEventListener("keydown",function(e){if(e.key==="ArrowRight"){st(1);ar();}',
     'if(e.key==="ArrowLeft"){st(-1);ar();}if(e.key===" "){e.preventDefault();if(t){clearInterval(t);t=null;}else ar();}});',
     '<\/scr' + 'ipt></body></html>'].join('');
-  function asDataURL(url) {
-    return fetch(url).then(function (r) { return r.blob(); }).then(function (b) {
-      return new Promise(function (res) {
-        var f = new FileReader();
-        f.onload = function () { res(f.result); };
-        f.readAsDataURL(b);
-      });
-    });
-  }
-  // watch in a new tab: same slideshow, images straight from the site, nothing downloaded.
-  // 90 seconds total, or 42 seconds at one second per frame.
-  function watchTab(ms) {
-    var urls = (window.R42 || []).map(function (r) {
-      return new URL('img/present/' + r.file, location.href).href;
+  function watchTab(files, ms) {
+    var urls = files.map(function (f) {
+      return new URL('img/present/' + f, location.href).href;
     });
     if (!urls.length) return;
     var html = SLIDE.replace('__IMGS__', JSON.stringify(urls))
@@ -785,42 +571,20 @@
     if (!w) { alert('The browser blocked the tab. Allow pop-ups for this page and try again.'); return; }
     w.document.open(); w.document.write(html); w.document.close();
   }
+  function files(list) { return (list || []).map(function (r) { return r.file; }); }
   document.getElementById('watch90').addEventListener('click', function () {
-    watchTab(Math.round(90000 / ((window.R42 || []).length || 42)));
+    var f = files(window.R42);
+    watchTab(f, Math.round(90000 / (f.length || 42)));
   });
   document.getElementById('watch42s').addEventListener('click', function () {
-    watchTab(1000);
+    watchTab(files(window.R42), 1000);
   });
-
-  document.getElementById('show42').addEventListener('click', function () {
-    var files = (window.R42 || []).map(function (r) { return r.file; });
-    if (!files.length) return;
-    if (location.protocol === 'file:') { alert('Slideshow building needs the online page.'); return; }
-    var btn = this, secs = prompt('Seconds on each image?', '4'); if (secs === null) return;
-    var ms = Math.max(500, Math.round(parseFloat(secs) * 1000) || 4000);
-    btn.disabled = true; var done = 0;
-    btn.textContent = 'Building 0/' + files.length;
-    Promise.all(files.map(function (file) {
-      return asDataURL('img/present/' + file).then(function (d) {
-        done++; btn.textContent = 'Building ' + done + '/' + files.length; return d;
-      });
-    })).then(function (imgs) {
-      var html = SLIDE.replace('__IMGS__', JSON.stringify(imgs)).replace('__MS__', ms).replace('__N__', imgs.length);
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
-      a.download = 'Interlaken-the-forty-two.html'; a.click();
-      setTimeout(function () { URL.revokeObjectURL(a.href); }, 8000);
-      btn.disabled = false; btn.textContent = 'Download the forty-two as a slideshow';
-    }).catch(function () {
-      btn.disabled = false; btn.textContent = 'Download the forty-two as a slideshow';
-      alert('Could not build the file. Try again.');
-    });
+  document.getElementById('watchAll').addEventListener('click', function () {
+    watchTab(files(window.RALL), 2000);
   });
-
-  paint();
 })();
 
-// The lightbox: tap a frame, move with arrows or keys, pick without leaving it.
+// The lightbox: tap a frame, move with arrows or keys, mark without leaving it.
 (function () {
   var lb = document.getElementById('lb');
   var img = document.getElementById('lbimg');
@@ -832,6 +596,9 @@
   var cur = -1;
   function collect() {
     frames = Array.prototype.slice.call(document.querySelectorAll('.card .ph[data-file]'));
+  }
+  function inR42(id) {
+    return (window.R42 || []).some(function (r) { return r.id === id; });
   }
   function show(i) {
     if (!frames.length) return;
@@ -847,9 +614,6 @@
     document.body.style.overflow = 'hidden';
     var nxt = frames[(cur + 1) % frames.length];
     (new Image()).src = 'img/present/' + nxt.dataset.file;
-  }
-  function inR42(id) {
-    return (window.R42 || []).some(function (r) { return r.id === id; });
   }
   function paintPick() {
     if (cur < 0) return;
@@ -901,66 +665,6 @@
     if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1));
     tx = null;
   }, { passive: true });
-})();
-
-// Section filters, from the nav.
-(function () {
-  var on = new Set();
-  var TOTAL = Array.prototype.reduce.call(
-    document.querySelectorAll('section[data-sec]'),
-    function (n, s) { return n + parseInt(s.getAttribute('data-n'), 10); }, 0);
-  var LEAD = ['deliverables', 'fortytwo', 'fineart', 'files', 'printing'];
-  var hint = document.getElementById('filthint'), clear = document.getElementById('clearfilt');
-  function apply() {
-    var any = on.size > 0;
-    document.querySelectorAll('section[data-sec]').forEach(function (sec) {
-      sec.hidden = any && !on.has(sec.getAttribute('data-sec'));
-    });
-    LEAD.forEach(function (id) { var el = document.getElementById(id); if (el) el.hidden = any; });
-    document.querySelectorAll('h3.mv').forEach(function (h) {
-      var n = h.nextElementSibling, vis = false;
-      while (n && n.tagName !== 'H3') {
-        if (n.matches && n.matches('section[data-sec]') && !n.hidden) vis = true;
-        n = n.nextElementSibling;
-      }
-      h.hidden = any && !vis;
-    });
-    document.querySelectorAll('nav .navmv').forEach(function (x) { x.hidden = any; });
-    document.querySelectorAll('nav button.filt').forEach(function (b) {
-      b.classList.toggle('on', on.has(b.getAttribute('data-sec')));
-    });
-    clear.hidden = !any;
-    if (any) {
-      var c = 0;
-      document.querySelectorAll('section[data-sec]').forEach(function (s) {
-        if (!s.hidden) c += parseInt(s.getAttribute('data-n'), 10);
-      });
-      hint.innerHTML = 'Showing <b>' + c + '</b> of ' + TOTAL + ' frames in ' + on.size +
-        (on.size === 1 ? ' set' : ' sets') + '. Pick more to add them, or Clear to see everything.';
-      hint.hidden = false;
-    } else { hint.hidden = true; }
-  }
-  document.querySelectorAll('nav a[href^="#"]').forEach(function (a) {
-    a.addEventListener('click', function () {
-      if (on.size) {
-        on.clear(); apply();
-        var t = document.querySelector(a.getAttribute('href'));
-        if (t) setTimeout(function () { t.scrollIntoView({ behavior: 'smooth' }); }, 30);
-      }
-    });
-  });
-  document.querySelectorAll('nav button.filt').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var k = b.getAttribute('data-sec');
-      if (on.has(k)) on.delete(k); else on.add(k);
-      apply();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  });
-  clear.addEventListener('click', function () {
-    on.clear(); apply();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
 })();
 </script>
 </body>
