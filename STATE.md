@@ -22,6 +22,15 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-31 (final shape + shareable slideshows): page is now two picture tiles
+  (Slideshow one, 42 seconds; Slideshow two, 90 seconds; same forty-two, Noah's order)
+  over "The gallery (163)". The slideshows are STANDALONE PAGES (slideshow-one.html,
+  slideshow-two.html) so each link plays on its own when copied and shared, which the
+  client email now states. Nav removed entirely. Swap loop lives on: + on gallery
+  frames, Replace inside the viewer for frames in the forty-two, bar sends v3 ballots.
+  Email draft rewritten to the hub framing with both slideshow links and Noah's new
+  closing; his final dictated sentence arrived unfinished ("having sat with these
+  photos for the last week,") and is NOT in the draft, awaiting his completion.
 - 2026-07-31 (stripped to four things, Noah's direction "too many links, I just wanted to
   get to the images"): the page is now THE FORTY-TWO (curated by Noah, his order, 90s and
   42s slideshows) and the FULL GALLERY (all 163 chronological, the forty-two included and
