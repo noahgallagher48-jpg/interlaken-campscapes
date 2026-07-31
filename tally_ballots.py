@@ -29,7 +29,7 @@ import os
 import re
 import sys
 
-HEADER = re.compile(r"INTERLAKEN BALLOT v[12]")
+HEADER = re.compile(r"INTERLAKEN (?:BALLOT v[12]|SWAPS v3)")
 SCAPE = {"sig", "fa"}
 GROUPS = {"sig": "Signature Campscape", "fa": "Fine Art",
           "dev": "Development / Campaign", "pub": "Publication-Ready",
@@ -43,20 +43,21 @@ def parse(text):
         votes = collections.defaultdict(list)
         name = ""
         for line in chunk.splitlines():
-            m = re.match(r"\s*(sig|fa|dev|pub|day)\s*:\s*(\S+)", line)
+            m = re.match(r"\s*(sig|fa|dev|pub|day|out|in)\s*:\s*(\S+)", line)
             if m:
                 votes[m.group(1)].append(m.group(2))
                 continue
             n = re.match(r"\s*Name\s*:\s*(.+)", line)
             if n and not name:
                 name = n.group(1).strip()
-        if votes:
+        if votes or re.search(r"^\s*no changes\s*$", chunk, re.M):
             yield name or "unnamed", votes
 
 
 def main(folder):
     tally = collections.defaultdict(collections.Counter)  # group -> frame -> votes
     voters = []
+    allvotes = []
     seen = set()
     for path in sorted(glob.glob(os.path.join(folder, "*.txt"))):
         for name, votes in parse(open(path, encoding="utf-8", errors="replace").read()):
@@ -65,6 +66,7 @@ def main(folder):
                 continue
             seen.add(key)
             voters.append(name)
+            allvotes.append(votes)
             for g, ids in votes.items():
                 for fid in set(ids):   # one voter, one vote per frame
                     tally[g][fid] += 1
@@ -73,6 +75,17 @@ def main(folder):
         sys.exit(f"no ballots found in {folder}")
 
     print(f"ballots: {len(voters)}  ({', '.join(voters)})\n")
+    stands = [v for v, votes in zip(voters, allvotes) if not votes]
+    if stands:
+        print(f"stands as it is: {len(stands)}  ({', '.join(stands)})\n")
+    if tally["out"] or tally["in"]:
+        print("Voted OUT of the forty-two")
+        for fid, n in tally["out"].most_common():
+            print(f"  {n:>2}  {fid:<14} {'#'*n}")
+        print("Nominated IN")
+        for fid, n in tally["in"].most_common():
+            print(f"  {n:>2}  {fid:<14} {'#'*n}")
+        print()
     combined = collections.Counter()
     for g in GROUPS:
         if not tally[g]:
@@ -83,14 +96,19 @@ def main(folder):
             print(f"  {n:>2}  {fid:<14} {marks}")
             combined[fid] += n
         print()
-    print("Marquee, all sets combined")
-    for fid, n in combined.most_common(15):
-        print(f"  {n:>2}  {fid}")
+    if combined:
+        print("Marquee, all sets combined")
+        for fid, n in combined.most_common(15):
+            print(f"  {n:>2}  {fid}")
 
     scape = collections.Counter()
     story = collections.Counter()
     for g, counts in tally.items():
+        if g in ("out", "in"):
+            continue
         (scape if g in SCAPE else story).update(counts)
+    if not scape and not story:
+        return
     print("\nThe forty-two the votes elect")
     print(f"  scapes, top 12 of {len(scape)} voted")
     for fid, n in scape.most_common(12):

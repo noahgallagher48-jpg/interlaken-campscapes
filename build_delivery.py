@@ -38,6 +38,10 @@ LABELS = {
 
 FRAMES = json.load(open(os.path.join(HERE, "frames.json")))
 SECTIONS = json.load(open(os.path.join(HERE, "sections.json")))
+# Noah's proposed forty-two, in his slideshow order (recovered by hash-match from the
+# downloaded slideshow, 2026-07-31). The page presents these as the set; the camp
+# challenges frames with out/in swaps.
+FORTY_TWO = json.load(open(os.path.join(HERE, "noahs_42.json")))
 
 # True since 2026-07-31: STATE.md records the owner's confirmation that the camp's
 # releases cover the population-facing set.
@@ -66,17 +70,25 @@ def slug(name):
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
-def card(f):
-    return ('    <div class="card">'
-            f'<button class="ph" type="button" data-file="{f["file"]}" '
-            f'data-id="{f["id"]}" data-group="{f["label"]}" '
-            f'aria-label="View {f["id"]}">'
-            f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></button>'
-            f'<span class="num">{f["id"]}</span>'
-            f'<button class="pick" type="button" data-id="{f["id"]}" '
-            f'data-group="{f["label"]}" data-file="{f["file"]}" '
-            f'aria-pressed="false" aria-label="Pick {f["id"]} for the book">+</button>'
-            '</div>')
+def card(f, r42=False, in42=False):
+    """One card. r42: a forty-two card, carries Replace. in42: a library card whose
+    frame already sits in the forty-two, carries a badge instead of +."""
+    out = ('    <div class="card">'
+           f'<button class="ph" type="button" data-file="{f["file"]}" '
+           f'data-id="{f["id"]}" data-group="{f["label"]}" '
+           f'aria-label="View {f["id"]}">'
+           f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></button>'
+           f'<span class="num">{f["id"]}</span>')
+    if r42:
+        out += (f'<button class="rep" type="button" data-id="{f["id"]}" '
+                f'aria-label="Mark {f["id"]} to come out of the forty-two">Replace</button>')
+    elif in42:
+        out += '<span class="in42">in the 42</span>'
+    else:
+        out += (f'<button class="pick" type="button" data-id="{f["id"]}" '
+                f'data-group="{f["label"]}" data-file="{f["file"]}" '
+                f'aria-pressed="false" aria-label="Swap {f["id"]} into the forty-two">+</button>')
+    return out + '</div>' 
 
 
 def build():
@@ -96,16 +108,22 @@ def build():
             lib.append(f'<section id="{s}" data-sec="{s}" data-n="{len(frames)}">')
             lib.append(f'  <h2>{name} <span class="cnt">{len(frames)}</span></h2>')
             lib.append('  <div class="grid">')
-            lib.extend(card(f) for f in frames)
+            lib.extend(card(f, in42=f["id"] in set(FORTY_TWO)) for f in frames)
             lib.append('  </div>')
             lib.append('</section>')
             navf.append(f'<button class="filt" type="button" data-sec="{s}">'
                         f'{name} <i>{len(frames)}</i></button>')
 
-    fa = ['  <div class="grid">']
     lookup = {f["id"]: f for f in FRAMES}
-    fa.extend(card(lookup[fid]) for fid in FINE_TWELVE)
+    fa = ['  <div class="grid">']
+    fa.extend(card(lookup[fid], in42=fid in set(FORTY_TWO)) for fid in FINE_TWELVE)
     fa.append('  </div>')
+
+    ft = ['  <div class="grid">']
+    ft.extend(card(lookup[fid], r42=True) for fid in FORTY_TWO)
+    ft.append('  </div>')
+    r42data = [{"id": fid, "file": lookup[fid]["file"]} for fid in FORTY_TWO]
+    ft.append('  <script>window.R42 = ' + json.dumps(r42data) + ';</script>')
 
     def fill(html, start, end, body):
         i, j = html.find(start), html.find(end)
@@ -117,6 +135,7 @@ def build():
     html = fill(html, "<!-- LIBRARY:START", "<!-- LIBRARY:END -->", "\n".join(lib))
     html = fill(html, "<!-- NAVFILT:START", "<!-- NAVFILT:END -->", "  ".join(navf))
     html = fill(html, "<!-- FINEART:START", "<!-- FINEART:END -->", "\n".join(fa))
+    html = fill(html, "<!-- FORTYTWO:START", "<!-- FORTYTWO:END -->", "\n".join(ft))
     open(PAGE, "w").write(html)
 
     missing = [f["file"] for f in FRAMES
