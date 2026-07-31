@@ -22,6 +22,13 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-31 (mail + slideshow reliability): mailto needs a configured mail app, which
+  phones have and desktops often lack (how Noah's own send failed), so every send now has
+  a Gmail-compose fallback (bar and stands-as-it-is) plus Copy. "Watch as a slideshow"
+  opens the forty-two playing in a new tab with images from the site, nothing downloaded,
+  so the browser's allow-downloads prompt never enters the main path; the offline copy
+  download remains as the secondary and may show the browser's standard one-time allow
+  prompt, which is one click and not a block.
 - 2026-07-31 (cull + clarity): Frames 39, 67, 86 pulled from the page at Noah's direction
   (library now 163; files remain in img/ and frames.json for the record). Card ids shortened
   to the bare number, moved bottom-left, which ends the badge/button overlap at phone
