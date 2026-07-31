@@ -22,6 +22,17 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-31 (the six + the forty-two): Page brought to parity with the Ramah guide's
+  feature set, adapted: sticky jump bar; Fine art prints section (the twelve, image and
+  number only: "If we call it fine art it is," Noah, no why-lines on the surface, the
+  justifications stay in frames.json for the guide layer); the ballot reworked from
+  2-per-set marquee to THE FORTY-TWO (12 scapes + 30 story, the agreement floors, live
+  counters, no auto-release, BALLOT v2 mailto; tally_ballots.py tallies v1 and v2 and
+  reports the elected 42); The book section (preview-for-approval loop, no amounts);
+  The files section (web now, full-res with the library); substrate table added to the
+  production section. Copy pass by the review agent: epigraph and production cards
+  de-formulaized, pricing phrase removed, UI narration trimmed. Geometry verified in a
+  real browser (counters, nav anchors, 12 cards, 166+166, no overflow).
 - 2026-07-31 (live): Owner confirmed releases cover the population-facing set (see Facts);
   INCLUDE_FACES flipped True, all 166 frames on the wall and ballot, held-back notice gone.
   Plan page now links the library from "A first look". Pushed live. Superseded havcil img

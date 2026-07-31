@@ -72,6 +72,29 @@ EMPTY = """  <div class="empty">
     The sample set arrives on this page first, then the full library within 30 days of the last on-site day. The counts in the agreement (12 Mastered Campscapes, 30 Storytelling Candids) are floors, not targets; the archive carries everything beyond them.
   </div>"""
 
+# The fine-art twelve. No why-lines on the page: "If we call it fine art it is"
+# (Noah, 2026-07-31). The label carries the claim; justification and specs stay in
+# frames.json and ride with the use-guide layer, never under the frame.
+FINE_TWELVE = [
+    "CILWEB1-17", "CILWEB1-101", "CILWEB1-14", "CILWEB1-63", "CILWEB1-66",
+    "CILWEB1-141", "CILWEB1-143", "CILWEB1-34", "CILWEB1-16", "CILWEB1-108",
+    "CILWEB1-81", "CILWEB1-51",
+]
+
+
+def fineart(frames):
+    """The twelve. Image and its number, nothing else."""
+    by_id = {f["id"]: f for f in frames}
+    out = ['  <div class="fagrid">']
+    for fid in FINE_TWELVE:
+        f = by_id[fid]
+        out.append('    <div class="facard">'
+                   f'<a href="img/present/{f["file"]}" target="_blank" rel="noopener">'
+                   f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{fid}"></a>'
+                   f'<p class="why"><span class="fid">{fid}</span></p></div>')
+    out.append('  </div>')
+    return "\n".join(out)
+
 
 def ingest(folder):
     from PIL import Image, ImageCms
@@ -137,7 +160,7 @@ def ballot(shown):
             current = f.get("label")
             out.append(f'  <h3 class="group"><span class="tag {current}">'
                        f'{LABELS.get(current, "Unlabelled")}</span>'
-                       f'<span class="quota" data-group="{current}">0 of 2</span></h3>')
+                       f'<span class="quota" data-group="{current}">0 picked</span></h3>')
             out.append('  <div class="bgrid">')
         out.append(f'    <button class="bpick" type="button" data-id="{f["id"]}" '
                    f'data-group="{f["label"]}" aria-pressed="false" '
@@ -186,6 +209,12 @@ def build():
     if bs >= 0 and be >= 0:
         bhead = html.find("-->", bs) + 3
         html = html[:bhead] + "\n" + ballot(shown) + "\n  " + html[be:]
+
+    fs = html.find("<!-- FINEART:START")
+    fe = html.find("<!-- FINEART:END -->")
+    if fs >= 0 and fe >= 0:
+        fhead = html.find("-->", fs) + 3
+        html = html[:fhead] + "\n" + fineart(FRAMES) + "\n  " + html[fe:]
     open(PAGE, "w").write(html)
 
     missing = [f["file"] for f in FRAMES

@@ -4,7 +4,7 @@
 Ballots arrive by email with subject "Interlaken picks", each body carrying the
 machine-readable block the delivery page builds:
 
-    INTERLAKEN BALLOT v1
+    INTERLAKEN BALLOT v2
 
     sig: havcil-74
     sig: havcil-95
@@ -17,9 +17,11 @@ split on the header line) in a folder, then:
 
     python3 tally_ballots.py ballots/
 
-Output: per-set ranking by vote count, each voter counted once per frame, and a
-combined marquee list. Names are read from the Name: line when present so the
-report can say who has voted, which is what the follow-up nudge needs.
+Output: per-set ranking by vote count, each voter counted once per frame, then
+the forty-two the votes elect: the top 12 from the scape sets (sig + fa) and the
+top 30 from the story sets (dev + pub + day), the split the signature layout
+runs on. v1 marquee ballots tally the same way. Names are read from the Name:
+line when present so the report can say who has voted.
 """
 import collections
 import glob
@@ -27,7 +29,8 @@ import os
 import re
 import sys
 
-HEADER = "INTERLAKEN BALLOT v1"
+HEADER = re.compile(r"INTERLAKEN BALLOT v[12]")
+SCAPE = {"sig", "fa"}
 GROUPS = {"sig": "Signature Campscape", "fa": "Fine Art",
           "dev": "Development / Campaign", "pub": "Publication-Ready",
           "day": "Daily / Social"}
@@ -35,7 +38,7 @@ GROUPS = {"sig": "Signature Campscape", "fa": "Fine Art",
 
 def parse(text):
     """Yield (voter, {group: [ids]}) per ballot found in the text."""
-    chunks = text.split(HEADER)[1:]
+    chunks = HEADER.split(text)[1:]
     for chunk in chunks:
         votes = collections.defaultdict(list)
         name = ""
@@ -83,6 +86,21 @@ def main(folder):
     print("Marquee, all sets combined")
     for fid, n in combined.most_common(15):
         print(f"  {n:>2}  {fid}")
+
+    scape = collections.Counter()
+    story = collections.Counter()
+    for g, counts in tally.items():
+        (scape if g in SCAPE else story).update(counts)
+    print("\nThe forty-two the votes elect")
+    print(f"  scapes, top 12 of {len(scape)} voted")
+    for fid, n in scape.most_common(12):
+        print(f"  {n:>2}  {fid}")
+    print(f"  story, top 30 of {len(story)} voted")
+    for fid, n in story.most_common(30):
+        print(f"  {n:>2}  {fid}")
+    short = (12 - min(12, len(scape))) + (30 - min(30, len(story)))
+    if short:
+        print(f"  ({short} slots unfilled by votes so far; ties and gaps are Noah's call)")
 
 
 if __name__ == "__main__":
