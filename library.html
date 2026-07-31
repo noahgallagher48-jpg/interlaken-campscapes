@@ -75,10 +75,12 @@
     border:1px solid var(--line);aspect-ratio:16/10}
   .dcard img{width:100%;height:100%;object-fit:cover;display:block;opacity:.72;transition:opacity .15s}
   .dcard:hover img{opacity:.95}
-  .dcard .dlab{position:absolute;left:12px;bottom:26px;right:12px;font-family:var(--serif);
-    font-weight:600;font-size:16.5px;color:#fff;text-shadow:0 1px 6px #000}
-  .dcard .dsub{position:absolute;left:12px;bottom:9px;right:12px;font-family:var(--mono);
-    font-size:10.5px;color:#d8d0c0;text-shadow:0 1px 4px #000;letter-spacing:.04em}
+  .dcard .txt{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 9px;
+    background:linear-gradient(transparent,rgba(20,17,13,.9))}
+  .dcard .dlab{display:block;font-family:var(--serif);font-weight:600;font-size:16.5px;
+    color:#fff;text-shadow:0 1px 6px #000;line-height:1.25}
+  .dcard .dsub{display:block;margin-top:3px;font-family:var(--mono);font-size:10.5px;
+    color:#d8d0c0;text-shadow:0 1px 4px #000;letter-spacing:.04em;line-height:1.45}
   .dcard:hover{text-decoration:none}
 
   /* cards */
@@ -208,23 +210,23 @@
   <div class="dgrid">
     <a class="dcard" href="#fortytwo">
       <img loading="lazy" src="img/thumb/CILWEB1-63.jpg" alt="">
-      <span class="dlab">The forty-two</span><span class="dsub">The proposed set &middot; challenge any frame</span>
+      <span class="txt"><span class="dlab">The forty-two</span><span class="dsub">The proposed set &middot; challenge any frame</span></span>
     </a>
     <a class="dcard" href="first-look/">
       <img loading="lazy" src="img/thumb/CILWEB1-14.jpg" alt="">
-      <span class="dlab">First look</span><span class="dsub">33 frames &middot; 90 seconds &middot; slideshow</span>
+      <span class="txt"><span class="dlab">First look</span><span class="dsub">33 frames &middot; 90 seconds &middot; slideshow</span></span>
     </a>
     <a class="dcard" href="#fineart">
       <img loading="lazy" src="img/thumb/CILWEB1-17.jpg" alt="">
-      <span class="dlab">Fine art prints</span><span class="dsub">12 frames</span>
+      <span class="txt"><span class="dlab">Fine art prints</span><span class="dsub">12 frames</span></span>
     </a>
     <a class="dcard" href="#library">
       <img loading="lazy" src="img/thumb/CILWEB1-58.jpg" alt="">
-      <span class="dlab">The library</span><span class="dsub">Every frame &middot; four days, in order</span>
+      <span class="txt"><span class="dlab">The library</span><span class="dsub">Every frame &middot; four days, in order</span></span>
     </a>
     <a class="dcard" href="#printing">
       <img loading="lazy" src="img/thumb/CILWEB1-116.jpg" alt="">
-      <span class="dlab">Printing</span><span class="dsub">What each frame can become</span>
+      <span class="txt"><span class="dlab">Printing</span><span class="dsub">What each frame can become</span></span>
     </a>
   </div>
 </section>
