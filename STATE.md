@@ -22,6 +22,15 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-31 (stripped to four things, Noah's direction "too many links, I just wanted to
+  get to the images"): the page is now THE FORTY-TWO (curated by Noah, his order, 90s and
+  42s slideshows) and the FULL GALLERY (all 163 chronological, the forty-two included and
+  badged, its own slideshow at 2s a frame). Nav is two links. Removed from the page:
+  deliverables grid, section filters and the fifteen named sections, book, fine art, files,
+  printing, living note. The swap machinery stays on the frames (Replace / + / bar / v3
+  ballot) while the selection mechanism question stays open. Fine-art twelve and the
+  section map remain in the build data for the use-guide layer later. Email draft claims
+  all verified against the live page.
 - 2026-07-31 (mail + slideshow reliability): mailto needs a configured mail app, which
   phones have and desktops often lack (how Noah's own send failed), so every send now has
   a Gmail-compose fallback (bar and stands-as-it-is) plus Copy. "Watch as a slideshow"
