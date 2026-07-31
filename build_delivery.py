@@ -98,7 +98,7 @@ padding:11px 22px;border-radius:3px;font-size:13px;letter-spacing:.16em;text-tra
 #n{position:fixed;bottom:14px;right:18px;font-size:12px;color:#a69b8a}
 .z{position:fixed;top:0;bottom:0;width:34%;z-index:3;cursor:pointer}#p{left:0}#x{right:0}
 </style></head><body>
-<div id=c><h1>Camp Interlaken</h1><p>__SUB__</p><button id=b>Begin</button></div>
+<div id=c><h1>Camp Interlaken</h1><p>__SUB__</p><button id=b>Begin</button><p style="margin-top:18px;font-size:12px"><a href="#" id=cl style="color:#a69b8a;text-decoration:underline">Copy this page's link to share</a></p></div>
 <div id=s><img id=a><img id=d style=position:absolute></div>
 <div class=z id=p></div><div class=z id=x></div><div id=n></div>
 <script>var U=__IMGS__,MS=__MS__,i=0,t=null,sh=null;
@@ -109,6 +109,9 @@ function st(d){go(i+d);}function ar(){clearInterval(t);t=setInterval(function(){
 document.getElementById("b").onclick=function(){document.getElementById("c").className="off";go(0);ar();};
 document.getElementById("x").onclick=function(){st(1);ar();};
 document.getElementById("p").onclick=function(){st(-1);ar();};
+document.getElementById("cl").onclick=function(e){e.preventDefault();var a=this;
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(location.href).then(function(){a.textContent="Link copied";});}
+else{window.prompt("Copy this link:",location.href);}};
 document.addEventListener("keydown",function(e){if(e.key==="ArrowRight"){st(1);ar();}
 if(e.key==="ArrowLeft"){st(-1);ar();}if(e.key===" "){e.preventDefault();if(t){clearInterval(t);t=null;}else ar();}});
 </scr"""  """ipt></body></html>"""
