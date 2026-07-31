@@ -22,6 +22,17 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-31 (the forty-two proposed): Presentation reframed at Noah's direction. His own
+  forty-two picks lead the page as the proposed signature set (recovered exactly by
+  hash-matching the images inside his downloaded slideshow file against the present tier;
+  order preserved; noahs_42.json is the record). The camp's job is now narrowing, not
+  electing: Replace on any of the forty-two marks it out, + on any library frame nominates
+  it in, the bar sends both lists (INTERLAKEN SWAPS v3, same "Interlaken picks" subject so
+  the sweep files them unchanged). A one-tap "stands as it is" sends a no-changes ballot;
+  Copy-instead fallback added because mailto failed on Noah's desktop. The 12/30 quota
+  counters removed with the reframe (his set runs 29 scapes / 13 story; the quota was
+  mine, not his). Slideshow builder now downloads the forty-two itself. tally_ballots.py
+  reports voted-out, nominated-in, and stands-as-is voters; v1/v2 ballots still parse.
 - 2026-07-31 (Ramah architecture): Page rebuilt on the Ramah guide's structure after
   Noah's first real use ("can't scroll through or back out, no vehicle for selection,
   unclear what's expected"). Now: deliverables grid up top (First look slideshow, Fine
