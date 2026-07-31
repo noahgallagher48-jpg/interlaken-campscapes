@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Camp Interlaken · July 2026</title>
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Camp Interlaken · July 2026">
+<meta property="og:description" content="The residency library, organized by what each image is for.">
+<style>
+  :root{
+    --ground:#14110D; --panel:#1C1813; --line:rgba(237,231,221,.12);
+    --ink:#EDE7DD; --muted:#A69B8A; --faint:#7A7060;
+    --accent:#E2A73E; --ok:#8FB573; --art:#C9A227;
+    --serif:"Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif;
+    --sans:"Avenir Next",Avenir,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.6;padding:0 22px 80px}
+  .wrap{max-width:860px;margin:0 auto}
+  #samples{max-width:1560px;width:calc(100vw - 44px);position:relative;left:50%;
+    transform:translateX(-50%);padding-bottom:30px}
+  #samples > p, #samples > .kicker, #samples > h2{max-width:64ch}
+  a{color:var(--accent);text-decoration:none}
+  a:hover,a:focus-visible{text-decoration:underline}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  header{padding:58px 0 34px;border-bottom:1px solid var(--line)}
+  .mark{font-family:var(--serif);font-size:13px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 26px}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,5.4vw,46px);
+    margin:0 0 10px;letter-spacing:.005em;text-wrap:balance;line-height:1.15}
+  .dates{font-family:var(--mono);font-size:13px;color:var(--muted);margin:0 0 18px}
+  .dates b{color:var(--ink);font-weight:600}
+  .standfirst{font-size:17px;color:var(--muted);max-width:60ch;margin:0}
+  .standfirst strong{color:var(--ink);font-weight:600}
+
+  section{margin-top:56px}
+  .kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
+    margin:0 0 8px;font-weight:600}
+  h2{font-family:var(--serif);font-weight:500;font-size:26px;margin:0 0 12px;text-wrap:balance}
+  h3{font-family:var(--serif);font-weight:600;font-size:17px;margin:0 0 6px}
+  p{max-width:66ch}
+  .sub{color:var(--muted);font-size:14.5px;margin:0 0 22px;max-width:64ch}
+
+  .epigraph{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink);
+    border-left:2px solid var(--accent);padding:2px 0 2px 18px;margin:26px 0;max-width:56ch}
+
+  /* the label system */
+  .labels{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:24px}
+  .label{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+  .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.13em;
+    text-transform:uppercase;border-radius:3px;padding:3px 8px;margin-bottom:9px;
+    border:1px solid currentColor}
+  .tag.fa{color:var(--art)} .tag.sig{color:var(--accent)} .tag.dev{color:var(--ok)}
+  .tag.pub{color:#8AB4C9} .tag.day{color:var(--muted)} .tag.arc{color:var(--faint)}
+  .label p{margin:0;font-size:13.8px;color:var(--muted)}
+
+  /* the block model (one image, fully explained) */
+  .block{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    overflow:hidden;margin-top:22px;display:grid;grid-template-columns:210px 1fr}
+  .block .ph{background:linear-gradient(135deg,#221D16,#171310);position:relative;min-height:190px;
+    display:flex;align-items:center;justify-content:center}
+  .block .ph span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint)}
+  .block .ph a{display:block;width:100%;height:100%;background:#000}
+  .block .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .block .ph .id{position:absolute;top:7px;left:9px;font-family:var(--mono);font-size:10px;
+    letter-spacing:.1em;color:#fff;text-shadow:0 1px 3px #000;z-index:2}
+  .heart{position:absolute;top:4px;right:5px;z-index:3;background:none;border:0;cursor:pointer;
+    font-size:19px;line-height:1;padding:4px 6px;color:rgba(255,255,255,.72);
+    text-shadow:0 1px 4px rgba(0,0,0,.8)}
+  .heart:hover{color:#fff}
+  .heart[aria-pressed="true"]{color:#E4685D}
+  #ballot{max-width:1100px;width:calc(100vw - 44px);position:relative;left:50%;
+    transform:translateX(-50%)}
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:8px;margin-top:6px}
+  .bpick{position:relative;display:block;padding:0;border:2px solid transparent;border-radius:5px;
+    background:#000;cursor:pointer;overflow:hidden}
+  .bpick img{width:100%;height:100%;aspect-ratio:3/2;object-fit:cover;display:block;
+    opacity:.88;transition:opacity .12s}
+  .bpick:hover img{opacity:1}
+  .bpick[aria-pressed="true"]{border-color:var(--accent)}
+  .bpick[aria-pressed="true"] img{opacity:1}
+  .bpick[aria-pressed="true"]::after{content:"\2665";position:absolute;top:5px;right:7px;
+    color:var(--accent);font-size:16px;text-shadow:0 1px 3px #000}
+  .quota{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--faint)}
+  .quota.full{color:var(--accent)}
+  .picks{position:sticky;bottom:0;margin-top:26px;background:var(--panel);
+    border:1px solid var(--line);border-radius:8px;padding:14px 18px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .picks .n{font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--accent)}
+  .picks p{font-size:13.5px;color:var(--muted);margin:0;flex:1 1 260px}
+  .picks a.send{display:inline-block;font-size:13px;font-weight:600;text-decoration:none;
+    border:1px solid var(--accent);color:var(--accent);border-radius:5px;padding:7px 14px}
+  .picks a.send[aria-disabled="true"]{opacity:.4;pointer-events:none}
+  .picks button.clear{background:none;border:0;color:var(--faint);font-size:12.5px;cursor:pointer;
+    text-decoration:underline}
+  h3.group{display:flex;align-items:baseline;gap:12px;margin:40px 0 14px;
+    padding-top:16px;border-top:1px solid var(--line);font-family:var(--sans);font-weight:600}
+  h3.group .tag{margin-bottom:0}
+  h3.group .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--faint)}
+
+
+  /* the opening frame */
+  .hero{position:relative;height:72vh;min-height:420px;overflow:hidden;background:#000}
+  .hero .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+    opacity:0;transition:opacity 1.8s ease}
+  .hero .slide.on{opacity:1}
+  .herotitle{position:absolute;left:0;right:0;bottom:0;padding:40px 24px 26px;
+    background:linear-gradient(transparent,rgba(20,17,13,.92))}
+  .herotitle .in{max-width:860px;margin:0 auto}
+  .herotitle h1{font-family:var(--serif);font-weight:500;font-size:clamp(30px,5.4vw,46px);
+    margin:0;letter-spacing:.005em;line-height:1.15;color:#fff}
+  .herotitle p{font-family:var(--mono);font-size:13px;color:#c9c2b4;margin:8px 0 0}
+
+  /* the story, big and in order */
+  #story{max-width:1100px;width:calc(100vw - 44px);position:relative;left:50%;
+    transform:translateX(-50%)}
+  .seq{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+  .seq a{display:block;background:#000;border-radius:4px;overflow:hidden}
+  .seq img{width:100%;height:auto;display:block}
+
+  /* the picking wall: photographs first, everything else out of the way */
+  .wall{columns:300px;column-gap:10px}
+  .pick{break-inside:avoid;margin:0 0 10px;padding:0;background:none;border:0}
+  .pick .ph{position:relative;display:block;background:#000;border-radius:3px;overflow:hidden}
+  .pick .ph img{width:100%;height:auto;display:block}
+  .pick figcaption{display:none}
+  .pick .heart{position:absolute;top:2px;right:4px;font-size:22px;opacity:0;transition:opacity .12s}
+  .pick:hover .heart,.pick .heart[aria-pressed="true"]{opacity:1}
+  @media (hover:none){.pick .heart{opacity:1}}
+
+  .block .fields{padding:18px 20px}
+  .field{padding:9px 0;border-top:1px solid var(--line)}
+  .field:first-child{border-top:0;padding-top:2px}
+  .field .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);display:block;margin-bottom:3px}
+  .field .v{font-size:14px;color:var(--ink)}
+  .field .v.mut{color:var(--muted)}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:24px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px 19px}
+  .card p{margin:0;font-size:13.8px;color:var(--muted)}
+
+  .empty{background:var(--panel);border:1px dashed var(--line);border-radius:6px;
+    padding:28px 22px;text-align:center;color:var(--muted);font-size:14.5px;margin-top:20px}
+  .empty b{color:var(--ink);font-weight:600;display:block;margin-bottom:6px;font-family:var(--serif);font-size:16px}
+
+  .channel{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--accent);
+    border-radius:6px;padding:16px 20px;margin:26px 0 0;font-size:14.5px;color:var(--muted);max-width:66ch}
+  .channel b{color:var(--ink)}
+
+  footer{margin-top:72px;padding-top:26px;border-top:1px solid var(--line);
+    color:var(--faint);font-size:13px}
+  footer .thesis{font-family:var(--serif);font-style:italic;color:var(--muted);
+    font-size:15px;margin:0 0 10px}
+  footer a{color:var(--muted)}
+
+  @media (max-width:640px){
+    body{padding:0 16px 60px}
+    .block{grid-template-columns:1fr}
+    .block .ph{min-height:150px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero" id="hero">
+  <img class="slide on" src="img/present/CILWEB1-63.jpg" style="object-position:50% 30%" alt="The whole camp crossing the bridge on Shabbat">
+  <img class="slide" src="img/present/CILWEB1-17.jpg" style="object-position:50% 45%" alt="The Milky Way over the lake, sailboats on the shore">
+  <img class="slide" src="img/present/CILWEB1-85.jpg" style="object-position:50% 40%" alt="A full rainbow over the field, the camp's name beneath it">
+  <img class="slide" src="img/present/CILWEB1-141.jpg" style="object-position:50% 50%" alt="The lake mirror-calm at dawn">
+  <img class="slide" src="img/present/CILWEB1-14.jpg" style="object-position:50% 55%" alt="The bridge at night, lit from below">
+  <div class="herotitle"><div class="in">
+    <h1>Camp Interlaken</h1>
+    <p>July 16 to 19, 2026 &middot; Eagle River, Wisconsin</p>
+  </div></div>
+</div>
+
+<div class="wrap">
+
+<header>
+  <p class="mark">Abba Photo</p>
+</header>
+
+<section id="story">
+  <h2>The crossing</h2>
+  <div class="seq">
+    <a href="img/present/CILWEB1-46.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/present/CILWEB1-46.jpg" alt=""></a>
+    <a href="img/present/CILWEB1-57.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/present/CILWEB1-57.jpg" alt=""></a>
+    <a href="img/present/CILWEB1-59.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/present/CILWEB1-59.jpg" alt=""></a>
+    <a href="img/present/CILWEB1-66.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/present/CILWEB1-66.jpg" alt=""></a>
+    <a href="img/present/CILWEB1-75.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/present/CILWEB1-75.jpg" alt=""></a>
+    <a href="img/present/CILWEB1-76.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/present/CILWEB1-76.jpg" alt=""></a>
+    <a href="img/present/CILWEB1-14.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/present/CILWEB1-14.jpg" alt=""></a>
+    <a href="img/present/CILWEB1-17.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/present/CILWEB1-17.jpg" alt=""></a>
+  </div>
+</section>
+
+<section id="context">
+  <p class="epigraph">A photograph becomes what its context makes it. In the daily feed it is a moment your families scan past twice. On the gala screen it is the room going quiet. On a wall it is the camp saying this is who we are.</p>
+</section>
+
+
+<section id="samples">
+  <h2>The library</h2>
+  <!-- FRAMES:START  generated by build_delivery.py, do not hand-edit between these markers -->
+  <h3 class="group"><span class="tag sig">Signature Campscape</span></h3>
+  <div class="wall">
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-3.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-3.jpg" alt="CILWEB1-3"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-14.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-14.jpg" alt="CILWEB1-14"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-15.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-15.jpg" alt="CILWEB1-15"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-18.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-18.jpg" alt="CILWEB1-18"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-19.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-19.jpg" alt="CILWEB1-19"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-23.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-23.jpg" alt="CILWEB1-23"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-28.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-28.jpg" alt="CILWEB1-28"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-29.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-29.jpg" alt="CILWEB1-29"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-32.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-32.jpg" alt="CILWEB1-32"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-38.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-38.jpg" alt="CILWEB1-38"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-54.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-54.jpg" alt="CILWEB1-54"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-58.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-58.jpg" alt="CILWEB1-58"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-59.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-59.jpg" alt="CILWEB1-59"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-60.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-60.jpg" alt="CILWEB1-60"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-61.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-61.jpg" alt="CILWEB1-61"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-62.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-62.jpg" alt="CILWEB1-62"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-63.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-63.jpg" alt="CILWEB1-63"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-65.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-65.jpg" alt="CILWEB1-65"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-66.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-66.jpg" alt="CILWEB1-66"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-67.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-67.jpg" alt="CILWEB1-67"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-80.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-80.jpg" alt="CILWEB1-80"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-82.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-82.jpg" alt="CILWEB1-82"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-83.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-83.jpg" alt="CILWEB1-83"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-84.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-84.jpg" alt="CILWEB1-84"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-85.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-85.jpg" alt="CILWEB1-85"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-89.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-89.jpg" alt="CILWEB1-89"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-93.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-93.jpg" alt="CILWEB1-93"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-94.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-94.jpg" alt="CILWEB1-94"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-95.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-95.jpg" alt="CILWEB1-95"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-102.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-102.jpg" alt="CILWEB1-102"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-107.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-107.jpg" alt="CILWEB1-107"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-114.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-114.jpg" alt="CILWEB1-114"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-115.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-115.jpg" alt="CILWEB1-115"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-119.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-119.jpg" alt="CILWEB1-119"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-128.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-128.jpg" alt="CILWEB1-128"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-129.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-129.jpg" alt="CILWEB1-129"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-131.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-131.jpg" alt="CILWEB1-131"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-142.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-142.jpg" alt="CILWEB1-142"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-145.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-145.jpg" alt="CILWEB1-145"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-160.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-160.jpg" alt="CILWEB1-160"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-162.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-162.jpg" alt="CILWEB1-162"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-164.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-164.jpg" alt="CILWEB1-164"></a></div>
+    </figure>
+  </div>
+  <h3 class="group"><span class="tag fa">Fine Art</span></h3>
+  <div class="wall">
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1.jpg" alt="CILWEB1"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-2.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-2.jpg" alt="CILWEB1-2"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-8.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-8.jpg" alt="CILWEB1-8"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-16.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-16.jpg" alt="CILWEB1-16"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-17.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-17.jpg" alt="CILWEB1-17"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-20.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-20.jpg" alt="CILWEB1-20"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-21.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-21.jpg" alt="CILWEB1-21"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-22.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-22.jpg" alt="CILWEB1-22"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-34.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-34.jpg" alt="CILWEB1-34"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-35.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-35.jpg" alt="CILWEB1-35"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-36.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-36.jpg" alt="CILWEB1-36"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-37.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-37.jpg" alt="CILWEB1-37"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-51.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-51.jpg" alt="CILWEB1-51"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-73.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-73.jpg" alt="CILWEB1-73"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-81.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-81.jpg" alt="CILWEB1-81"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-86.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-86.jpg" alt="CILWEB1-86"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-87.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-87.jpg" alt="CILWEB1-87"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-88.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-88.jpg" alt="CILWEB1-88"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-90.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-90.jpg" alt="CILWEB1-90"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-91.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-91.jpg" alt="CILWEB1-91"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-92.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-92.jpg" alt="CILWEB1-92"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-96.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-96.jpg" alt="CILWEB1-96"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-101.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-101.jpg" alt="CILWEB1-101"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-103.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-103.jpg" alt="CILWEB1-103"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-104.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-104.jpg" alt="CILWEB1-104"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-106.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-106.jpg" alt="CILWEB1-106"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-108.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-108.jpg" alt="CILWEB1-108"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-109.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-109.jpg" alt="CILWEB1-109"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-116.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-116.jpg" alt="CILWEB1-116"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-123.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-123.jpg" alt="CILWEB1-123"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-126.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-126.jpg" alt="CILWEB1-126"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-127.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-127.jpg" alt="CILWEB1-127"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-132.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-132.jpg" alt="CILWEB1-132"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-133.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-133.jpg" alt="CILWEB1-133"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-134.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-134.jpg" alt="CILWEB1-134"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-140.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-140.jpg" alt="CILWEB1-140"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-141.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-141.jpg" alt="CILWEB1-141"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-143.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-143.jpg" alt="CILWEB1-143"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-144.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-144.jpg" alt="CILWEB1-144"></a></div>
+    </figure>
+  </div>
+  <h3 class="group"><span class="tag dev">Development / Campaign</span></h3>
+  <div class="wall">
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-5.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-5.jpg" alt="CILWEB1-5"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-7.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-7.jpg" alt="CILWEB1-7"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-12.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-12.jpg" alt="CILWEB1-12"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-13.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-13.jpg" alt="CILWEB1-13"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-26.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-26.jpg" alt="CILWEB1-26"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-41.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-41.jpg" alt="CILWEB1-41"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-46.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-46.jpg" alt="CILWEB1-46"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-50.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-50.jpg" alt="CILWEB1-50"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-52.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-52.jpg" alt="CILWEB1-52"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-56.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-56.jpg" alt="CILWEB1-56"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-57.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-57.jpg" alt="CILWEB1-57"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-64.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-64.jpg" alt="CILWEB1-64"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-69.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-69.jpg" alt="CILWEB1-69"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-74.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-74.jpg" alt="CILWEB1-74"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-75.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-75.jpg" alt="CILWEB1-75"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-97.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-97.jpg" alt="CILWEB1-97"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-98.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-98.jpg" alt="CILWEB1-98"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-99.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-99.jpg" alt="CILWEB1-99"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-105.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-105.jpg" alt="CILWEB1-105"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-136.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-136.jpg" alt="CILWEB1-136"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-139.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-139.jpg" alt="CILWEB1-139"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-147.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-147.jpg" alt="CILWEB1-147"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-148.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-148.jpg" alt="CILWEB1-148"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-149.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-149.jpg" alt="CILWEB1-149"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-158.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-158.jpg" alt="CILWEB1-158"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-163.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-163.jpg" alt="CILWEB1-163"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-166.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-166.jpg" alt="CILWEB1-166"></a></div>
+    </figure>
+  </div>
+  <h3 class="group"><span class="tag pub">Publication-Ready</span></h3>
+  <div class="wall">
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-6.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-6.jpg" alt="CILWEB1-6"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-9.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-9.jpg" alt="CILWEB1-9"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-42.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-42.jpg" alt="CILWEB1-42"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-43.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-43.jpg" alt="CILWEB1-43"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-44.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-44.jpg" alt="CILWEB1-44"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-45.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-45.jpg" alt="CILWEB1-45"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-48.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-48.jpg" alt="CILWEB1-48"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-49.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-49.jpg" alt="CILWEB1-49"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-53.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-53.jpg" alt="CILWEB1-53"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-55.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-55.jpg" alt="CILWEB1-55"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-70.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-70.jpg" alt="CILWEB1-70"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-71.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-71.jpg" alt="CILWEB1-71"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-76.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-76.jpg" alt="CILWEB1-76"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-79.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-79.jpg" alt="CILWEB1-79"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-112.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-112.jpg" alt="CILWEB1-112"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-113.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-113.jpg" alt="CILWEB1-113"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-122.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-122.jpg" alt="CILWEB1-122"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-135.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-135.jpg" alt="CILWEB1-135"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-146.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-146.jpg" alt="CILWEB1-146"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-150.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-150.jpg" alt="CILWEB1-150"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-151.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-151.jpg" alt="CILWEB1-151"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-152.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-152.jpg" alt="CILWEB1-152"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-153.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-153.jpg" alt="CILWEB1-153"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-154.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-154.jpg" alt="CILWEB1-154"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-155.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-155.jpg" alt="CILWEB1-155"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-156.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-156.jpg" alt="CILWEB1-156"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-161.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-161.jpg" alt="CILWEB1-161"></a></div>
+    </figure>
+  </div>
+  <h3 class="group"><span class="tag day">Daily / Social</span></h3>
+  <div class="wall">
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-4.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-4.jpg" alt="CILWEB1-4"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-10.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-10.jpg" alt="CILWEB1-10"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-11.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-11.jpg" alt="CILWEB1-11"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-24.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-24.jpg" alt="CILWEB1-24"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-25.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-25.jpg" alt="CILWEB1-25"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-27.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-27.jpg" alt="CILWEB1-27"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-30.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-30.jpg" alt="CILWEB1-30"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-31.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-31.jpg" alt="CILWEB1-31"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-33.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-33.jpg" alt="CILWEB1-33"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-39.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-39.jpg" alt="CILWEB1-39"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-40.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-40.jpg" alt="CILWEB1-40"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-47.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-47.jpg" alt="CILWEB1-47"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-68.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-68.jpg" alt="CILWEB1-68"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-72.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-72.jpg" alt="CILWEB1-72"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-77.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-77.jpg" alt="CILWEB1-77"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-78.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-78.jpg" alt="CILWEB1-78"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-100.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-100.jpg" alt="CILWEB1-100"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-110.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-110.jpg" alt="CILWEB1-110"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-111.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-111.jpg" alt="CILWEB1-111"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-117.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-117.jpg" alt="CILWEB1-117"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-118.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-118.jpg" alt="CILWEB1-118"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-120.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-120.jpg" alt="CILWEB1-120"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-121.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-121.jpg" alt="CILWEB1-121"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-124.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-124.jpg" alt="CILWEB1-124"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-125.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-125.jpg" alt="CILWEB1-125"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-130.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-130.jpg" alt="CILWEB1-130"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-137.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-137.jpg" alt="CILWEB1-137"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-138.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-138.jpg" alt="CILWEB1-138"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-157.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-157.jpg" alt="CILWEB1-157"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-159.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-159.jpg" alt="CILWEB1-159"></a></div>
+    </figure>
+    <figure class="pick">
+      <div class="ph"><a href="img/present/CILWEB1-165.jpg" target="_blank" rel="noopener"><img loading="lazy" src="img/thumb/CILWEB1-165.jpg" alt="CILWEB1-165"></a></div>
+    </figure>
+  </div>
+  <!-- FRAMES:END -->
+
+</section>
+
+<section id="ballot">
+  <h2>Pick the marquee frames</h2>
+  <p class="sub">Two per set. Tap to pick, tap again to release.</p>
+  <!-- BALLOT:START  generated by build_delivery.py -->
+  <h3 class="group"><span class="tag sig">Signature Campscape</span><span class="quota" data-group="sig">0 of 2</span></h3>
+  <div class="bgrid">
+    <button class="bpick" type="button" data-id="CILWEB1-3" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-3"><img loading="lazy" src="img/thumb/CILWEB1-3.jpg" alt="CILWEB1-3"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-14" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-14"><img loading="lazy" src="img/thumb/CILWEB1-14.jpg" alt="CILWEB1-14"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-15" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-15"><img loading="lazy" src="img/thumb/CILWEB1-15.jpg" alt="CILWEB1-15"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-18" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-18"><img loading="lazy" src="img/thumb/CILWEB1-18.jpg" alt="CILWEB1-18"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-19" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-19"><img loading="lazy" src="img/thumb/CILWEB1-19.jpg" alt="CILWEB1-19"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-23" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-23"><img loading="lazy" src="img/thumb/CILWEB1-23.jpg" alt="CILWEB1-23"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-28" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-28"><img loading="lazy" src="img/thumb/CILWEB1-28.jpg" alt="CILWEB1-28"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-29" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-29"><img loading="lazy" src="img/thumb/CILWEB1-29.jpg" alt="CILWEB1-29"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-32" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-32"><img loading="lazy" src="img/thumb/CILWEB1-32.jpg" alt="CILWEB1-32"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-38" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-38"><img loading="lazy" src="img/thumb/CILWEB1-38.jpg" alt="CILWEB1-38"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-54" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-54"><img loading="lazy" src="img/thumb/CILWEB1-54.jpg" alt="CILWEB1-54"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-58" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-58"><img loading="lazy" src="img/thumb/CILWEB1-58.jpg" alt="CILWEB1-58"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-59" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-59"><img loading="lazy" src="img/thumb/CILWEB1-59.jpg" alt="CILWEB1-59"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-60" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-60"><img loading="lazy" src="img/thumb/CILWEB1-60.jpg" alt="CILWEB1-60"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-61" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-61"><img loading="lazy" src="img/thumb/CILWEB1-61.jpg" alt="CILWEB1-61"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-62" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-62"><img loading="lazy" src="img/thumb/CILWEB1-62.jpg" alt="CILWEB1-62"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-63" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-63"><img loading="lazy" src="img/thumb/CILWEB1-63.jpg" alt="CILWEB1-63"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-65" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-65"><img loading="lazy" src="img/thumb/CILWEB1-65.jpg" alt="CILWEB1-65"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-66" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-66"><img loading="lazy" src="img/thumb/CILWEB1-66.jpg" alt="CILWEB1-66"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-67" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-67"><img loading="lazy" src="img/thumb/CILWEB1-67.jpg" alt="CILWEB1-67"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-80" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-80"><img loading="lazy" src="img/thumb/CILWEB1-80.jpg" alt="CILWEB1-80"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-82" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-82"><img loading="lazy" src="img/thumb/CILWEB1-82.jpg" alt="CILWEB1-82"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-83" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-83"><img loading="lazy" src="img/thumb/CILWEB1-83.jpg" alt="CILWEB1-83"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-84" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-84"><img loading="lazy" src="img/thumb/CILWEB1-84.jpg" alt="CILWEB1-84"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-85" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-85"><img loading="lazy" src="img/thumb/CILWEB1-85.jpg" alt="CILWEB1-85"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-89" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-89"><img loading="lazy" src="img/thumb/CILWEB1-89.jpg" alt="CILWEB1-89"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-93" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-93"><img loading="lazy" src="img/thumb/CILWEB1-93.jpg" alt="CILWEB1-93"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-94" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-94"><img loading="lazy" src="img/thumb/CILWEB1-94.jpg" alt="CILWEB1-94"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-95" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-95"><img loading="lazy" src="img/thumb/CILWEB1-95.jpg" alt="CILWEB1-95"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-102" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-102"><img loading="lazy" src="img/thumb/CILWEB1-102.jpg" alt="CILWEB1-102"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-107" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-107"><img loading="lazy" src="img/thumb/CILWEB1-107.jpg" alt="CILWEB1-107"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-114" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-114"><img loading="lazy" src="img/thumb/CILWEB1-114.jpg" alt="CILWEB1-114"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-115" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-115"><img loading="lazy" src="img/thumb/CILWEB1-115.jpg" alt="CILWEB1-115"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-119" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-119"><img loading="lazy" src="img/thumb/CILWEB1-119.jpg" alt="CILWEB1-119"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-128" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-128"><img loading="lazy" src="img/thumb/CILWEB1-128.jpg" alt="CILWEB1-128"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-129" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-129"><img loading="lazy" src="img/thumb/CILWEB1-129.jpg" alt="CILWEB1-129"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-131" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-131"><img loading="lazy" src="img/thumb/CILWEB1-131.jpg" alt="CILWEB1-131"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-142" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-142"><img loading="lazy" src="img/thumb/CILWEB1-142.jpg" alt="CILWEB1-142"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-145" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-145"><img loading="lazy" src="img/thumb/CILWEB1-145.jpg" alt="CILWEB1-145"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-160" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-160"><img loading="lazy" src="img/thumb/CILWEB1-160.jpg" alt="CILWEB1-160"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-162" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-162"><img loading="lazy" src="img/thumb/CILWEB1-162.jpg" alt="CILWEB1-162"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-164" data-group="sig" aria-pressed="false" aria-label="Pick CILWEB1-164"><img loading="lazy" src="img/thumb/CILWEB1-164.jpg" alt="CILWEB1-164"></button>
+  </div>
+  <h3 class="group"><span class="tag fa">Fine Art</span><span class="quota" data-group="fa">0 of 2</span></h3>
+  <div class="bgrid">
+    <button class="bpick" type="button" data-id="CILWEB1" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1"><img loading="lazy" src="img/thumb/CILWEB1.jpg" alt="CILWEB1"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-2" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-2"><img loading="lazy" src="img/thumb/CILWEB1-2.jpg" alt="CILWEB1-2"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-8" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-8"><img loading="lazy" src="img/thumb/CILWEB1-8.jpg" alt="CILWEB1-8"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-16" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-16"><img loading="lazy" src="img/thumb/CILWEB1-16.jpg" alt="CILWEB1-16"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-17" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-17"><img loading="lazy" src="img/thumb/CILWEB1-17.jpg" alt="CILWEB1-17"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-20" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-20"><img loading="lazy" src="img/thumb/CILWEB1-20.jpg" alt="CILWEB1-20"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-21" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-21"><img loading="lazy" src="img/thumb/CILWEB1-21.jpg" alt="CILWEB1-21"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-22" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-22"><img loading="lazy" src="img/thumb/CILWEB1-22.jpg" alt="CILWEB1-22"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-34" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-34"><img loading="lazy" src="img/thumb/CILWEB1-34.jpg" alt="CILWEB1-34"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-35" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-35"><img loading="lazy" src="img/thumb/CILWEB1-35.jpg" alt="CILWEB1-35"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-36" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-36"><img loading="lazy" src="img/thumb/CILWEB1-36.jpg" alt="CILWEB1-36"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-37" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-37"><img loading="lazy" src="img/thumb/CILWEB1-37.jpg" alt="CILWEB1-37"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-51" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-51"><img loading="lazy" src="img/thumb/CILWEB1-51.jpg" alt="CILWEB1-51"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-73" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-73"><img loading="lazy" src="img/thumb/CILWEB1-73.jpg" alt="CILWEB1-73"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-81" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-81"><img loading="lazy" src="img/thumb/CILWEB1-81.jpg" alt="CILWEB1-81"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-86" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-86"><img loading="lazy" src="img/thumb/CILWEB1-86.jpg" alt="CILWEB1-86"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-87" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-87"><img loading="lazy" src="img/thumb/CILWEB1-87.jpg" alt="CILWEB1-87"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-88" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-88"><img loading="lazy" src="img/thumb/CILWEB1-88.jpg" alt="CILWEB1-88"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-90" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-90"><img loading="lazy" src="img/thumb/CILWEB1-90.jpg" alt="CILWEB1-90"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-91" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-91"><img loading="lazy" src="img/thumb/CILWEB1-91.jpg" alt="CILWEB1-91"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-92" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-92"><img loading="lazy" src="img/thumb/CILWEB1-92.jpg" alt="CILWEB1-92"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-96" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-96"><img loading="lazy" src="img/thumb/CILWEB1-96.jpg" alt="CILWEB1-96"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-101" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-101"><img loading="lazy" src="img/thumb/CILWEB1-101.jpg" alt="CILWEB1-101"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-103" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-103"><img loading="lazy" src="img/thumb/CILWEB1-103.jpg" alt="CILWEB1-103"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-104" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-104"><img loading="lazy" src="img/thumb/CILWEB1-104.jpg" alt="CILWEB1-104"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-106" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-106"><img loading="lazy" src="img/thumb/CILWEB1-106.jpg" alt="CILWEB1-106"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-108" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-108"><img loading="lazy" src="img/thumb/CILWEB1-108.jpg" alt="CILWEB1-108"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-109" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-109"><img loading="lazy" src="img/thumb/CILWEB1-109.jpg" alt="CILWEB1-109"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-116" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-116"><img loading="lazy" src="img/thumb/CILWEB1-116.jpg" alt="CILWEB1-116"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-123" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-123"><img loading="lazy" src="img/thumb/CILWEB1-123.jpg" alt="CILWEB1-123"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-126" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-126"><img loading="lazy" src="img/thumb/CILWEB1-126.jpg" alt="CILWEB1-126"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-127" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-127"><img loading="lazy" src="img/thumb/CILWEB1-127.jpg" alt="CILWEB1-127"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-132" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-132"><img loading="lazy" src="img/thumb/CILWEB1-132.jpg" alt="CILWEB1-132"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-133" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-133"><img loading="lazy" src="img/thumb/CILWEB1-133.jpg" alt="CILWEB1-133"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-134" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-134"><img loading="lazy" src="img/thumb/CILWEB1-134.jpg" alt="CILWEB1-134"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-140" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-140"><img loading="lazy" src="img/thumb/CILWEB1-140.jpg" alt="CILWEB1-140"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-141" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-141"><img loading="lazy" src="img/thumb/CILWEB1-141.jpg" alt="CILWEB1-141"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-143" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-143"><img loading="lazy" src="img/thumb/CILWEB1-143.jpg" alt="CILWEB1-143"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-144" data-group="fa" aria-pressed="false" aria-label="Pick CILWEB1-144"><img loading="lazy" src="img/thumb/CILWEB1-144.jpg" alt="CILWEB1-144"></button>
+  </div>
+  <h3 class="group"><span class="tag dev">Development / Campaign</span><span class="quota" data-group="dev">0 of 2</span></h3>
+  <div class="bgrid">
+    <button class="bpick" type="button" data-id="CILWEB1-5" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-5"><img loading="lazy" src="img/thumb/CILWEB1-5.jpg" alt="CILWEB1-5"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-7" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-7"><img loading="lazy" src="img/thumb/CILWEB1-7.jpg" alt="CILWEB1-7"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-12" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-12"><img loading="lazy" src="img/thumb/CILWEB1-12.jpg" alt="CILWEB1-12"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-13" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-13"><img loading="lazy" src="img/thumb/CILWEB1-13.jpg" alt="CILWEB1-13"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-26" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-26"><img loading="lazy" src="img/thumb/CILWEB1-26.jpg" alt="CILWEB1-26"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-41" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-41"><img loading="lazy" src="img/thumb/CILWEB1-41.jpg" alt="CILWEB1-41"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-46" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-46"><img loading="lazy" src="img/thumb/CILWEB1-46.jpg" alt="CILWEB1-46"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-50" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-50"><img loading="lazy" src="img/thumb/CILWEB1-50.jpg" alt="CILWEB1-50"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-52" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-52"><img loading="lazy" src="img/thumb/CILWEB1-52.jpg" alt="CILWEB1-52"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-56" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-56"><img loading="lazy" src="img/thumb/CILWEB1-56.jpg" alt="CILWEB1-56"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-57" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-57"><img loading="lazy" src="img/thumb/CILWEB1-57.jpg" alt="CILWEB1-57"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-64" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-64"><img loading="lazy" src="img/thumb/CILWEB1-64.jpg" alt="CILWEB1-64"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-69" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-69"><img loading="lazy" src="img/thumb/CILWEB1-69.jpg" alt="CILWEB1-69"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-74" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-74"><img loading="lazy" src="img/thumb/CILWEB1-74.jpg" alt="CILWEB1-74"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-75" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-75"><img loading="lazy" src="img/thumb/CILWEB1-75.jpg" alt="CILWEB1-75"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-97" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-97"><img loading="lazy" src="img/thumb/CILWEB1-97.jpg" alt="CILWEB1-97"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-98" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-98"><img loading="lazy" src="img/thumb/CILWEB1-98.jpg" alt="CILWEB1-98"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-99" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-99"><img loading="lazy" src="img/thumb/CILWEB1-99.jpg" alt="CILWEB1-99"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-105" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-105"><img loading="lazy" src="img/thumb/CILWEB1-105.jpg" alt="CILWEB1-105"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-136" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-136"><img loading="lazy" src="img/thumb/CILWEB1-136.jpg" alt="CILWEB1-136"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-139" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-139"><img loading="lazy" src="img/thumb/CILWEB1-139.jpg" alt="CILWEB1-139"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-147" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-147"><img loading="lazy" src="img/thumb/CILWEB1-147.jpg" alt="CILWEB1-147"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-148" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-148"><img loading="lazy" src="img/thumb/CILWEB1-148.jpg" alt="CILWEB1-148"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-149" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-149"><img loading="lazy" src="img/thumb/CILWEB1-149.jpg" alt="CILWEB1-149"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-158" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-158"><img loading="lazy" src="img/thumb/CILWEB1-158.jpg" alt="CILWEB1-158"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-163" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-163"><img loading="lazy" src="img/thumb/CILWEB1-163.jpg" alt="CILWEB1-163"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-166" data-group="dev" aria-pressed="false" aria-label="Pick CILWEB1-166"><img loading="lazy" src="img/thumb/CILWEB1-166.jpg" alt="CILWEB1-166"></button>
+  </div>
+  <h3 class="group"><span class="tag pub">Publication-Ready</span><span class="quota" data-group="pub">0 of 2</span></h3>
+  <div class="bgrid">
+    <button class="bpick" type="button" data-id="CILWEB1-6" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-6"><img loading="lazy" src="img/thumb/CILWEB1-6.jpg" alt="CILWEB1-6"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-9" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-9"><img loading="lazy" src="img/thumb/CILWEB1-9.jpg" alt="CILWEB1-9"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-42" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-42"><img loading="lazy" src="img/thumb/CILWEB1-42.jpg" alt="CILWEB1-42"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-43" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-43"><img loading="lazy" src="img/thumb/CILWEB1-43.jpg" alt="CILWEB1-43"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-44" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-44"><img loading="lazy" src="img/thumb/CILWEB1-44.jpg" alt="CILWEB1-44"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-45" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-45"><img loading="lazy" src="img/thumb/CILWEB1-45.jpg" alt="CILWEB1-45"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-48" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-48"><img loading="lazy" src="img/thumb/CILWEB1-48.jpg" alt="CILWEB1-48"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-49" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-49"><img loading="lazy" src="img/thumb/CILWEB1-49.jpg" alt="CILWEB1-49"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-53" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-53"><img loading="lazy" src="img/thumb/CILWEB1-53.jpg" alt="CILWEB1-53"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-55" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-55"><img loading="lazy" src="img/thumb/CILWEB1-55.jpg" alt="CILWEB1-55"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-70" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-70"><img loading="lazy" src="img/thumb/CILWEB1-70.jpg" alt="CILWEB1-70"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-71" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-71"><img loading="lazy" src="img/thumb/CILWEB1-71.jpg" alt="CILWEB1-71"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-76" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-76"><img loading="lazy" src="img/thumb/CILWEB1-76.jpg" alt="CILWEB1-76"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-79" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-79"><img loading="lazy" src="img/thumb/CILWEB1-79.jpg" alt="CILWEB1-79"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-112" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-112"><img loading="lazy" src="img/thumb/CILWEB1-112.jpg" alt="CILWEB1-112"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-113" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-113"><img loading="lazy" src="img/thumb/CILWEB1-113.jpg" alt="CILWEB1-113"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-122" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-122"><img loading="lazy" src="img/thumb/CILWEB1-122.jpg" alt="CILWEB1-122"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-135" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-135"><img loading="lazy" src="img/thumb/CILWEB1-135.jpg" alt="CILWEB1-135"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-146" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-146"><img loading="lazy" src="img/thumb/CILWEB1-146.jpg" alt="CILWEB1-146"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-150" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-150"><img loading="lazy" src="img/thumb/CILWEB1-150.jpg" alt="CILWEB1-150"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-151" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-151"><img loading="lazy" src="img/thumb/CILWEB1-151.jpg" alt="CILWEB1-151"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-152" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-152"><img loading="lazy" src="img/thumb/CILWEB1-152.jpg" alt="CILWEB1-152"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-153" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-153"><img loading="lazy" src="img/thumb/CILWEB1-153.jpg" alt="CILWEB1-153"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-154" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-154"><img loading="lazy" src="img/thumb/CILWEB1-154.jpg" alt="CILWEB1-154"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-155" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-155"><img loading="lazy" src="img/thumb/CILWEB1-155.jpg" alt="CILWEB1-155"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-156" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-156"><img loading="lazy" src="img/thumb/CILWEB1-156.jpg" alt="CILWEB1-156"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-161" data-group="pub" aria-pressed="false" aria-label="Pick CILWEB1-161"><img loading="lazy" src="img/thumb/CILWEB1-161.jpg" alt="CILWEB1-161"></button>
+  </div>
+  <h3 class="group"><span class="tag day">Daily / Social</span><span class="quota" data-group="day">0 of 2</span></h3>
+  <div class="bgrid">
+    <button class="bpick" type="button" data-id="CILWEB1-4" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-4"><img loading="lazy" src="img/thumb/CILWEB1-4.jpg" alt="CILWEB1-4"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-10" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-10"><img loading="lazy" src="img/thumb/CILWEB1-10.jpg" alt="CILWEB1-10"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-11" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-11"><img loading="lazy" src="img/thumb/CILWEB1-11.jpg" alt="CILWEB1-11"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-24" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-24"><img loading="lazy" src="img/thumb/CILWEB1-24.jpg" alt="CILWEB1-24"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-25" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-25"><img loading="lazy" src="img/thumb/CILWEB1-25.jpg" alt="CILWEB1-25"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-27" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-27"><img loading="lazy" src="img/thumb/CILWEB1-27.jpg" alt="CILWEB1-27"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-30" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-30"><img loading="lazy" src="img/thumb/CILWEB1-30.jpg" alt="CILWEB1-30"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-31" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-31"><img loading="lazy" src="img/thumb/CILWEB1-31.jpg" alt="CILWEB1-31"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-33" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-33"><img loading="lazy" src="img/thumb/CILWEB1-33.jpg" alt="CILWEB1-33"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-39" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-39"><img loading="lazy" src="img/thumb/CILWEB1-39.jpg" alt="CILWEB1-39"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-40" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-40"><img loading="lazy" src="img/thumb/CILWEB1-40.jpg" alt="CILWEB1-40"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-47" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-47"><img loading="lazy" src="img/thumb/CILWEB1-47.jpg" alt="CILWEB1-47"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-68" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-68"><img loading="lazy" src="img/thumb/CILWEB1-68.jpg" alt="CILWEB1-68"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-72" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-72"><img loading="lazy" src="img/thumb/CILWEB1-72.jpg" alt="CILWEB1-72"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-77" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-77"><img loading="lazy" src="img/thumb/CILWEB1-77.jpg" alt="CILWEB1-77"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-78" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-78"><img loading="lazy" src="img/thumb/CILWEB1-78.jpg" alt="CILWEB1-78"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-100" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-100"><img loading="lazy" src="img/thumb/CILWEB1-100.jpg" alt="CILWEB1-100"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-110" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-110"><img loading="lazy" src="img/thumb/CILWEB1-110.jpg" alt="CILWEB1-110"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-111" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-111"><img loading="lazy" src="img/thumb/CILWEB1-111.jpg" alt="CILWEB1-111"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-117" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-117"><img loading="lazy" src="img/thumb/CILWEB1-117.jpg" alt="CILWEB1-117"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-118" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-118"><img loading="lazy" src="img/thumb/CILWEB1-118.jpg" alt="CILWEB1-118"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-120" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-120"><img loading="lazy" src="img/thumb/CILWEB1-120.jpg" alt="CILWEB1-120"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-121" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-121"><img loading="lazy" src="img/thumb/CILWEB1-121.jpg" alt="CILWEB1-121"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-124" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-124"><img loading="lazy" src="img/thumb/CILWEB1-124.jpg" alt="CILWEB1-124"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-125" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-125"><img loading="lazy" src="img/thumb/CILWEB1-125.jpg" alt="CILWEB1-125"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-130" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-130"><img loading="lazy" src="img/thumb/CILWEB1-130.jpg" alt="CILWEB1-130"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-137" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-137"><img loading="lazy" src="img/thumb/CILWEB1-137.jpg" alt="CILWEB1-137"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-138" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-138"><img loading="lazy" src="img/thumb/CILWEB1-138.jpg" alt="CILWEB1-138"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-157" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-157"><img loading="lazy" src="img/thumb/CILWEB1-157.jpg" alt="CILWEB1-157"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-159" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-159"><img loading="lazy" src="img/thumb/CILWEB1-159.jpg" alt="CILWEB1-159"></button>
+    <button class="bpick" type="button" data-id="CILWEB1-165" data-group="day" aria-pressed="false" aria-label="Pick CILWEB1-165"><img loading="lazy" src="img/thumb/CILWEB1-165.jpg" alt="CILWEB1-165"></button>
+  </div>
+  <!-- BALLOT:END -->
+  <div class="picks" id="picks" hidden>
+    <span class="n"><span id="pickCount">0</span> of 10</span>
+    <p>Each person sends their own list.</p>
+    <a class="send" id="sendPicks" href="#" aria-disabled="true">Send my picks</a>
+    <button class="clear" id="clearPicks" type="button">Clear</button>
+  </div>
+</section>
+
+
+
+
+
+
+<section id="production">
+  <p class="kicker">The print-grade frames</p>
+  <h2>Producing the wall pieces</h2>
+  <p class="sub">Why the Fine Art and Signature frames carry production notes, and why it is for the camp.</p>
+  <div class="cards">
+    <div class="card"><h3>Produced through Abba Photo at Miller's</h3>
+      <p>The print-grade frames are produced through me at Miller's Imaging Labs. Not a lock-in, a safeguard: the label dies at the wrong printer, and an office print turns a real object into a poster. This keeps the camp holding the real thing.</p></div>
+    <div class="card"><h3>Each carries its own specs</h3>
+      <p>Paper class, the size window at which the frame reads as intended, finish and mounting where it matters. Delivered alongside the full-resolution file so the frame arrives at full strength.</p></div>
+    <div class="card"><h3>The notation builds value</h3>
+      <p>Fine-art frames publish with the line "from the fine-art series, available as a print." Publishing an image with its name builds the asset instead of spending it. A camp that knows a frame is a real object gifts it, insures it, and stewards it like one.</p></div>
+  </div>
+</section>
+
+<section id="living">
+  <p class="channel"><b>Tell me where they run.</b> When a frame lands somewhere, on the appeal, the gala screen, a donor's wall, a family's feed, send me a note at <a href="mailto:noah@abba-photo.com">noah@abba-photo.com</a>. It helps me steward the library, and it tells the story of what the work does.</p>
+</section>
+
+<footer>
+  <p class="thesis">Find the engagements. Find the connections. Photograph those.</p>
+  <p>Abba Photo · Noah Gallagher · <a href="mailto:noah@abba-photo.com">noah@abba-photo.com</a> · <a href="https://abba-photo.com" target="_blank" rel="noopener">abba-photo.com</a><br>
+  Eagle River, Wisconsin &middot; July 2026.</p>
+</footer>
+
+</div>
+<script>
+// The hero drifts through five frames. Reduced-motion readers get the first one, still.
+(function () {
+  var slides = document.querySelectorAll('#hero .slide');
+  if (slides.length < 2) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var i = 0;
+  setInterval(function () {
+    slides[i].classList.remove('on');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('on');
+  }, 7000);
+})();
+
+// The ballot. Two picks per set, kept on this device; a third pick in a set releases the
+// oldest. "Send my picks" mails a machine-readable list so the ballots can be tallied.
+(function () {
+  var KEY = 'interlaken-ballot';
+  var LIMIT = 2;
+  var GROUPS = { sig: 'Signature Campscape', fa: 'Fine Art', dev: 'Development / Campaign',
+                 pub: 'Publication-Ready', day: 'Daily / Social' };
+  var bar = document.getElementById('picks');
+  var count = document.getElementById('pickCount');
+  var send = document.getElementById('sendPicks');
+  var clear = document.getElementById('clearPicks');
+  var picks = Array.prototype.slice.call(document.querySelectorAll('.bpick'));
+  if (!bar || !picks.length) return;
+
+  function read() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; }
+  }
+  function write(state) {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function total(state) {
+    return Object.keys(state).reduce(function (n, g) { return n + state[g].length; }, 0);
+  }
+  function paint() {
+    var state = read();
+    picks.forEach(function (b) {
+      var g = b.dataset.group;
+      b.setAttribute('aria-pressed',
+        (state[g] || []).indexOf(b.dataset.id) > -1 ? 'true' : 'false');
+    });
+    document.querySelectorAll('.quota').forEach(function (q) {
+      var n = (state[q.dataset.group] || []).length;
+      q.textContent = n + ' of ' + LIMIT;
+      q.classList.toggle('full', n >= LIMIT);
+    });
+    var n = total(state);
+    count.textContent = n;
+    send.setAttribute('aria-disabled', n > 0 ? 'false' : 'true');
+    if (n > 0) {
+      var lines = ['INTERLAKEN BALLOT v1', ''];
+      Object.keys(GROUPS).forEach(function (g) {
+        (state[g] || []).forEach(function (id) { lines.push(g + ': ' + id); });
+      });
+      lines.push('', 'Name:', '', 'A frame you loved that is not here, or anything else:');
+      send.href = 'mailto:noah@abba-photo.com'
+        + '?subject=' + encodeURIComponent('Interlaken picks')
+        + '&body=' + encodeURIComponent(lines.join('\n'));
+    } else {
+      send.removeAttribute('href');
+    }
+    bar.hidden = false;
+  }
+
+  picks.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var state = read();
+      var g = b.dataset.group;
+      var list = state[g] = state[g] || [];
+      var i = list.indexOf(b.dataset.id);
+      if (i > -1) { list.splice(i, 1); }
+      else {
+        if (list.length >= LIMIT) list.shift();
+        list.push(b.dataset.id);
+      }
+      write(state);
+      paint();
+    });
+  });
+  clear.addEventListener('click', function () { write({}); paint(); });
+  paint();
+})();
+</script>
+</body>
+</html>

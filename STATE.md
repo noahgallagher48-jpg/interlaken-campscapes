@@ -11,7 +11,7 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - The owner travels July 13 to 21; sessions may be started from a browser or phone.
 - Locked logistics (do not re-plan or remind): engagement PAID IN FULL (Jul 9, ahead of schedule; travel reimbursement invoiced separately after the trip). Flight BOOKED, BOS-ORD Mon Jul 13 morning; the RETURN leg is not yet booked. Rental SUV booked and paid, ORD Jul 15 noon to Jul 21 noon. Amounts, confirmation codes, and booking numbers live in the private dashboard repo, `docs/CLIENT_CONTACTS.md`. Lodging: on-site, director's house.
 - Camp gear (Drea via owner, Jul 13-15): Canon T5, T6, and T7 bodies with the kit lenses they came with, bought at Sam's Club (owner confirmed Jul 15). That is the standard Sam's two-lens basic kit: EF-S 18-55mm and EF 75-300mm; Drea's "18-50 and 50-300" were round-number recall. PLUS a 50mm f/1.8 prime the camp purchased Jul 14 on the owner's recommendation, the low-light fix. Gear rehab and the field guide work from this kit.
-- Minor releases are the client's responsibility. No camper or minor faces on this public page unless releases are confirmed here first.
+- Minor releases are the client's responsibility. RELEASES CONFIRMED by the owner 2026-07-31: the camp's releases cover the population-facing set, so recognizable campers may appear on this page. The `faces` field in frames.json still marks each such frame for any later reuse decision.
 - Boundary reminder (see CLAUDE.md): if an incoming note references campaign plans, gifts, or anything else not already on the page, ask the owner before publishing it.
 
 ## Pending
@@ -22,6 +22,79 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-31 (live): Owner confirmed releases cover the population-facing set (see Facts);
+  INCLUDE_FACES flipped True, all 166 frames on the wall and ballot, held-back notice gone.
+  Plan page now links the library from "A first look". Pushed live. Superseded havcil img
+  tiers left untracked on purpose (never added to git); local prune still awaits the
+  owner's go.
+- 2026-07-31 (full set): Noah's full web-ready export (`/Volumes/Extreme SSD/CIL_WEB1`,
+  166 frames, sRGB 2560 from Lightroom this time, no conversion needed) is now the page's
+  canonical set. 134 frames matched the July label pass by capture identity and carried
+  their labels (`prior_id` in frames.json keeps the trace); 32 new photographs labeled from
+  contact sheets (`_work/web1_sheets/`). Groups: sig 42, fa 39, dev 27, pub 27, day 31.
+  Hero and story sections repointed to the new versions of the same captures (all 11
+  aspect-verified). 32 frames flagged for recognizable campers are HELD off the page with
+  the on-page notice; INCLUDE_FACES stays False until the owner records release
+  confirmation here. Superseded havcil img tiers NOT yet pruned (bulk delete awaits the
+  owner's go; regenerable from CIL_Draft). Page still local, push gated on the owner.
+- 2026-07-30 (naming): The page is not labeled. `delivery.html` renamed `library.html`; h1 is
+  "Camp Interlaken"; title/og read "Camp Interlaken · July 2026"; standfirst cut; every
+  "delivery" label and every CAMPSCAPES mention removed from the client surface (CAMPSCAPES
+  softly walked back per Noah: search results for the word connect to nothing he wants).
+  Same label-scrub applied to Aaron's live page (title tag, hero date line), pushed, verified
+  live. Doctrine recorded in memory: client surfaces carry subject and date, never the
+  artifact's role.
+- 2026-07-30 (late): Page rebuilt to Noah's direction: photos are the star. Hero crossfades
+  five release-safe frames (74, 46, 95, 35, 44). Gallery is viewing only. New ballot section:
+  two picks per set, third pick releases the oldest, "Send my picks" mails a machine-readable
+  ballot (INTERLAKEN BALLOT v1) for wide distribution to camp staff and stakeholders;
+  `tally_ballots.py` aggregates ballots into per-set and marquee rankings, tested. Page prose
+  cut to 434 words total. Still not pushed. NEXT: wire the intake sweep to collect subject
+  "Interlaken picks" mail into a ballots folder for tallying, cadence per the camp.
+- 2026-07-30 (rebuilt as a delivery, not a library): Noah's test was the three chairs, the
+  client opening it, the development director forwarding it, the donor who funded it, and the
+  page failed all three as a wall of thumbnails. New order: (1) HERO, havcil-74 full bleed,
+  the whole camp on the bridge, title over it. (2) THE STORY, section id=story, "The
+  crossing", eight frames big and in order (62, 69, 70, 76, 85, 86, 44, 46), all
+  release-safe, gather to bridge to assembly to song to night to stars. No captions, one sub
+  line "Friday evening, in order." (3) The context argument and the label definitions moved
+  back above the library. (4) THE LIBRARY, the wall, retitled "The whole set, filed by use",
+  group headings carry the label alone, no frame counts (inventory language). (5) The form
+  section CUT: it promised per-frame fields the page no longer displays; that layer lives in
+  frames.json and the printed use guide. (6) Picks bar rewritten without implementation talk:
+  "Heart the ones you love, then send the list. Each person's picks are their own; separate
+  lists tell me more than one merged one." (my words, flagged for Noah). Verified numerically
+  at 1156px viewport: hero full-bleed at top, 8 story frames at 1100px, section order
+  story/context/labels/samples/production/living, no overflow, 121 hearts live, send
+  activates, story frames deliberately heartless. Still not pushed; the page has never been
+  live.
+- 2026-07-30 (page rebuilt to Noah's direction): TWO CHANGES. (1) The categories speak for
+  themselves. All per-frame prose is off the client page: no why-line, no justification, no
+  reasons toggle. The label declares what a frame is and that is the whole statement. The
+  written reasons stay in `frames.json` for internal use and for the printed use guide.
+  (2) ARCHIVE DISSOLVED as a display group. It read as a lower tier and it was not one; it was
+  my mislabel. All 20 frames in it moved to real jobs (9 to Fine Art, 4 to Signature, 5 to
+  Daily, 1 each to Development and Publication). Nothing delivered is "archive tier". The
+  labels section now states the archive is all of the above together, not a sixth bucket, and
+  says plainly that the labels are not a ranking. Counts across the 148: Signature 37,
+  Fine Art 36, Daily 32, Publication-Ready 22, Development 21.
+  Layout: photographs first, wall moved above all prose, masonry columns edge to edge, heart
+  on hover, nothing else on the card. Verified numerically at a 1440 viewport: 4 columns,
+  342px cards, no horizontal overflow, no captions in the DOM. Playwright's screenshots of
+  this page came back at an unreliable scale, so the geometry is measured rather than seen.
+- 2026-07-30: LABEL PASS DONE, proposals only, nothing published. Noah's 181-file export
+  (`/Volumes/Extreme SSD/CIL_Draft`, all sRGB 2560px) ingested to `img/present` and
+  `img/thumb`, 16 contact sheets at `_work/sheets/`. **The 181 files are 148 photographs.**
+  `havcil-123` through `havcil-155` is one contiguous run of second exports of `havcil-11`
+  through `havcil-43`; not byte-identical, but the same source RAW and capture time, so they
+  are re-exports, not variants. Drop list at `_work/drop_list.txt`. All 148 carry a proposed
+  label and a one-line note in `_work/labels_draft.md` (machine copy `_work/labels.json`):
+  33 Signature Campscape, 27 Fine Art, 27 Daily/Social, 21 Publication-Ready,
+  20 Development/Campaign, 20 Archive. 27 frames flagged FACES where minors are clearly
+  identifiable, held back from public surfaces per Drea's Jul 17 scenes-not-faces direction
+  until releases are confirmed. All four of Drea's named program areas are covered: Lake
+  Finley, K'far Noar, the Chadar at song session, Tushball. The Jul 19 wrap list is in as
+  well, water skiers from the boat at `havcil-156` to `havcil-176`.
 - 2026-07-29 (Monday line corrected, PUSHED): the overdue promise is fixed as a one-word
   change to Noah's own sentence, "lands Monday" to "lands this week", in all three places
   (plan page `#firstlook`, first-look title card, first-look og:description). Nothing else in
