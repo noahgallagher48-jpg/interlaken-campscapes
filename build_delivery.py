@@ -75,10 +75,23 @@ EMPTY = """  <div class="empty">
 # The fine-art twelve. No why-lines on the page: "If we call it fine art it is"
 # (Noah, 2026-07-31). The label carries the claim; justification and specs stay in
 # frames.json and ride with the use-guide layer, never under the frame.
+# Selected 2026-07-31 by a full visual pass over the sig+fa pool (81 frames,
+# _work/fa_sheets/), NOT by which frames had written justifications. Sequence:
+# night sky, night structures, dawn, sunset, black and white, the working camp,
+# closing on the crossing.
 FINE_TWELVE = [
-    "CILWEB1-17", "CILWEB1-101", "CILWEB1-14", "CILWEB1-63", "CILWEB1-66",
-    "CILWEB1-141", "CILWEB1-143", "CILWEB1-34", "CILWEB1-16", "CILWEB1-108",
-    "CILWEB1-81", "CILWEB1-51",
+    "CILWEB1-17",   # Milky Way over the sailboats on the grass
+    "CILWEB1-102",  # the bridge at night, lit, under stars
+    "CILWEB1-19",   # the yurts at night, black and white
+    "CILWEB1-142",  # hydro-bikes on the beach at pink dawn, lake mirror-flat
+    "CILWEB1-143",  # one Adirondack chair on the dock, towel, flat water
+    "CILWEB1-91",   # sunburst over the lake, driftwood beach foreground
+    "CILWEB1-89",   # the waterslide in silhouette against the sunset
+    "CILWEB1-16",   # the bridge boards, black and white, to nothing
+    "CILWEB1-22",   # amphitheater light through the trees, black and white
+    "CILWEB1-116",  # canoe hulls over the working waterfront
+    "CILWEB1-66",   # the Magen David over the camp in whites
+    "CILWEB1-63",   # the whole camp on the bridge at once
 ]
 
 
