@@ -78,7 +78,7 @@ def card(f, r42=False, in42=False):
            f'data-id="{f["id"]}" data-group="{f["label"]}" '
            f'aria-label="View {f["id"]}">'
            f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></button>'
-           f'<span class="num">{f["id"]}</span>')
+           f'<span class="num">{f["id"].rsplit("-", 1)[-1] if "-" in f["id"] else "1"}</span>')
     if r42:
         out += (f'<button class="rep" type="button" data-id="{f["id"]}" '
                 f'aria-label="Mark {f["id"]} to come out of the forty-two">Replace</button>')
