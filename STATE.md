@@ -22,6 +22,12 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - BACKUP PLANS for the two fragile signatures (Noah, Jul 15): (1) THE CROSSING (Fri ~5:45, storm-risk, once only) gets redundant coverage: train 1-2 media-team shooters, one WIDE + one TIGHT; Noah shoots the landscape compositions and invites them to imitate them, so it is training and coverage at once. Camp offered a BOAT Friday as a vantage (confirm day), for a wide of the crossing or waterfront. (2) THE NIGHT SKY (Sat, smoke wildcard): real Saturday shot is the goal; last-resort fallback is a BLENDED frame (a night sky composited into a foreground), used only if he has to, disclosed as a blend, camp's choice whether to share. NIGHT-SKY BLEND stays OFF the public page; the crossing's multi-angle coverage is fine to mention (added to the Friday rail).
 
 ## Log
+- 2026-07-31 (Noah's final email, staged verbatim): he wrote the send himself (neshama
+  line to Drea, curated-42 framing, "just my personal selections", professional-standards
+  line, hub-for-final-delivery-by-use-case, Shabbat Shalom). Staged word for word. To
+  make its share line literally true, the slideshow viewers now carry a small "Copy this
+  page's link to share" on the start screen. The crossing photo stays embedded above the
+  link per his standing show-the-work rule. Remaining before send: Toni's address.
 - 2026-07-31 (naming + Monday framing): tiles read "Short version · 42 photos · 42
   seconds" and "Curated gallery · 90 seconds"; the gallery section is "Gallery hub", all
   Noah's words. Email reframed: the page is the platform for Monday's conversation, NOT
