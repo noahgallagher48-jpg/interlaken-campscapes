@@ -141,8 +141,40 @@ def build():
     lookup = {f["id"]: f for f in FRAMES}
     shown = sorted((nums[n] for n in placed), key=lambda f: times.get(f["id"], "9999"))
 
+    # Noah's groupings (gallery pass, 2026-08-02): named runs gathered at the
+    # chronological position of their first member. Frame 2 leads the gallery.
+    GROUPS = [
+        ("Tushball", [3, 112, 113]),
+        ("Indoor campfire", [4, 6, 7, 8, 9, 10, 11, 12]),
+        ("Shabbat", list(range(42, 78))),
+    ]
+    grouped = {n for _, ns in GROUPS for n in ns}
+    first_of = {}
+    for name, ns in GROUPS:
+        members = [nums[n] for n in ns if n in placed]
+        if members:
+            first_of[min(ns, key=lambda n: times.get(nums[n]["id"], "9999") if n in placed else "9999")] = (name, members)
+
+    lead = [nums[2]] if 2 in placed else []
     gal = ['  <div class="wall">']
-    gal.extend(card(f) for f in shown)
+    gal.extend(card(f) for f in lead)
+    for f in shown:
+        m = re.match(r"CILWEB1-(\d+)$", f["id"])
+        n = int(m.group(1)) if m else 1
+        if n == 2:
+            continue
+        if n in first_of:
+            name, members = first_of[n]
+            gal.append('  </div>')
+            gal.append(f'  <h3 class="run">{name}</h3>')
+            gal.append('  <div class="wall">')
+            gal.extend(card(g) for g in members)
+            gal.append('  </div>')
+            gal.append('  <div class="wall">')
+            continue
+        if n in grouped:
+            continue
+        gal.append(card(f))
     gal.append('  </div>')
     rall = [{"id": f["id"], "file": f["file"]} for f in shown]
     gal.append('  <script>window.RALL = ' + json.dumps(rall) + ';</script>')
