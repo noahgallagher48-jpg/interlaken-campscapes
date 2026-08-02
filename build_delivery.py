@@ -147,6 +147,10 @@ def build():
     rall = [{"id": f["id"], "file": f["file"]} for f in shown]
     gal.append('  <script>window.RALL = ' + json.dumps(rall) + ';</script>')
 
+    picks = ['  <div class="wall">']
+    picks.extend(card(lookup[fid]) for fid in FORTY_TWO)
+    picks.append('  </div>')
+
     html = open(PAGE).read()
 
     def fill(html, start, end, body):
@@ -156,6 +160,7 @@ def build():
         head = html.find("-->", i) + 3
         return html[:head] + "\n" + body + "\n  " + html[j:]
 
+    html = fill(html, "<!-- PICKS:START", "<!-- PICKS:END -->", "\n".join(picks))
     html = fill(html, "<!-- GALLERY:START", "<!-- GALLERY:END -->", "\n".join(gal))
     open(PAGE, "w").write(html)
     slideshow_pages(lookup)
