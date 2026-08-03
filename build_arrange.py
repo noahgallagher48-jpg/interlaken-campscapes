@@ -60,6 +60,11 @@ header button.go{background:#e2a73e;color:#14110d;font-weight:600}
 .th.mark{outline:2px dashed rgba(226,167,62,.8);outline-offset:-2px}
 #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#ede7dd;color:#14110d;padding:10px 16px;border-radius:4px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:12;max-width:88vw;text-align:center}
 #toast.on{opacity:1}
+#dock{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:11;display:none;flex-direction:column;gap:6px;max-height:80vh;overflow-y:auto;background:rgba(24,20,15,.97);border:1px solid rgba(226,167,62,.45);border-radius:6px;padding:10px}
+#dock.on{display:flex}
+#dock .dk{border:1px solid rgba(237,231,221,.3);border-radius:4px;padding:9px 14px;font-size:13px;color:#c9bfa9;min-width:150px;text-align:left}
+#dock .dk.hot{background:#e2a73e;color:#14110d;border-color:#e2a73e;font-weight:600}
+#dock .lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#7d745f;padding:0 2px}
 #lb{position:fixed;inset:0;background:rgba(10,8,6,.97);display:none;align-items:center;justify-content:center;z-index:10}
 #lb.on{display:flex}
 #lb img{max-width:100vw;max-height:100vh;object-fit:contain}
@@ -75,10 +80,13 @@ at the bottom; the gold number on a frame there counts the groups holding it, an
 frame sits in Out of the vote. Drag from All frames into a group to add it, drag between
 groups to move, and the &#215; on a copy takes it out of that group only. Tapping works the
 same: tap a frame, then tap a group title to add it there, or tap a frame inside a group
-to slot in front. &#8599; shows any frame large. Everything saves as you go; Copy
-arrangement when done and paste it to me.</div>
+to slot in front. While you drag, a dock of group names appears on the right; dropping on
+a name lands the frame in that group, no long hauls across the page, and the page also
+scrolls itself when you drag near its top or bottom edge. &#8599; shows any frame large.
+Everything saves as you go; Copy arrangement when done and paste it to me.</div>
 </header>
 <div id=board></div>
+<div id=dock></div>
 <div id=toast></div>
 <div id=lb><img id=lbi alt=""><button class=x aria-label="Close">&times;</button></div>
 <script>
@@ -116,9 +124,9 @@ d.innerHTML='<img loading="lazy" src="img/thumb/'+FR[n]+'" alt="'+n+'">'+
 '<span class="n">'+n+'</span>'+
 (kind==="p"?'<span class="u" style="display:none"></span>':'<button class="rm" type="button" aria-label="Remove">&#215;</button>')+
 '<button class="v" type="button" aria-label="View">&#8599;</button>';
-d.addEventListener("dragstart",function(e){dragEl=d;d.classList.add("drag");
+d.addEventListener("dragstart",function(e){dragEl=d;d.classList.add("drag");dock(true);
 e.dataTransfer.effectAllowed="copyMove";try{e.dataTransfer.setData("text/plain",String(n));}catch(x){}});
-d.addEventListener("dragend",function(){d.classList.remove("drag");
+d.addEventListener("dragend",function(){d.classList.remove("drag");dock(false);
 document.querySelectorAll(".th.mark").forEach(function(m){m.classList.remove("mark");});
 document.querySelectorAll(".lane.over").forEach(function(l){l.classList.remove("over");});});
 d.addEventListener("dragover",function(e){e.preventDefault();
@@ -183,6 +191,22 @@ state.groups.forEach(function(gr){b.appendChild(section("g",gr.name,gr.frames));
 b.appendChild(section("out","Out of the vote",state.out));
 b.appendChild(section("pal","All frames",ALL));
 count();}
+function dock(on){var k=$("dock");if(!on){k.className="";return;}
+k.innerHTML='<span class="lbl">Drop on a group</span>';
+document.querySelectorAll('.grp[data-kind="g"],.grp[data-kind="out"]').forEach(function(g){
+var row=document.createElement("div");row.className="dk";
+row.textContent=g.querySelector(".gname").textContent;
+row.addEventListener("dragover",function(e){e.preventDefault();row.classList.add("hot");});
+row.addEventListener("dragleave",function(){row.classList.remove("hot");});
+row.addEventListener("drop",function(e){e.preventDefault();row.classList.remove("hot");
+if(dragEl)place(dragEl,dragEl.dataset.src,g.querySelector(".lane"),null);
+dragEl=null;dock(false);});
+k.appendChild(row);});
+k.className="on";}
+document.addEventListener("dragover",function(e){
+var m=150,b=100,y=e.clientY,h=window.innerHeight;
+if(y<m)window.scrollBy(0,-Math.ceil((m-y)*.35));
+else if(y>h-b)window.scrollBy(0,Math.ceil((y-(h-b))*.35));});
 state=load();render();
 $("ng").onclick=function(){var nm=window.prompt("Group name","");if(!nm)return;
 var out=document.querySelector('.grp[data-kind="out"]');
