@@ -8,14 +8,19 @@ header{padding:40px 20px 8px;max-width:1180px;margin:0 auto}
 h1{font-family:Georgia,serif;font-weight:600;font-size:clamp(24px,4.5vw,34px)}
 .sub{color:#a69b8a;font-size:14px;margin-top:6px}
 .instr{color:#c9bfa9;font-size:15px;line-height:1.55;margin:16px 0 4px;max-width:640px}
-.wall{max-width:1180px;margin:18px auto 0;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.card{position:relative}
+section.sv{max-width:1180px;margin:34px auto 0;padding:0 14px}
+h2.sv{font-family:Georgia,serif;font-weight:500;font-size:21px;color:#c9bfa9;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid rgba(237,231,221,.14);padding-bottom:6px}
+h2.sv .q{font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#e2a73e}
+h2.sv .scnt{font-size:12.5px;color:#7d745f;margin-left:auto}
+h2.sv.full .scnt{color:#8fb573}
+.wall{columns:3 360px;column-gap:16px;padding-top:16px}
+.card{position:relative;break-inside:avoid;margin-bottom:16px}
 .ph{display:block;width:100%;border:0;padding:0;background:#1d1913;cursor:pointer;border-radius:2px;overflow:hidden}
-.ph img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
-.num{position:absolute;left:7px;bottom:6px;font-size:11px;color:#cfc6b4;text-shadow:0 1px 4px #000}
-.sel{position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:50%;border:2px solid rgba(237,231,221,.85);background:rgba(20,17,13,.35);cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.5)}
+.ph img{display:block;width:100%;height:auto}
+.num{position:absolute;left:9px;bottom:8px;font-size:12px;color:#cfc6b4;text-shadow:0 1px 4px #000}
+.sel{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:2px solid rgba(237,231,221,.85);background:rgba(20,17,13,.35);cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.5)}
 .card.on .sel{background:#e2a73e;border-color:#e2a73e}
-.card.on .sel::after{content:"";position:absolute;inset:7px 8px 9px;border:solid #14110d;border-width:0 0 3px 3px;transform:rotate(-45deg)}
+.card.on .sel::after{content:"";position:absolute;inset:9px 9px 12px;border:solid #14110d;border-width:0 0 3px 3px;transform:rotate(-45deg)}
 .card.on .ph{outline:3px solid #e2a73e;outline-offset:-3px}
 body.rv .card:not(.on){display:none}
 #bar{position:fixed;left:0;right:0;bottom:0;background:rgba(24,20,15,.97);border-top:1px solid rgba(226,167,62,.35);display:flex;align-items:center;gap:10px;padding:12px 16px;z-index:8}
@@ -50,7 +55,9 @@ body.rv .card:not(.on){display:none}
 footer{max-width:1180px;margin:34px auto 0;padding:0 20px 30px;color:#7d745f;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 </style></head><body>
 <header><h1>Camp Interlaken &middot; the marketing pool</h1><div class=sub>37 frames &middot; cut it down</div>
-<p class=instr>Tap the circle on the frames that go out. No cap. Copy puts the numbered list on the clipboard; if it balks, a box pops up with the list to grab.</p></header>
+<p class=instr>Tap the circle on the frames that go out. No cap. Copy puts the numbered
+list on the clipboard; if it balks, a box pops up with the list to grab.</p></header>
+<section class=sv data-k=all>
 <div class="wall">
 <div class="card" data-n="63"><button class="ph" type="button" aria-label="View 63"><img loading="lazy" src="img/thumb/CILWEB1-63.jpg" alt="CILWEB1-63"></button><button class="sel" type="button" aria-label="Pick 63"></button><span class="num">63</span></div>
 <div class="card" data-n="42"><button class="ph" type="button" aria-label="View 42"><img loading="lazy" src="img/thumb/CILWEB1-42.jpg" alt="CILWEB1-42"></button><button class="sel" type="button" aria-label="Pick 42"></button><span class="num">42</span></div>
@@ -90,27 +97,25 @@ footer{max-width:1180px;margin:34px auto 0;padding:0 20px 30px;color:#7d745f;fon
 <div class="card" data-n="14"><button class="ph" type="button" aria-label="View 14"><img loading="lazy" src="img/thumb/CILWEB1-14.jpg" alt="CILWEB1-14"></button><button class="sel" type="button" aria-label="Pick 14"></button><span class="num">14</span></div>
 <div class="card" data-n="17"><button class="ph" type="button" aria-label="View 17"><img loading="lazy" src="img/thumb/CILWEB1-17.jpg" alt="CILWEB1-17"></button><button class="sel" type="button" aria-label="Pick 17"></button><span class="num">17</span></div>
 </div>
+</section>
 <div id=bar><div id=cnt></div><button id=rv type=button>My picks</button><button id=cp class=go type=button>Copy</button></div>
 <div id=toast></div>
 <div id=lb><img id=lbi alt=""><button class="nav pv" aria-label="Previous"></button><button class="nav nx" aria-label="Next"></button><button class=x aria-label="Close">&times;</button><div id=lbbar><span class=id id=lbid></span><button class=pk id=lbpk type=button>Pick</button></div></div>
-
 <footer>Photographs Noah Gallagher &middot; Abba Photo</footer>
 <script>
-var CAP=99,KEY="cil-twenty",SUBJ="Interlaken marketing picks",TO="noah@abba-photo.com",FORM=null;
-var F=[{"n": 63, "f": "CILWEB1-63.jpg"}, {"n": 42, "f": "CILWEB1-42.jpg"}, {"n": 112, "f": "CILWEB1-112.jpg"}, {"n": 119, "f": "CILWEB1-119.jpg"}, {"n": 3, "f": "CILWEB1-3.jpg"}, {"n": 48, "f": "CILWEB1-48.jpg"}, {"n": 150, "f": "CILWEB1-150.jpg"}, {"n": 151, "f": "CILWEB1-151.jpg"}, {"n": 152, "f": "CILWEB1-152.jpg"}, {"n": 153, "f": "CILWEB1-153.jpg"}, {"n": 154, "f": "CILWEB1-154.jpg"}, {"n": 155, "f": "CILWEB1-155.jpg"}, {"n": 156, "f": "CILWEB1-156.jpg"}, {"n": 157, "f": "CILWEB1-157.jpg"}, {"n": 120, "f": "CILWEB1-120.jpg"}, {"n": 121, "f": "CILWEB1-121.jpg"}, {"n": 122, "f": "CILWEB1-122.jpg"}, {"n": 130, "f": "CILWEB1-130.jpg"}, {"n": 186, "f": "CILWEB1-186.jpg"}, {"n": 187, "f": "CILWEB1-187.jpg"}, {"n": 188, "f": "CILWEB1-188.jpg"}, {"n": 190, "f": "CILWEB1-190.jpg"}, {"n": 177, "f": "CILWEB1-177.jpg"}, {"n": 9, "f": "CILWEB1-9.jpg"}, {"n": 68, "f": "CILWEB1-68.jpg"}, {"n": 71, "f": "CILWEB1-71.jpg"}, {"n": 74, "f": "CILWEB1-74.jpg"}, {"n": 2, "f": "CILWEB1-2.jpg"}, {"n": 23, "f": "CILWEB1-23.jpg"}, {"n": 93, "f": "CILWEB1-93.jpg"}, {"n": 161, "f": "CILWEB1-161.jpg"}, {"n": 38, "f": "CILWEB1-38.jpg"}, {"n": 83, "f": "CILWEB1-83.jpg"}, {"n": 97, "f": "CILWEB1-97.jpg"}, {"n": 144, "f": "CILWEB1-144.jpg"}, {"n": 14, "f": "CILWEB1-14.jpg"}, {"n": 17, "f": "CILWEB1-17.jpg"}];
-var picks=new Set(JSON.parse(localStorage.getItem(KEY)||"[]"));
-var cards={},cur=-1,tt=null;
+var KEY="cil-twenty",F=[{"n": 63, "f": "CILWEB1-63.jpg"}, {"n": 42, "f": "CILWEB1-42.jpg"}, {"n": 112, "f": "CILWEB1-112.jpg"}, {"n": 119, "f": "CILWEB1-119.jpg"}, {"n": 3, "f": "CILWEB1-3.jpg"}, {"n": 48, "f": "CILWEB1-48.jpg"}, {"n": 150, "f": "CILWEB1-150.jpg"}, {"n": 151, "f": "CILWEB1-151.jpg"}, {"n": 152, "f": "CILWEB1-152.jpg"}, {"n": 153, "f": "CILWEB1-153.jpg"}, {"n": 154, "f": "CILWEB1-154.jpg"}, {"n": 155, "f": "CILWEB1-155.jpg"}, {"n": 156, "f": "CILWEB1-156.jpg"}, {"n": 157, "f": "CILWEB1-157.jpg"}, {"n": 120, "f": "CILWEB1-120.jpg"}, {"n": 121, "f": "CILWEB1-121.jpg"}, {"n": 122, "f": "CILWEB1-122.jpg"}, {"n": 130, "f": "CILWEB1-130.jpg"}, {"n": 186, "f": "CILWEB1-186.jpg"}, {"n": 187, "f": "CILWEB1-187.jpg"}, {"n": 188, "f": "CILWEB1-188.jpg"}, {"n": 190, "f": "CILWEB1-190.jpg"}, {"n": 177, "f": "CILWEB1-177.jpg"}, {"n": 9, "f": "CILWEB1-9.jpg"}, {"n": 68, "f": "CILWEB1-68.jpg"}, {"n": 71, "f": "CILWEB1-71.jpg"}, {"n": 74, "f": "CILWEB1-74.jpg"}, {"n": 2, "f": "CILWEB1-2.jpg"}, {"n": 23, "f": "CILWEB1-23.jpg"}, {"n": 93, "f": "CILWEB1-93.jpg"}, {"n": 161, "f": "CILWEB1-161.jpg"}, {"n": 38, "f": "CILWEB1-38.jpg"}, {"n": 83, "f": "CILWEB1-83.jpg"}, {"n": 97, "f": "CILWEB1-97.jpg"}, {"n": 144, "f": "CILWEB1-144.jpg"}, {"n": 14, "f": "CILWEB1-14.jpg"}, {"n": 17, "f": "CILWEB1-17.jpg"}];
+var picks=new Set(JSON.parse(localStorage.getItem(KEY)||"[]")),cur=-1,tt=null;
 function $(i){return document.getElementById(i);}
-function save(){localStorage.setItem(KEY,JSON.stringify(Array.from(picks)));}
 function toast(m){var t=$("toast");t.textContent=m;t.className="on";
-clearTimeout(tt);tt=setTimeout(function(){t.className="";},2600);}
-function bar(){$("cnt").textContent=CAP<99?picks.size+" of "+CAP+" picked":picks.size+" picked";}
-function mark(n){var c=cards[n];if(c)c.className=picks.has(n)?"card on":"card";
-var pk=$("lbpk");
-if(cur>=0){var k=F[cur].n;pk.className=picks.has(k)?"pk on":"pk";pk.textContent=picks.has(k)?"Picked":"Pick";}}
-function toggle(n){if(!picks.has(n)&&picks.size>=CAP){toast("That is "+CAP+". Unpick one to add this one.");return;}
-picks.has(n)?picks.delete(n):picks.add(n);save();bar();mark(n);}
-document.querySelectorAll(".card").forEach(function(c){var n=+c.dataset.n;cards[n]=c;
+clearTimeout(tt);tt=setTimeout(function(){t.className="";},2400);}
+function save(){localStorage.setItem(KEY,JSON.stringify(Array.from(picks)));}
+function bar(){$("cnt").textContent=picks.size+" picked";}
+function mark(n){var c=document.querySelector('.card[data-n="'+n+'"]');
+if(c)c.className=picks.has(n)?"card on":"card";
+if(cur>=0){var k=F[cur].n,pk=$("lbpk");
+pk.className=picks.has(k)?"pk on":"pk";pk.textContent=picks.has(k)?"Picked":"Pick";}}
+function toggle(n){picks.has(n)?picks.delete(n):picks.add(n);save();bar();mark(n);}
+document.querySelectorAll(".card").forEach(function(c){var n=+c.dataset.n;
 if(picks.has(n))c.className="card on";
 c.querySelector(".sel").onclick=function(e){e.stopPropagation();toggle(n);};
 c.querySelector(".ph").onclick=function(){open_(F.findIndex(function(f){return f.n===n;}));};});
@@ -127,44 +132,11 @@ if(e.key==="ArrowRight")open_(cur+1);if(e.key==="ArrowLeft")open_(cur-1);
 if(e.key==="Escape")shut();});
 $("rv").onclick=function(){document.body.classList.toggle("rv");
 this.textContent=document.body.classList.contains("rv")?"See all":"My picks";};
-function list(){return Array.from(picks).sort(function(a,b){return a-b;}).join(", ");}
-function enc(s){return encodeURIComponent(s);}
-function copyOut(s,m){if(navigator.clipboard&&navigator.clipboard.writeText){
-navigator.clipboard.writeText(s).then(function(){toast(m);},function(){window.prompt("Copy this:",s);});}
-else window.prompt("Copy this:",s);}
-if($("send")){
-var conn=localStorage.getItem(KEY+":conn")||"";
-$("nm").value=localStorage.getItem(KEY+":name")||"";
-$("em").value=localStorage.getItem(KEY+":email")||"";
-document.querySelectorAll("#conns button").forEach(function(b){
-if(b.textContent===conn)b.className="on";
-b.onclick=function(){conn=b.textContent;
-document.querySelectorAll("#conns button").forEach(function(x){x.className=x===b?"on":"";});};});
-$("go").onclick=function(){if(!picks.size){toast("Nothing picked yet.");return;}
-$("send").className="on";};
-$("sx").onclick=function(){$("send").className="";};
-function fields(){var n=$("nm").value.trim();
-if(!n){toast("Your name goes first.");return null;}
-if(!conn){toast("Tap your connection to camp.");return null;}
-var e=$("em").value.trim();
-localStorage.setItem(KEY+":name",n);localStorage.setItem(KEY+":conn",conn);
-localStorage.setItem(KEY+":email",e);
-return {n:n,c:conn,e:e};}
-function body_(f){return "Name: "+f.n+"\nConnection: "+f.c+(f.e?"\nEmail: "+f.e:"")+"\nPicks: "+list();}
-$("sgo").onclick=function(){var f=fields();if(!f)return;var b=this;
-if(FORM){var fd=new FormData();fd.append(FORM.name,f.n);fd.append(FORM.conn,f.c);
-if(f.e)fd.append(FORM.email,f.e);fd.append(FORM.picks,list());
-b.disabled=true;
-fetch(FORM.base,{method:"POST",mode:"no-cors",body:fd}).then(function(){
-$("send").className="";b.disabled=false;$("go").textContent="Sent";
-toast("Got it. Thank you, "+f.n+".");},function(){b.disabled=false;
-toast("That did not go through. Try once more.");});}
-else location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+f.n)+"&body="+enc(body_(f));};
-$("scp").onclick=function(){var f=fields();if(!f)return;
-copyOut(body_(f)+"\n(send to "+TO+")","Copied. Text or email it to Noah.");};
-}else{
 $("cp").onclick=function(){if(!picks.size){toast("Nothing picked yet.");return;}
-copyOut(SUBJ+": "+list(),"Copied.");};
-}
+var s="Interlaken marketing picks: "+Array.from(picks).sort(function(a,b){return a-b;}).join(", ");
+if(navigator.clipboard&&navigator.clipboard.writeText){
+navigator.clipboard.writeText(s).then(function(){toast("Copied.");},
+function(){window.prompt("Copy this:",s);});}
+else window.prompt("Copy this:",s);};
 bar();
 </script></body></html>

@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
-"""Builds two standalone picker pages from frames.json / sections.json / times.json.
+"""Builds the two picker pages from frames.json / sections.json / times.json.
 
-    favorites.html   every placed frame, chronological. The community favorites
-                     vote: each voter picks ten and sends them with their name
-                     and connection to camp. Aggregates into the resonance
-                     report for the camp's development work.
-    twenty.html      the marketing shortlist, Noah cuts it to ten.
+    favorites.html   THE SURVEY (Noah's structure, 2026-08-03): four sections
+                     with forced-choice quotas. Pick two bridge-with-people,
+                     two bridge-without-people, three landscapes-with-nobody,
+                     five from the rest. Twelve picks per voter; 25 voters
+                     break the book-and-print pool of ~87 down toward the 42.
+                     SECTION POOLS BELOW ARE PLACEHOLDERS until Noah's
+                     arrangement paste replaces them.
+    twenty.html      the marketing pool, Noah cuts it down. No cap.
 
 Both pages are noindex and unlinked from the library. Picks persist in
 localStorage until sent. Regenerate: python3 build_vote.py
 
-FORM wiring: once the Google Form exists, fill FORM below with the viewform
-base URL and the entry IDs (from the form's public HTML) and regenerate. Until
-then the send flow falls back to email and copy.
+FORM wiring: when the Google Form exists, fill FORM with the formResponse URL
+and entry IDs; the survey then submits silently in the background (no mail
+client, no clipboard). Until then the send falls back to email.
 """
 import json
 import os
@@ -23,53 +26,55 @@ FRAMES = json.load(open(os.path.join(HERE, "frames.json")))
 SECTIONS = json.load(open(os.path.join(HERE, "sections.json")))
 TIMES = json.load(open(os.path.join(HERE, "_work", "times.json")))
 
-# The marketing pool (2026-08-03, expanded same day on Noah's word: "activity
-# shots, those are marketing"): kids and energy, water skiing, the activities,
-# the gatherings, the place by day, the sky. Noah cuts it down; no cap.
+TO = "noah@abba-photo.com"
+
+# Google Form behind the survey. None until it exists; then:
+# FORM = {"base": "https://docs.google.com/forms/d/e/FORM_ID/formResponse",
+#         "name": "entry.1", "conn": "entry.2", "email": "entry.3",
+#         "bp": "entry.4", "bn": "entry.5", "ls": "entry.6", "rest": "entry.7"}
+FORM = None
+
+CONNECTIONS = ["Current parent", "Alumni", "Staff", "Board", "Friend of camp"]
+
+# ---- THE SURVEY (pools are PLACEHOLDERS; Noah's arrangement replaces them) --
+SURVEY = [
+    {"k": "bp", "title": "The bridge, with people", "q": 2,
+     "frames": [23, 63, 161, 170, 171]},
+    {"k": "bn", "title": "The bridge, without people", "q": 2,
+     "frames": [93, 14, 16, 28, 168, 174]},
+    {"k": "ls", "title": "Landscapes, nobody in them", "q": 3,
+     "frames": [1, 21, 87, 88, 90, 91, 96, 141, 143, 144]},
+    {"k": "rest", "title": "The rest", "q": 5,
+     "frames": [2, 34, 38, 42, 47, 48, 71, 74, 97, 102, 115, 119, 150, 156, 177, 190]},
+]
+WORDS = {2: "pick two", 3: "pick three", 5: "pick five"}
+
+# The marketing pool (2026-08-03): Noah cuts it down; no cap.
 TWENTY = [63, 42, 112, 119, 3, 48,
           150, 151, 152, 153, 154, 155, 156, 157,
           120, 121, 122, 130, 186, 187, 188, 190, 177,
           9, 68, 71, 74,
           2, 23, 93, 161, 38, 83, 97, 144, 14, 17]
 
-TO = "noah@abba-photo.com"
-
-# Google Form behind favorites.html. None until the form exists; then set base
-# to the form's formResponse URL and the entry IDs from its public HTML. The
-# page then submits silently in the background: tap Send, done, no mail client.
-# FORM = {"base": "https://docs.google.com/forms/d/e/FORM_ID/formResponse",
-#         "name": "entry.111", "conn": "entry.222",
-#         "email": "entry.333", "picks": "entry.444"}
-FORM = None
-
-CONNECTIONS = ["Current parent", "Alumni", "Staff", "Board", "Friend of camp"]
-
-PANEL = """<div id=send><div id=sheet>
-<h2>Send your ten</h2>
-<label for=nm>Name</label><input id=nm autocomplete=name>
-<div class=lbl>Connection to camp</div><div id=conns>__CONNS__</div>
-<label for=em>Email <span class=opt>(optional)</span></label><input id=em type=email autocomplete=email>
-<div class=row><button id=sgo class=go type=button>Send</button><button id=scp type=button>Copy instead</button><button id=sx type=button>Back</button></div>
-</div></div>"""
-
-PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content=noindex>
-<title>__TITLE__</title><style>
-*{margin:0;padding:0;box-sizing:border-box}
+CSS = """*{margin:0;padding:0;box-sizing:border-box}
 body{background:#14110d;color:#ede7dd;font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;padding-bottom:86px}
 header{padding:40px 20px 8px;max-width:1180px;margin:0 auto}
 h1{font-family:Georgia,serif;font-weight:600;font-size:clamp(24px,4.5vw,34px)}
 .sub{color:#a69b8a;font-size:14px;margin-top:6px}
 .instr{color:#c9bfa9;font-size:15px;line-height:1.55;margin:16px 0 4px;max-width:640px}
-.wall{max-width:1180px;margin:18px auto 0;padding:0 14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.card{position:relative}
+section.sv{max-width:1180px;margin:34px auto 0;padding:0 14px}
+h2.sv{font-family:Georgia,serif;font-weight:500;font-size:21px;color:#c9bfa9;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid rgba(237,231,221,.14);padding-bottom:6px}
+h2.sv .q{font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#e2a73e}
+h2.sv .scnt{font-size:12.5px;color:#7d745f;margin-left:auto}
+h2.sv.full .scnt{color:#8fb573}
+.wall{columns:3 360px;column-gap:16px;padding-top:16px}
+.card{position:relative;break-inside:avoid;margin-bottom:16px}
 .ph{display:block;width:100%;border:0;padding:0;background:#1d1913;cursor:pointer;border-radius:2px;overflow:hidden}
-.ph img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
-.num{position:absolute;left:7px;bottom:6px;font-size:11px;color:#cfc6b4;text-shadow:0 1px 4px #000}
-.sel{position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:50%;border:2px solid rgba(237,231,221,.85);background:rgba(20,17,13,.35);cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.5)}
+.ph img{display:block;width:100%;height:auto}
+.num{position:absolute;left:9px;bottom:8px;font-size:12px;color:#cfc6b4;text-shadow:0 1px 4px #000}
+.sel{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:2px solid rgba(237,231,221,.85);background:rgba(20,17,13,.35);cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.5)}
 .card.on .sel{background:#e2a73e;border-color:#e2a73e}
-.card.on .sel::after{content:"";position:absolute;inset:7px 8px 9px;border:solid #14110d;border-width:0 0 3px 3px;transform:rotate(-45deg)}
+.card.on .sel::after{content:"";position:absolute;inset:9px 9px 12px;border:solid #14110d;border-width:0 0 3px 3px;transform:rotate(-45deg)}
 .card.on .ph{outline:3px solid #e2a73e;outline-offset:-3px}
 body.rv .card:not(.on){display:none}
 #bar{position:fixed;left:0;right:0;bottom:0;background:rgba(24,20,15,.97);border-top:1px solid rgba(226,167,62,.35);display:flex;align-items:center;gap:10px;padding:12px 16px;z-index:8}
@@ -101,32 +106,144 @@ body.rv .card:not(.on){display:none}
 #sheet .row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
 #sheet .row button{background:none;border:1px solid rgba(226,167,62,.55);color:#e2a73e;padding:10px 16px;border-radius:3px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
 #sheet .row button.go{background:#e2a73e;color:#14110d;font-weight:600}
-footer{max-width:1180px;margin:34px auto 0;padding:0 20px 30px;color:#7d745f;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+footer{max-width:1180px;margin:34px auto 0;padding:0 20px 30px;color:#7d745f;font-size:12px;letter-spacing:.14em;text-transform:uppercase}"""
+
+SURVEY_PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content=noindex>
+<title>Camp Interlaken &middot; favorites</title><style>
+__CSS__
 </style></head><body>
-<header><h1>__TITLE__</h1><div class=sub>__SUB__</div>
-<p class=instr>__INSTR__</p></header>
-__WALL__
-<div id=bar><div id=cnt></div>__BARBTNS__</div>
+<header><h1>Camp Interlaken</h1><div class=sub>Summer 2026 &middot; the favorites vote</div>
+<p class=instr>Four sets of photographs. Pick two from the first, two from the second,
+three from the third, and five from the last: twelve in all, the ones that stay with you.
+Tap a photo to see it large, tap the circle to pick it. Your picks save on this device
+until you send them.</p></header>
+__SECTIONS__
+<div id=bar><div id=cnt></div><button id=rv type=button>My picks</button><button id=go class=go type=button>Send</button></div>
 <div id=toast></div>
 <div id=lb><img id=lbi alt=""><button class="nav pv" aria-label="Previous"></button><button class="nav nx" aria-label="Next"></button><button class=x aria-label="Close">&times;</button><div id=lbbar><span class=id id=lbid></span><button class=pk id=lbpk type=button>Pick</button></div></div>
-__PANEL__
+<div id=send><div id=sheet>
+<h2>Send your twelve</h2>
+<label for=nm>Name</label><input id=nm autocomplete=name>
+<div class=lbl>Connection to camp</div><div id=conns>__CONNS__</div>
+<label for=em>Email <span class=opt>(optional)</span></label><input id=em type=email autocomplete=email>
+<div class=row><button id=sgo class=go type=button>Send</button><button id=sx type=button>Back</button></div>
+</div></div>
 <footer>Photographs Noah Gallagher &middot; Abba Photo</footer>
 <script>
-var CAP=__CAP__,KEY=__KEY__,SUBJ=__SUBJ__,TO=__TO__,FORM=__FORM__;
-var F=__LIST__;
-var picks=new Set(JSON.parse(localStorage.getItem(KEY)||"[]"));
-var cards={},cur=-1,tt=null;
+var KEY="cil-survey",SUBJ="Interlaken favorites",TO=__TO__,FORM=__FORM__;
+var SECS=__SECS__;
+var picks={},cur=null,tt=null;
+try{picks=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){picks={};}
+SECS.forEach(function(s){if(!Array.isArray(picks[s.k]))picks[s.k]=[];});
 function $(i){return document.getElementById(i);}
-function save(){localStorage.setItem(KEY,JSON.stringify(Array.from(picks)));}
+function sec(k){for(var i=0;i<SECS.length;i++)if(SECS[i].k===k)return SECS[i];}
 function toast(m){var t=$("toast");t.textContent=m;t.className="on";
 clearTimeout(tt);tt=setTimeout(function(){t.className="";},2600);}
-function bar(){$("cnt").textContent=CAP<99?picks.size+" of "+CAP+" picked":picks.size+" picked";}
-function mark(n){var c=cards[n];if(c)c.className=picks.has(n)?"card on":"card";
-var pk=$("lbpk");
-if(cur>=0){var k=F[cur].n;pk.className=picks.has(k)?"pk on":"pk";pk.textContent=picks.has(k)?"Picked":"Pick";}}
-function toggle(n){if(!picks.has(n)&&picks.size>=CAP){toast("That is "+CAP+". Unpick one to add this one.");return;}
-picks.has(n)?picks.delete(n):picks.add(n);save();bar();mark(n);}
-document.querySelectorAll(".card").forEach(function(c){var n=+c.dataset.n;cards[n]=c;
+function save(){localStorage.setItem(KEY,JSON.stringify(picks));}
+function total(){var n=0;SECS.forEach(function(s){n+=picks[s.k].length;});return n;}
+function need(){var m=0;SECS.forEach(function(s){m+=s.q;});return m;}
+function bar(){$("cnt").textContent=total()+" of "+need()+" picked";
+SECS.forEach(function(s){var h=$("h-"+s.k);
+h.querySelector(".scnt").textContent=picks[s.k].length+" of "+s.q;
+h.className=picks[s.k].length===s.q?"sv full":"sv";});}
+function mark(k,n){var c=document.querySelector('#s-'+k+' .card[data-n="'+n+'"]');
+if(c)c.className=picks[k].indexOf(n)>=0?"card on":"card";
+if(cur){var s=sec(cur.k),m=s.frames[cur.i],pk=$("lbpk");
+pk.className=picks[cur.k].indexOf(m)>=0?"pk on":"pk";
+pk.textContent=picks[cur.k].indexOf(m)>=0?"Picked":"Pick";}}
+function toggle(k,n){var a=picks[k],i=a.indexOf(n),s=sec(k);
+if(i<0&&a.length>=s.q){toast("That set has its "+s.q+". Unpick one first.");return;}
+i<0?a.push(n):a.splice(i,1);save();bar();mark(k,n);}
+document.querySelectorAll("section.sv .card").forEach(function(c){
+var k=c.closest("section").dataset.k,n=+c.dataset.n;
+if(picks[k].indexOf(n)>=0)c.className="card on";
+c.querySelector(".sel").onclick=function(e){e.stopPropagation();toggle(k,n);};
+c.querySelector(".ph").onclick=function(){open_(k,sec(k).frames.indexOf(n));};});
+function open_(k,i){var s=sec(k);cur={k:k,i:(i+s.frames.length)%s.frames.length};
+var n=s.frames[cur.i];
+$("lbi").src="img/present/"+s.files[cur.i];$("lbid").textContent=s.title+" &middot; "+n;
+$("lbid").innerHTML=s.title+" &middot; "+n;
+$("lb").className="on";mark(k,n);}
+function shut(){$("lb").className="";cur=null;}
+document.querySelector("#lb .x").onclick=shut;
+document.querySelector("#lb .pv").onclick=function(){if(cur)open_(cur.k,cur.i-1);};
+document.querySelector("#lb .nx").onclick=function(){if(cur)open_(cur.k,cur.i+1);};
+$("lbpk").onclick=function(){if(cur)toggle(cur.k,sec(cur.k).frames[cur.i]);};
+document.addEventListener("keydown",function(e){if(!cur)return;
+if(e.key==="ArrowRight")open_(cur.k,cur.i+1);if(e.key==="ArrowLeft")open_(cur.k,cur.i-1);
+if(e.key==="Escape")shut();});
+$("rv").onclick=function(){document.body.classList.toggle("rv");
+this.textContent=document.body.classList.contains("rv")?"See all":"My picks";};
+function enc(s){return encodeURIComponent(s);}
+function short(){for(var i=0;i<SECS.length;i++){var s=SECS[i];
+if(picks[s.k].length!==s.q)return s;}return null;}
+$("go").onclick=function(){var s=short();
+if(s){toast('"'+s.title+'" still needs '+(s.q-picks[s.k].length)+" more.");
+$("s-"+s.k).scrollIntoView({behavior:"smooth"});return;}
+$("send").className="on";};
+$("sx").onclick=function(){$("send").className="";};
+var conn=localStorage.getItem(KEY+":conn")||"";
+$("nm").value=localStorage.getItem(KEY+":name")||"";
+$("em").value=localStorage.getItem(KEY+":email")||"";
+document.querySelectorAll("#conns button").forEach(function(b){
+if(b.textContent===conn)b.className="on";
+b.onclick=function(){conn=b.textContent;
+document.querySelectorAll("#conns button").forEach(function(x){x.className=x===b?"on":"";});};});
+function lists(){var o={};SECS.forEach(function(s){
+o[s.k]=picks[s.k].slice().sort(function(a,b){return a-b;}).join(", ");});return o;}
+$("sgo").onclick=function(){var n=$("nm").value.trim();
+if(!n){toast("Your name goes first.");return;}
+if(!conn){toast("Tap your connection to camp.");return;}
+var e=$("em").value.trim();
+localStorage.setItem(KEY+":name",n);localStorage.setItem(KEY+":conn",conn);
+localStorage.setItem(KEY+":email",e);
+var L=lists(),b=this;
+if(FORM){var fd=new FormData();fd.append(FORM.name,n);fd.append(FORM.conn,conn);
+if(e)fd.append(FORM.email,e);
+SECS.forEach(function(s){fd.append(FORM[s.k],L[s.k]);});
+b.disabled=true;
+fetch(FORM.base,{method:"POST",mode:"no-cors",body:fd}).then(function(){
+$("send").className="";b.disabled=false;$("go").textContent="Sent";
+toast("Got it. Thank you, "+n+".");},function(){b.disabled=false;
+toast("That did not go through. Try once more.");});}
+else{var body="Name: "+n+"\\nConnection: "+conn+(e?"\\nEmail: "+e:"");
+SECS.forEach(function(s){body+="\\n"+s.title+": "+L[s.k];});
+location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+n)+"&body="+enc(body);}};
+bar();
+</script></body></html>"""
+
+POOL_PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content=noindex>
+<title>Camp Interlaken &middot; the marketing pool</title><style>
+__CSS__
+</style></head><body>
+<header><h1>Camp Interlaken &middot; the marketing pool</h1><div class=sub>__N__ frames &middot; cut it down</div>
+<p class=instr>Tap the circle on the frames that go out. No cap. Copy puts the numbered
+list on the clipboard; if it balks, a box pops up with the list to grab.</p></header>
+<section class=sv data-k=all>
+__WALL__
+</section>
+<div id=bar><div id=cnt></div><button id=rv type=button>My picks</button><button id=cp class=go type=button>Copy</button></div>
+<div id=toast></div>
+<div id=lb><img id=lbi alt=""><button class="nav pv" aria-label="Previous"></button><button class="nav nx" aria-label="Next"></button><button class=x aria-label="Close">&times;</button><div id=lbbar><span class=id id=lbid></span><button class=pk id=lbpk type=button>Pick</button></div></div>
+<footer>Photographs Noah Gallagher &middot; Abba Photo</footer>
+<script>
+var KEY="cil-twenty",F=__LIST__;
+var picks=new Set(JSON.parse(localStorage.getItem(KEY)||"[]")),cur=-1,tt=null;
+function $(i){return document.getElementById(i);}
+function toast(m){var t=$("toast");t.textContent=m;t.className="on";
+clearTimeout(tt);tt=setTimeout(function(){t.className="";},2400);}
+function save(){localStorage.setItem(KEY,JSON.stringify(Array.from(picks)));}
+function bar(){$("cnt").textContent=picks.size+" picked";}
+function mark(n){var c=document.querySelector('.card[data-n="'+n+'"]');
+if(c)c.className=picks.has(n)?"card on":"card";
+if(cur>=0){var k=F[cur].n,pk=$("lbpk");
+pk.className=picks.has(k)?"pk on":"pk";pk.textContent=picks.has(k)?"Picked":"Pick";}}
+function toggle(n){picks.has(n)?picks.delete(n):picks.add(n);save();bar();mark(n);}
+document.querySelectorAll(".card").forEach(function(c){var n=+c.dataset.n;
 if(picks.has(n))c.className="card on";
 c.querySelector(".sel").onclick=function(e){e.stopPropagation();toggle(n);};
 c.querySelector(".ph").onclick=function(){open_(F.findIndex(function(f){return f.n===n;}));};});
@@ -143,45 +260,12 @@ if(e.key==="ArrowRight")open_(cur+1);if(e.key==="ArrowLeft")open_(cur-1);
 if(e.key==="Escape")shut();});
 $("rv").onclick=function(){document.body.classList.toggle("rv");
 this.textContent=document.body.classList.contains("rv")?"See all":"My picks";};
-function list(){return Array.from(picks).sort(function(a,b){return a-b;}).join(", ");}
-function enc(s){return encodeURIComponent(s);}
-function copyOut(s,m){if(navigator.clipboard&&navigator.clipboard.writeText){
-navigator.clipboard.writeText(s).then(function(){toast(m);},function(){window.prompt("Copy this:",s);});}
-else window.prompt("Copy this:",s);}
-if($("send")){
-var conn=localStorage.getItem(KEY+":conn")||"";
-$("nm").value=localStorage.getItem(KEY+":name")||"";
-$("em").value=localStorage.getItem(KEY+":email")||"";
-document.querySelectorAll("#conns button").forEach(function(b){
-if(b.textContent===conn)b.className="on";
-b.onclick=function(){conn=b.textContent;
-document.querySelectorAll("#conns button").forEach(function(x){x.className=x===b?"on":"";});};});
-$("go").onclick=function(){if(!picks.size){toast("Nothing picked yet.");return;}
-$("send").className="on";};
-$("sx").onclick=function(){$("send").className="";};
-function fields(){var n=$("nm").value.trim();
-if(!n){toast("Your name goes first.");return null;}
-if(!conn){toast("Tap your connection to camp.");return null;}
-var e=$("em").value.trim();
-localStorage.setItem(KEY+":name",n);localStorage.setItem(KEY+":conn",conn);
-localStorage.setItem(KEY+":email",e);
-return {n:n,c:conn,e:e};}
-function body_(f){return "Name: "+f.n+"\\nConnection: "+f.c+(f.e?"\\nEmail: "+f.e:"")+"\\nPicks: "+list();}
-$("sgo").onclick=function(){var f=fields();if(!f)return;var b=this;
-if(FORM){var fd=new FormData();fd.append(FORM.name,f.n);fd.append(FORM.conn,f.c);
-if(f.e)fd.append(FORM.email,f.e);fd.append(FORM.picks,list());
-b.disabled=true;
-fetch(FORM.base,{method:"POST",mode:"no-cors",body:fd}).then(function(){
-$("send").className="";b.disabled=false;$("go").textContent="Sent";
-toast("Got it. Thank you, "+f.n+".");},function(){b.disabled=false;
-toast("That did not go through. Try once more.");});}
-else location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+f.n)+"&body="+enc(body_(f));};
-$("scp").onclick=function(){var f=fields();if(!f)return;
-copyOut(body_(f)+"\\n(send to "+TO+")","Copied. Text or email it to Noah.");};
-}else{
 $("cp").onclick=function(){if(!picks.size){toast("Nothing picked yet.");return;}
-copyOut(SUBJ+": "+list(),"Copied.");};
-}
+var s="Interlaken marketing picks: "+Array.from(picks).sort(function(a,b){return a-b;}).join(", ");
+if(navigator.clipboard&&navigator.clipboard.writeText){
+navigator.clipboard.writeText(s).then(function(){toast("Copied.");},
+function(){window.prompt("Copy this:",s);});}
+else window.prompt("Copy this:",s);};
 bar();
 </script></body></html>"""
 
@@ -194,9 +278,9 @@ def by_num():
     return out
 
 
-def cards(frames):
+def cards(pairs):
     out = ['<div class="wall">']
-    for n, f in frames:
+    for n, f in pairs:
         out.append(f'<div class="card" data-n="{n}">'
                    f'<button class="ph" type="button" aria-label="View {n}">'
                    f'<img loading="lazy" src="img/thumb/{f["file"]}" alt="{f["id"]}"></button>'
@@ -206,43 +290,39 @@ def cards(frames):
     return "\n".join(out)
 
 
-def emit(name, title, sub, instr, frames, cap, key, subj, panel):
-    if panel:
-        pan = PANEL.replace("__CONNS__", "".join(
-            f'<button type=button>{c}</button>' for c in CONNECTIONS))
-        btns = '<button id=rv type=button>My picks</button><button id=go class=go type=button>Send</button>'
-    else:
-        pan = ""
-        btns = ('<button id=rv type=button>My picks</button>'
-                '<button id=cp class=go type=button>Copy</button>')
-    html = (PAGE.replace("__TITLE__", title).replace("__SUB__", sub)
-            .replace("__INSTR__", instr).replace("__WALL__", cards(frames))
-            .replace("__BARBTNS__", btns).replace("__PANEL__", pan)
-            .replace("__CAP__", str(cap)).replace("__KEY__", json.dumps(key))
-            .replace("__SUBJ__", json.dumps(subj)).replace("__TO__", json.dumps(TO))
-            .replace("__FORM__", json.dumps(FORM if panel else None))
-            .replace("__LIST__", json.dumps([{"n": n, "f": f["file"]} for n, f in frames])))
-    open(os.path.join(HERE, name), "w").write(html)
-    print(f"wrote {name} ({len(frames)} frames)")
-
-
 def build():
     nums = by_num()
-    placed = {n for _, secs in SECTIONS for _, ns in secs for n in ns}
-    chron = sorted(placed, key=lambda n: TIMES.get(nums[n]["id"], "9999"))
-    if 2 in placed:
-        chron = [2] + [n for n in chron if n != 2]
-    emit("favorites.html", "Camp Interlaken", f"Summer 2026 &middot; {len(chron)} photographs",
-         "Pick the ten that stay with you. Tap a photo to see it large, tap the circle "
-         "to pick it. Your picks save on this device until you send them, with your "
-         "name and your connection to camp.",
-         [(n, nums[n]) for n in chron], 10, "cil-fav", "Interlaken favorites", panel=True)
-    emit("twenty.html", "Camp Interlaken &middot; the marketing pool",
-         f"{len(TWENTY)} frames &middot; cut it down",
-         "Tap the circle on the frames that go out. No cap. Copy puts the numbered "
-         "list on the clipboard; if it balks, a box pops up with the list to grab.",
-         [(n, nums[n]) for n in TWENTY], 99, "cil-twenty", "Interlaken marketing picks",
-         panel=False)
+
+    secs_html, secs_js = [], []
+    for s in SURVEY:
+        pairs = [(n, nums[n]) for n in s["frames"]]
+        secs_html.append(
+            f'<section class=sv data-k={s["k"]} id=s-{s["k"]}>\n'
+            f'<h2 class=sv id=h-{s["k"]}><span>{s["title"]}</span>'
+            f'<span class=q>{WORDS[s["q"]]}</span><span class=scnt></span></h2>\n'
+            + cards(pairs) + '\n</section>')
+        secs_js.append({"k": s["k"], "title": s["title"], "q": s["q"],
+                        "frames": s["frames"],
+                        "files": [nums[n]["file"] for n in s["frames"]]})
+    conns = "".join(f'<button type=button>{c}</button>' for c in CONNECTIONS)
+    html = (SURVEY_PAGE.replace("__CSS__", CSS)
+            .replace("__SECTIONS__", "\n".join(secs_html))
+            .replace("__CONNS__", conns)
+            .replace("__TO__", json.dumps(TO))
+            .replace("__FORM__", json.dumps(FORM))
+            .replace("__SECS__", json.dumps(secs_js)))
+    open(os.path.join(HERE, "favorites.html"), "w").write(html)
+    print(f"wrote favorites.html (survey, {sum(len(s['frames']) for s in SURVEY)} frames "
+          f"across {len(SURVEY)} sections, {sum(s['q'] for s in SURVEY)} picks)")
+
+    pairs = [(n, nums[n]) for n in TWENTY]
+    html = (POOL_PAGE.replace("__CSS__", CSS)
+            .replace("__N__", str(len(TWENTY)))
+            .replace("__WALL__", cards(pairs))
+            .replace("__LIST__", json.dumps(
+                [{"n": n, "f": f["file"]} for n, f in pairs])))
+    open(os.path.join(HERE, "twenty.html"), "w").write(html)
+    print(f"wrote twenty.html ({len(TWENTY)} frames)")
 
 
 if __name__ == "__main__":
