@@ -23,15 +23,21 @@ FRAMES = json.load(open(os.path.join(HERE, "frames.json")))
 SECTIONS = json.load(open(os.path.join(HERE, "sections.json")))
 TIMES = json.load(open(os.path.join(HERE, "_work", "times.json")))
 
-# The marketing shortlist (2026-08-03): kids and energy, the gatherings, the
-# place by day, the sky. Noah picks ten from these.
-TWENTY = [63, 42, 112, 119, 3, 48, 9, 68, 71, 74,
+# The marketing pool (2026-08-03, expanded same day on Noah's word: "activity
+# shots, those are marketing"): kids and energy, water skiing, the activities,
+# the gatherings, the place by day, the sky. Noah cuts it down; no cap.
+TWENTY = [63, 42, 112, 119, 3, 48,
+          150, 151, 152, 153, 154, 155, 156, 157,
+          120, 121, 122, 130, 186, 187, 188, 190, 177,
+          9, 68, 71, 74,
           2, 23, 93, 161, 38, 83, 97, 144, 14, 17]
 
 TO = "noah@abba-photo.com"
 
-# Google Form behind favorites.html. None until the form exists; then:
-# FORM = {"base": "https://docs.google.com/forms/d/e/FORM_ID/viewform",
+# Google Form behind favorites.html. None until the form exists; then set base
+# to the form's formResponse URL and the entry IDs from its public HTML. The
+# page then submits silently in the background: tap Send, done, no mail client.
+# FORM = {"base": "https://docs.google.com/forms/d/e/FORM_ID/formResponse",
 #         "name": "entry.111", "conn": "entry.222",
 #         "email": "entry.333", "picks": "entry.444"}
 FORM = None
@@ -114,7 +120,7 @@ function $(i){return document.getElementById(i);}
 function save(){localStorage.setItem(KEY,JSON.stringify(Array.from(picks)));}
 function toast(m){var t=$("toast");t.textContent=m;t.className="on";
 clearTimeout(tt);tt=setTimeout(function(){t.className="";},2600);}
-function bar(){$("cnt").textContent=picks.size+" of "+CAP+" picked";}
+function bar(){$("cnt").textContent=CAP<99?picks.size+" of "+CAP+" picked":picks.size+" picked";}
 function mark(n){var c=cards[n];if(c)c.className=picks.has(n)?"card on":"card";
 var pk=$("lbpk");
 if(cur>=0){var k=F[cur].n;pk.className=picks.has(k)?"pk on":"pk";pk.textContent=picks.has(k)?"Picked":"Pick";}}
@@ -140,7 +146,7 @@ this.textContent=document.body.classList.contains("rv")?"See all":"My picks";};
 function list(){return Array.from(picks).sort(function(a,b){return a-b;}).join(", ");}
 function enc(s){return encodeURIComponent(s);}
 function copyOut(s,m){if(navigator.clipboard&&navigator.clipboard.writeText){
-navigator.clipboard.writeText(s).then(function(){toast(m);});}
+navigator.clipboard.writeText(s).then(function(){toast(m);},function(){window.prompt("Copy this:",s);});}
 else window.prompt("Copy this:",s);}
 if($("send")){
 var conn=localStorage.getItem(KEY+":conn")||"";
@@ -161,22 +167,20 @@ localStorage.setItem(KEY+":name",n);localStorage.setItem(KEY+":conn",conn);
 localStorage.setItem(KEY+":email",e);
 return {n:n,c:conn,e:e};}
 function body_(f){return "Name: "+f.n+"\\nConnection: "+f.c+(f.e?"\\nEmail: "+f.e:"")+"\\nPicks: "+list();}
-$("sgo").onclick=function(){var f=fields();if(!f)return;
-if(FORM){location.href=FORM.base+"?usp=pp_url&"+FORM.name+"="+enc(f.n)+"&"+FORM.conn+"="+enc(f.c)+
-(f.e?"&"+FORM.email+"="+enc(f.e):"")+"&"+FORM.picks+"="+enc(list());}
+$("sgo").onclick=function(){var f=fields();if(!f)return;var b=this;
+if(FORM){var fd=new FormData();fd.append(FORM.name,f.n);fd.append(FORM.conn,f.c);
+if(f.e)fd.append(FORM.email,f.e);fd.append(FORM.picks,list());
+b.disabled=true;
+fetch(FORM.base,{method:"POST",mode:"no-cors",body:fd}).then(function(){
+$("send").className="";b.disabled=false;$("go").textContent="Sent";
+toast("Got it. Thank you, "+f.n+".");},function(){b.disabled=false;
+toast("That did not go through. Try once more.");});}
 else location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+f.n)+"&body="+enc(body_(f));};
 $("scp").onclick=function(){var f=fields();if(!f)return;
 copyOut(body_(f)+"\\n(send to "+TO+")","Copied. Text or email it to Noah.");};
 }else{
-function name_(){var n=localStorage.getItem(KEY+":name")||"";
-n=window.prompt("Your name",n)||"";if(n)localStorage.setItem(KEY+":name",n);return n;}
-$("go").onclick=function(){if(!picks.size){toast("Nothing picked yet.");return;}
-var n=name_();if(!n)return;
-location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+n)+
-"&body="+enc("Name: "+n+"\\nPicks: "+list());};
 $("cp").onclick=function(){if(!picks.size){toast("Nothing picked yet.");return;}
-var n=name_();if(!n)return;
-copyOut(SUBJ+" from "+n+": "+list()+"  (send to "+TO+")","Copied.");};
+copyOut(SUBJ+": "+list(),"Copied.");};
 }
 bar();
 </script></body></html>"""
@@ -210,8 +214,7 @@ def emit(name, title, sub, instr, frames, cap, key, subj, panel):
     else:
         pan = ""
         btns = ('<button id=rv type=button>My picks</button>'
-                '<button id=cp type=button>Copy</button>'
-                '<button id=go class=go type=button>Email</button>')
+                '<button id=cp class=go type=button>Copy</button>')
     html = (PAGE.replace("__TITLE__", title).replace("__SUB__", sub)
             .replace("__INSTR__", instr).replace("__WALL__", cards(frames))
             .replace("__BARBTNS__", btns).replace("__PANEL__", pan)
@@ -234,9 +237,11 @@ def build():
          "to pick it. Your picks save on this device until you send them, with your "
          "name and your connection to camp.",
          [(n, nums[n]) for n in chron], 10, "cil-fav", "Interlaken favorites", panel=True)
-    emit("twenty.html", "Camp Interlaken &middot; twenty frames", "Cut to ten",
-         "Tap the circle on the ten that go out. Copy sends the list to the clipboard.",
-         [(n, nums[n]) for n in TWENTY], 10, "cil-twenty", "Interlaken marketing ten",
+    emit("twenty.html", "Camp Interlaken &middot; the marketing pool",
+         f"{len(TWENTY)} frames &middot; cut it down",
+         "Tap the circle on the frames that go out. No cap. Copy puts the numbered "
+         "list on the clipboard; if it balks, a box pops up with the list to grab.",
+         [(n, nums[n]) for n in TWENTY], 99, "cil-twenty", "Interlaken marketing picks",
          panel=False)
 
 

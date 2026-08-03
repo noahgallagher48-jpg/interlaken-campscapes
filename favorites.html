@@ -258,7 +258,7 @@ function $(i){return document.getElementById(i);}
 function save(){localStorage.setItem(KEY,JSON.stringify(Array.from(picks)));}
 function toast(m){var t=$("toast");t.textContent=m;t.className="on";
 clearTimeout(tt);tt=setTimeout(function(){t.className="";},2600);}
-function bar(){$("cnt").textContent=picks.size+" of "+CAP+" picked";}
+function bar(){$("cnt").textContent=CAP<99?picks.size+" of "+CAP+" picked":picks.size+" picked";}
 function mark(n){var c=cards[n];if(c)c.className=picks.has(n)?"card on":"card";
 var pk=$("lbpk");
 if(cur>=0){var k=F[cur].n;pk.className=picks.has(k)?"pk on":"pk";pk.textContent=picks.has(k)?"Picked":"Pick";}}
@@ -284,7 +284,7 @@ this.textContent=document.body.classList.contains("rv")?"See all":"My picks";};
 function list(){return Array.from(picks).sort(function(a,b){return a-b;}).join(", ");}
 function enc(s){return encodeURIComponent(s);}
 function copyOut(s,m){if(navigator.clipboard&&navigator.clipboard.writeText){
-navigator.clipboard.writeText(s).then(function(){toast(m);});}
+navigator.clipboard.writeText(s).then(function(){toast(m);},function(){window.prompt("Copy this:",s);});}
 else window.prompt("Copy this:",s);}
 if($("send")){
 var conn=localStorage.getItem(KEY+":conn")||"";
@@ -305,22 +305,20 @@ localStorage.setItem(KEY+":name",n);localStorage.setItem(KEY+":conn",conn);
 localStorage.setItem(KEY+":email",e);
 return {n:n,c:conn,e:e};}
 function body_(f){return "Name: "+f.n+"\nConnection: "+f.c+(f.e?"\nEmail: "+f.e:"")+"\nPicks: "+list();}
-$("sgo").onclick=function(){var f=fields();if(!f)return;
-if(FORM){location.href=FORM.base+"?usp=pp_url&"+FORM.name+"="+enc(f.n)+"&"+FORM.conn+"="+enc(f.c)+
-(f.e?"&"+FORM.email+"="+enc(f.e):"")+"&"+FORM.picks+"="+enc(list());}
+$("sgo").onclick=function(){var f=fields();if(!f)return;var b=this;
+if(FORM){var fd=new FormData();fd.append(FORM.name,f.n);fd.append(FORM.conn,f.c);
+if(f.e)fd.append(FORM.email,f.e);fd.append(FORM.picks,list());
+b.disabled=true;
+fetch(FORM.base,{method:"POST",mode:"no-cors",body:fd}).then(function(){
+$("send").className="";b.disabled=false;$("go").textContent="Sent";
+toast("Got it. Thank you, "+f.n+".");},function(){b.disabled=false;
+toast("That did not go through. Try once more.");});}
 else location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+f.n)+"&body="+enc(body_(f));};
 $("scp").onclick=function(){var f=fields();if(!f)return;
 copyOut(body_(f)+"\n(send to "+TO+")","Copied. Text or email it to Noah.");};
 }else{
-function name_(){var n=localStorage.getItem(KEY+":name")||"";
-n=window.prompt("Your name",n)||"";if(n)localStorage.setItem(KEY+":name",n);return n;}
-$("go").onclick=function(){if(!picks.size){toast("Nothing picked yet.");return;}
-var n=name_();if(!n)return;
-location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+n)+
-"&body="+enc("Name: "+n+"\nPicks: "+list());};
 $("cp").onclick=function(){if(!picks.size){toast("Nothing picked yet.");return;}
-var n=name_();if(!n)return;
-copyOut(SUBJ+" from "+n+": "+list()+"  (send to "+TO+")","Copied.");};
+copyOut(SUBJ+": "+list(),"Copied.");};
 }
 bar();
 </script></body></html>
