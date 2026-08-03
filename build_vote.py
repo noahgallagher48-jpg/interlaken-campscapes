@@ -36,16 +36,23 @@ FORM = None
 
 CONNECTIONS = ["Current parent", "Alumni", "Staff", "Board", "Friend of camp"]
 
-# ---- THE SURVEY (pools are PLACEHOLDERS; Noah's arrangement replaces them) --
+# ---- THE SURVEY: Noah's Book 87 (arrangement paste, 2026-08-03), classified
+# into his four sections by a visual pass; order within each section follows
+# his Book order. Judgment calls: 97 (two figures at the rail) sits in the
+# rest, not bridge-with-people; 37 reads as the fountain bridge, empty.
 SURVEY = [
     {"k": "bp", "title": "The bridge, with people", "q": 2,
-     "frames": [23, 63, 161, 170, 171]},
+     "frames": [58, 23, 63, 61, 60, 170, 57, 161]},
     {"k": "bn", "title": "The bridge, without people", "q": 2,
-     "frames": [93, 14, 16, 28, 168, 174]},
+     "frames": [14, 16, 94, 93, 62, 37]},
     {"k": "ls", "title": "Landscapes, nobody in them", "q": 3,
-     "frames": [1, 21, 87, 88, 90, 91, 96, 141, 143, 144]},
+     "frames": [1, 36, 25, 24, 20, 88, 87, 89, 85, 84, 83, 90, 38, 19, 32, 31,
+                40, 178, 108, 101, 124, 145, 140]},
     {"k": "rest", "title": "The rest", "q": 5,
-     "frames": [2, 34, 38, 42, 47, 48, 71, 74, 97, 102, 115, 119, 150, 156, 177, 190]},
+     "frames": [71, 3, 169, 8, 13, 45, 44, 43, 42, 54, 53, 68, 73, 74, 173,
+                75, 76, 77, 78, 79, 81, 98, 97, 56, 52, 51, 50, 49, 48, 47,
+                46, 123, 125, 182, 179, 111, 110, 99, 175, 100, 185, 184, 188,
+                177, 193, 160, 158, 153, 186, 148]},
 ]
 WORDS = {2: "pick two", 3: "pick three", 5: "pick five"}
 
