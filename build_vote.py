@@ -13,9 +13,11 @@
 Both pages are noindex and unlinked from the library. Picks persist in
 localStorage until sent. Regenerate: python3 build_vote.py
 
-FORM wiring: when the Google Form exists, fill FORM with the formResponse URL
-and entry IDs; the survey then submits silently in the background (no mail
-client, no clipboard). Until then the send falls back to email.
+Votes submit to Web3Forms (api.web3forms.com) with the public access key
+below; every vote arrives as an email to noah@abba-photo.com with subject
+"Interlaken favorites: <name>". No Google Form, no mail client, no clipboard.
+The key is public by design (client-side); the account is Web3Forms free tier
+under noah@abba-photo.com, created 2026-08-04.
 """
 import json
 import os
@@ -28,11 +30,8 @@ TIMES = json.load(open(os.path.join(HERE, "_work", "times.json")))
 
 TO = "noah@abba-photo.com"
 
-# Google Form behind the survey. None until it exists; then:
-# FORM = {"base": "https://docs.google.com/forms/d/e/FORM_ID/formResponse",
-#         "name": "entry.1", "conn": "entry.2", "email": "entry.3",
-#         "bp": "entry.4", "bn": "entry.5", "ls": "entry.6", "rest": "entry.7"}
-FORM = None
+# Web3Forms public access key; submissions email to noah@abba-photo.com.
+W3F_KEY = "b3bc124c-7812-4c4e-8fce-6ea6b9d1c5a2"
 
 CONNECTIONS = ["Current parent", "Alumni", "Staff", "Board", "Friend of camp"]
 
@@ -139,7 +138,7 @@ __SECTIONS__
 </div></div>
 <footer>Photographs Noah Gallagher &middot; Abba Photo</footer>
 <script>
-var KEY="cil-survey",SUBJ="Interlaken favorites",TO=__TO__,FORM=__FORM__;
+var KEY="cil-survey",SUBJ="Interlaken favorites",W3F=__W3F__;
 var SECS=__SECS__;
 var picks={},cur=null,tt=null;
 try{picks=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){picks={};}
@@ -207,17 +206,19 @@ var e=$("em").value.trim();
 localStorage.setItem(KEY+":name",n);localStorage.setItem(KEY+":conn",conn);
 localStorage.setItem(KEY+":email",e);
 var L=lists(),b=this;
-if(FORM){var fd=new FormData();fd.append(FORM.name,n);fd.append(FORM.conn,conn);
-if(e)fd.append(FORM.email,e);
-SECS.forEach(function(s){fd.append(FORM[s.k],L[s.k]);});
-b.disabled=true;
-fetch(FORM.base,{method:"POST",mode:"no-cors",body:fd}).then(function(){
-$("send").className="";b.disabled=false;$("go").textContent="Sent";
-toast("Got it. Thank you, "+n+".");},function(){b.disabled=false;
-toast("That did not go through. Try once more.");});}
-else{var body="Name: "+n+"\\nConnection: "+conn+(e?"\\nEmail: "+e:"");
-SECS.forEach(function(s){body+="\\n"+s.title+": "+L[s.k];});
-location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+n)+"&body="+enc(body);}};
+var payload={access_key:W3F,subject:SUBJ+": "+n,from_name:"Interlaken favorites vote",
+botcheck:"",name:n,connection:conn,email:e,
+bridge_with_people:L.bp,bridge_without_people:L.bn,landscapes:L.ls,the_rest:L.rest};
+b.disabled=true;b.textContent="Sending…";
+fetch("https://api.web3forms.com/submit",{method:"POST",
+headers:{"Content-Type":"application/json",Accept:"application/json"},
+body:JSON.stringify(payload)}).then(function(r){return r.json();}).then(function(r){
+if(r.success){$("send").className="";b.textContent="Sent";
+toast("Got it. Thank you, "+n+".");}
+else{b.disabled=false;b.textContent="Send my picks";
+toast("That did not go through. Try once more.");}},
+function(){b.disabled=false;b.textContent="Send my picks";
+toast("That did not go through. Try once more.");});};
 bar();
 </script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
@@ -315,8 +316,7 @@ def build():
     html = (SURVEY_PAGE.replace("__CSS__", CSS)
             .replace("__SECTIONS__", "\n".join(secs_html))
             .replace("__CONNS__", conns)
-            .replace("__TO__", json.dumps(TO))
-            .replace("__FORM__", json.dumps(FORM))
+            .replace("__W3F__", json.dumps(W3F_KEY))
             .replace("__SECS__", json.dumps(secs_js)))
     open(os.path.join(HERE, "favorites.html"), "w").write(html)
     print(f"wrote favorites.html (survey, {sum(len(s['frames']) for s in SURVEY)} frames "

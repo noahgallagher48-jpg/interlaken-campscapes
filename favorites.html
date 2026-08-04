@@ -178,7 +178,7 @@ until you send them.</p></header>
 </div></div>
 <footer>Photographs Noah Gallagher &middot; Abba Photo</footer>
 <script>
-var KEY="cil-survey",SUBJ="Interlaken favorites",TO="noah@abba-photo.com",FORM=null;
+var KEY="cil-survey",SUBJ="Interlaken favorites",W3F="b3bc124c-7812-4c4e-8fce-6ea6b9d1c5a2";
 var SECS=[{"k": "bp", "title": "The bridge, with people", "q": 2, "frames": [58, 23, 63, 61, 60, 170, 57, 161], "files": ["CILWEB1-58.jpg", "CILWEB1-23.jpg", "CILWEB1-63.jpg", "CILWEB1-61.jpg", "CILWEB1-60.jpg", "CILWEB1-170.jpg", "CILWEB1-57.jpg", "CILWEB1-161.jpg"]}, {"k": "bn", "title": "The bridge, without people", "q": 2, "frames": [14, 16, 94, 93, 62, 37], "files": ["CILWEB1-14.jpg", "CILWEB1-16.jpg", "CILWEB1-94.jpg", "CILWEB1-93.jpg", "CILWEB1-62.jpg", "CILWEB1-37.jpg"]}, {"k": "ls", "title": "Landscapes, nobody in them", "q": 3, "frames": [1, 36, 25, 24, 20, 88, 87, 89, 85, 84, 83, 90, 38, 19, 32, 31, 40, 178, 108, 101, 124, 145, 140], "files": ["CILWEB1.jpg", "CILWEB1-36.jpg", "CILWEB1-25.jpg", "CILWEB1-24.jpg", "CILWEB1-20.jpg", "CILWEB1-88.jpg", "CILWEB1-87.jpg", "CILWEB1-89.jpg", "CILWEB1-85.jpg", "CILWEB1-84.jpg", "CILWEB1-83.jpg", "CILWEB1-90.jpg", "CILWEB1-38.jpg", "CILWEB1-19.jpg", "CILWEB1-32.jpg", "CILWEB1-31.jpg", "CILWEB1-40.jpg", "CILWEB1-178.jpg", "CILWEB1-108.jpg", "CILWEB1-101.jpg", "CILWEB1-124.jpg", "CILWEB1-145.jpg", "CILWEB1-140.jpg"]}, {"k": "rest", "title": "The rest", "q": 5, "frames": [71, 3, 169, 8, 13, 45, 44, 43, 42, 54, 53, 68, 73, 74, 173, 75, 76, 77, 78, 79, 81, 98, 97, 56, 52, 51, 50, 49, 48, 47, 46, 123, 125, 182, 179, 111, 110, 99, 175, 100, 185, 184, 188, 177, 193, 160, 158, 153, 186, 148], "files": ["CILWEB1-71.jpg", "CILWEB1-3.jpg", "CILWEB1-169.jpg", "CILWEB1-8.jpg", "CILWEB1-13.jpg", "CILWEB1-45.jpg", "CILWEB1-44.jpg", "CILWEB1-43.jpg", "CILWEB1-42.jpg", "CILWEB1-54.jpg", "CILWEB1-53.jpg", "CILWEB1-68.jpg", "CILWEB1-73.jpg", "CILWEB1-74.jpg", "CILWEB1-173.jpg", "CILWEB1-75.jpg", "CILWEB1-76.jpg", "CILWEB1-77.jpg", "CILWEB1-78.jpg", "CILWEB1-79.jpg", "CILWEB1-81.jpg", "CILWEB1-98.jpg", "CILWEB1-97.jpg", "CILWEB1-56.jpg", "CILWEB1-52.jpg", "CILWEB1-51.jpg", "CILWEB1-50.jpg", "CILWEB1-49.jpg", "CILWEB1-48.jpg", "CILWEB1-47.jpg", "CILWEB1-46.jpg", "CILWEB1-123.jpg", "CILWEB1-125.jpg", "CILWEB1-182.jpg", "CILWEB1-179.jpg", "CILWEB1-111.jpg", "CILWEB1-110.jpg", "CILWEB1-99.jpg", "CILWEB1-175.jpg", "CILWEB1-100.jpg", "CILWEB1-185.jpg", "CILWEB1-184.jpg", "CILWEB1-188.jpg", "CILWEB1-177.jpg", "CILWEB1-193.jpg", "CILWEB1-160.jpg", "CILWEB1-158.jpg", "CILWEB1-153.jpg", "CILWEB1-186.jpg", "CILWEB1-148.jpg"]}];
 var picks={},cur=null,tt=null;
 try{picks=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){picks={};}
@@ -246,17 +246,18 @@ var e=$("em").value.trim();
 localStorage.setItem(KEY+":name",n);localStorage.setItem(KEY+":conn",conn);
 localStorage.setItem(KEY+":email",e);
 var L=lists(),b=this;
-if(FORM){var fd=new FormData();fd.append(FORM.name,n);fd.append(FORM.conn,conn);
-if(e)fd.append(FORM.email,e);
-SECS.forEach(function(s){fd.append(FORM[s.k],L[s.k]);});
-b.disabled=true;
-fetch(FORM.base,{method:"POST",mode:"no-cors",body:fd}).then(function(){
-$("send").className="";b.disabled=false;$("go").textContent="Sent";
-toast("Got it. Thank you, "+n+".");},function(){b.disabled=false;
-toast("That did not go through. Try once more.");});}
-else{var body="Name: "+n+"\nConnection: "+conn+(e?"\nEmail: "+e:"");
-SECS.forEach(function(s){body+="\n"+s.title+": "+L[s.k];});
-location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+n)+"&body="+enc(body);}};
+var payload={access_key:W3F,subject:SUBJ+": "+n,from_name:"Interlaken favorites vote",
+botcheck:"",name:n,connection:conn,email:e,
+bridge_with_people:L.bp,bridge_without_people:L.bn,landscapes:L.ls,the_rest:L.rest};
+b.disabled=true;b.textContent="Sending…";
+fetch("https://api.web3forms.com/submit",{method:"POST",
+headers:{"Content-Type":"application/json",Accept:"application/json"},
+body:JSON.stringify(payload)}).then(function(r){return r.json();}).then(function(r){
+if(r.success){$("send").className="";b.textContent="Sent";
+toast("Got it. Thank you, "+n+".");}
+else{b.disabled=false;b.textContent="Send my picks";
+toast("That did not go through. Try once more.");}},
+function(){b.disabled=false;b.textContent="Send my picks";
+toast("That did not go through. Try once more.");});};
 bar();
-</script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-</body></html>
+</script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>
