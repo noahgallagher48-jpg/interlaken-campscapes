@@ -219,7 +219,7 @@ else{var body="Name: "+n+"\\nConnection: "+conn+(e?"\\nEmail: "+e:"");
 SECS.forEach(function(s){body+="\\n"+s.title+": "+L[s.k];});
 location.href="mailto:"+TO+"?subject="+enc(SUBJ+" from "+n)+"&body="+enc(body);}};
 bar();
-</script></body></html>"""
+</script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
 POOL_PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -274,7 +274,7 @@ navigator.clipboard.writeText(s).then(function(){toast("Copied.");},
 function(){window.prompt("Copy this:",s);});}
 else window.prompt("Copy this:",s);};
 bar();
-</script></body></html>"""
+</script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
 
 def by_num():
