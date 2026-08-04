@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Builds the two picker pages from frames.json / sections.json / times.json.
 
-    favorites.html   THE SURVEY (Noah's structure, 2026-08-03): four sections
-                     with forced-choice quotas. Pick two bridge-with-people,
-                     two bridge-without-people, three landscapes-with-nobody,
-                     five from the rest. Twelve picks per voter; 25 voters
-                     break the book-and-print pool of ~87 down toward the 42.
-                     SECTION POOLS BELOW ARE PLACEHOLDERS until Noah's
-                     arrangement paste replaces them.
+    favorites.html   THE SURVEY (Noah's structure, rev 2026-08-04): five
+                     sections. Required: two bridge-with-people, two
+                     bridge-without-people, three landscapes, four Shabbat
+                     (Shabbat = his arrangement group minus its bridge
+                     frames, which stay in the bridge sections). Optional:
+                     up to ten from the rest, no requirement. Pools are
+                     his arrangement paste of 2026-08-03.
     twenty.html      the marketing pool, Noah cuts it down. No cap.
 
 Both pages are noindex and unlinked from the library. Picks persist in
@@ -47,13 +47,19 @@ SURVEY = [
     {"k": "ls", "title": "Landscapes, nobody in them", "q": 3,
      "frames": [1, 36, 25, 24, 20, 88, 87, 89, 85, 84, 83, 90, 38, 19, 32, 31,
                 40, 178, 108, 101, 124, 145, 140]},
-    {"k": "rest", "title": "The rest", "q": 5,
-     "frames": [71, 3, 169, 8, 13, 45, 44, 43, 42, 54, 53, 68, 73, 74, 173,
-                75, 76, 77, 78, 79, 81, 98, 97, 56, 52, 51, 50, 49, 48, 47,
-                46, 123, 125, 182, 179, 111, 110, 99, 175, 100, 185, 184, 188,
-                177, 193, 160, 158, 153, 186, 148]},
+    {"k": "sh", "title": "Shabbat", "q": 4,
+     "frames": [42, 43, 44, 45, 47, 48, 49, 50, 51, 52, 53, 54, 56, 68, 71,
+                73, 74, 75, 76, 77, 78, 79, 173, 99, 175, 100, 177]},
+    {"k": "rest", "title": "The rest", "q": 10, "opt": True,
+     "frames": [3, 169, 8, 13, 81, 98, 97, 46, 123, 125, 182, 179, 111, 110,
+                185, 184, 188, 193, 160, 158, 153, 186, 148]},
 ]
-WORDS = {2: "pick two", 3: "pick three", 5: "pick five"}
+WORDS = {2: "pick two", 3: "pick three", 4: "pick four", 5: "pick five", 10: "ten"}
+
+def quota_label(s):
+    if s.get("opt"):
+        return f"up to {WORDS[s['q']]}, if you like"
+    return WORDS[s["q"]]
 
 # The marketing pool (2026-08-03): Noah cuts it down; no cap.
 TWENTY = [63, 42, 112, 119, 3, 48,
@@ -121,8 +127,9 @@ SURVEY_PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
 __CSS__
 </style></head><body>
 <header><h1>Camp Interlaken</h1><div class=sub>Summer 2026 &middot; the favorites vote</div>
-<p class=instr>Four sets of photographs. Pick two from the first, two from the second,
-three from the third, and five from the last: twelve in all, the ones that stay with you.
+<p class=instr>Five sets of photographs. Pick two from each bridge set, three landscapes,
+four from Shabbat, the ones that stay with you. The last set is open: up to ten favorites,
+none required.
 Tap a photo to see it large, tap the circle to pick it. Your picks save on this device
 until you send them.</p></header>
 __SECTIONS__
@@ -130,7 +137,7 @@ __SECTIONS__
 <div id=toast></div>
 <div id=lb><img id=lbi alt=""><button class="nav pv" aria-label="Previous"></button><button class="nav nx" aria-label="Next"></button><button class=x aria-label="Close">&times;</button><div id=lbbar><span class=id id=lbid></span><button class=pk id=lbpk type=button>Pick</button></div></div>
 <div id=send><div id=sheet>
-<h2>Send your twelve</h2>
+<h2>Send your picks</h2>
 <label for=nm>Name</label><input id=nm autocomplete=name>
 <div class=lbl>Connection to camp</div><div id=conns>__CONNS__</div>
 <label for=em>Email <span class=opt>(optional)</span></label><input id=em type=email autocomplete=email>
@@ -138,7 +145,7 @@ __SECTIONS__
 </div></div>
 <footer>Photographs Noah Gallagher &middot; Abba Photo</footer>
 <script>
-var KEY="cil-survey",SUBJ="Interlaken favorites",W3F=__W3F__;
+var KEY="cil-survey2",SUBJ="Interlaken favorites",W3F=__W3F__;
 var SECS=__SECS__;
 var picks={},cur=null,tt=null;
 try{picks=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){picks={};}
@@ -149,11 +156,13 @@ function toast(m){var t=$("toast");t.textContent=m;t.className="on";
 clearTimeout(tt);tt=setTimeout(function(){t.className="";},2600);}
 function save(){localStorage.setItem(KEY,JSON.stringify(picks));}
 function total(){var n=0;SECS.forEach(function(s){n+=picks[s.k].length;});return n;}
-function need(){var m=0;SECS.forEach(function(s){m+=s.q;});return m;}
-function bar(){$("cnt").textContent=total()+" of "+need()+" picked";
+function need(){var m=0;SECS.forEach(function(s){if(!s.opt)m+=s.q;});return m;}
+function reqtotal(){var n=0;SECS.forEach(function(s){if(!s.opt)n+=picks[s.k].length;});return n;}
+function bar(){var x=total()-reqtotal();
+$("cnt").textContent=reqtotal()+" of "+need()+" picked"+(x?" · +"+x+" from the rest":"");
 SECS.forEach(function(s){var h=$("h-"+s.k);
-h.querySelector(".scnt").textContent=picks[s.k].length+" of "+s.q;
-h.className=picks[s.k].length===s.q?"sv full":"sv";});}
+h.querySelector(".scnt").textContent=s.opt?picks[s.k].length+" of up to "+s.q:picks[s.k].length+" of "+s.q;
+h.className=(!s.opt&&picks[s.k].length===s.q)||(s.opt&&picks[s.k].length>0)?"sv full":"sv";});}
 function mark(k,n){var c=document.querySelector('#s-'+k+' .card[data-n="'+n+'"]');
 if(c)c.className=picks[k].indexOf(n)>=0?"card on":"card";
 if(cur){var s=sec(cur.k),m=s.frames[cur.i],pk=$("lbpk");
@@ -184,7 +193,7 @@ $("rv").onclick=function(){document.body.classList.toggle("rv");
 this.textContent=document.body.classList.contains("rv")?"See all":"My picks";};
 function enc(s){return encodeURIComponent(s);}
 function short(){for(var i=0;i<SECS.length;i++){var s=SECS[i];
-if(picks[s.k].length!==s.q)return s;}return null;}
+if(!s.opt&&picks[s.k].length!==s.q)return s;}return null;}
 $("go").onclick=function(){var s=short();
 if(s){toast('"'+s.title+'" still needs '+(s.q-picks[s.k].length)+" more.");
 $("s-"+s.k).scrollIntoView({behavior:"smooth"});return;}
@@ -307,7 +316,7 @@ def build():
         secs_html.append(
             f'<section class=sv data-k={s["k"]} id=s-{s["k"]}>\n'
             f'<h2 class=sv id=h-{s["k"]}><span>{s["title"]}</span>'
-            f'<span class=q>{WORDS[s["q"]]}</span><span class=scnt></span></h2>\n'
+            f'<span class=q>{quota_label(s)}</span><span class=scnt></span></h2>\n'
             + cards(pairs) + '\n</section>')
         secs_js.append({"k": s["k"], "title": s["title"], "q": s["q"],
                         "frames": s["frames"],
