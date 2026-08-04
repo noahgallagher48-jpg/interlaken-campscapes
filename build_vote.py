@@ -319,6 +319,7 @@ def build():
             f'<span class=q>{quota_label(s)}</span><span class=scnt></span></h2>\n'
             + cards(pairs) + '\n</section>')
         secs_js.append({"k": s["k"], "title": s["title"], "q": s["q"],
+                        "opt": bool(s.get("opt")),
                         "frames": s["frames"],
                         "files": [nums[n]["file"] for n in s["frames"]]})
     conns = "".join(f'<button type=button>{c}</button>' for c in CONNECTIONS)
