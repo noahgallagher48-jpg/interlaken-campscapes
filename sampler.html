@@ -20,7 +20,16 @@ h2{font-family:Georgia,serif;font-weight:500;font-size:24px;color:#c9bfa9}
 .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:3px;padding:3px 8px;background:rgba(226,167,62,.14);color:#e2a73e;vertical-align:4px;margin-left:10px}
 
 /* the wall */
-#scene{position:relative;border-radius:6px;overflow:hidden;background:linear-gradient(180deg,#efe9df 0%,#e6dfd2 62%,#d9d1c2 62.5%,#cfc6b6 100%)}
+#scene{position:relative;border-radius:6px;overflow:hidden;
+background:
+ radial-gradient(120% 90% at 32% 8%, rgba(255,252,244,.85) 0%, rgba(255,252,244,0) 55%),
+ radial-gradient(140% 100% at 50% 118%, rgba(60,48,34,.22) 0%, rgba(60,48,34,0) 46%),
+ linear-gradient(180deg,#ece5d8 0%,#e4dccc 80%,#d6cdbb 83.6%,#cec4b1 83.9%,#c8bda8 100%)}
+#scene::before{content:"";position:absolute;left:0;right:0;top:83.2%;height:1%;
+background:linear-gradient(180deg,#efe9dc 0%,#ded4c2 55%,rgba(90,74,54,.35) 100%)}
+#scene::after{content:"";position:absolute;left:0;right:0;top:84.2%;bottom:0;
+background:repeating-linear-gradient(90deg, rgba(96,76,52,.16) 0 2px, rgba(0,0,0,0) 2px 118px),
+linear-gradient(180deg, rgba(171,142,104,.5) 0%, rgba(140,112,80,.55) 100%);mix-blend-mode:multiply}
 #scene svg{display:block;width:100%;height:auto}
 #art{position:absolute;box-shadow:0 14px 40px rgba(30,25,15,.45);background:#fff;transition:width .35s ease}
 #art .inner{border:1px solid #ccc}
@@ -90,6 +99,7 @@ footer{padding:36px 0 46px;color:#7d745f;font-size:12px;letter-spacing:.14em;tex
   <div id=scene>
     <svg viewBox="0 0 1000 620" aria-hidden=true>
       <rect x=0 y=520 width=1000 height=8 fill="#b9ae9b"/>
+      <ellipse cx="500" cy="516" rx="250" ry="16" fill="rgba(50,38,24,.28)"/>
       <g fill="#4a4238">
         <rect x="310" y="380" width="380" height="118" rx="16" />
         <rect x="290" y="356" width="52" height="118" rx="14" />
@@ -98,6 +108,15 @@ footer{padding:36px 0 46px;color:#7d745f;font-size:12px;letter-spacing:.14em;tex
         <rect x="506" y="346" width="176" height="52" rx="12" fill="#564c40" />
         <rect x="322" y="498" width="14" height="26" /><rect x="664" y="498" width="14" height="26" />
       </g>
+      <g>
+        <rect x="330" y="392" width="340" height="12" rx="6" fill="rgba(255,250,238,.10)"/>
+        <rect x="318" y="352" width="170" height="10" rx="5" fill="rgba(255,250,238,.12)"/>
+        <rect x="512" y="352" width="170" height="10" rx="5" fill="rgba(255,250,238,.12)"/>
+      </g>
+      <g stroke="#8a7a62" stroke-width="5" fill="none" opacity=".55">
+        <line x1="118" y1="520" x2="118" y2="330"/><circle cx="118" cy="318" r="16" fill="#3a3226" stroke="none"/>
+      </g>
+      <ellipse cx="118" cy="522" rx="34" ry="7" fill="rgba(50,38,24,.22)"/>
     </svg>
     <div id=art><div class=inner><img src="img/present/CILWEB1-141.jpg" alt=""></div></div>
   </div>
