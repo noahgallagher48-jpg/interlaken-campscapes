@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content=noindex>
+<title>Camp Interlaken &middot; the tour</title><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#14110d;color:#ede7dd;font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;line-height:1.55}
+header{padding:42px 20px 6px;max-width:1000px;margin:0 auto}
+h1{font-family:Georgia,serif;font-weight:600;font-size:clamp(24px,4.5vw,34px)}
+.sub{color:#a69b8a;font-size:14px;margin-top:6px;max-width:60ch}
+#map{max-width:1000px;margin:18px auto 60px;padding:0 14px}
+#map svg{width:100%;height:auto;display:block;border:1px solid rgba(237,231,221,.14);border-radius:10px;background:
+  radial-gradient(120% 90% at 50% -10%, #1b1712 0%, #14110d 60%),#14110d}
+.lake{fill:#1c2a2e}
+.shore{stroke:#3a4a4e;stroke-width:.5;fill:none}
+.path{stroke:rgba(237,231,221,.22);stroke-width:.55;fill:none;stroke-dasharray:1.6 1.9}
+.node{cursor:pointer;pointer-events:bounding-box}
+.node .dot{fill:#e2a73e}
+.node .halo{fill:rgba(226,167,62,.16)}
+.node:hover .halo,.node:active .halo{fill:rgba(226,167,62,.32)}
+.node text{fill:#c9bfa9;font-size:3.1px;font-family:Georgia,serif;letter-spacing:.04em}
+.sketchnote{color:#7d745f;font-size:12.5px;margin-top:10px}
+#room{position:fixed;inset:0;background:rgba(10,8,6,.98);display:none;z-index:9;overflow-y:auto}
+#room.on{display:block}
+#room .in{max-width:1100px;margin:0 auto;padding:26px 16px 80px}
+#room h2{font-family:Georgia,serif;font-weight:600;font-size:26px;display:flex;align-items:baseline;gap:14px}
+#room h2 small{color:#7d745f;font-size:13px;font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}
+#room .x{position:fixed;top:10px;right:16px;font-size:36px;color:#ede7dd;background:none;border:0;cursor:pointer;z-index:11}
+#dz{width:100%;height:56vh;background:#000;border-radius:6px;margin-top:16px;display:none}
+#dz.on{display:block}
+.dznote{color:#7d745f;font-size:12.5px;margin-top:6px;display:none}
+.dznote.on{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:18px}
+.grid button{border:0;padding:0;background:#1d1913;border-radius:4px;overflow:hidden;cursor:pointer}
+.grid img{width:100%;height:auto;display:block}
+#lb{position:fixed;inset:0;background:rgba(5,4,3,.98);display:none;align-items:center;justify-content:center;z-index:12}
+#lb.on{display:flex}
+#lb img{max-width:96vw;max-height:92vh;object-fit:contain}
+#lb .x{position:fixed;top:8px;right:14px;font-size:34px;color:#ede7dd;background:none;border:0;cursor:pointer}
+footer{max-width:1000px;margin:0 auto;padding:0 20px 50px;color:#7d745f;font-size:12.5px}
+a{color:#e2a73e}
+</style></head><body>
+<header><h1>Camp Interlaken &middot; the tour</h1>
+<p class=sub>Tap a place. Its photographs open.</p></header>
+
+<div id=map>
+<svg viewBox="0 0 100 100" aria-label="A sketch of camp">
+  <path class=lake d="M0,88 C 18,82 34,90 52,87 C 70,84 84,92 100,88 L100,100 L0,100 Z"/>
+  <path class=shore d="M0,88 C 18,82 34,90 52,87 C 70,84 84,92 100,88"/>
+  <path class=path d="M30,76 C 36,68 42,66 48,62 C 55,57 60,56 68,54 C 60,48 54,40 50,34 C 40,36 30,36 22,38 M48,62 C 60,50 72,38 84,14"/>
+  <g class="node" data-k="water"><circle cx="30" cy="78" r="2.1" class="dot"/><circle cx="30" cy="78" r="4.2" class="halo"/><text x="30" y="74.6" text-anchor="middle">The waterfront</text></g>
+<g class="node" data-k="boats"><circle cx="62" cy="84" r="2.1" class="dot"/><circle cx="62" cy="84" r="4.2" class="halo"/><text x="62" y="80.6" text-anchor="middle">On the water</text></g>
+<g class="node" data-k="bridge"><circle cx="48" cy="62" r="2.1" class="dot"/><circle cx="48" cy="62" r="4.2" class="halo"/><text x="48" y="58.6" text-anchor="middle">The bridge</text></g>
+<g class="node" data-k="gather"><circle cx="68" cy="56" r="2.1" class="dot"/><circle cx="68" cy="56" r="4.2" class="halo"/><text x="68" y="52.6" text-anchor="middle">Shabbat</text></g>
+<g class="node" data-k="kfar"><circle cx="22" cy="38" r="2.1" class="dot"/><circle cx="22" cy="38" r="4.2" class="halo"/><text x="24.2" y="34.6" text-anchor="start">K'far Noar</text></g>
+<g class="node" data-k="cabins"><circle cx="50" cy="34" r="2.1" class="dot"/><circle cx="50" cy="34" r="4.2" class="halo"/><text x="50" y="30.6" text-anchor="middle">Cabins and bunks</text></g>
+<g class="node" data-k="games"><circle cx="76" cy="30" r="2.1" class="dot"/><circle cx="76" cy="30" r="4.2" class="halo"/><text x="73.8" y="26.6" text-anchor="end">Games and the wall</text></g>
+<g class="node" data-k="night"><circle cx="84" cy="12" r="2.1" class="dot"/><circle cx="84" cy="12" r="4.2" class="halo"/><text x="81.8" y="8.6" text-anchor="end">After dark</text></g>
+</svg>
+<p class=sketchnote>A sketch of the ground, not a survey. The real thing sits on the camp's own map.</p>
+</div>
+
+<div id=room><button class=x aria-label="Close">&times;</button><div class=in>
+<h2 id=rtitle></h2>
+<div id=dz></div><p class=dznote id=dznote>Pinch or scroll to look closer. This frame holds it.</p>
+<div class=grid id=rgrid></div>
+</div></div>
+
+<div id=lb><button class=x aria-label="Close">&times;</button><img id=lbi alt=""></div>
+
+<footer>Photographs Noah Gallagher &middot; Abba Photo &middot;
+<a href="https://www.abba-photo.com">abba-photo.com</a></footer>
+
+<script src="lib/openseadragon.min.js"></script>
+<script>
+var ROOMS=[{"k": "water", "label": "The waterfront", "frames": [{"n": 23, "f": "CILWEB1-23.jpg"}, {"n": 36, "f": "CILWEB1-36.jpg"}, {"n": 37, "f": "CILWEB1-37.jpg"}, {"n": 115, "f": "CILWEB1-115.jpg"}, {"n": 116, "f": "CILWEB1-116.jpg"}, {"n": 117, "f": "CILWEB1-117.jpg"}, {"n": 118, "f": "CILWEB1-118.jpg"}, {"n": 119, "f": "CILWEB1-119.jpg"}, {"n": 120, "f": "CILWEB1-120.jpg"}, {"n": 192, "f": "CILWEB1-192.jpg"}], "dz": "CILWEB1-192.jpg"}, {"k": "boats", "label": "On the water", "frames": [{"n": 150, "f": "CILWEB1-150.jpg"}, {"n": 151, "f": "CILWEB1-151.jpg"}, {"n": 152, "f": "CILWEB1-152.jpg"}, {"n": 153, "f": "CILWEB1-153.jpg"}, {"n": 154, "f": "CILWEB1-154.jpg"}, {"n": 155, "f": "CILWEB1-155.jpg"}, {"n": 156, "f": "CILWEB1-156.jpg"}, {"n": 157, "f": "CILWEB1-157.jpg"}, {"n": 158, "f": "CILWEB1-158.jpg"}, {"n": 159, "f": "CILWEB1-159.jpg"}, {"n": 161, "f": "CILWEB1-161.jpg"}], "dz": null}, {"k": "bridge", "label": "The bridge", "frames": [{"n": 57, "f": "CILWEB1-57.jpg"}, {"n": 58, "f": "CILWEB1-58.jpg"}, {"n": 59, "f": "CILWEB1-59.jpg"}, {"n": 60, "f": "CILWEB1-60.jpg"}, {"n": 61, "f": "CILWEB1-61.jpg"}, {"n": 62, "f": "CILWEB1-62.jpg"}, {"n": 63, "f": "CILWEB1-63.jpg"}], "dz": null}, {"k": "gather", "label": "Shabbat", "frames": [{"n": 42, "f": "CILWEB1-42.jpg"}, {"n": 43, "f": "CILWEB1-43.jpg"}, {"n": 44, "f": "CILWEB1-44.jpg"}, {"n": 45, "f": "CILWEB1-45.jpg"}, {"n": 54, "f": "CILWEB1-54.jpg"}, {"n": 65, "f": "CILWEB1-65.jpg"}, {"n": 68, "f": "CILWEB1-68.jpg"}, {"n": 71, "f": "CILWEB1-71.jpg"}, {"n": 73, "f": "CILWEB1-73.jpg"}, {"n": 74, "f": "CILWEB1-74.jpg"}, {"n": 75, "f": "CILWEB1-75.jpg"}, {"n": 76, "f": "CILWEB1-76.jpg"}, {"n": 77, "f": "CILWEB1-77.jpg"}, {"n": 78, "f": "CILWEB1-78.jpg"}, {"n": 79, "f": "CILWEB1-79.jpg"}, {"n": 99, "f": "CILWEB1-99.jpg"}, {"n": 100, "f": "CILWEB1-100.jpg"}], "dz": null}, {"k": "kfar", "label": "K'far Noar", "frames": [{"n": 24, "f": "CILWEB1-24.jpg"}, {"n": 25, "f": "CILWEB1-25.jpg"}, {"n": 28, "f": "CILWEB1-28.jpg"}, {"n": 29, "f": "CILWEB1-29.jpg"}, {"n": 31, "f": "CILWEB1-31.jpg"}, {"n": 32, "f": "CILWEB1-32.jpg"}, {"n": 33, "f": "CILWEB1-33.jpg"}, {"n": 162, "f": "CILWEB1-162.jpg"}, {"n": 163, "f": "CILWEB1-163.jpg"}, {"n": 164, "f": "CILWEB1-164.jpg"}], "dz": null}, {"k": "cabins", "label": "Cabins and bunks", "frames": [{"n": 30, "f": "CILWEB1-30.jpg"}, {"n": 34, "f": "CILWEB1-34.jpg"}, {"n": 35, "f": "CILWEB1-35.jpg"}, {"n": 38, "f": "CILWEB1-38.jpg"}, {"n": 40, "f": "CILWEB1-40.jpg"}, {"n": 107, "f": "CILWEB1-107.jpg"}, {"n": 126, "f": "CILWEB1-126.jpg"}, {"n": 127, "f": "CILWEB1-127.jpg"}], "dz": null}, {"k": "games", "label": "Games and the wall", "frames": [{"n": 110, "f": "CILWEB1-110.jpg"}, {"n": 111, "f": "CILWEB1-111.jpg"}, {"n": 112, "f": "CILWEB1-112.jpg"}, {"n": 113, "f": "CILWEB1-113.jpg"}, {"n": 121, "f": "CILWEB1-121.jpg"}, {"n": 122, "f": "CILWEB1-122.jpg"}, {"n": 130, "f": "CILWEB1-130.jpg"}, {"n": 160, "f": "CILWEB1-160.jpg"}], "dz": null}, {"k": "night", "label": "After dark", "frames": [{"n": 14, "f": "CILWEB1-14.jpg"}, {"n": 16, "f": "CILWEB1-16.jpg"}, {"n": 18, "f": "CILWEB1-18.jpg"}, {"n": 19, "f": "CILWEB1-19.jpg"}, {"n": 20, "f": "CILWEB1-20.jpg"}, {"n": 21, "f": "CILWEB1-21.jpg"}, {"n": 22, "f": "CILWEB1-22.jpg"}, {"n": 102, "f": "CILWEB1-102.jpg"}, {"n": 105, "f": "CILWEB1-105.jpg"}, {"n": 17, "f": "CILWEB1-17.jpg"}, {"n": 101, "f": "CILWEB1-101.jpg"}, {"n": 104, "f": "CILWEB1-104.jpg"}], "dz": null}];var byk={};ROOMS.forEach(function(r){byk[r.k]=r;});
+var viewer=null;
+function openRoom(k){var r=byk[k];if(!r)return;
+document.getElementById("rtitle").innerHTML=r.label+' <small>'+r.frames.length+" frames</small>";
+var g=document.getElementById("rgrid");g.innerHTML="";
+r.frames.forEach(function(f){
+  if(r.dz&&f.f===r.dz)return;
+  var b=document.createElement("button");
+  var i=document.createElement("img");i.loading="lazy";i.src="img/thumb/"+f.f;i.alt=r.label;
+  b.appendChild(i);b.onclick=function(){document.getElementById("lbi").src="img/present/"+f.f;
+  document.getElementById("lb").className="on";};g.appendChild(b);});
+var dz=document.getElementById("dz"),dn=document.getElementById("dznote");
+if(viewer){viewer.destroy();viewer=null;}
+if(r.dz){dz.className="on";dn.className="dznote on";
+viewer=OpenSeadragon({element:dz,tileSources:{type:"image",url:"img/present/"+r.dz},
+showNavigationControl:false,gestureSettingsMouse:{clickToZoom:true,scrollToZoom:true}});}
+else{dz.className="";dn.className="dznote";}
+document.getElementById("room").className="on";document.body.style.overflow="hidden";}
+function closeRoom(){document.getElementById("room").className="";document.body.style.overflow="";
+if(viewer){viewer.destroy();viewer=null;}}
+document.querySelectorAll(".node").forEach(function(n){
+n.addEventListener("click",function(){openRoom(n.dataset.k);});});
+document.querySelector("#room .x").onclick=closeRoom;
+document.querySelector("#lb .x").onclick=function(){document.getElementById("lb").className="";};
+document.getElementById("lb").addEventListener("click",function(e){
+if(e.target.id==="lb")this.className="";});
+document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;
+if(document.getElementById("lb").className==="on")document.getElementById("lb").className="";
+else if(document.getElementById("room").className==="on")closeRoom();});
+</script>
+<script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>
