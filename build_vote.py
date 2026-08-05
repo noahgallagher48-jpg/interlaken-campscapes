@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Builds the two picker pages from frames.json / sections.json / times.json.
 
-    favorites.html   THE SURVEY (Noah's structure, rev 2026-08-04): five
-                     sections. Required: two bridge-with-people, two
-                     bridge-without-people, three landscapes, four Shabbat
-                     (Shabbat = his arrangement group minus its bridge
-                     frames, which stay in the bridge sections). Optional:
-                     up to ten from the rest, no requirement. Pools are
-                     his arrangement paste of 2026-08-03.
+    favorites.html   THE SURVEY (Noah's structure, rev 4, 2026-08-04):
+                     five sections, headings instruction-only (no themes
+                     shown to voters), 25 picks per ballot proportional
+                     to set size: bridge-with 2/8, bridge-without 2/6,
+                     landscapes 6/23, Shabbat 7/27, rest 8/27 (rest
+                     includes the four restored first looks 194-197).
+                     Pools from his arrangement paste of 2026-08-03.
     twenty.html      the marketing pool, Noah cuts it down. No cap.
 
 Both pages are noindex and unlinked from the library. Picks persist in
