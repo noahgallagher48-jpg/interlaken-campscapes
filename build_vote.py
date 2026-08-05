@@ -44,18 +44,18 @@ SURVEY = [
      "frames": [58, 23, 63, 61, 60, 170, 57, 161]},
     {"k": "bn", "title": "The bridge, without people", "q": 2,
      "frames": [14, 16, 94, 93, 62, 37]},
-    {"k": "ls", "title": "Landscapes, nobody in them", "q": 3,
+    {"k": "ls", "title": "Landscapes, nobody in them", "q": 6,
      "frames": [1, 36, 25, 24, 20, 88, 87, 89, 85, 84, 83, 90, 38, 19, 32, 31,
                 40, 178, 108, 101, 124, 145, 140]},
-    {"k": "sh", "title": "Shabbat", "q": 4,
+    {"k": "sh", "title": "Shabbat", "q": 7,
      "frames": [42, 43, 44, 45, 47, 48, 49, 50, 51, 52, 53, 54, 56, 68, 71,
                 73, 74, 75, 76, 77, 78, 79, 173, 99, 175, 100, 177]},
-    {"k": "rest", "title": "The rest", "q": 10, "opt": True,
+    {"k": "rest", "title": "The rest", "q": 8,
      "frames": [3, 169, 8, 13, 81, 98, 97, 46, 123, 125, 182, 179, 111, 110,
                 185, 184, 188, 193, 160, 158, 153, 186, 148,
                 194, 195, 196, 197]},
 ]
-WORDS = {2: "pick two", 3: "pick three", 4: "pick four", 5: "pick five", 10: "ten"}
+WORDS = {2: "pick two", 3: "pick three", 4: "pick four", 5: "pick five", 6: "pick six", 7: "pick seven", 8: "pick eight"}
 
 def heading(s):
     if s.get("opt"):
@@ -129,7 +129,7 @@ __CSS__
 </style></head><body>
 <header><h1>Camp Interlaken</h1><div class=sub>Summer 2026 &middot; the favorites vote</div>
 <p class=instr>Five sets of photographs. Each set says how many to pick: the ones that
-stay with you. The last set is open, none required.
+stay with you. Twenty five in all.
 Tap a photo to see it large, tap the circle to pick it. Your picks save on this device
 until you send them.</p></header>
 __SECTIONS__
