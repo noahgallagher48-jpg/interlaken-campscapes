@@ -52,14 +52,15 @@ SURVEY = [
                 73, 74, 75, 76, 77, 78, 79, 173, 99, 175, 100, 177]},
     {"k": "rest", "title": "The rest", "q": 10, "opt": True,
      "frames": [3, 169, 8, 13, 81, 98, 97, 46, 123, 125, 182, 179, 111, 110,
-                185, 184, 188, 193, 160, 158, 153, 186, 148]},
+                185, 184, 188, 193, 160, 158, 153, 186, 148,
+                194, 195, 196, 197]},
 ]
 WORDS = {2: "pick two", 3: "pick three", 4: "pick four", 5: "pick five", 10: "ten"}
 
-def quota_label(s):
+def heading(s):
     if s.get("opt"):
-        return f"up to {WORDS[s['q']]}, if you like"
-    return WORDS[s["q"]]
+        return f"Up to {WORDS[s['q']]} images, if you like"
+    return WORDS[s["q"]].capitalize() + " images"
 
 # The marketing pool (2026-08-03): Noah cuts it down; no cap.
 TWENTY = [63, 42, 112, 119, 3, 48,
@@ -127,9 +128,8 @@ SURVEY_PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
 __CSS__
 </style></head><body>
 <header><h1>Camp Interlaken</h1><div class=sub>Summer 2026 &middot; the favorites vote</div>
-<p class=instr>Five sets of photographs. Pick two from each bridge set, three landscapes,
-four from Shabbat, the ones that stay with you. The last set is open: up to ten favorites,
-none required.
+<p class=instr>Five sets of photographs. Each set says how many to pick: the ones that
+stay with you. The last set is open, none required.
 Tap a photo to see it large, tap the circle to pick it. Your picks save on this device
 until you send them.</p></header>
 __SECTIONS__
@@ -178,8 +178,8 @@ c.querySelector(".sel").onclick=function(e){e.stopPropagation();toggle(k,n);};
 c.querySelector(".ph").onclick=function(){open_(k,sec(k).frames.indexOf(n));};});
 function open_(k,i){var s=sec(k);cur={k:k,i:(i+s.frames.length)%s.frames.length};
 var n=s.frames[cur.i];
-$("lbi").src="img/present/"+s.files[cur.i];$("lbid").textContent=s.title+" &middot; "+n;
-$("lbid").innerHTML=s.title+" &middot; "+n;
+$("lbi").src="img/present/"+s.files[cur.i];
+$("lbid").textContent=n;
 $("lb").className="on";mark(k,n);}
 function shut(){$("lb").className="";cur=null;}
 document.querySelector("#lb .x").onclick=shut;
@@ -195,7 +195,7 @@ function enc(s){return encodeURIComponent(s);}
 function short(){for(var i=0;i<SECS.length;i++){var s=SECS[i];
 if(!s.opt&&picks[s.k].length!==s.q)return s;}return null;}
 $("go").onclick=function(){var s=short();
-if(s){toast('"'+s.title+'" still needs '+(s.q-picks[s.k].length)+" more.");
+if(s){toast("That set still needs "+(s.q-picks[s.k].length)+" more.");
 $("s-"+s.k).scrollIntoView({behavior:"smooth"});return;}
 $("send").className="on";};
 $("sx").onclick=function(){$("send").className="";};
@@ -315,8 +315,8 @@ def build():
         pairs = [(n, nums[n]) for n in s["frames"]]
         secs_html.append(
             f'<section class=sv data-k={s["k"]} id=s-{s["k"]}>\n'
-            f'<h2 class=sv id=h-{s["k"]}><span>{s["title"]}</span>'
-            f'<span class=q>{quota_label(s)}</span><span class=scnt></span></h2>\n'
+            f'<h2 class=sv id=h-{s["k"]}><span>{heading(s)}</span>'
+            f'<span class=scnt></span></h2>\n'
             + cards(pairs) + '\n</section>')
         secs_js.append({"k": s["k"], "title": s["title"], "q": s["q"],
                         "opt": bool(s.get("opt")),
