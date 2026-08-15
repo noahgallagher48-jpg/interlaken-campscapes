@@ -34,7 +34,7 @@ body.spreads .pair figure{margin:0;display:flex;align-items:center;background:#0
   font-size:11.5px;color:rgba(237,231,221,.55)}
 </style></head><body>
 <header>
-  <h1>Camp Interlaken &middot; July 2026<span>50 frames</span></h1>
+  <h1>Camp Interlaken &middot; July 2026<span>49 frames</span></h1>
   <div class=tog>
     <button id=bRead class=on>Read</button><button id=bSpread>Spreads</button>
   </div>
@@ -43,7 +43,7 @@ body.spreads .pair figure{margin:0;display:flex;align-items:center;background:#0
 <div id=lb><button class=x>&times;</button><button class=p>&lsaquo;</button>
 <img id=lbi alt=""><button class=nx>&rsaquo;</button><div class=c id=lbc></div></div>
 <script>
-var IDS=["CILWEB1-201", "CILWEB1-123", "CILWEB1-136", "CILWEB1-2", "CILWEB1-54", "CILWEB1-143", "CILWEB1-36", "CILWEB1-29", "CILWEB1-168", "CILWEB1-101", "CILWEB1-109", "CILWEB1-97", "CILWEB1-12", "CILWEB1-46", "CILWEB1-93", "CILWEB1-180", "CILWEB1-83", "CILWEB1", "CILWEB1-58", "CILWEB1-20", "CILWEB1-87", "CILWEB1-98", "CILWEB1-60", "CILWEB1-144", "CILWEB1-207", "CILWEB1-184", "CILWEB1-116", "CILWEB1-8", "CILWEB1-206", "CILWEB1-148", "CILWEB1-38", "CILWEB1-71", "CILWEB1-16", "CILWEB1-161", "CILWEB1-169", "CILWEB1-209", "CILWEB1-215", "CILWEB1-141", "CILWEB1-196", "CILWEB1-179", "CILWEB1-47", "CILWEB1-88", "CILWEB1-51", "CILWEB1-50", "CILWEB1-48", "CILWEB1-34", "CILWEB1-175", "CILWEB1-119", "CILWEB1-3", "CILWEB1-131"],NUMS=[201, 123, 136, 2, 54, 143, 36, 29, 168, 101, 109, 97, 12, 46, 93, 180, 83, 1, 58, 20, 87, 98, 60, 144, 207, 184, 116, 8, 206, 148, 38, 71, 16, 161, 169, 209, 215, 141, 196, 179, 47, 88, 51, 50, 48, 34, 175, 119, 3, 131],i=0,spread=false;
+var IDS=["CILWEB1-201", "CILWEB1-123", "CILWEB1-136", "CILWEB1-2", "CILWEB1-54", "CILWEB1-143", "CILWEB1-36", "CILWEB1-29", "CILWEB1-168", "CILWEB1-101", "CILWEB1-109", "CILWEB1-97", "CILWEB1-12", "CILWEB1-46", "CILWEB1-93", "CILWEB1-180", "CILWEB1-83", "CILWEB1", "CILWEB1-58", "CILWEB1-20", "CILWEB1-87", "CILWEB1-98", "CILWEB1-60", "CILWEB1-144", "CILWEB1-207", "CILWEB1-184", "CILWEB1-8", "CILWEB1-206", "CILWEB1-148", "CILWEB1-38", "CILWEB1-71", "CILWEB1-16", "CILWEB1-161", "CILWEB1-169", "CILWEB1-209", "CILWEB1-215", "CILWEB1-141", "CILWEB1-196", "CILWEB1-179", "CILWEB1-47", "CILWEB1-88", "CILWEB1-51", "CILWEB1-50", "CILWEB1-48", "CILWEB1-34", "CILWEB1-175", "CILWEB1-119", "CILWEB1-3", "CILWEB1-131"],NUMS=[201, 123, 136, 2, 54, 143, 36, 29, 168, 101, 109, 97, 12, 46, 93, 180, 83, 1, 58, 20, 87, 98, 60, 144, 207, 184, 8, 206, 148, 38, 71, 16, 161, 169, 209, 215, 141, 196, 179, 47, 88, 51, 50, 48, 34, 175, 119, 3, 131],i=0,spread=false;
 function fig(k){return '<figure data-k="'+k+'"><img loading=lazy src="img/present/'+IDS[k]+
   '.jpg" alt=""><span class=n>'+NUMS[k]+'</span></figure>';}
 function render(){var m=document.getElementById('m'),h='';
