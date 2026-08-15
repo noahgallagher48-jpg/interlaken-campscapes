@@ -25,7 +25,9 @@ import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FRAMES = json.load(open(os.path.join(HERE, "frames.json")))
-SECTIONS = json.load(open(os.path.join(HERE, "sections.json")))
+import killed as _killed
+SECTIONS = _killed.strip(json.load(open(os.path.join(HERE, "sections.json"))))
+_killed.check(SECTIONS, __file__)
 TIMES = json.load(open(os.path.join(HERE, "_work", "times.json")))
 
 TO = "noah@abba-photo.com"

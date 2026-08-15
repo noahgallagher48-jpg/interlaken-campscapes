@@ -37,7 +37,9 @@ LABELS = {
 }
 
 FRAMES = json.load(open(os.path.join(HERE, "frames.json")))
-SECTIONS = json.load(open(os.path.join(HERE, "sections.json")))
+import killed as _killed
+SECTIONS = _killed.strip(json.load(open(os.path.join(HERE, "sections.json"))))
+_killed.check(SECTIONS, __file__)
 # Noah's proposed forty-two, in his slideshow order (recovered by hash-match from the
 # downloaded slideshow, 2026-07-31). The page presents these as the set; the camp
 # challenges frames with out/in swaps.

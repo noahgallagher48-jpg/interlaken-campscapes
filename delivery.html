@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content=noindex>
+<title>Camp Interlaken · July 2026</title>
+<meta property="og:title" content="Camp Interlaken · July 2026">
+<meta property="og:description" content="Photographs by Noah Gallagher · Abba Photo">
+<meta property="og:image" content="https://www.abba-photo.com/interlaken-campscapes/img/present/CILWEB1-201.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.abba-photo.com/interlaken-campscapes/delivery.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel=icon href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="%23100e0b"/><circle cx="16" cy="16" r="7" fill="none" stroke="%23daa143" stroke-width="2.4"/></svg>'>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ground:#100e0b;--ink:#ece6da;--muted:#9a9080;--faint:#6e6557;--gold:#daa143;
+  --serif:"Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif;
+  --mono:"SF Mono",ui-monospace,Menlo,monospace}
+html{scroll-behavior:smooth}
+body{background:var(--ground);color:var(--ink);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+img{display:block;max-width:100%;height:auto}
+button.lnk{background:none;border:0;color:var(--muted);cursor:pointer;font:inherit;
+  font-size:inherit;padding:0;letter-spacing:inherit}
+button.lnk:hover{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+
+/* ---- opening ---- */
+.open{min-height:52vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:72px 24px 56px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:22px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5.4vw,54px);
+  letter-spacing:.015em;text-wrap:balance}
+.date{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);margin-top:14px}
+.rule{width:44px;border-top:1px solid rgba(218,161,67,.6);margin:34px 0}
+.play{display:inline-flex;align-items:center;gap:11px;background:none;color:var(--ink);
+  border:1px solid rgba(236,230,218,.34);border-radius:44px;padding:13px 30px;
+  font-size:13px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  font-family:inherit;transition:border-color .25s,color .25s}
+.play:hover{border-color:var(--gold);color:var(--gold)}
+.play .tri{font-size:10px;position:relative;top:-1px}
+.dlline{margin-top:26px;font-size:13px;color:var(--faint)}
+.opts{margin-top:9px}
+.opts a,.opts button.lnk{color:var(--muted)}
+.opts .dot{color:var(--faint);margin:0 9px}
+
+.wrap{max-width:1560px;margin:0 auto;padding:0 clamp(16px,3vw,44px)}
+.reader{max-width:1180px;margin:0 auto;padding:0 clamp(16px,3vw,44px)}
+
+/* ---- the picks: a slow read ---- */
+.reader figure{margin:0 0 clamp(26px,4.5vh,52px);position:relative}
+.reader figure img{width:100%;cursor:zoom-in;background:#181510}
+.reader figure.tall img{width:auto;max-width:100%;max-height:92vh;margin:0 auto}
+
+/* ---- the grid: a fast browse ---- */
+.secthead{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding:64px 0 22px;border-top:1px solid rgba(236,230,218,.1);margin-top:26px}
+.secthead h2{font-family:var(--serif);font-weight:400;font-size:23px;letter-spacing:.01em}
+.secthead span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--faint)}
+.grid{columns:3 340px;column-gap:12px;padding-bottom:24px}
+.grid figure{break-inside:avoid;margin:0 0 12px;position:relative}
+.grid figure img{width:100%;cursor:zoom-in;background:#181510}
+
+figure .tag{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:12px;
+  padding:20px 10px 7px;font-family:var(--mono);font-size:10.5px;color:rgba(236,230,218,.66);
+  background:linear-gradient(transparent,rgba(10,8,6,.7));opacity:0;transition:opacity .2s}
+figure:hover .tag{opacity:1}
+figure .tag .links{margin-left:auto;display:flex;gap:12px}
+figure .tag a{letter-spacing:.06em}
+.fadein{opacity:0;transition:opacity .6s ease}
+.fadein.in{opacity:1}
+
+/* ---- selection ---- */
+figure .pick{position:absolute;top:9px;right:9px;width:23px;height:23px;border-radius:50%;
+  border:1.5px solid rgba(236,230,218,.85);background:rgba(10,8,6,.42);display:none;
+  align-items:center;justify-content:center;font-size:13px;line-height:1;color:var(--ground);
+  pointer-events:none}
+body.sel .pick{display:flex}
+body.sel figure img{cursor:pointer}
+figure.on .pick{background:var(--gold);border-color:var(--gold)}
+figure.on .pick::after{content:"\2713"}
+figure.on img{outline:2px solid var(--gold);outline-offset:-2px}
+#selbar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(90px);
+  z-index:45;display:flex;align-items:center;gap:20px;background:rgba(18,15,11,.96);
+  border:1px solid rgba(236,230,218,.16);border-radius:44px;padding:12px 26px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.05em;white-space:nowrap;
+  transition:transform .3s ease;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+body.sel #selbar{transform:translateX(-50%) translateY(0)}
+#selbar .ct{color:var(--muted)}
+#selbar button.lnk{font-family:var(--mono);font-size:12px;color:var(--gold)}
+#selbar button.lnk:disabled{color:var(--faint);cursor:default;text-decoration:none}
+#selbar .done{color:var(--muted)}
+
+footer{max-width:1180px;margin:0 auto;padding:44px clamp(16px,3vw,44px) 84px;
+  border-top:1px solid rgba(236,230,218,.1);display:flex;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--faint)}
+footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
+
+/* ---- lightbox ---- */
+#lb{position:fixed;inset:0;background:rgba(8,7,5,.985);display:none;
+  align-items:center;justify-content:center;z-index:50}
+#lb.on{display:flex}
+#lb img{max-width:95vw;max-height:88vh;object-fit:contain}
+#lb button{position:absolute;background:none;border:0;color:var(--ink);font-size:32px;
+  cursor:pointer;padding:16px 22px;opacity:.55;line-height:1;transition:opacity .2s}
+#lb button:hover{opacity:1}
+#lb .x{top:8px;right:12px;font-size:24px}#lb .p{left:4px}#lb .nx{right:4px}
+#lb .c{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:11.5px;color:rgba(236,230,218,.6);
+  display:flex;gap:18px;align-items:center;white-space:nowrap}
+#lb .c a,#lb .c button.cp{position:static;font-size:11.5px;font-family:var(--mono);
+  padding:0;opacity:1;color:var(--gold);letter-spacing:.04em;background:none;border:0;cursor:pointer}
+#lb .c button.cp:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* ---- slideshow ---- */
+#ss{position:fixed;inset:0;background:#070605;display:none;z-index:60}
+#ss.on{display:block}
+#ss .lay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 1.3s ease-in-out}
+#ss .lay.show{opacity:1}
+#ss .lay img{max-width:100vw;max-height:100vh;object-fit:contain}
+#ss .close{position:absolute;top:10px;right:16px;background:none;border:0;
+  color:rgba(236,230,218,.5);font-size:26px;cursor:pointer;z-index:3;padding:12px}
+#ss .close:hover{color:var(--ink)}
+#ss .hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:3;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:rgba(236,230,218,.36);
+  transition:opacity .6s;pointer-events:none}
+#ss.playing .hint{opacity:0}
+
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:70;
+  background:var(--ink);color:var(--ground);font-family:var(--mono);font-size:12px;
+  padding:9px 18px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .3s}
+#toast.on{opacity:1}
+@media (max-width:640px){.open{min-height:40vh;padding-top:56px}.grid{columns:2 150px}
+  #selbar{gap:13px;padding:11px 18px;font-size:11px}}
+</style></head><body>
+
+<div class=open>
+  <p class=eyebrow>Abba Photo</p>
+  <h1>Camp Interlaken</h1>
+  <p class=date>Eagle River, Wisconsin &middot; July 2026</p>
+  <div class=rule></div>
+  <button class=play id=play><span class=tri>&#9654;</span> Play</button>
+  <p class=dlline>198 photographs in two sizes: full resolution for print, web for screens</p>
+  <p class="dlline opts">
+    <a href="https://drive.google.com/drive/folders/1HsgxIW_O2UkrAx8gKageMM1xg6t__cdi" target=_blank rel=noopener>All full res</a>
+    <span class=dot>&middot;</span>
+    <button class=lnk id=zipall>All for web (243 MB)</button>
+    <span class=dot>&middot;</span>
+    <button class=lnk id=selmode>Select frames</button>
+  </p>
+  <p class=dlline style="margin-top:8px;font-size:12px">Full resolution comes from Google Drive. No sign-in needed.</p>
+</div>
+
+<div class=reader id=picks></div>
+
+<div class=wrap>
+  <div class=secthead><h2>Everything</h2><span>198 &middot; IN THE ORDER THEY WERE MADE</span></div>
+  <div class=grid id=grid></div>
+</div>
+
+<footer>
+  <span>Photographs by Noah Gallagher</span>
+  <span>Abba Photo &middot; <a href="https://www.abba-photo.com" target=_blank rel=noopener>abba-photo.com</a></span>
+</footer>
+
+<div id=selbar><span class=ct id=selct>0 selected</span>
+  <button class=lnk id=selweb disabled>Web zip</button>
+  <button class=lnk id=selfull disabled>Full res</button>
+  <button class="lnk done" id=seldone>Done</button></div>
+
+<div id=lb><button class=x aria-label=Close>&times;</button>
+  <button class=p aria-label=Previous>&lsaquo;</button>
+  <img id=lbi alt="Camp Interlaken JCC, Eagle River, Wisconsin, July 2026">
+  <button class=nx aria-label=Next>&rsaquo;</button><div class=c id=lbc></div></div>
+
+<div id=ss><button class=close id=ssx aria-label=Close>&times;</button>
+  <div class=lay id=la><img alt="Camp Interlaken JCC, Eagle River, Wisconsin, July 2026"></div><div class=lay id=lbb><img alt="Camp Interlaken JCC, Eagle River, Wisconsin, July 2026"></div>
+  <div class=hint>CLICK TO PAUSE &middot; ESC TO LEAVE</div></div>
+
+<div id=toast>Link copied</div>
+
+<script>
+var PICKS=[{"n": 201, "id": "CILWEB1-201", "d": "https://drive.google.com/uc?export=download&id=1gL_mbRqjP_bn-VBZszCBJytju43vk504", "w": 2560, "h": 1708}, {"n": 123, "id": "CILWEB1-123", "d": "https://drive.google.com/uc?export=download&id=1YF3jR3X1kpdiUOekl6o-U4dHvCnLCyAs", "w": 2560, "h": 1708}, {"n": 136, "id": "CILWEB1-136", "d": "https://drive.google.com/uc?export=download&id=1tucuvQIdYxDW3w5_NG-aOD-5XXwlXNOx", "w": 2048, "h": 2560}, {"n": 2, "id": "CILWEB1-2", "d": "https://drive.google.com/uc?export=download&id=1YB3aPXa2G9YPXHsNey13Tv8JoFNK2gjM", "w": 2560, "h": 1707}, {"n": 54, "id": "CILWEB1-54", "d": "https://drive.google.com/uc?export=download&id=1UCrNA-MTGTSaNxgrqrF9TzOqAPQJ0h27", "w": 2560, "h": 1708}, {"n": 143, "id": "CILWEB1-143", "d": "https://drive.google.com/uc?export=download&id=1g4ftxpHD88qbYyPM_i8tVN7Q_bxQXGqt", "w": 2560, "h": 1708}, {"n": 36, "id": "CILWEB1-36", "d": "https://drive.google.com/uc?export=download&id=1bPdvPZGNX4q433gaHkImSl7ldZ_U3XMZ", "w": 2560, "h": 1708}, {"n": 29, "id": "CILWEB1-29", "d": "https://drive.google.com/uc?export=download&id=1e8xtjrQl7ChjVAwLOgD4VZh14cayGChl", "w": 2560, "h": 1440}, {"n": 168, "id": "CILWEB1-168", "d": "https://drive.google.com/uc?export=download&id=1GFGp0wN0vn8Yl1_1MS2J0fD7tzPqxdyB", "w": 2560, "h": 1708}, {"n": 101, "id": "CILWEB1-101", "d": "https://drive.google.com/uc?export=download&id=1ROMT6dEu11EVz6MZYVz9k7Xth8QGz_og", "w": 2560, "h": 2048}, {"n": 109, "id": "CILWEB1-109", "d": "https://drive.google.com/uc?export=download&id=1W3so-w3vRztSzy8v897T9V7D8JLJauby", "w": 2560, "h": 1707}, {"n": 97, "id": "CILWEB1-97", "d": "https://drive.google.com/uc?export=download&id=1IAtozc7SDvElYXxM82AjFVKETuNv30P5", "w": 2560, "h": 1708}, {"n": 12, "id": "CILWEB1-12", "d": "https://drive.google.com/uc?export=download&id=1MyTRC9306H4mVtAYNpg86KnAK4GA6NIM", "w": 2560, "h": 1440}, {"n": 46, "id": "CILWEB1-46", "d": "https://drive.google.com/uc?export=download&id=1HXa7W6B7Wuhusl8M1_KzY0v3OFtR5AAw", "w": 2560, "h": 1707}, {"n": 93, "id": "CILWEB1-93", "d": "https://drive.google.com/uc?export=download&id=1xUCNzRQGaV3_kBVt6qllgfVEvBQKw3lm", "w": 2560, "h": 1707}, {"n": 180, "id": "CILWEB1-180", "d": "https://drive.google.com/uc?export=download&id=1dt8vdCJdIgIAWMKIJt1bcQC_VU02BABr", "w": 2560, "h": 2048}, {"n": 83, "id": "CILWEB1-83", "d": "https://drive.google.com/uc?export=download&id=1riGvrRBfdLZyq3V41Zndi2e0bQuYSeFd", "w": 2560, "h": 1708}, {"n": 1, "id": "CILWEB1", "d": "https://drive.google.com/uc?export=download&id=1hCjkVT3Crt29ez6PTjBn9zEqpQB9vAm8", "w": 2048, "h": 2560}, {"n": 58, "id": "CILWEB1-58", "d": "https://drive.google.com/uc?export=download&id=1IqR4ppjhmWDnQAEI8GU2ftKEZsKvI1sV", "w": 2560, "h": 1440}, {"n": 20, "id": "CILWEB1-20", "d": "https://drive.google.com/uc?export=download&id=1Ee5jdADOW5IoHz5YtLMwgKgGadE6zSQl", "w": 2560, "h": 1708}, {"n": 87, "id": "CILWEB1-87", "d": "https://drive.google.com/uc?export=download&id=1djO4YrESQA9q6zzov9JaB5LeJsR0VBTK", "w": 2560, "h": 1440}, {"n": 98, "id": "CILWEB1-98", "d": "https://drive.google.com/uc?export=download&id=1yCWbF1qZ58PHzIdetaBjpZItn2BlrUqo", "w": 2560, "h": 1707}, {"n": 60, "id": "CILWEB1-60", "d": "https://drive.google.com/uc?export=download&id=1z2ExqMvrZnJj0hAhiepgaT7bRRxK6zeE", "w": 2560, "h": 1707}, {"n": 144, "id": "CILWEB1-144", "d": "https://drive.google.com/uc?export=download&id=1fR5LYocrL3QJjyXt9Xwqxzxdb2h1OgzM", "w": 2048, "h": 2560}, {"n": 207, "id": "CILWEB1-207", "d": "https://drive.google.com/uc?export=download&id=1fz-uZJVMF8hUGikAaeaZmGOhitSkGoEH", "w": 2560, "h": 1708}, {"n": 184, "id": "CILWEB1-184", "d": "https://drive.google.com/uc?export=download&id=1HjHjM5UHZalL6YdMNVMy6llCVMtP0NX1", "w": 2560, "h": 1708}, {"n": 116, "id": "CILWEB1-116", "d": "https://drive.google.com/file/d/11IP_4D-7Z1R3Yy9CaITWs3dKkdPEPZ7A/view", "w": 2560, "h": 900}, {"n": 8, "id": "CILWEB1-8", "d": "https://drive.google.com/uc?export=download&id=1trqvrDBHKmnNgQcJQVhMrljboTA3fZTa", "w": 2560, "h": 1707}, {"n": 206, "id": "CILWEB1-206", "d": "https://drive.google.com/uc?export=download&id=1VNe3otGQ6rzKBRZvAeNObjnCHfyINR8U", "w": 2048, "h": 2560}, {"n": 148, "id": "CILWEB1-148", "d": "https://drive.google.com/uc?export=download&id=14wCGk6CaQ2YIMtwHBxbe3kp4sZDJImew", "w": 2560, "h": 1707}, {"n": 38, "id": "CILWEB1-38", "d": "https://drive.google.com/uc?export=download&id=1Y76zT4qKcA2Ep5hvxB5ddkycl1Dkxaid", "w": 2560, "h": 1708}, {"n": 71, "id": "CILWEB1-71", "d": "https://drive.google.com/uc?export=download&id=1-dYefC-CAzgyvuSv_FnQFpyDA2XLXyXR", "w": 2560, "h": 1708}, {"n": 16, "id": "CILWEB1-16", "d": "https://drive.google.com/uc?export=download&id=1QaEYjD2l4Pij39BwQRwrPJwFHLJyfXjO", "w": 2560, "h": 1707}, {"n": 161, "id": "CILWEB1-161", "d": "https://drive.google.com/uc?export=download&id=1GAlmmE3CZrQoBiGVM_gh_9PG4BDvgpUs", "w": 2560, "h": 1708}, {"n": 169, "id": "CILWEB1-169", "d": "https://drive.google.com/uc?export=download&id=1Zz7pWWZFjNScoEbNrJhJaZ_Stejz5Yfg", "w": 2560, "h": 1707}, {"n": 209, "id": "CILWEB1-209", "d": "https://drive.google.com/uc?export=download&id=1SkDCCStCkPD36KVnUBaT8RMB6cxGudAZ", "w": 2560, "h": 1707}, {"n": 215, "id": "CILWEB1-215", "d": "https://drive.google.com/uc?export=download&id=1Qj1oSnjVpPyLAq1og6z1Eo7CE2Jmt2-b", "w": 2560, "h": 1707}, {"n": 141, "id": "CILWEB1-141", "d": "https://drive.google.com/uc?export=download&id=1S6fHaW-CHX2MTS6lZbOl8_o12LjyKh1s", "w": 2560, "h": 1707}, {"n": 196, "id": "CILWEB1-196", "d": "https://drive.google.com/uc?export=download&id=1r-rMrc_BFLt-gGX-Uh38SewIpmviL-cJ", "w": 2560, "h": 1708}, {"n": 179, "id": "CILWEB1-179", "d": "https://drive.google.com/uc?export=download&id=1nvuH9WC8NhK9xrwYFHQ2jj8XS9CNIq5O", "w": 2560, "h": 1708}, {"n": 47, "id": "CILWEB1-47", "d": "https://drive.google.com/uc?export=download&id=1jzZFPh0m4kKe3p2yQn8AvVtEZyXv21SG", "w": 2560, "h": 1708}, {"n": 88, "id": "CILWEB1-88", "d": "https://drive.google.com/uc?export=download&id=1392WEGSklWMVIoN6VdU5vIqhQOMGJ0y0", "w": 2048, "h": 2560}, {"n": 51, "id": "CILWEB1-51", "d": "https://drive.google.com/uc?export=download&id=1bwNsWQH65GTZvg4gZqa_OkRp1B_grgSe", "w": 2560, "h": 2048}, {"n": 50, "id": "CILWEB1-50", "d": "https://drive.google.com/uc?export=download&id=1r1aBdcmzzBOv_AELP3JX2hqUheonmvQL", "w": 2560, "h": 1440}, {"n": 48, "id": "CILWEB1-48", "d": "https://drive.google.com/uc?export=download&id=1YkEEV-SuaJbQ035xSey3v7kHYKc4VERk", "w": 2560, "h": 1708}, {"n": 34, "id": "CILWEB1-34", "d": "https://drive.google.com/uc?export=download&id=16RTsrKJlg9RUnvcvQdktD-lM4Lj1GvCe", "w": 2560, "h": 1707}, {"n": 175, "id": "CILWEB1-175", "d": "https://drive.google.com/uc?export=download&id=1sJyqf2OK3J1YBW9gYGLVN-86KVgM37Ce", "w": 2560, "h": 1440}, {"n": 119, "id": "CILWEB1-119", "d": "https://drive.google.com/uc?export=download&id=1jBD_IIC1vells6YXa0yMxUGgeLKbL0ng", "w": 2560, "h": 1440}, {"n": 3, "id": "CILWEB1-3", "d": "https://drive.google.com/uc?export=download&id=1blfrUG0y9gP4PCU7Pk5D8fmGTEj577pe", "w": 2560, "h": 1708}, {"n": 131, "id": "CILWEB1-131", "d": "https://drive.google.com/uc?export=download&id=1DbzIQAbAYjGoZ9xpNBg4EUCecv7LT5wa", "w": 2560, "h": 2048}],ALL=[{"n": 201, "id": "CILWEB1-201", "d": "https://drive.google.com/uc?export=download&id=1gL_mbRqjP_bn-VBZszCBJytju43vk504", "w": 2560, "h": 1708}, {"n": 198, "id": "CILWEB1-198", "d": "https://drive.google.com/uc?export=download&id=1n8idfEiqsDpjsTpaPswjJThvBub9Pjnm", "w": 2560, "h": 2048}, {"n": 167, "id": "CILWEB1-167", "d": "https://drive.google.com/uc?export=download&id=1agjuUsa16oT330Kbwehpr67ImGB0lAiQ", "w": 2560, "h": 1708}, {"n": 168, "id": "CILWEB1-168", "d": "https://drive.google.com/uc?export=download&id=1GFGp0wN0vn8Yl1_1MS2J0fD7tzPqxdyB", "w": 2560, "h": 1708}, {"n": 1, "id": "CILWEB1", "d": "https://drive.google.com/uc?export=download&id=1hCjkVT3Crt29ez6PTjBn9zEqpQB9vAm8", "w": 2048, "h": 2560}, {"n": 2, "id": "CILWEB1-2", "d": "https://drive.google.com/uc?export=download&id=1YB3aPXa2G9YPXHsNey13Tv8JoFNK2gjM", "w": 2560, "h": 1707}, {"n": 3, "id": "CILWEB1-3", "d": "https://drive.google.com/uc?export=download&id=1blfrUG0y9gP4PCU7Pk5D8fmGTEj577pe", "w": 2560, "h": 1708}, {"n": 4, "id": "CILWEB1-4", "d": "https://drive.google.com/uc?export=download&id=1xV54mwzaniw-sDm8aR1_jKub9PrvyrZX", "w": 2560, "h": 2048}, {"n": 6, "id": "CILWEB1-6", "d": "https://drive.google.com/uc?export=download&id=1sHNDV84QKChM2khTCDMR0zBD0E2I4KPA", "w": 2560, "h": 1708}, {"n": 169, "id": "CILWEB1-169", "d": "https://drive.google.com/uc?export=download&id=1Zz7pWWZFjNScoEbNrJhJaZ_Stejz5Yfg", "w": 2560, "h": 1707}, {"n": 7, "id": "CILWEB1-7", "d": "https://drive.google.com/uc?export=download&id=1yWtHRXDVEbfzeUzbC3D27UDl-z6NyEk-", "w": 2560, "h": 1440}, {"n": 8, "id": "CILWEB1-8", "d": "https://drive.google.com/uc?export=download&id=1trqvrDBHKmnNgQcJQVhMrljboTA3fZTa", "w": 2560, "h": 1707}, {"n": 9, "id": "CILWEB1-9", "d": "https://drive.google.com/uc?export=download&id=1F0EhUU-GnES5k3Gxe1jFj2VSGSQvDFx6", "w": 2560, "h": 2048}, {"n": 10, "id": "CILWEB1-10", "d": "https://drive.google.com/uc?export=download&id=1V5zo1uoeX6_IzewBZ9QUixVmSVWYVA2h", "w": 2048, "h": 2560}, {"n": 11, "id": "CILWEB1-11", "d": "https://drive.google.com/uc?export=download&id=1tsOpwUbDsBqVuSDprfXWPsPh5ypYTTyV", "w": 2560, "h": 1707}, {"n": 12, "id": "CILWEB1-12", "d": "https://drive.google.com/uc?export=download&id=1MyTRC9306H4mVtAYNpg86KnAK4GA6NIM", "w": 2560, "h": 1440}, {"n": 14, "id": "CILWEB1-14", "d": "https://drive.google.com/uc?export=download&id=1sH-3aQRnAlVhcjuSsBZq8_hTvB9YNhda", "w": 2560, "h": 1707}, {"n": 16, "id": "CILWEB1-16", "d": "https://drive.google.com/uc?export=download&id=1QaEYjD2l4Pij39BwQRwrPJwFHLJyfXjO", "w": 2560, "h": 1707}, {"n": 17, "id": "CILWEB1-17", "d": "https://drive.google.com/uc?export=download&id=1CwpCIP6CSw1v86pnjO9SnWGUB1I8kzay", "w": 2048, "h": 2560}, {"n": 18, "id": "CILWEB1-18", "d": "https://drive.google.com/uc?export=download&id=1YgMjEwEVHkhgfqVug6eZ7LDlHC5wLIid", "w": 2560, "h": 1708}, {"n": 19, "id": "CILWEB1-19", "d": "https://drive.google.com/uc?export=download&id=11aTQevgRgOwoi2_w2IC6tQ0oMyggX_JK", "w": 2560, "h": 1708}, {"n": 20, "id": "CILWEB1-20", "d": "https://drive.google.com/uc?export=download&id=1Ee5jdADOW5IoHz5YtLMwgKgGadE6zSQl", "w": 2560, "h": 1708}, {"n": 21, "id": "CILWEB1-21", "d": "https://drive.google.com/uc?export=download&id=1YelEgd8-uYAsZHhLXDmY05SvVHM4cSOi", "w": 2560, "h": 1708}, {"n": 22, "id": "CILWEB1-22", "d": "https://drive.google.com/uc?export=download&id=1_LNCpZpA5aPECoNbdsiaNQcQs6mHCY4j", "w": 2560, "h": 1707}, {"n": 23, "id": "CILWEB1-23", "d": "https://drive.google.com/uc?export=download&id=1Rcc0TccIKfwiE1wEx-trK4KwpgIri-7L", "w": 2560, "h": 1707}, {"n": 24, "id": "CILWEB1-24", "d": "https://drive.google.com/uc?export=download&id=16kgKD91vYoshrFTkO9QfHlO6JhyA4AxV", "w": 2560, "h": 1708}, {"n": 25, "id": "CILWEB1-25", "d": "https://drive.google.com/uc?export=download&id=1EGMABUnyEDe-t4k1qBEHglW0OjxmlBrL", "w": 2560, "h": 1708}, {"n": 26, "id": "CILWEB1-26", "d": "https://drive.google.com/uc?export=download&id=1hBVw5gdo96Qdf6DDOzN_v6_B_3XjBy7g", "w": 2560, "h": 2048}, {"n": 27, "id": "CILWEB1-27", "d": "https://drive.google.com/uc?export=download&id=1yJqNCqtIaCf-_NPlEdkVW07sXstxthKW", "w": 2560, "h": 1440}, {"n": 28, "id": "CILWEB1-28", "d": "https://drive.google.com/uc?export=download&id=1NQxbU43ccuH05_b1mkzJICU0DeYYngnE", "w": 2560, "h": 1440}, {"n": 29, "id": "CILWEB1-29", "d": "https://drive.google.com/uc?export=download&id=1e8xtjrQl7ChjVAwLOgD4VZh14cayGChl", "w": 2560, "h": 1440}, {"n": 30, "id": "CILWEB1-30", "d": "https://drive.google.com/uc?export=download&id=1FtQHiDKLI9yLSwC9xNxEwZlc2S3k7jXO", "w": 1707, "h": 2560}, {"n": 31, "id": "CILWEB1-31", "d": "https://drive.google.com/uc?export=download&id=1S1-6mjAofQ_1OPlkJql_AcfiLHC89aIQ", "w": 2560, "h": 1708}, {"n": 32, "id": "CILWEB1-32", "d": "https://drive.google.com/uc?export=download&id=1qxMHmk4PKGZYef3Juha-Mlq7aJx9iPJt", "w": 2560, "h": 2048}, {"n": 33, "id": "CILWEB1-33", "d": "https://drive.google.com/uc?export=download&id=1w6-BGnBISWZPI0Vx5aNu8l7zptLg3acN", "w": 2560, "h": 1708}, {"n": 34, "id": "CILWEB1-34", "d": "https://drive.google.com/uc?export=download&id=16RTsrKJlg9RUnvcvQdktD-lM4Lj1GvCe", "w": 2560, "h": 1707}, {"n": 35, "id": "CILWEB1-35", "d": "https://drive.google.com/uc?export=download&id=1YllpuSYPC7kuajTQTDC_6Wo8ITyAOzmg", "w": 2560, "h": 1707}, {"n": 36, "id": "CILWEB1-36", "d": "https://drive.google.com/uc?export=download&id=1bPdvPZGNX4q433gaHkImSl7ldZ_U3XMZ", "w": 2560, "h": 1708}, {"n": 37, "id": "CILWEB1-37", "d": "https://drive.google.com/uc?export=download&id=1UBCeWKI4kdcPLwIDGP93psMaemCrMEGr", "w": 2560, "h": 1707}, {"n": 38, "id": "CILWEB1-38", "d": "https://drive.google.com/uc?export=download&id=1Y76zT4qKcA2Ep5hvxB5ddkycl1Dkxaid", "w": 2560, "h": 1708}, {"n": 40, "id": "CILWEB1-40", "d": "https://drive.google.com/uc?export=download&id=1O1QbaguypXwDYzhLxlmhuJIV4ONGnWWG", "w": 2560, "h": 1708}, {"n": 41, "id": "CILWEB1-41", "d": "https://drive.google.com/uc?export=download&id=1KIbRRtQHfz_p_U5HW7CKMxlVVmQBvJsh", "w": 2560, "h": 1708}, {"n": 42, "id": "CILWEB1-42", "d": "https://drive.google.com/uc?export=download&id=1N_9PitoJeGsj9JrAKVodQXIajdYDtUcE", "w": 2560, "h": 1708}, {"n": 43, "id": "CILWEB1-43", "d": "https://drive.google.com/uc?export=download&id=1KuIpGTG34BLMki0P--BGkCl8E29akTa0", "w": 2560, "h": 1440}, {"n": 44, "id": "CILWEB1-44", "d": "https://drive.google.com/uc?export=download&id=1uJMtuCiAZp6SAvFgwQn1khCWFfDCLUcY", "w": 2560, "h": 1707}, {"n": 45, "id": "CILWEB1-45", "d": "https://drive.google.com/uc?export=download&id=1zSYQUjkuRwP29CXFUcyyihS241u_LOpn", "w": 2560, "h": 1708}, {"n": 46, "id": "CILWEB1-46", "d": "https://drive.google.com/uc?export=download&id=1HXa7W6B7Wuhusl8M1_KzY0v3OFtR5AAw", "w": 2560, "h": 1707}, {"n": 47, "id": "CILWEB1-47", "d": "https://drive.google.com/uc?export=download&id=1jzZFPh0m4kKe3p2yQn8AvVtEZyXv21SG", "w": 2560, "h": 1708}, {"n": 48, "id": "CILWEB1-48", "d": "https://drive.google.com/uc?export=download&id=1YkEEV-SuaJbQ035xSey3v7kHYKc4VERk", "w": 2560, "h": 1708}, {"n": 49, "id": "CILWEB1-49", "d": "https://drive.google.com/uc?export=download&id=1vpmwbBUxfPjAZ5d72DDCj4KoUD55KqJY", "w": 2560, "h": 1708}, {"n": 50, "id": "CILWEB1-50", "d": "https://drive.google.com/uc?export=download&id=1r1aBdcmzzBOv_AELP3JX2hqUheonmvQL", "w": 2560, "h": 1440}, {"n": 51, "id": "CILWEB1-51", "d": "https://drive.google.com/uc?export=download&id=1bwNsWQH65GTZvg4gZqa_OkRp1B_grgSe", "w": 2560, "h": 2048}, {"n": 52, "id": "CILWEB1-52", "d": "https://drive.google.com/uc?export=download&id=1DugGZ8zuL7lcC0boHJIlzPsFqrW9947T", "w": 2560, "h": 1440}, {"n": 53, "id": "CILWEB1-53", "d": "https://drive.google.com/uc?export=download&id=1zDM6B0MecxU2yRSxOqRgLhkua5o8IRvT", "w": 2048, "h": 2560}, {"n": 54, "id": "CILWEB1-54", "d": "https://drive.google.com/uc?export=download&id=1UCrNA-MTGTSaNxgrqrF9TzOqAPQJ0h27", "w": 2560, "h": 1708}, {"n": 55, "id": "CILWEB1-55", "d": "https://drive.google.com/uc?export=download&id=1BjUKmlLYdpVrzgkq68GFWX6gqKHAJLde", "w": 2560, "h": 1707}, {"n": 56, "id": "CILWEB1-56", "d": "https://drive.google.com/uc?export=download&id=1A5k5ZfIrfYXG1vhmyVDjl6rtS7Pk_xlz", "w": 2560, "h": 2048}, {"n": 57, "id": "CILWEB1-57", "d": "https://drive.google.com/uc?export=download&id=1u25T1BrIwPxDKeuxL3zLe0BGx6reul66", "w": 2560, "h": 1440}, {"n": 170, "id": "CILWEB1-170", "d": "https://drive.google.com/uc?export=download&id=1ie5jCLzkQvz1g9OtSpcPiEWhqj6xt2vY", "w": 2560, "h": 1708}, {"n": 171, "id": "CILWEB1-171", "d": "https://drive.google.com/uc?export=download&id=1sJEx8DDxRPLfFdvSOkK-Vku9zdyXLzSA", "w": 2560, "h": 1708}, {"n": 58, "id": "CILWEB1-58", "d": "https://drive.google.com/uc?export=download&id=1IqR4ppjhmWDnQAEI8GU2ftKEZsKvI1sV", "w": 2560, "h": 1440}, {"n": 59, "id": "CILWEB1-59", "d": "https://drive.google.com/uc?export=download&id=1_v6JR2sgCY8h9YLok_Fh57N8LgYcHPrw", "w": 2560, "h": 1707}, {"n": 60, "id": "CILWEB1-60", "d": "https://drive.google.com/uc?export=download&id=1z2ExqMvrZnJj0hAhiepgaT7bRRxK6zeE", "w": 2560, "h": 1707}, {"n": 61, "id": "CILWEB1-61", "d": "https://drive.google.com/uc?export=download&id=1XoHMou4HurXvwQFglCoblmdemHdx1i17", "w": 2560, "h": 2048}, {"n": 62, "id": "CILWEB1-62", "d": "https://drive.google.com/uc?export=download&id=1Ei6CyrBjVtKScO2hM_DRixB8f0r00xMW", "w": 2560, "h": 1707}, {"n": 63, "id": "CILWEB1-63", "d": "https://drive.google.com/uc?export=download&id=1qzuJc75jGanCVkaEqtRcjlTEzde3xq5s", "w": 2560, "h": 1708}, {"n": 202, "id": "CILWEB1-202", "d": "https://drive.google.com/uc?export=download&id=1ablGijbxxo4Ua26Nik-9Bn1T5XkPkend", "w": 1707, "h": 2560}, {"n": 172, "id": "CILWEB1-172", "d": "https://drive.google.com/uc?export=download&id=1Ii2WK8hfe5m5wiJ9tGQyKM3HQ34YNBUe", "w": 2048, "h": 2560}, {"n": 64, "id": "CILWEB1-64", "d": "https://drive.google.com/uc?export=download&id=1o7CJUsqdUefSi-BSD9zlAkhL4sAqGMZp", "w": 2560, "h": 1708}, {"n": 68, "id": "CILWEB1-68", "d": "https://drive.google.com/uc?export=download&id=1hNHEghTht0jvrZhPD1i9r68Iu_V25ux8", "w": 2560, "h": 1708}, {"n": 69, "id": "CILWEB1-69", "d": "https://drive.google.com/uc?export=download&id=1ERYiB7kiOiieHTGkNZOtnFDXXiVoWR2p", "w": 1708, "h": 2560}, {"n": 70, "id": "CILWEB1-70", "d": "https://drive.google.com/uc?export=download&id=1ug3u1yNr53QHb8D3ICvP8QuSmx9FAr0-", "w": 1707, "h": 2560}, {"n": 71, "id": "CILWEB1-71", "d": "https://drive.google.com/uc?export=download&id=1-dYefC-CAzgyvuSv_FnQFpyDA2XLXyXR", "w": 2560, "h": 1708}, {"n": 72, "id": "CILWEB1-72", "d": "https://drive.google.com/uc?export=download&id=1cey8C1gQVswO3yt0iKKVlAuYA8jDUceE", "w": 2560, "h": 2048}, {"n": 73, "id": "CILWEB1-73", "d": "https://drive.google.com/uc?export=download&id=1O02fiFpbB-VxHAqs9Hpl4yrMLk8lkWJh", "w": 2560, "h": 1708}, {"n": 74, "id": "CILWEB1-74", "d": "https://drive.google.com/uc?export=download&id=1mW4CZyadLhcSGdLWytRjF2K-fMtR1BBE", "w": 2560, "h": 1708}, {"n": 173, "id": "CILWEB1-173", "d": "https://drive.google.com/uc?export=download&id=1wawBYFdyREhWm4t2Nwtiql_VVO9n7I6_", "w": 2048, "h": 2560}, {"n": 75, "id": "CILWEB1-75", "d": "https://drive.google.com/uc?export=download&id=1XumYFNX4ftnWgN8ux0JvrB20CI-SnyFs", "w": 2560, "h": 1707}, {"n": 76, "id": "CILWEB1-76", "d": "https://drive.google.com/uc?export=download&id=1ul2x6c70y4uRp1gkYPCmw8q3QlO0HTqV", "w": 2560, "h": 1708}, {"n": 77, "id": "CILWEB1-77", "d": "https://drive.google.com/uc?export=download&id=1IdjYSAzQViMftQrJQ7-BzJBVfTMUUZpp", "w": 2560, "h": 1708}, {"n": 78, "id": "CILWEB1-78", "d": "https://drive.google.com/uc?export=download&id=1hUhzUWM3-pHP0Rh90QCE2aU8w0yJ-8oy", "w": 2560, "h": 1708}, {"n": 79, "id": "CILWEB1-79", "d": "https://drive.google.com/uc?export=download&id=15DtvDP2muXa3e5ORosvKn5PD3ojakYj-", "w": 2560, "h": 2048}, {"n": 81, "id": "CILWEB1-81", "d": "https://drive.google.com/uc?export=download&id=1IzyQ-NpdTYzupdvyAR4bPMnOEf-m90Y0", "w": 2560, "h": 1708}, {"n": 82, "id": "CILWEB1-82", "d": "https://drive.google.com/uc?export=download&id=1UTG4iZebJ6gcpZzQgN-NDeDCZrdzKE8n", "w": 2560, "h": 1708}, {"n": 83, "id": "CILWEB1-83", "d": "https://drive.google.com/uc?export=download&id=1riGvrRBfdLZyq3V41Zndi2e0bQuYSeFd", "w": 2560, "h": 1708}, {"n": 84, "id": "CILWEB1-84", "d": "https://drive.google.com/uc?export=download&id=1zCo35txy43fewnUmYzOiMxucreCUR1iS", "w": 2560, "h": 1708}, {"n": 85, "id": "CILWEB1-85", "d": "https://drive.google.com/uc?export=download&id=15MpXzsKs7zi7oVEQ0jptgCKtVsk4wmxt", "w": 2560, "h": 1707}, {"n": 87, "id": "CILWEB1-87", "d": "https://drive.google.com/uc?export=download&id=1djO4YrESQA9q6zzov9JaB5LeJsR0VBTK", "w": 2560, "h": 1440}, {"n": 88, "id": "CILWEB1-88", "d": "https://drive.google.com/uc?export=download&id=1392WEGSklWMVIoN6VdU5vIqhQOMGJ0y0", "w": 2048, "h": 2560}, {"n": 89, "id": "CILWEB1-89", "d": "https://drive.google.com/uc?export=download&id=1xubIubsBb-wpy3wfSg_Eqg-ppomA7PJE", "w": 2560, "h": 1708}, {"n": 90, "id": "CILWEB1-90", "d": "https://drive.google.com/uc?export=download&id=1e_uoKb4gcLsoGmaD2ZCsr3Ku2Z8_dcs_", "w": 2560, "h": 2048}, {"n": 91, "id": "CILWEB1-91", "d": "https://drive.google.com/uc?export=download&id=1rrgB7bozQWHfZT3pS4M5BvSonHcmh0hi", "w": 2560, "h": 1708}, {"n": 92, "id": "CILWEB1-92", "d": "https://drive.google.com/uc?export=download&id=17V-iJmYUxemoYB-0M7Z03ulnv1U_TgOd", "w": 2560, "h": 1707}, {"n": 93, "id": "CILWEB1-93", "d": "https://drive.google.com/uc?export=download&id=1xUCNzRQGaV3_kBVt6qllgfVEvBQKw3lm", "w": 2560, "h": 1707}, {"n": 94, "id": "CILWEB1-94", "d": "https://drive.google.com/uc?export=download&id=1D_jfCPT3seuixCOgrMuoBO33BResB-Ht", "w": 2560, "h": 1708}, {"n": 95, "id": "CILWEB1-95", "d": "https://drive.google.com/uc?export=download&id=11GMAX82VXHR4mh__4BqJxWHZmV5nCCLk", "w": 1707, "h": 2560}, {"n": 96, "id": "CILWEB1-96", "d": "https://drive.google.com/uc?export=download&id=1g38WlGU__xYVC7C6OckJzr1OSglu_CuS", "w": 2560, "h": 1708}, {"n": 174, "id": "CILWEB1-174", "d": "https://drive.google.com/uc?export=download&id=15-entd5hRD3pBX5rImQV6fz78lggH9_o", "w": 2560, "h": 2048}, {"n": 97, "id": "CILWEB1-97", "d": "https://drive.google.com/uc?export=download&id=1IAtozc7SDvElYXxM82AjFVKETuNv30P5", "w": 2560, "h": 1708}, {"n": 98, "id": "CILWEB1-98", "d": "https://drive.google.com/uc?export=download&id=1yCWbF1qZ58PHzIdetaBjpZItn2BlrUqo", "w": 2560, "h": 1707}, {"n": 175, "id": "CILWEB1-175", "d": "https://drive.google.com/uc?export=download&id=1sJyqf2OK3J1YBW9gYGLVN-86KVgM37Ce", "w": 2560, "h": 1440}, {"n": 99, "id": "CILWEB1-99", "d": "https://drive.google.com/uc?export=download&id=1zf4WLSa4QtbZ9YgnIPI5Mr1-k_sUXwNt", "w": 2560, "h": 1708}, {"n": 100, "id": "CILWEB1-100", "d": "https://drive.google.com/uc?export=download&id=172gcHBdKg9d24NzzThXv-9-bm-IZgila", "w": 2560, "h": 1708}, {"n": 176, "id": "CILWEB1-176", "d": "https://drive.google.com/uc?export=download&id=1xL6y9My7UuqdlqxRn14Uc2mbzNrG-oSq", "w": 2560, "h": 1708}, {"n": 177, "id": "CILWEB1-177", "d": "https://drive.google.com/uc?export=download&id=18chTOtYlVNEqXU0D-F8gmAioTQsCQrt7", "w": 2560, "h": 2048}, {"n": 101, "id": "CILWEB1-101", "d": "https://drive.google.com/uc?export=download&id=1ROMT6dEu11EVz6MZYVz9k7Xth8QGz_og", "w": 2560, "h": 2048}, {"n": 102, "id": "CILWEB1-102", "d": "https://drive.google.com/uc?export=download&id=1Gsf3KpR2noaUXKEvC9WxGyrJK8tg6kUY", "w": 2560, "h": 1708}, {"n": 104, "id": "CILWEB1-104", "d": "https://drive.google.com/uc?export=download&id=1vVGX36POhm3c8pviAz6Yi7JkCDvHE5DA", "w": 2048, "h": 2560}, {"n": 105, "id": "CILWEB1-105", "d": "https://drive.google.com/uc?export=download&id=1SJV4PxXK8j0W-ajYdPR2kQSSjYMi9nFB", "w": 2048, "h": 2560}, {"n": 178, "id": "CILWEB1-178", "d": "https://drive.google.com/uc?export=download&id=1jrDrZf9vrHYyxBQUAmNAtP6QwscoUzQN", "w": 2560, "h": 2048}, {"n": 107, "id": "CILWEB1-107", "d": "https://drive.google.com/uc?export=download&id=1j36GRJVNfbBubC6HXXhUv_XEB1k_nV5f", "w": 2560, "h": 1708}, {"n": 109, "id": "CILWEB1-109", "d": "https://drive.google.com/uc?export=download&id=1W3so-w3vRztSzy8v897T9V7D8JLJauby", "w": 2560, "h": 1707}, {"n": 110, "id": "CILWEB1-110", "d": "https://drive.google.com/uc?export=download&id=1khS7xGaTtgkv8d9gL8RxwmzIKOpzAvIF", "w": 2560, "h": 1440}, {"n": 111, "id": "CILWEB1-111", "d": "https://drive.google.com/uc?export=download&id=1Yaqgvkp_JSdb0FhVeC6qO4vUom5Q6IZW", "w": 2048, "h": 2560}, {"n": 179, "id": "CILWEB1-179", "d": "https://drive.google.com/uc?export=download&id=1nvuH9WC8NhK9xrwYFHQ2jj8XS9CNIq5O", "w": 2560, "h": 1708}, {"n": 180, "id": "CILWEB1-180", "d": "https://drive.google.com/uc?export=download&id=1dt8vdCJdIgIAWMKIJt1bcQC_VU02BABr", "w": 2560, "h": 2048}, {"n": 181, "id": "CILWEB1-181", "d": "https://drive.google.com/uc?export=download&id=1-Xfkz_vItXl_9C79frX3kjJ2pzvAFlcb", "w": 2560, "h": 1708}, {"n": 182, "id": "CILWEB1-182", "d": "https://drive.google.com/uc?export=download&id=1qHkOJ7CjcMgtJi6hQFCgNPcShD8sOiTv", "w": 2048, "h": 2560}, {"n": 184, "id": "CILWEB1-184", "d": "https://drive.google.com/uc?export=download&id=1HjHjM5UHZalL6YdMNVMy6llCVMtP0NX1", "w": 2560, "h": 1708}, {"n": 185, "id": "CILWEB1-185", "d": "https://drive.google.com/uc?export=download&id=1tgPVkcgcUYn8QuQATsZSeM6hOY6whpts", "w": 2560, "h": 1440}, {"n": 186, "id": "CILWEB1-186", "d": "https://drive.google.com/uc?export=download&id=1YL0DWIPgdGqxvZmM4hMYLAtWvC5WVf_l", "w": 2560, "h": 1440}, {"n": 187, "id": "CILWEB1-187", "d": "https://drive.google.com/uc?export=download&id=1uWPeKgav5mdZzbZZQslQQniZJ81nYScN", "w": 2560, "h": 1708}, {"n": 188, "id": "CILWEB1-188", "d": "https://drive.google.com/uc?export=download&id=1U6hwiUMkh1ezKSM9m7JmTLxRFuWtF8Ic", "w": 2560, "h": 1707}, {"n": 189, "id": "CILWEB1-189", "d": "https://drive.google.com/uc?export=download&id=1LE-7ZWO-M4islPQPKuL7rWn7NGr9r3Of", "w": 2560, "h": 2048}, {"n": 190, "id": "CILWEB1-190", "d": "https://drive.google.com/uc?export=download&id=130DKZ74a-bPRqoUibJuBllXChbj6eXac", "w": 2048, "h": 2560}, {"n": 112, "id": "CILWEB1-112", "d": "https://drive.google.com/uc?export=download&id=1uYf-4LFzYcXEuKYEsm9h8AOfvsdfUMXU", "w": 2560, "h": 1708}, {"n": 191, "id": "CILWEB1-191", "d": "https://drive.google.com/uc?export=download&id=1l0_ZOAdx-_ZYnOI8QXqzbi9HGKQy8_Fl", "w": 2560, "h": 1707}, {"n": 113, "id": "CILWEB1-113", "d": "https://drive.google.com/uc?export=download&id=1T0m9H_jI8ycVqxedQff6s3Yxv2vJipIZ", "w": 2048, "h": 2560}, {"n": 114, "id": "CILWEB1-114", "d": "https://drive.google.com/uc?export=download&id=1hNl9DDAYPlohmQH-FpfaonATaplhQVZE", "w": 2560, "h": 1707}, {"n": 115, "id": "CILWEB1-115", "d": "https://drive.google.com/uc?export=download&id=1DPV0bshYeBuWriEu37ELQr31Jj9ErIir", "w": 2560, "h": 1708}, {"n": 203, "id": "CILWEB1-203", "d": "https://drive.google.com/uc?export=download&id=17Kexf1RAINuY_3dkOzKcefcnznlWpTwY", "w": 2048, "h": 2560}, {"n": 192, "id": "CILWEB1-192", "d": "https://drive.google.com/file/d/11IP_4D-7Z1R3Yy9CaITWs3dKkdPEPZ7A/view", "w": 2560, "h": 900}, {"n": 116, "id": "CILWEB1-116", "d": "https://drive.google.com/file/d/11IP_4D-7Z1R3Yy9CaITWs3dKkdPEPZ7A/view", "w": 2560, "h": 900}, {"n": 117, "id": "CILWEB1-117", "d": "https://drive.google.com/uc?export=download&id=1bIkMTlJzeDh0LNdHlI1k5rhEoO-w4jxI", "w": 2560, "h": 1707}, {"n": 118, "id": "CILWEB1-118", "d": "https://drive.google.com/uc?export=download&id=1qCq45XcWyFVjxu7X2YtHC_hrbYki8Hq2", "w": 2560, "h": 1440}, {"n": 119, "id": "CILWEB1-119", "d": "https://drive.google.com/uc?export=download&id=1jBD_IIC1vells6YXa0yMxUGgeLKbL0ng", "w": 2560, "h": 1440}, {"n": 120, "id": "CILWEB1-120", "d": "https://drive.google.com/uc?export=download&id=1F-qEDU0R7sZ0BOJjBpIX7lJ40MgiEkIX", "w": 2560, "h": 1708}, {"n": 121, "id": "CILWEB1-121", "d": "https://drive.google.com/uc?export=download&id=19VoK9r5OxxIjBPCIqnu5OhJrCrLb0Y2T", "w": 2048, "h": 2560}, {"n": 122, "id": "CILWEB1-122", "d": "https://drive.google.com/uc?export=download&id=1wr8Nh_JLAO7a4ha1iDLp8DxIAVlH7IMv", "w": 1707, "h": 2560}, {"n": 204, "id": "CILWEB1-204", "d": "https://drive.google.com/uc?export=download&id=1ag2xMcUjhM8ULvGPTc7ur9m96xh3tRHs", "w": 2560, "h": 1707}, {"n": 123, "id": "CILWEB1-123", "d": "https://drive.google.com/uc?export=download&id=1YF3jR3X1kpdiUOekl6o-U4dHvCnLCyAs", "w": 2560, "h": 1708}, {"n": 124, "id": "CILWEB1-124", "d": "https://drive.google.com/uc?export=download&id=1717sKRVFC8bWouBNDACf8nC7vUgTTc-M", "w": 2560, "h": 1708}, {"n": 195, "id": "CILWEB1-195", "d": "https://drive.google.com/uc?export=download&id=1CJqkdousDMMzksd43XHLllp5Xvirp2Q3", "w": 2560, "h": 2048}, {"n": 125, "id": "CILWEB1-125", "d": "https://drive.google.com/uc?export=download&id=1GsuYPDMNJQt3O8O92g8qc33aD9VoWXjB", "w": 2560, "h": 1707}, {"n": 126, "id": "CILWEB1-126", "d": "https://drive.google.com/uc?export=download&id=1xFMcV_xELRB8pe3DQeixsVpJpvLOLuAr", "w": 2560, "h": 1708}, {"n": 127, "id": "CILWEB1-127", "d": "https://drive.google.com/uc?export=download&id=1sbvt8rcVXUnImVYDDt1qGM2SqqN3HGRn", "w": 2560, "h": 1708}, {"n": 128, "id": "CILWEB1-128", "d": "https://drive.google.com/uc?export=download&id=1PftMgSEiDaA5FfbrI1XjJJ8UqyCtWDMb", "w": 2560, "h": 1440}, {"n": 129, "id": "CILWEB1-129", "d": "https://drive.google.com/uc?export=download&id=1mRvxt2mFskHzA7zmr_JWSFC2aM2ez4D4", "w": 2560, "h": 1708}, {"n": 130, "id": "CILWEB1-130", "d": "https://drive.google.com/uc?export=download&id=12mDJozljGCXgh8QDbmRy8INLTVR11mFk", "w": 2560, "h": 1708}, {"n": 205, "id": "CILWEB1-205", "d": "https://drive.google.com/uc?export=download&id=1R2Hjy34mfEW7qvvUBfHwTev7LYPy-67H", "w": 2560, "h": 1707}, {"n": 131, "id": "CILWEB1-131", "d": "https://drive.google.com/uc?export=download&id=1DbzIQAbAYjGoZ9xpNBg4EUCecv7LT5wa", "w": 2560, "h": 2048}, {"n": 193, "id": "CILWEB1-193", "d": "https://drive.google.com/uc?export=download&id=15CcbiqVKC0LjmsPt1hmlscax7x40S4jq", "w": 2560, "h": 1708}, {"n": 132, "id": "CILWEB1-132", "d": "https://drive.google.com/uc?export=download&id=1wyG8h7BC4jLUN0twdoTHMynJ90vSDLgv", "w": 2560, "h": 1707}, {"n": 133, "id": "CILWEB1-133", "d": "https://drive.google.com/uc?export=download&id=111rz0DwaBjZIixeQiIkFa8IGfJyJ9hoT", "w": 1707, "h": 2560}, {"n": 134, "id": "CILWEB1-134", "d": "https://drive.google.com/uc?export=download&id=1JImKmuzK62xDi5MZ-0dNnn3NLv1wWXUl", "w": 2560, "h": 1708}, {"n": 135, "id": "CILWEB1-135", "d": "https://drive.google.com/uc?export=download&id=1dfU9EnK7w9_Ruu9AfIgDufnBZo5mT3Fm", "w": 2560, "h": 2048}, {"n": 136, "id": "CILWEB1-136", "d": "https://drive.google.com/uc?export=download&id=1tucuvQIdYxDW3w5_NG-aOD-5XXwlXNOx", "w": 2048, "h": 2560}, {"n": 137, "id": "CILWEB1-137", "d": "https://drive.google.com/uc?export=download&id=1fp8UGwhe2yrT1Lrf8MTrdu0il4czlpdL", "w": 2560, "h": 1708}, {"n": 138, "id": "CILWEB1-138", "d": "https://drive.google.com/uc?export=download&id=1eGyIgchqZVwbx4wbmwxVoLQaXbu30jLk", "w": 2560, "h": 1708}, {"n": 139, "id": "CILWEB1-139", "d": "https://drive.google.com/uc?export=download&id=1qA1Apg0bWl2YNXFmsbaVq9dP4QEl_FVg", "w": 2560, "h": 1708}, {"n": 140, "id": "CILWEB1-140", "d": "https://drive.google.com/uc?export=download&id=1bvoHu2RxL73e4Y-ZRbrgEM75sJvRxhHc", "w": 2560, "h": 1708}, {"n": 141, "id": "CILWEB1-141", "d": "https://drive.google.com/uc?export=download&id=1S6fHaW-CHX2MTS6lZbOl8_o12LjyKh1s", "w": 2560, "h": 1707}, {"n": 142, "id": "CILWEB1-142", "d": "https://drive.google.com/uc?export=download&id=16S9b1McPO5DCxZTZMY67G5tqe3GN1SyI", "w": 2560, "h": 2048}, {"n": 143, "id": "CILWEB1-143", "d": "https://drive.google.com/uc?export=download&id=1g4ftxpHD88qbYyPM_i8tVN7Q_bxQXGqt", "w": 2560, "h": 1708}, {"n": 144, "id": "CILWEB1-144", "d": "https://drive.google.com/uc?export=download&id=1fR5LYocrL3QJjyXt9Xwqxzxdb2h1OgzM", "w": 2048, "h": 2560}, {"n": 206, "id": "CILWEB1-206", "d": "https://drive.google.com/uc?export=download&id=1VNe3otGQ6rzKBRZvAeNObjnCHfyINR8U", "w": 2048, "h": 2560}, {"n": 145, "id": "CILWEB1-145", "d": "https://drive.google.com/uc?export=download&id=1Bo6F9FG1b3f5Jp9BI1mI1AAilcg3GwF7", "w": 2560, "h": 2048}, {"n": 146, "id": "CILWEB1-146", "d": "https://drive.google.com/uc?export=download&id=1MGcOOWdkE9_HSFZYZtihu8aYP-WN1y1O", "w": 2560, "h": 1708}, {"n": 207, "id": "CILWEB1-207", "d": "https://drive.google.com/uc?export=download&id=1fz-uZJVMF8hUGikAaeaZmGOhitSkGoEH", "w": 2560, "h": 1708}, {"n": 147, "id": "CILWEB1-147", "d": "https://drive.google.com/uc?export=download&id=15Q53qNuIvP5X6tpfpN4exsygrs1z-xlS", "w": 2560, "h": 1440}, {"n": 148, "id": "CILWEB1-148", "d": "https://drive.google.com/uc?export=download&id=14wCGk6CaQ2YIMtwHBxbe3kp4sZDJImew", "w": 2560, "h": 1707}, {"n": 149, "id": "CILWEB1-149", "d": "https://drive.google.com/uc?export=download&id=196cjZTdNVhCBhoKAVoeOpPNJvbAiKV70", "w": 2560, "h": 1708}, {"n": 213, "id": "CILWEB1-213", "d": "https://drive.google.com/uc?export=download&id=1IjXxspeZqypmVARtuLnIoj0XCxHIKaB-", "w": 2560, "h": 1440}, {"n": 196, "id": "CILWEB1-196", "d": "https://drive.google.com/uc?export=download&id=1r-rMrc_BFLt-gGX-Uh38SewIpmviL-cJ", "w": 2560, "h": 1708}, {"n": 150, "id": "CILWEB1-150", "d": "https://drive.google.com/uc?export=download&id=1UCZcFvqGoyu5hUkxNQB41KS-EfSQyLAM", "w": 1707, "h": 2560}, {"n": 151, "id": "CILWEB1-151", "d": "https://drive.google.com/uc?export=download&id=1lzw1qlzrQx1rIaFeKYTMcy-qfgR41Zc8", "w": 1707, "h": 2560}, {"n": 152, "id": "CILWEB1-152", "d": "https://drive.google.com/uc?export=download&id=1IkbpApcxrH4ucLob6_6dl-a3aHr0cQi7", "w": 2560, "h": 1708}, {"n": 153, "id": "CILWEB1-153", "d": "https://drive.google.com/uc?export=download&id=1IGWL2AiNshoeIJqw-rD_rzOys3E8p1FJ", "w": 2560, "h": 1707}, {"n": 197, "id": "CILWEB1-197", "d": "https://drive.google.com/uc?export=download&id=1QaJDC-JtsN_L6e7r030rVI0Rc43Bj_jb", "w": 2560, "h": 1707}, {"n": 154, "id": "CILWEB1-154", "d": "https://drive.google.com/uc?export=download&id=1-opzLyrzJqkKY6QQR0Ge2NzIBE1FztMq", "w": 2560, "h": 1708}, {"n": 155, "id": "CILWEB1-155", "d": "https://drive.google.com/uc?export=download&id=10vCK17n_p377gaPtOoeq2fJznnICxvfC", "w": 2048, "h": 2560}, {"n": 208, "id": "CILWEB1-208", "d": "https://drive.google.com/uc?export=download&id=1ZG3qcf79qvRss08JofIAQWtWSfK8YvBC", "w": 2560, "h": 1707}, {"n": 156, "id": "CILWEB1-156", "d": "https://drive.google.com/uc?export=download&id=17MYFPqf-sCE7XGUcOixQfvs6An-dsPyN", "w": 2560, "h": 1708}, {"n": 157, "id": "CILWEB1-157", "d": "https://drive.google.com/uc?export=download&id=17Erwciy7TkK8L-eopDHkjgEbgokjXUeX", "w": 2560, "h": 1708}, {"n": 158, "id": "CILWEB1-158", "d": "https://drive.google.com/uc?export=download&id=1ubHG7I_fqXo2-0HRS3gmertji-JTIsCN", "w": 2560, "h": 1440}, {"n": 159, "id": "CILWEB1-159", "d": "https://drive.google.com/uc?export=download&id=1cjtTRRA9swoZc40yzdUchKP9cM4Q1sed", "w": 2560, "h": 1708}, {"n": 160, "id": "CILWEB1-160", "d": "https://drive.google.com/uc?export=download&id=13MBYoPLSImNEO3-ZaStooyeZZBpMlveP", "w": 2560, "h": 1708}, {"n": 161, "id": "CILWEB1-161", "d": "https://drive.google.com/uc?export=download&id=1GAlmmE3CZrQoBiGVM_gh_9PG4BDvgpUs", "w": 2560, "h": 1708}, {"n": 162, "id": "CILWEB1-162", "d": "https://drive.google.com/uc?export=download&id=1avb7YUAoh4EnLKhbRXNFADyMZolnW7uG", "w": 2560, "h": 1708}, {"n": 163, "id": "CILWEB1-163", "d": "https://drive.google.com/uc?export=download&id=14WTehLn7aRC0kxY7oiaChlguSiKZGiMM", "w": 2560, "h": 1440}, {"n": 164, "id": "CILWEB1-164", "d": "https://drive.google.com/uc?export=download&id=14WTehLn7aRC0kxY7oiaChlguSiKZGiMM", "w": 2560, "h": 1440}, {"n": 165, "id": "CILWEB1-165", "d": "https://drive.google.com/uc?export=download&id=1_-RpdHC3noJ7XnQhKxInsnoEhB3pP9zs", "w": 2560, "h": 1440}, {"n": 209, "id": "CILWEB1-209", "d": "https://drive.google.com/uc?export=download&id=1SkDCCStCkPD36KVnUBaT8RMB6cxGudAZ", "w": 2560, "h": 1707}, {"n": 215, "id": "CILWEB1-215", "d": "https://drive.google.com/uc?export=download&id=1Qj1oSnjVpPyLAq1og6z1Eo7CE2Jmt2-b", "w": 2560, "h": 1707}, {"n": 211, "id": "CILWEB1-211", "d": "https://drive.google.com/uc?export=download&id=1eZ5khaJJYLaIsZzs2giCPSc69OY6OsdK", "w": 2560, "h": 2048}, {"n": 166, "id": "CILWEB1-166", "d": "https://drive.google.com/uc?export=download&id=1Pu1ZgP6okgnHs8a7JixvBtz08LOSeN_j", "w": 2560, "h": 1440}, {"n": 212, "id": "CILWEB1-212", "d": "https://drive.google.com/uc?export=download&id=1Su92_YgqBA_1ObNeRd8WeHLjmRCzNq79", "w": 2560, "h": 1707}, {"n": 214, "id": "CILWEB1-214", "d": "https://drive.google.com/uc?export=download&id=1_QFvDxR3rvE27hFZCsCmTRivkRN7ZeXJ", "w": 2560, "h": 1707}],ALT="Camp Interlaken JCC, Eagle River, Wisconsin, July 2026";
+function src(f){return 'img/present/'+f.id+'.jpg';}
+function webname(f){return 'Interlaken-'+f.n+'.jpg';}
+function fig(f,tall){return '<figure data-n="'+f.n+'" id="f'+f.n+'"'+
+  (tall&&f.h>f.w?' class=tall':'')+'>'+
+  '<img class=fadein loading=lazy width='+f.w+' height='+f.h+' src="'+src(f)+'" alt="'+ALT+'">'+
+  '<span class=pick></span>'+
+  '<div class=tag><span>'+f.n+'</span><span class=links>'+
+  (f.d?'<a href="'+f.d+'">Full</a>':'')+
+  '<a href="'+src(f)+'" download="'+webname(f)+'">Web</a></span></div></figure>';}
+document.getElementById('picks').innerHTML=PICKS.map(function(f){return fig(f,true);}).join('');
+document.getElementById('grid').innerHTML=ALL.map(function(f){return fig(f,false);}).join('');
+document.querySelectorAll('img.fadein').forEach(function(im){
+  if(im.complete)im.classList.add('in');
+  else im.addEventListener('load',function(){im.classList.add('in');});});
+
+var toastT=null;
+function toast(m){var t=document.getElementById('toast');t.textContent=m;
+  t.classList.add('on');clearTimeout(toastT);
+  toastT=setTimeout(function(){t.classList.remove('on');},2100);}
+
+/* ---- selection ---- */
+var selected={};
+function selCount(){return Object.keys(selected).length;}
+function selSync(){var c=selCount();
+  document.getElementById('selct').textContent=c+' selected';
+  document.getElementById('selweb').disabled=!c;
+  document.getElementById('selfull').disabled=!c;}
+function selToggle(n,el){if(selected[n]){delete selected[n];el.classList.remove('on');}
+  else{selected[n]=1;el.classList.add('on');}selSync();}
+function selFrames(){return ALL.filter(function(f){return selected[f.n];});}
+document.getElementById('selmode').onclick=function(){
+  document.body.classList.add('sel');selSync();};
+document.getElementById('seldone').onclick=function(){
+  document.body.classList.remove('sel');selected={};
+  document.querySelectorAll('figure.on').forEach(function(g){g.classList.remove('on');});};
+
+/* ---- store-only zip writer ---- */
+var CRCT=(function(){var t=[],c,k,n;for(n=0;n<256;n++){c=n;
+  for(k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+function crc32(u8){var c=0xFFFFFFFF,i;
+  for(i=0;i<u8.length;i++)c=CRCT[(c^u8[i])&0xFF]^(c>>>8);
+  return (c^0xFFFFFFFF)>>>0;}
+function le16(v){return new Uint8Array([v&255,(v>>>8)&255]);}
+function le32(v){return new Uint8Array([v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]);}
+function zipBuild(entries){var parts=[],central=[],off=0,DT=((46<<9)|(7<<5)|19),i;
+  for(i=0;i<entries.length;i++){var e=entries[i],
+    nm=new TextEncoder().encode(e.name),crc=crc32(e.data),
+    loc=[le32(0x04034b50),le16(20),le16(0x0800),le16(0),le16(0),le16(DT),
+         le32(crc),le32(e.data.length),le32(e.data.length),le16(nm.length),le16(0)];
+    loc.forEach(function(p){parts.push(p);});parts.push(nm);parts.push(e.data);
+    var hdr=[le32(0x02014b50),le16(20),le16(20),le16(0x0800),le16(0),le16(0),le16(DT),
+         le32(crc),le32(e.data.length),le32(e.data.length),le16(nm.length),
+         le16(0),le16(0),le16(0),le16(0),le32(0),le32(off)];
+    central.push({h:hdr,n:nm});
+    off+=30+nm.length+e.data.length;}
+  var cdOff=off,cdLen=0;
+  central.forEach(function(c){c.h.forEach(function(p){parts.push(p);cdLen+=p.length;});
+    parts.push(c.n);cdLen+=c.n.length;});
+  [le32(0x06054b50),le16(0),le16(0),le16(entries.length),le16(entries.length),
+   le32(cdLen),le32(cdOff),le16(0)].forEach(function(p){parts.push(p);});
+  return new Blob(parts,{type:'application/zip'});}
+function saveBlob(blob,name){var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);
+  a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},4000);}
+var zipping=false;
+function zipWeb(frames,zipname,btn,label){
+  if(zipping||!frames.length)return;zipping=true;
+  var entries=[],k=0;
+  function next(){
+    if(k>=frames.length){
+      btn.textContent='Packing\u2026';
+      setTimeout(function(){saveBlob(zipBuild(entries),zipname);
+        btn.textContent=label;zipping=false;},30);return;}
+    var f=frames[k];btn.textContent='Preparing '+(k+1)+' / '+frames.length;
+    fetch(src(f)).then(function(r){return r.arrayBuffer();}).then(function(b){
+      entries.push({name:webname(f),data:new Uint8Array(b)});k++;next();
+    },function(){k++;next();});}
+  next();}
+var zab=document.getElementById('zipall'),zabLabel=zab.textContent;
+zab.onclick=function(){zipWeb(ALL,'Camp-Interlaken-web.zip',zab,zabLabel);};
+document.getElementById('selweb').onclick=function(){
+  zipWeb(selFrames(),'Camp-Interlaken-selection.zip',this,'Web zip');};
+document.getElementById('selfull').onclick=function(){
+  var fs=selFrames().filter(function(f){return f.d;});
+  if(!fs.length)return;
+  toast('Starting '+fs.length+' download'+(fs.length>1?'s':''));
+  fs.forEach(function(f,j){setTimeout(function(){
+    var a=document.createElement('a');a.href=f.d;document.body.appendChild(a);
+    a.click();a.remove();},j*600);});};
+
+/* ---- lightbox with deep links ---- */
+var set=ALL,i=0,lb=document.getElementById('lb');
+function preloadAround(){[i+1,i-1].forEach(function(k){
+  var f=set[(k+set.length)%set.length];if(f)(new Image()).src=src(f);});}
+function open_(arr,k,silent){set=arr;i=k;var f=set[i];
+  document.getElementById('lbi').src=src(f);
+  document.getElementById('lbc').innerHTML=(i+1)+' / '+set.length+
+    '<span>'+f.n+'</span>'+(f.d?'<a href="'+f.d+'">Full res</a>':'')+
+    '<a href="'+src(f)+'" download="'+webname(f)+'">Web</a>'+
+    '<button class=cp id=cpl>Copy link</button>';
+  document.getElementById('cpl').onclick=function(){
+    var u=location.origin+location.pathname+'#'+f.n;
+    (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject())
+      .then(function(){toast('Link copied');},
+            function(){window.prompt('Copy this:',u);});};
+  lb.classList.add('on');
+  if(!silent)history.replaceState(null,'','#'+f.n);
+  preloadAround();}
+function closeLB(){lb.classList.remove('on');
+  history.replaceState(null,'',location.pathname);}
+function step(d){open_(set,(i+d+set.length)%set.length);}
+function wire(id,arr){document.getElementById(id).onclick=function(e){
+  if(e.target.tagName==='A')return;var g=e.target.closest('figure');if(!g)return;
+  var n=+g.dataset.n;
+  if(document.body.classList.contains('sel')){selToggle(n,g);return;}
+  open_(arr,arr.findIndex(function(x){return x.n===n;}));};}
+wire('picks',PICKS);wire('grid',ALL);
+document.querySelector('#lb .x').onclick=closeLB;
+document.querySelector('#lb .p').onclick=function(e){e.stopPropagation();step(-1);};
+document.querySelector('#lb .nx').onclick=function(e){e.stopPropagation();step(1);};
+lb.onclick=function(e){if(e.target.id==='lb')closeLB();};
+
+/* ---- slideshow ---- */
+var ss=document.getElementById('ss'),LA=document.getElementById('la'),
+    LB2=document.getElementById('lbb'),cur=0,front=LA,tmr=null,run=false;
+function paint(el,f){el.firstElementChild.src=src(f);}
+function advance(){var nxt=(front===LA)?LB2:LA;cur=(cur+1)%PICKS.length;
+  paint(nxt,PICKS[cur]);nxt.classList.add('show');front.classList.remove('show');front=nxt;
+  var pre=PICKS[(cur+1)%PICKS.length];if(pre)(new Image()).src=src(pre);
+  tmr=setTimeout(advance,4400);}
+function startSS(){cur=0;front=LA;paint(LA,PICKS[0]);
+  LA.classList.add('show');LB2.classList.remove('show');
+  ss.classList.add('on','playing');run=true;
+  clearTimeout(tmr);tmr=setTimeout(advance,4400);
+  if(PICKS[1])paint(LB2,PICKS[1]);}
+function stopSS(){clearTimeout(tmr);run=false;ss.classList.remove('on','playing');}
+document.getElementById('play').onclick=startSS;
+document.getElementById('ssx').onclick=function(e){e.stopPropagation();stopSS();};
+ss.onclick=function(){if(run){clearTimeout(tmr);run=false;ss.classList.remove('playing');}
+  else{run=true;ss.classList.add('playing');tmr=setTimeout(advance,1100);}};
+document.onkeydown=function(e){
+  if(ss.classList.contains('on')){
+    if(e.key==='Escape')stopSS();
+    if(e.key===' '){e.preventDefault();ss.click();}
+    if(e.key==='ArrowRight'){clearTimeout(tmr);advance();}return;}
+  if(lb.classList.contains('on')){
+    if(e.key==='Escape')closeLB();
+    if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);return;}
+  if(e.key==='Escape'&&document.body.classList.contains('sel'))
+    document.getElementById('seldone').click();};
+var sx=0;lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;});
+lb.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-sx;
+  if(Math.abs(d)>44)step(d<0?1:-1);});
+
+/* arriving with intent */
+(function(){
+  if(location.search.indexOf('play')>-1){startSS();return;}
+  var m=location.hash.match(/^#(\d+)$/);
+  if(m){var n=+m[1],k=ALL.findIndex(function(x){return x.n===n;});
+    if(k>-1)open_(ALL,k,true);}
+})();
+</script>
+<script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body></html>

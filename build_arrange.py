@@ -20,7 +20,9 @@ import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FRAMES = json.load(open(os.path.join(HERE, "frames.json")))
-SECTIONS = json.load(open(os.path.join(HERE, "sections.json")))
+import killed as _killed
+SECTIONS = _killed.strip(json.load(open(os.path.join(HERE, "sections.json"))))
+_killed.check(SECTIONS, __file__)
 TIMES = json.load(open(os.path.join(HERE, "_work", "times.json")))
 
 SEED_GROUPS = [
@@ -90,7 +92,7 @@ Everything saves as you go; Copy arrangement when done and paste it to me.</div>
 <div id=toast></div>
 <div id=lb><img id=lbi alt=""><button class=x aria-label="Close">&times;</button></div>
 <script>
-var FR=__FRAMES__,ALL=__ALL__,SEED=__SEED__,KEY="cil-arrange";
+var FR=__FRAMES__,ALL=__ALL__,SEED=__SEED__,KEY="cil-arrange-0814";
 var state=null,sel=null,dragEl=null,tt=null;
 function $(i){return document.getElementById(i);}
 function toast(m){var t=$("toast");t.textContent=m;t.className="on";
@@ -234,12 +236,24 @@ def build():
         m = re.match(r"CILWEB1-(\d+)$", f["id"])
         nums[int(m.group(1)) if m else 1] = f
     placed = {n for _, secs in SECTIONS for _, ns in secs for n in ns}
-    groups = [{"name": name, "frames": [n for n in ns if n in placed]}
-              for name, ns in SEED_GROUPS]
+    # The owner's saved arrangement is the seed when one is on file. localStorage
+    # only survives within one origin, so a session opened from a different port or
+    # from the live site starts empty; seeding from the file is what makes his
+    # grouping work show up wherever he opens the page.
+    saved = os.path.join(HERE, "_work", "arrangement_current.json")
+    if os.path.exists(saved):
+        a = json.load(open(saved))
+        groups = [{"name": g["name"], "frames": [n for n in g["frames"] if n in placed]}
+                  for g in a["groups"]]
+        out = [n for n in a.get("out", []) if n in placed]
+    else:
+        groups = [{"name": name, "frames": [n for n in ns if n in placed]}
+                  for name, ns in SEED_GROUPS]
+        out = []
     allf = sorted(placed, key=lambda n: TIMES.get(nums[n]["id"], "9999"))
     if 2 in placed:
         allf = [2] + [n for n in allf if n != 2]
-    seed = {"groups": groups, "out": []}
+    seed = {"groups": groups, "out": out}
     files = {n: nums[n]["file"] for n in placed}
     html = (PAGE.replace("__FRAMES__", json.dumps(files))
             .replace("__ALL__", json.dumps(allf))
