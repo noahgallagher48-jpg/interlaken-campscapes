@@ -2,3 +2,7 @@ __pycache__/
 _work/
 .playwright-mcp/
 *.bak-*
+arrange.html
+sampler.html
+twenty.html
+tour.html
