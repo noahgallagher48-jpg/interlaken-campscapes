@@ -5,9 +5,11 @@
                      five sections, headings instruction-only (no themes
                      shown to voters), 25 picks per ballot proportional
                      to set size: bridge-with 2/8, bridge-without 2/6,
-                     landscapes 6/23, Shabbat 7/27, rest 8/27 (rest
-                     includes the four restored first looks 194-197).
-                     Pools from his arrangement paste of 2026-08-03.
+                     landscapes 6/23, Shabbat 7/27, rest 8/26 (rest
+                     includes the restored first looks 195-197).
+                     Pools from his arrangement paste of 2026-08-03,
+                     swept against _work/killed.json 2026-08-16: 13 and
+                     108 replaced by their keepers 12 and 109, 194 out.
     twenty.html      the marketing pool, Noah cuts it down. No cap.
 
 Both pages are noindex and unlinked from the library. Picks persist in
@@ -48,14 +50,14 @@ SURVEY = [
      "frames": [14, 16, 94, 93, 62, 37]},
     {"k": "ls", "title": "Landscapes, nobody in them", "q": 6,
      "frames": [1, 36, 25, 24, 20, 88, 87, 89, 85, 84, 83, 90, 38, 19, 32, 31,
-                40, 178, 108, 101, 124, 145, 140]},
+                40, 178, 109, 101, 124, 145, 140]},
     {"k": "sh", "title": "Shabbat", "q": 7,
      "frames": [42, 43, 44, 45, 47, 48, 49, 50, 51, 52, 53, 54, 56, 68, 71,
                 73, 74, 75, 76, 77, 78, 79, 173, 99, 175, 100, 177]},
     {"k": "rest", "title": "The rest", "q": 8,
-     "frames": [3, 169, 8, 13, 81, 98, 97, 46, 123, 125, 182, 179, 111, 110,
+     "frames": [3, 169, 8, 12, 81, 98, 97, 46, 123, 125, 182, 179, 111, 110,
                 185, 184, 188, 193, 160, 158, 153, 186, 148,
-                194, 195, 196, 197]},
+                195, 196, 197]},
 ]
 WORDS = {2: "pick two", 3: "pick three", 4: "pick four", 5: "pick five", 6: "pick six", 7: "pick seven", 8: "pick eight"}
 
@@ -147,7 +149,7 @@ __SECTIONS__
 </div></div>
 <footer>Photographs Noah Gallagher &middot; Abba Photo</footer>
 <script>
-var KEY="cil-survey2",SUBJ="Interlaken favorites",W3F=__W3F__;
+var KEY="cil-survey3",SUBJ="Interlaken favorites",W3F=__W3F__;
 var SECS=__SECS__;
 var picks={},cur=null,tt=null;
 try{picks=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){picks={};}
@@ -219,7 +221,7 @@ localStorage.setItem(KEY+":email",e);
 var L=lists(),b=this;
 var payload={access_key:W3F,subject:SUBJ+": "+n,from_name:"Interlaken favorites vote",
 botcheck:"",name:n,connection:conn,email:e,
-bridge_with_people:L.bp,bridge_without_people:L.bn,landscapes:L.ls,the_rest:L.rest};
+bridge_with_people:L.bp,bridge_without_people:L.bn,landscapes:L.ls,shabbat:L.sh,the_rest:L.rest};
 b.disabled=true;b.textContent="Sending…";
 fetch("https://api.web3forms.com/submit",{method:"POST",
 headers:{"Content-Type":"application/json",Accept:"application/json"},
@@ -287,6 +289,14 @@ function(){window.prompt("Copy this:",s);});}
 else window.prompt("Copy this:",s);};
 bar();
 </script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
+
+
+# The SURVEY and TWENTY lists are hardcoded, so the sections.json filter above
+# does not cover them. A killed frame in either list stops the build here.
+_kills = _killed.killed()
+_bad = sorted((set(n for s in SURVEY for n in s["frames"]) | set(TWENTY)) & _kills)
+if _bad:
+    raise SystemExit(f"build_vote.py: killed frames in ballot lists: {_bad}")
 
 
 def by_num():
