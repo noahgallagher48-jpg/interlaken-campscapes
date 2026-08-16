@@ -70,6 +70,7 @@ body.spreads .pair figure{margin:0;display:flex;align-items:center;background:#0
   font-size:11.5px;color:rgba(237,231,221,.55)}
 </style></head><body>
 <header>
+  <a href="https://www.abba-photo.com/" style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.24em;color:#e2a73e;text-decoration:none;margin-right:14px">ABBA PHOTO</a>
   <h1>__TITLE__<span>__COUNT__ frames</span></h1>
   <div class=tog>
     <button id=bRead class=on>Read</button><button id=bSpread>Spreads</button>

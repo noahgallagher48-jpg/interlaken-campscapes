@@ -26,7 +26,8 @@ button.lnk{background:none;border:0;color:var(--muted);cursor:pointer;font:inher
 button.lnk:hover{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
 
 /* ---- opening ---- */
-.open{min-height:52vh;display:flex;flex-direction:column;align-items:center;
+.home{position:absolute;top:16px;left:20px;z-index:5;font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.open{position:relative;min-height:52vh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;padding:72px 24px 56px}
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.34em;text-transform:uppercase;
   color:var(--gold);margin-bottom:22px}
@@ -137,8 +138,9 @@ footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
   #selbar{gap:13px;padding:11px 18px;font-size:11px}}
 </style></head><body>
 
+<a class=home href="https://www.abba-photo.com/">Abba Photo</a>
 <div class=open>
-  <p class=eyebrow>Abba Photo</p>
+  <p class=eyebrow style="visibility:hidden">.</p>
   <h1>Camp Interlaken</h1>
   <p class=date>Eagle River, Wisconsin &middot; July 2026</p>
   <div class=rule></div>
