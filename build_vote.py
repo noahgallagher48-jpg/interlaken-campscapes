@@ -215,7 +215,9 @@ b.onclick=function(){conn=b.textContent;
 document.querySelectorAll("#conns button").forEach(function(x){x.className=x===b?"on":"";});};});
 function lists(){var o={};SECS.forEach(function(s){
 o[s.k]=picks[s.k].slice().sort(function(a,b){return a-b;}).join(", ");});return o;}
-$("sgo").onclick=function(){var n=$("nm").value.trim();
+$("sgo").onclick=function(){
+if(short()){$("send").className="";toast("A set still needs picks.");return;}
+var n=$("nm").value.trim();
 if(!n){toast("Your name goes first.");return;}
 if(!conn){toast("Tap your connection to camp.");return;}
 var e=$("em").value.trim(),wb=$("wb").value.trim();
