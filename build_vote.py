@@ -117,6 +117,8 @@ body.rv .card:not(.on){display:none}
 #sheet label,#sheet .lbl{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#a69b8a;margin:14px 0 6px}
 #sheet .opt{text-transform:none;letter-spacing:0}
 #sheet input{width:100%;background:#14110d;border:1px solid rgba(237,231,221,.25);border-radius:3px;color:#ede7dd;padding:10px 12px;font-size:15px}
+#sheet textarea{width:100%;background:#14110d;border:1px solid rgba(237,231,221,.25);border-radius:3px;color:#ede7dd;padding:10px 12px;font-size:15px;font-family:inherit;resize:vertical;min-height:64px}
+#sheet textarea::placeholder,#sheet input::placeholder{color:#7d745f}
 #conns{display:flex;flex-wrap:wrap;gap:8px}
 #conns button{background:none;border:1px solid rgba(237,231,221,.3);color:#c9bfa9;padding:8px 12px;border-radius:16px;font-size:13px;cursor:pointer}
 #conns button.on{background:#e2a73e;border-color:#e2a73e;color:#14110d;font-weight:600}
@@ -144,6 +146,7 @@ __SECTIONS__
 <h2>Send your picks</h2>
 <label for=nm>Name</label><input id=nm autocomplete=name>
 <div class=lbl>Connection to camp</div><div id=conns>__CONNS__</div>
+<label for=wb>What does your favorite image bring back for you? <span class=opt>(optional)</span></label><textarea id=wb placeholder="A moment, a sound, a summer."></textarea>
 <label for=em>Email <span class=opt>(optional)</span></label><input id=em type=email autocomplete=email>
 <div class=row><button id=sgo class=go type=button>Send</button><button id=sx type=button>Back</button></div>
 </div></div>
@@ -215,12 +218,12 @@ o[s.k]=picks[s.k].slice().sort(function(a,b){return a-b;}).join(", ");});return 
 $("sgo").onclick=function(){var n=$("nm").value.trim();
 if(!n){toast("Your name goes first.");return;}
 if(!conn){toast("Tap your connection to camp.");return;}
-var e=$("em").value.trim();
+var e=$("em").value.trim(),wb=$("wb").value.trim();
 localStorage.setItem(KEY+":name",n);localStorage.setItem(KEY+":conn",conn);
 localStorage.setItem(KEY+":email",e);
 var L=lists(),b=this;
 var payload={access_key:W3F,subject:SUBJ+": "+n,from_name:"Interlaken favorites vote",
-botcheck:"",name:n,connection:conn,email:e,
+botcheck:"",name:n,connection:conn,email:e,what_it_brings_back:wb,
 bridge_with_people:L.bp,bridge_without_people:L.bn,landscapes:L.ls,shabbat:L.sh,the_rest:L.rest};
 b.disabled=true;b.textContent="Sending…";
 fetch("https://api.web3forms.com/submit",{method:"POST",
