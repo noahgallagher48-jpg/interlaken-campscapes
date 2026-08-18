@@ -274,3 +274,12 @@ Read this together with CLAUDE.md before touching the page. Log entries at the b
 - 2026-07-10: Campaign language folded in. The approach item now reads the bridge back (icon of continuity, Shabbat crossing as the signature); Friday's rail is built around the crossing. Water-under-the-bridge gap noted for the owner, not for this page.
 - 2026-07-10: Footer date bumped to "updated July 10" (cloud-session road test).
 - 2026-07-09: Hub launched. Page reframed client-facing: meeting agenda on top, approach read-back, open requests (campaign materials, photo library, campfire with s'mores, lights and access). Hub intro email staged to Drea.
+
+## 2026-08-18 · The live tally exists
+tally_live.py replaces tally_ballots.py (which parsed the retired BALLOT v2
+format and read zero real ballots). Parses the Web3Forms ballots on file in the
+private dashboard repo, ranks per section, carries the what-it-brings-back
+quotes verbatim, and writes a call-ready page (_work/tally.html, live library
+thumbnails) for the Sep 8 review. Verified against the first real ballot.
+One voter per email; a later ballot replaces the earlier and is noted.
+
