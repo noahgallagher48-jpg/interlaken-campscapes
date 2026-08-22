@@ -24,6 +24,7 @@ deep links (#209), Copy link, ?play autostart.
 import json
 import os
 import re
+import sys
 
 from PIL import Image
 
@@ -39,6 +40,29 @@ FRAMES = json.load(open(os.path.join(HERE, "frames.json")))
 SECTIONS = _killed.strip(json.load(open(os.path.join(HERE, "sections.json"))))
 _killed.check(SECTIONS, __file__)
 TIMES = json.load(open(os.path.join(HERE, "_work", "times.json")))
+# Master dimensions, read off the Drive files 2026-08-22 (ranged header fetches;
+# _work/master_dims.json). Print sizes come from the MASTER, never a web tier.
+sys.path.insert(0, os.path.expanduser("~/Abba_Photo/dashboard/tools"))
+from print_sizes import print_line
+MDIMS = json.load(open(os.path.join(HERE, "_work", "master_dims.json")))
+
+
+def print_text(n):
+    """The per-frame print line, from the master's true resolution. Empty when
+    no master is on file or its shape disagrees with the display tier (never
+    promise a size off a file we have doubts about)."""
+    m = MDIMS.get(str(n))
+    if not m:
+        return ""
+    pl = print_line(m["w"], m["h"])
+    if pl["note"]:
+        return "Prints true as a custom cut"
+    parts = [(pl[k], lab) for k, lab in
+             (("metal", "metal"), ("paper", "paper"), ("canvas", "canvas")) if pl[k]]
+    if not parts:
+        return ""
+    return "Prints to " + " &middot; ".join(
+        f"<b>{sz.replace('x', '&times;')}&Prime;</b> {lab}" for sz, lab in parts)
 DRIVE = json.load(open(os.path.join(HERE, "_work", "frame_drive.json")))
 ARR = json.load(open(os.path.join(HERE, "_work", "arrangement_current.json")))
 
@@ -67,7 +91,7 @@ def dl(n):
 def rec(n):
     p = os.path.join(HERE, "img", "present", f"{num2id[n]}.jpg")
     w, h = Image.open(p).size
-    return {"n": n, "id": num2id[n], "d": dl(n), "w": w, "h": h}
+    return {"n": n, "id": num2id[n], "d": dl(n), "w": w, "h": h, "pr": print_text(n)}
 
 
 web_mb = round(sum(os.path.getsize(os.path.join(HERE, "img", "present", f"{num2id[n]}.jpg"))
@@ -189,6 +213,10 @@ footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
 #lb .c a,#lb .c button.cp{position:static;font-size:11.5px;font-family:var(--mono);
   padding:0;opacity:1;color:var(--gold);letter-spacing:.04em;background:none;border:0;cursor:pointer}
 #lb .c button.cp:hover{text-decoration:underline;text-underline-offset:3px}
+.sz{font-size:11px;color:#a69b8a;padding:5px 10px 8px;line-height:1.45}
+.sz b{color:#cfc4b2;font-weight:600}
+#lb .c .szl{font-size:11.5px;color:#a69b8a;flex-basis:100%;text-align:center}
+#lb .c .szl b{color:#cfc4b2;font-weight:600}
 
 /* ---- slideshow ---- */
 #ss{position:fixed;inset:0;background:#070605;display:none;z-index:60}
@@ -227,6 +255,8 @@ footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
     <button class=lnk id=zipall>All for web (__WEBMB__ MB)</button>
     <span class=dot>&middot;</span>
     <button class=lnk id=selmode>Select frames</button>
+    <span class=dot>&middot;</span>
+    <a href="field-guide.html">The field guide</a>
   </p>
   <p class=dlline style="margin-top:8px;font-size:12px">Full resolution comes from Google Drive. No sign-in needed.</p>
 </div>
@@ -269,7 +299,8 @@ function fig(f,tall){return '<figure data-n="'+f.n+'" id="f'+f.n+'"'+
   '<span class=pick></span>'+
   '<div class=tag><span>'+f.n+'</span><span class=links>'+
   (f.d?'<a href="'+f.d+'">Full</a>':'')+
-  '<a href="'+src(f)+'" download="'+webname(f)+'">Web</a></span></div></figure>';}
+  '<a href="'+src(f)+'" download="'+webname(f)+'">Web</a></span></div>'+
+  (f.pr?'<div class=sz>'+f.pr+'</div>':'')+'</figure>';}
 document.getElementById('picks').innerHTML=PICKS.map(function(f){return fig(f,true);}).join('');
 document.getElementById('grid').innerHTML=ALL.map(function(f){return fig(f,false);}).join('');
 document.querySelectorAll('img.fadein').forEach(function(im){
@@ -360,7 +391,8 @@ function open_(arr,k,silent){set=arr;i=k;var f=set[i];
   document.getElementById('lbc').innerHTML=(i+1)+' / '+set.length+
     '<span>'+f.n+'</span>'+(f.d?'<a href="'+f.d+'">Full res</a>':'')+
     '<a href="'+src(f)+'" download="'+webname(f)+'">Web</a>'+
-    '<button class=cp id=cpl>Copy link</button>';
+    '<button class=cp id=cpl>Copy link</button>'+
+    (f.pr?'<span class=szl>'+f.pr+'</span>':'');
   document.getElementById('cpl').onclick=function(){
     var u=location.origin+location.pathname+'#'+f.n;
     (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject())
