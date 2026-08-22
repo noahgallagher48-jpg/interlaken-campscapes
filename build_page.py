@@ -64,6 +64,7 @@ def print_text(n):
     return "Prints to " + " &middot; ".join(
         f"<b>{sz.replace('x', '&times;')}&Prime;</b> {lab}" for sz, lab in parts)
 DRIVE = json.load(open(os.path.join(HERE, "_work", "frame_drive.json")))
+WEBIDS = json.load(open(os.path.join(HERE, "_work", "drive_web_ids.json")))
 ARR = json.load(open(os.path.join(HERE, "_work", "arrangement_current.json")))
 
 num2id = {}
@@ -91,11 +92,18 @@ def dl(n):
 def rec(n):
     p = os.path.join(HERE, "img", "present", f"{num2id[n]}.jpg")
     w, h = Image.open(p).size
-    return {"n": n, "id": num2id[n], "d": dl(n), "w": w, "h": h, "pr": print_text(n)}
+    wid = WEBIDS.get(str(n))
+    wd = f"https://drive.google.com/uc?export=download&id={wid}" if wid else ""
+    return {"n": n, "id": num2id[n], "d": dl(n), "wd": wd, "w": w, "h": h,
+            "pr": print_text(n)}
 
 
-web_mb = round(sum(os.path.getsize(os.path.join(HERE, "img", "present", f"{num2id[n]}.jpg"))
-                   for n in placed) / 1e6)
+_stage = os.path.expanduser("~/Desktop/ABBA/interlaken/web3840_stage")
+_fd_files = {rec["file"] for rec in DRIVE.values()}
+web_mb = round(sum(os.path.getsize(os.path.join(_stage, f)) for f in _fd_files
+                   if os.path.exists(os.path.join(_stage, f))) / 1e6)
+ZIP_URL = ("https://github.com/noahgallagher48-jpg/interlaken-campscapes/releases/"
+           "download/interlaken-2026-web/Camp-Interlaken-web.zip")
 
 PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -274,7 +282,7 @@ footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
 </footer>
 
 <div id=selbar><span class=ct id=selct>0 selected</span>
-  <button class=lnk id=selweb disabled>Web zip</button>
+  <button class=lnk id=selweb disabled>Web</button>
   <button class=lnk id=selfull disabled>Full res</button>
   <button class="lnk done" id=seldone>Done</button></div>
 
@@ -299,7 +307,7 @@ function fig(f,tall){return '<figure data-n="'+f.n+'" id="f'+f.n+'"'+
   '<span class=pick></span>'+
   '<div class=tag><span>'+f.n+'</span><span class=links>'+
   (f.d?'<a href="'+f.d+'">Full</a>':'')+
-  '<a href="'+src(f)+'" download="'+webname(f)+'">Web</a></span></div>'+
+  (f.wd?'<a href="'+f.wd+'">Web</a>':'<a href="'+src(f)+'" download="'+webname(f)+'">Web</a>')+'</span></div>'+
   (f.pr?'<div class=sz>'+f.pr+'</div>':'')+'</figure>';}
 document.getElementById('picks').innerHTML=PICKS.map(function(f){return fig(f,true);}).join('');
 document.getElementById('grid').innerHTML=ALL.map(function(f){return fig(f,false);}).join('');
@@ -370,10 +378,15 @@ function zipWeb(frames,zipname,btn,label){
       entries.push({name:webname(f),data:new Uint8Array(b)});k++;next();
     },function(){k++;next();});}
   next();}
-var zab=document.getElementById('zipall'),zabLabel=zab.textContent;
-zab.onclick=function(){zipWeb(ALL,'Camp-Interlaken-web.zip',zab,zabLabel);};
+var zab=document.getElementById('zipall');
+zab.onclick=function(){location.href='__ZIPURL__';};
 document.getElementById('selweb').onclick=function(){
-  zipWeb(selFrames(),'Camp-Interlaken-selection.zip',this,'Web zip');};
+  var fs=selFrames().filter(function(f){return f.wd;});
+  if(!fs.length)return;
+  toast('Starting '+fs.length+' download'+(fs.length>1?'s':''));
+  fs.forEach(function(f,j){setTimeout(function(){
+    var a=document.createElement('a');a.href=f.wd;document.body.appendChild(a);
+    a.click();a.remove();},j*900);});};
 document.getElementById('selfull').onclick=function(){
   var fs=selFrames().filter(function(f){return f.d;});
   if(!fs.length)return;
@@ -390,7 +403,7 @@ function open_(arr,k,silent){set=arr;i=k;var f=set[i];
   document.getElementById('lbi').src=src(f);
   document.getElementById('lbc').innerHTML=(i+1)+' / '+set.length+
     '<span>'+f.n+'</span>'+(f.d?'<a href="'+f.d+'">Full res</a>':'')+
-    '<a href="'+src(f)+'" download="'+webname(f)+'">Web</a>'+
+    (f.wd?'<a href="'+f.wd+'">Web</a>':'<a href="'+src(f)+'" download="'+webname(f)+'">Web</a>')+
     '<button class=cp id=cpl>Copy link</button>'+
     (f.pr?'<span class=szl>'+f.pr+'</span>':'');
   document.getElementById('cpl').onclick=function(){
@@ -469,6 +482,7 @@ html = (PAGE.replace("__PICKS__", json.dumps(precs))
             .replace("__OGIMG__", f"{CANON}/img/present/{precs[0]['id']}.jpg")
             .replace("__FOLDER__", FOLDER)
             .replace("__WEBMB__", str(web_mb))
+            .replace("__ZIPURL__", ZIP_URL)
             .replace("__NLIB__", str(len(placed))))
 
 open(os.path.join(HERE, "delivery.html"), "w").write(html)
