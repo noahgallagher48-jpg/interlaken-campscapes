@@ -78,7 +78,17 @@ def parse(path):
             continue
         key, _, val = line.partition(":")
         cur[key.strip()] = val.strip()
-    return ballots
+    # The 8/24 pipeline verification submitted a real ballot through the real
+    # form, deliberately named so it can never count. Anything test-named is
+    # dropped here, loudly, so the Sep 8 numbers are only the community's.
+    kept = []
+    for b in ballots:
+        label = (b.get("name", "") + " " + b.get("_header", "")).upper()
+        if "PIPELINE TEST" in label or "DISCARD" in label:
+            print(f"  excluded test ballot: {b.get('name') or b.get('_header')}")
+            continue
+        kept.append(b)
+    return kept
 
 def main():
     args = sys.argv[1:]
