@@ -202,11 +202,11 @@ function save(){localStorage.setItem(KEY,JSON.stringify(picks));}
 function total(){var n=0;SECS.forEach(function(s){n+=picks[s.k].length;});return n;}
 function need(){var m=0;SECS.forEach(function(s){if(!s.opt)m+=s.q;});return m;}
 function reqtotal(){var n=0;SECS.forEach(function(s){if(!s.opt)n+=picks[s.k].length;});return n;}
-function bar(){var x=total()-reqtotal();
-$("cnt").textContent=reqtotal()+" of "+need()+" picked"+(x?" · +"+x+" from the rest":"");
+function bar(){
+$("cnt").textContent=total()+" picked";
 SECS.forEach(function(s){var h=$("h-"+s.k);
-h.querySelector(".scnt").textContent=s.opt?picks[s.k].length+" of up to "+s.q:picks[s.k].length+" of "+s.q;
-h.className=(!s.opt&&picks[s.k].length===s.q)||(s.opt&&picks[s.k].length>0)?"sv full":"sv";});}
+h.querySelector(".scnt").textContent=picks[s.k].length+" of up to "+s.q;
+h.className=picks[s.k].length>0?"sv full":"sv";});}
 function mark(k,n){var c=document.querySelector('#s-'+k+' .card[data-n="'+n+'"]');
 if(c)c.className=picks[k].indexOf(n)>=0?"card on":"card";
 if(cur){var s=sec(cur.k),m=s.frames[cur.i],pk=$("lbpk");
@@ -236,11 +236,9 @@ if(e.key==="Escape")shut();});
 $("rv").onclick=function(){document.body.classList.toggle("rv");
 this.textContent=document.body.classList.contains("rv")?"See all":"My picks";};
 function enc(s){return encodeURIComponent(s);}
-function short(){for(var i=0;i<SECS.length;i++){var s=SECS[i];
-if(!s.opt&&picks[s.k].length!==s.q)return s;}return null;}
-$("go").onclick=function(){var s=short();
-if(s){toast("That set still needs "+(s.q-picks[s.k].length)+" more.");
-$("s-"+s.k).scrollIntoView({behavior:"smooth"});return;}
+/* Whatever they pick is a ballot (Noah, 2026-08-24). One favorite counts. */
+$("go").onclick=function(){
+if(!total()){toast("Pick at least one favorite first.");return;}
 $("send").className="on";};
 $("sx").onclick=function(){$("send").className="";};
 var conn=localStorage.getItem(KEY+":conn")||"";
@@ -253,7 +251,7 @@ document.querySelectorAll("#conns button").forEach(function(x){x.className=x===b
 function lists(){var o={};SECS.forEach(function(s){
 o[s.k]=picks[s.k].slice().sort(function(a,b){return a-b;}).join(", ");});return o;}
 $("sgo").onclick=function(){
-if(short()){$("send").className="";toast("A set still needs picks.");return;}
+if(!total()){$("send").className="";toast("Pick at least one favorite first.");return;}
 var n=$("nm").value.trim();
 if(!n){toast("Your name goes first.");return;}
 if(!conn){toast("Tap your connection to camp.");return;}
