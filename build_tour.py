@@ -146,7 +146,7 @@ document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;
 if(document.getElementById("lb").className==="on")document.getElementById("lb").className="";
 else if(document.getElementById("room").className==="on")closeRoom();});
 </script>
-<script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://abba-photo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body></html>"""
 
 def build():

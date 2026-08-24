@@ -468,7 +468,7 @@ lb.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-sx;
     if(k>-1)open_(ALL,k,true);}
 })();
 </script>
-<script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://abba-photo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body></html>"""
 
 precs = [rec(n) for n in picks]

@@ -236,7 +236,7 @@ toast("That did not go through. Try once more.");}},
 function(){b.disabled=false;b.textContent="Send my picks";
 toast("That did not go through. Try once more.");});};
 bar();
-</script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
+</script><script data-goatcounter="https://abba-photo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
 POOL_PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -291,7 +291,7 @@ navigator.clipboard.writeText(s).then(function(){toast("Copied.");},
 function(){window.prompt("Copy this:",s);});}
 else window.prompt("Copy this:",s);};
 bar();
-</script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
+</script><script data-goatcounter="https://abba-photo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
 
 # The SURVEY and TWENTY lists are hardcoded, so the sections.json filter above

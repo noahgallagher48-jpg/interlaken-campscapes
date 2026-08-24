@@ -120,7 +120,7 @@ else{window.prompt("Copy this link:",location.href);}};
 document.addEventListener("keydown",function(e){if(e.key==="ArrowRight"){st(1);ar();}
 if(e.key==="ArrowLeft"){st(-1);ar();}if(e.key==="Escape"){location.href="library.html";}
 if(e.key===" "){e.preventDefault();if(t){clearInterval(t);t=null;}else ar();}});
-</scr"""  """ipt><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
+</scr"""  """ipt><script data-goatcounter="https://abba-photo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
 
 def slideshow_pages(lookup):

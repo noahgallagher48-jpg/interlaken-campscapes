@@ -111,7 +111,7 @@ document.getElementById('bSpread').onclick=function(){spread=true;document.body.
   this.classList.add('on');document.getElementById('bRead').classList.remove('on');render();};
 render();
 </script>
-<script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://abba-photo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body></html>"""
 
 html = (PAGE.replace("__IDS__", json.dumps(ids))

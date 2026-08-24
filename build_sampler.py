@@ -292,7 +292,7 @@ window.addEventListener("pointermove",function(e){if(drag)fromEvent(e);});
 window.addEventListener("pointerup",function(){drag=false;});
 box.addEventListener("touchmove",function(e){fromEvent(e);e.preventDefault();},{passive:false});
 set(46);})();
-</script><script data-goatcounter="https://abbaphoto.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
+</script><script data-goatcounter="https://abba-photo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
 
 def build():
