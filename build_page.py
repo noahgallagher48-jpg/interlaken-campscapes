@@ -212,7 +212,10 @@ footer{max-width:1180px;margin:0 auto;padding:44px clamp(16px,3vw,44px) 84px;
 footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
 
 /* ---- lightbox ---- */
-#lb{position:fixed;inset:0;background:rgba(8,7,5,.985);display:none;
+/* NEUTRAL, not the camp's warm ground (Noah, 2026-08-28): 'use their colors
+   on the main pages but not in album layout or lightbox'. A tinted surround
+   changes how the photograph reads, and this is where people judge them. */
+#lb{position:fixed;inset:0;background:rgba(18,18,20,.985);display:none;
   align-items:center;justify-content:center;z-index:50}
 #lb.on{display:flex}
 #lb img{max-width:95vw;max-height:88vh;object-fit:contain}
