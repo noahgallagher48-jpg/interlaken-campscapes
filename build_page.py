@@ -348,6 +348,12 @@ window.BKCLIENT = {name:"Camp Interlaken", place:"Eagle River, Wisconsin &middot
 /* the book tab's "Noah's Picks" chip reads this; without it the chip shows
    its empty-state note rather than his selection */
 var BOOKPICKS=__BOOKPICKS__, CLIENTPICKS=[];
+/* BOOKSEND was missing entirely, so Save the book threw on
+   BOOKSEND.drive_endpoint before the .catch() existed: the button stuck on
+   "Saving" and neither the inbox route nor the JSON fallback ran. Codex
+   caught it 2026-08-28. Empty endpoints are fine; the code falls back to a
+   local download, which is the point. */
+var BOOKSEND={"drive_endpoint":"","web3forms_key":"","subject":"Interlaken book"};
 function src(f){return 'img/present/'+f.id+'.jpg';}
 function webname(f){return 'Interlaken-'+f.n+'.jpg';}
 function fig(f,tall){return '<figure data-n="'+f.n+'" id="f'+f.n+'"'+
@@ -542,7 +548,7 @@ _pickn = [r["n"] for r in precs]
 html = (PAGE.replace("__BOOKPICKS__", json.dumps(_pickn))
             .replace("__BOOKCSS__", BOOK_CSS)
             .replace("__BOOKHTML__", BOOK_HTML)
-            .replace("__BOOKJS__", BOOK_JS)
+            .replace("__BOOKJS__", BOOK_JS.replace("__BKBLEEDHERO__", "{}"))
             .replace("__PICKS__", json.dumps(precs))
             .replace("__ALL__", json.dumps(arecs))
             .replace("__ALT__", json.dumps(ALT))
