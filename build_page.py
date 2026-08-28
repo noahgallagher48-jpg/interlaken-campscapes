@@ -94,8 +94,10 @@ def rec(n):
     w, h = Image.open(p).size
     wid = WEBIDS.get(str(n))
     wd = f"https://drive.google.com/uc?export=download&id={wid}" if wid else ""
+    # f/wpx/hpx are what book_layout's JS reads. Adding them here means the
+    # page keeps ONE global ALL that serves both the gallery and the book tab.
     return {"n": n, "id": num2id[n], "d": dl(n), "wd": wd, "w": w, "h": h,
-            "pr": print_text(n)}
+            "pr": print_text(n), "f": f"{num2id[n]}.jpg", "wpx": w, "hpx": h}
 
 
 _stage = os.path.expanduser("~/Desktop/ABBA/interlaken/web3840_stage")
@@ -104,6 +106,8 @@ web_mb = round(sum(os.path.getsize(os.path.join(_stage, f)) for f in _fd_files
                    if os.path.exists(os.path.join(_stage, f))) / 1e6)
 ZIP_URL = ("https://github.com/noahgallagher48-jpg/interlaken-campscapes/releases/"
            "download/interlaken-2026-web/Camp-Interlaken-web.zip")
+
+from book_layout import CSS as BOOK_CSS, HTML as BOOK_HTML, JS as BOOK_JS
 
 PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
@@ -118,7 +122,8 @@ PAGE = """<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
 <link rel=icon href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="%23100e0b"/><circle cx="16" cy="16" r="7" fill="none" stroke="%23daa143" stroke-width="2.4"/></svg>'>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--ground:#100e0b;--ink:#ece6da;--muted:#9a9080;--faint:#6e6557;--gold:#daa143;
+:root{--book-bar:#1b1712;/* warm lane bar; book_layout reads this */
+--ground:#100e0b;--ink:#ece6da;--muted:#9a9080;--faint:#6e6557;--gold:#daa143;
   --serif:"Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif;
   --mono:"SF Mono",ui-monospace,Menlo,monospace}
 html{scroll-behavior:smooth}
@@ -247,6 +252,13 @@ footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
 #toast.on{opacity:1}
 @media (max-width:640px){.open{min-height:40vh;padding-top:56px}.grid{columns:2 150px}
   #selbar{gap:13px;padding:11px 18px;font-size:11px}}
+.toptabs{display:flex;gap:8px;justify-content:center;margin:20px 0 0}
+.toptab{background:transparent;border:1px solid rgba(236,230,218,.28);color:inherit;
+ border-radius:24px;padding:10px 24px;font:600 14px inherit;cursor:pointer;letter-spacing:.01em}
+.toptab[aria-selected=true]{background:var(--gold);border-color:var(--gold);color:var(--ground)}
+#tab-gallery{display:none}
+#tab-gallery.on{display:block}
+__BOOKCSS__
 </style></head><body>
 
 <a class=home href="https://www.abba-photo.com/">Abba Photo</a>
@@ -269,12 +281,41 @@ footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
   <p class=dlline style="margin-top:8px;font-size:12px">Full resolution comes from Google Drive. No sign-in needed.</p>
 </div>
 
-<div class=reader id=picks></div>
-
-<div class=wrap>
-  <div class=secthead><h2>Everything</h2><span>__NLIB__ &middot; IN THE ORDER THEY WERE MADE</span></div>
-  <div class=grid id=grid></div>
+<div class=toptabs role=tablist>
+  <button class=toptab role=tab data-tab=gallery aria-selected=true>Gallery</button>
+  <button class=toptab role=tab data-tab=book aria-selected=false>Book layout</button>
 </div>
+
+<div id=tab-gallery class=on>
+  <div class=reader id=picks></div>
+
+  <div class=wrap>
+    <div class=secthead><h2>Everything</h2><span>__NLIB__ &middot; IN THE ORDER THEY WERE MADE</span></div>
+    <div class=grid id=grid></div>
+  </div>
+</div>
+
+<div id=tab-book>
+ <div class=wrap>
+  <p class=bklede>Choose the photographs for the book, then see how they lay out on the page.
+  The strip along the bottom is the book in order, and it drags.</p>
+  <div class=bkwho>
+   <span class=bkwholab>Picking as</span>
+   <button class=bkwhobtn id=bkwho-camp data-who=camp>Camp Interlaken</button>
+   <button class=bkwhobtn id=bkwho-noah data-who=noah>Noah</button>
+   <span class=bkwhonote id=bkwhonote></span>
+  </div>
+  <div class=bkchips role=tablist>
+   <button class=bkchip role=tab aria-selected=true data-view=mine id=bkchip-mine>My picks</button>
+   <button class=bkchip role=tab aria-selected=false data-view=picks>Noah&#x27;s Picks</button>
+   <button class=bkchip role=tab aria-selected=false data-view=clientpicks>Camp Interlaken&#x27;s picks</button>
+   <button class=bkchip role=tab aria-selected=false data-view=all>All photographs</button>
+   <button class=bkchip role=tab aria-selected=false data-view=book>In the book</button>
+  </div>
+  <div class=bkgrid id=bkgrid></div>
+ </div>
+</div>
+__BOOKHTML__
 
 <footer>
   <span>Photographs by Noah Gallagher</span>
@@ -299,6 +340,9 @@ footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
 
 <script>
 var PICKS=__PICKS__,ALL=__ALL__,ALT=__ALT__;
+/* book_layout reads this before it runs; it defaults to Kingswood otherwise */
+window.BKCLIENT = {name:"Camp Interlaken", place:"Eagle River, Wisconsin &middot; July 2026",
+                   slug:"interlaken", set:"cil1"};
 function src(f){return 'img/present/'+f.id+'.jpg';}
 function webname(f){return 'Interlaken-'+f.n+'.jpg';}
 function fig(f,tall){return '<figure data-n="'+f.n+'" id="f'+f.n+'"'+
@@ -469,11 +513,30 @@ lb.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-sx;
 })();
 </script>
 <script data-goatcounter="https://abba-photo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+__BOOKJS__
+document.querySelectorAll(".toptab").forEach(function(b){
+  b.onclick=function(){
+    var which=b.getAttribute("data-tab");
+    document.querySelectorAll(".toptab").forEach(function(o){
+      o.setAttribute("aria-selected", o===b ? "true" : "false"); });
+    document.getElementById("tab-gallery").className = which==="gallery" ? "on" : "";
+    document.getElementById("tab-book").className = which==="book" ? "on" : "";
+    document.getElementById("bklane").className = which==="book" ? "bklane on" : "bklane";
+    window.scrollTo(0,0);
+  };
+});
+
+bkWire();
+</script>
 </body></html>"""
 
 precs = [rec(n) for n in picks]
 arecs = [rec(n) for n in placed]
-html = (PAGE.replace("__PICKS__", json.dumps(precs))
+html = (PAGE.replace("__BOOKCSS__", BOOK_CSS)
+            .replace("__BOOKHTML__", BOOK_HTML)
+            .replace("__BOOKJS__", BOOK_JS)
+            .replace("__PICKS__", json.dumps(precs))
             .replace("__ALL__", json.dumps(arecs))
             .replace("__ALT__", json.dumps(ALT))
             .replace("__ALTT__", ALT)
