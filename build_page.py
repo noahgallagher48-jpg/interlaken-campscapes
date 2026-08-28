@@ -252,7 +252,9 @@ footer a{color:var(--muted)}footer a:hover{color:var(--gold)}
 #toast.on{opacity:1}
 @media (max-width:640px){.open{min-height:40vh;padding-top:56px}.grid{columns:2 150px}
   #selbar{gap:13px;padding:11px 18px;font-size:11px}}
-.toptabs{display:flex;gap:8px;justify-content:center;margin:20px 0 0}
+.toptabs{display:flex;gap:8px;justify-content:center;margin:4px 0 48px}
+/* the tabs need air on BOTH sides: measured 76px above and 0 below, so the
+   photograph started hard against the buttons (Noah, 8/27: mind the spacing) */
 .toptab{background:transparent;border:1px solid rgba(236,230,218,.28);color:inherit;
  border-radius:24px;padding:10px 24px;font:600 14px inherit;cursor:pointer;letter-spacing:.01em}
 .toptab[aria-selected=true]{background:var(--gold);border-color:var(--gold);color:var(--ground)}
@@ -343,6 +345,9 @@ var PICKS=__PICKS__,ALL=__ALL__,ALT=__ALT__;
 /* book_layout reads this before it runs; it defaults to Kingswood otherwise */
 window.BKCLIENT = {name:"Camp Interlaken", place:"Eagle River, Wisconsin &middot; July 2026",
                    slug:"interlaken", set:"cil1"};
+/* the book tab's "Noah's Picks" chip reads this; without it the chip shows
+   its empty-state note rather than his selection */
+var BOOKPICKS=__BOOKPICKS__, CLIENTPICKS=[];
 function src(f){return 'img/present/'+f.id+'.jpg';}
 function webname(f){return 'Interlaken-'+f.n+'.jpg';}
 function fig(f,tall){return '<figure data-n="'+f.n+'" id="f'+f.n+'"'+
@@ -533,7 +538,9 @@ bkWire();
 
 precs = [rec(n) for n in picks]
 arecs = [rec(n) for n in placed]
-html = (PAGE.replace("__BOOKCSS__", BOOK_CSS)
+_pickn = [r["n"] for r in precs]
+html = (PAGE.replace("__BOOKPICKS__", json.dumps(_pickn))
+            .replace("__BOOKCSS__", BOOK_CSS)
             .replace("__BOOKHTML__", BOOK_HTML)
             .replace("__BOOKJS__", BOOK_JS)
             .replace("__PICKS__", json.dumps(precs))
