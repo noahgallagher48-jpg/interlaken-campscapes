@@ -270,7 +270,7 @@ __BOOKCSS__
   <p class=date>Eagle River, Wisconsin &middot; July 2026</p>
   <div class=rule></div>
   <button class=play id=play><span class=tri>&#9654;</span> Play</button>
-  <p class=dlline>__NLIB__ photographs in two sizes: full resolution for print, web for screens</p>
+  <p class=dlline>Your photographs in two sizes: full resolution for print, web for screens</p>
   <p class="dlline opts">
     <a href="https://drive.google.com/drive/folders/__FOLDER__" target=_blank rel=noopener>All full res</a>
     <span class=dot>&middot;</span>
