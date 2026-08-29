@@ -398,9 +398,11 @@ var BOOKPICKS=[201, 123, 136, 2, 54, 143, 36, 29, 168, 101, 109, 97, 12, 46, 93,
 /* BOOKSEND was missing entirely, so Save the book threw on
    BOOKSEND.drive_endpoint before the .catch() existed: the button stuck on
    "Saving" and neither the inbox route nor the JSON fallback ran. Codex
-   caught it 2026-08-28. Empty endpoints are fine; the code falls back to a
-   local download, which is the point. */
-var BOOKSEND={"drive_endpoint":"","web3forms_key":"","subject":"Interlaken book"};
+   caught it 2026-08-28. The web3forms key is the standing route (same
+   public key as the vote page and Kingswood's book_send.json): a saved
+   book lands in the noah@abba-photo.com inbox. Local download stays as
+   the last-resort fallback the code already carries. */
+var BOOKSEND={"drive_endpoint":"","web3forms_key":"b3bc124c-7812-4c4e-8fce-6ea6b9d1c5a2","subject":"Interlaken book"};
 function src(f){return 'img/present/'+f.id+'.jpg';}
 function webname(f){return 'Interlaken-'+f.n+'.jpg';}
 function fig(f,tall){return '<figure data-n="'+f.n+'" id="f'+f.n+'"'+
