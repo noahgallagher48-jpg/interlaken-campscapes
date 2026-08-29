@@ -63,8 +63,21 @@ def print_text(n):
         return ""
     return "Prints to " + " &middot; ".join(
         f"<b>{sz.replace('x', '&times;')}&Prime;</b> {lab}" for sz, lab in parts)
-DRIVE = json.load(open(os.path.join(HERE, "_work", "frame_drive.json")))
-WEBIDS = json.load(open(os.path.join(HERE, "_work", "drive_web_ids.json")))
+def _no_placeholders(m, what):
+    """A "local-NNNN" value is an id recorded BEFORE Drive committed the upload.
+    Building a page with one ships a 404 to the client. Refuse at every point
+    that writes, copies, or loads a map, not just at the one that writes it.
+    Codex, 2026-08-28: the guard existed in one place and the other paths were
+    open."""
+    bad = [k for k, v in m.items() if isinstance(v, str) and v.startswith("local-")]
+    if bad:
+        raise SystemExit(f"STOPPED: {len(bad)} placeholder Drive ids in {what} "
+                         f"({bad[:4]}). Let Drive finish uploading, then refresh the map.")
+    return m
+
+
+DRIVE = _no_placeholders(json.load(open(os.path.join(HERE, "_work", "frame_drive.json"))), "frame_drive.json")
+WEBIDS = _no_placeholders(json.load(open(os.path.join(HERE, "_work", "drive_web_ids.json"))), "drive_web_ids.json")
 ARR = json.load(open(os.path.join(HERE, "_work", "arrangement_current.json")))
 
 num2id = {}
