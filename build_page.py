@@ -579,6 +579,62 @@ html = (PAGE.replace("__BOOKPICKS__", json.dumps(_pickn))
             .replace("__ZIPURL__", ZIP_URL)
             .replace("__NLIB__", str(len(placed))))
 
+def draft_mode(html):
+    """When img/bookdraft/ holds the Fundy proof renders, the Book layout tab
+    shows THE DRAFT instead of the build-your-own picker. Same pattern as
+    Kingswood (build_delivery.py, 2026-08-30): the client reviews the real
+    book on their own hub in their own colours, never on a vendor surface.
+    Delete img/bookdraft and rebuild to restore the picker untouched."""
+    ddir = os.path.join(HERE, "img", "bookdraft")
+    if not os.path.isdir(ddir):
+        return html
+    spreads = sorted(f for f in os.listdir(ddir) if f[0].isdigit() and f.endswith(".jpg"))
+    if not spreads:
+        return html
+    seq = (["Cover.jpg"] if os.path.exists(os.path.join(ddir, "Cover.jpg")) else []) \
+        + spreads \
+        + (["BackCover.jpg"] if os.path.exists(os.path.join(ddir, "BackCover.jpg")) else [])
+    cards = []
+    for f in seq:
+        if f == "Cover.jpg":
+            lab = "The cover"
+        elif f == "BackCover.jpg":
+            lab = "The back cover"
+        else:
+            a, b = f.replace(".jpg", "").split("-")
+            lab = f"Pages {int(a)}&ndash;{int(b)}"
+        cards.append(f'<figure class=bdft><img loading=lazy src="img/bookdraft/{f}" '
+                     f'alt=""><figcaption>{lab}</figcaption></figure>')
+    draft = f"""
+ <div class="wrap bkdraft">
+  <p class=bklede>The book, page by page, the way it will print. Anything can
+  change: swap a photograph, cut one, make one bigger, add one that belongs.
+  The pages are numbered under each spread, and every photograph in the gallery
+  carries its own number, so a note like &ldquo;pages 11&ndash;12: swap the left
+  photo for 214&rdquo; is all it takes.</p>
+  {''.join(cards)}
+  <p class=bdcta><a href="mailto:noah@abba-photo.com?subject=Interlaken%20book%20notes">Send your notes</a></p>
+ </div>
+<style>
+#tab-book>.wrap:not(.bkdraft){{display:none}}
+#bklane{{display:none!important}}
+.bkdraft{{max-width:1180px;margin:0 auto}}
+.bkdraft .bklede{{max-width:62ch;margin:0 auto 24px;text-align:center;opacity:.72;
+ font-size:14.5px;line-height:1.55}}
+.bkdraft .bdft{{margin:0 0 30px}}
+.bkdraft .bdft img{{width:100%;height:auto;display:block;background:#0b0908;
+ box-shadow:0 12px 38px rgba(0,0,0,.45)}}
+.bkdraft .bdft figcaption{{opacity:.6;font-size:12.5px;letter-spacing:.09em;
+ text-transform:uppercase;margin-top:7px;text-align:center}}
+.bkdraft .bdcta{{text-align:center;margin:36px 0 60px}}
+.bkdraft .bdcta a{{display:inline-block;background:var(--gold,#daa143);color:#100e0b;
+ text-decoration:none;padding:13px 24px;border-radius:4px;font-size:13px;
+ letter-spacing:.12em;text-transform:uppercase}}
+</style>"""
+    return html.replace("<div id=tab-book>", "<div id=tab-book>" + draft, 1)
+
+
+html = draft_mode(html)
 open(os.path.join(HERE, "delivery.html"), "w").write(html)
 print(f"wrote delivery.html: picks {len(precs)}, library {len(arecs)}, "
       f"{sum(1 for r in arecs if r['d'])} full-res links, web set {web_mb} MB")
