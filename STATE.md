@@ -284,3 +284,4 @@ quotes verbatim, and writes a call-ready page (_work/tally.html, live library
 thumbnails) for the Sep 8 review. Verified against the first real ballot.
 One voter per email; a later ballot replaces the earlier and is noted.
 
+- 2026-09-09: Meeting with Drea moved to Thursday Sep 10 noon (calendar event, Drea invited). The vote closed Sep 7; Noah: a tool for her, no tally unless she asks. One-page HTML sheet for the meeting at ~/Desktop/ABBA/interlaken/next/interlaken_next_2026-09-08.html (what's left with me: the book's two paths through Jan 19, 2027; the vote page as a tool; the page stays; then this fall, the whole library, next summer, what happens now). Contract check (AP template): no printed book owed; up to two layouts; physical books at cost through Miller's if ordered within six months post-residency = Jan 19, 2027. Drea follow-up in Gmail drafts, Noah's send.
