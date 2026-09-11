@@ -3,6 +3,7 @@
 Read this together with CLAUDE.md before touching the page. Log entries at the bottom, one line each, newest first. This file is public with the repo: nothing goes in it that the client has not made public.
 
 ## Facts a session needs
+**STATUS 2026-09-11: meeting with Drea HELD (Fri 9 AM ET); the proposal LIVE at prints.html with prints.pdf (Media Management and Production Proposal, six sections, all pricing subject to change); sent to Drea Sep 11; nothing outward until Mon Sep 14 (Rosh Hashanah); Monday: resend to Jonah Geller and Toni with the sample proposal at abba-photo.com/proposal/. The counter tag is on prints.html since Sep 11 midday; opens count from then.**
 **STATUS 2026-08-04: residency SHOT and PAID; library LIVE at 192 placed frames; favorites survey LIVE (rev 4, 25 picks, Web3Forms votes-as-email); Drea handoff email STAGED; full delivery ~Aug 18. The section below is the pre-residency record.**
 - Engagement: CAMPSCAPES Heritage & Legacy residency, July 16 to 19, 2026, Eagle River WI.
 - Client contact: Drea Lear, Philanthropy Director, Camp Interlaken JCC. Executive Director: Toni Davison Levenberg. Addresses live in the private dashboard repo, `docs/CLIENT_CONTACTS.md`, not in this public repo.
@@ -285,3 +286,4 @@ thumbnails) for the Sep 8 review. Verified against the first real ballot.
 One voter per email; a later ballot replaces the earlier and is noted.
 
 - 2026-09-09: Meeting with Drea moved to Thursday Sep 10 noon (calendar event, Drea invited). The vote closed Sep 7; Noah: a tool for her, no tally unless she asks. One-page HTML sheet for the meeting at ~/Desktop/ABBA/interlaken/next/interlaken_next_2026-09-08.html (what's left with me: the book's two paths through Jan 19, 2027; the vote page as a tool; the page stays; then this fall, the whole library, next summer, what happens now). Contract check (AP template): no printed book owed; up to two layouts; physical books at cost through Miller's if ordered within six months post-residency = Jan 19, 2027. Drea follow-up in Gmail drafts, Noah's send.
+- 2026-09-11: prints.html and prints.pdf (the proposal) live; counter tag added; the Drea meeting held; the vote page had 3 opens in 30 days and no submission.
